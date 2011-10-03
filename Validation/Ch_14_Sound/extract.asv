@@ -1,0 +1,57 @@
+clear
+clc
+rows = 3;
+cols = 2;
+% read original speech
+[x, fs] = wavread('noisyspeech.wav');
+
+sound(x, fs)
+disp('original signal - press enter')
+
+pause
+
+dt = 1/fs      % sampling period (sec)
+pts = length(x)     % number of points
+t = (1:pts) * dt;   % time array for plotting
+subplot(rows, cols, 1)    % plot it
+plot( t(1:(fs/5)), x(1:(fs/5)) )
+title('original signal')
+xlabel('time (sec)')
+df = 1 / t(end)       % the frequency interval
+fmax = df * pts / 2 % the max frequency is half what you think
+                    % because the spectrum is mirrored about
+                    % the max frequency, but has the same
+                    % number of points
+
+Y = fft(x);         % perform the transform
+f = (1:pts) * 2 * fmax / pts; % frequencies for plotting
+subplot(rows, cols, 2)    % plot the specrum power
+YY = real(Y).^2 + imag(Y).^2;
+plot(f, YY)
+title('power spectrum')
+xlabel('frequency (Hz)')
+% find the location of the first noise peak (first half of spectrum)
+[peak, index1] = max(YY(1:(pts/2)))
+% take a good look at the spectrum in that region
+subplot(rows, cols, 3)
+% find the location of the second noise peak (second half of spectrum)
+plot(f((index1 - 30) : (index1 + 30)), YY((index1 - 30) : (index1 + 30)));
+title('expand data around the max')
+xlabel('frequency (Hz)')
+flt = hiPass(index1*4, pts);
+subplot(rows, cols, 4);
+plot(f, flt);
+title('filter')
+xlabel('frequency (Hz)')
+subplot(rows, cols, 5);
+Y1 = Y.*flt;
+YY1 = real(Y1).^2 + imag(Y1).^2;
+plot(f, YY1)
+title('modified real spectrum')
+xlabel('frequency (Hz)')
+y = ifft(Y) * 20;
+subplot(rows, cols, 6)
+plot(t(1:(fs/5)), y(1:(fs/5)))
+title('reconstructed the new signal')
+xlabel('time (sec)')
+sound(y, fs)

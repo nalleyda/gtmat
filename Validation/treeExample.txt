@@ -1,0 +1,77 @@
+Start with empty list
+00: (BODY 
+ 01: (= ca 
+  02: (CVCAT 
+   03: (CHCAT 1 abc 
+	 04: (VCAT 
+	  05: (HCAT 2 3) Stored 05 in 0  (HCAT 2 3)
+	 )               Stored 04 in 1  (VCAT <05>)
+	)                Stored 03 in 2  (CHCAT 1 'abc' <04>)
+  )                 Stored 02 in 3  (CVCAT <03>)
+ )                  Stored 01 in 4  (= 'ca' <02>)
+ 06; (= a 3 ;)      Stored 06 in 5  (= 'a' 3 ';')
+ 07: (= b 4 ;)      Stored 07 in 6  (= 'b' 4 ';')
+ 08: (= c ordinary string) 
+                    Stored 09 in 7  (= 'c' 'ordinary string') 
+ 09: (= d 
+  10: (+ c a)       Stored 10 in 8  (+ 'c' 'a')
+ )                  Stored 09 in 9  (= 'd' <10>)
+ 11: (= str 
+  12: (CALL char d) Stored 12 in 10 (CALL 'char' 'd')
+ ;)                 Stored 11 in 11 (= 'str' <12> ';')
+ 13: (= ln 
+  14: (CALL length str)
+                    Stored 14 in 12 (CALL 'length' 'str')
+ )                  Stored 13 in 13 (= 'ln' <14>)
+ 15: (if 
+  16: (> a b)       Stored 16 in 14 (> 'a' 'b')
+  17: (BODY 
+   18: (= a 
+	 19: (+ b 1)     Stored 19 in 15 (+ 'b' 1)
+	)                Stored 18 in 16 (= 'a' <19>)
+  )                 Stored 17 in 17 (BODY <18>)
+  20: (< a b)       Stored 20 in 18 (< 'a' 'b')
+  21: (BODY 
+   22: (= b 
+	 23: (- a b)     Stored 23 in 19 (- 'a' 'b')
+	)                Stored 22 in 20 (= 'b' <23>)
+	24: (= c 42)     Stored 24 in 21 (= 'c' 42)
+	25: (= d 4)      Stored 25 in 22 (= 'd' 4)
+  )                 Stored 21 in 23 (BODY <22> <24> <25>)
+  26: (BODY 
+   27: (= b 4)      Stored 27 in 24 (= 'b' 4)
+	28: (= c (- a b))Stored 28 in 25 (= 'c' <23>) 
+  )                 Stored 26 in 26 (BODY <27> <28>)
+ )                  Stored 15 in 27 (if <16> <17> <20> <21> <26>)
+ 29: (GETS 
+  30: (+ 2 
+   31; (* a b)      Stored 31 in 28 (* 'a' 'b')
+  )                 Stored 30 in 29 (+ 2 <31>)
+ )                  Stored 29 in 30 (GETS <30>)
+ 32: (= x 8.3)      Stored 32 in 31 (= 'x' 8.3)
+ 33: (= y 
+  34: (+ x 3.95)    Stored 34 in 32 (+ 'x' 3.95)
+ )                  Stored 33 in 33 (= 'y' <34>)
+ 35: (= z
+  36: (* 
+   37: (* 3 
+	 38: (+ 
+	  39: (NEGATE x) Stored 39 in 34 (NEGATE 'x')
+    y)              Stored 38 in 35 (+ <39> 'y')
+	)                Stored 37 in 36 (* 3 <38>)
+  4 )               Stored 36 in 37 (* <37> 4)
+ )                  Stored 35 in 38 (= 'z' <36>)
+ 40: (= v EMPTY_VECTOR)
+                    Stored 40 in 39 (= 'v' EMPTY_VECTOR)
+ 41: (for ndx v 
+  42: (BODY 
+   43: (= a 
+	 44: (+ a ndx)   Stored 44 in 40 (+ 'a' 'ndx')
+	)                Stored 43 in 41 (= 'a' <44>)
+	45: (= b 
+	 46: (+ b 1)     Stored 46 in 42 (+ 'b' 1)
+	)                Stored 45 in 43 (= 'b' <46>)
+  )                 Stored 42 in 44 (BODY <43> <45>)
+ )                  Stored 41 in 45 (for 'ndx' 'v' <42>)
+ (while (> b 0) (BODY (= a (+ a b)) (= b (- b 1)))) (= x 4) (switch x <missing NEWLINE> (case 1 (BODY (= y 1))) (case 2 (BODY (= y 2))) (case (CVCAT (CHCAT 3 4 5)) (BODY (= y found one of the cell answers))) (otherwise (BODY (= y 3)))) (= month Mar) (= leap 1) (switch month 
+ (case (CVCAT (CHCAT Jan Mar May July Aug Oct Dec)) (BODY (= days 31))) (case (CVCAT (CHCAT April Sept June Nov)) (BODY (= days 30))) (case Feb (BODY (if (> leap 0) (BODY (= days 29)) (BODY (= days 28))))) (otherwise (BODY (GETS (CALL error bad month))))))

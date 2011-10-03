@@ -1,0 +1,13 @@
+ Volume in drive C has no label.
+ Volume Serial Number is 5C47-D8E8
+
+ Directory of C:\Users\dsmith\Documents\GT_Mat\Validation\Ch_02_Getting_Started
+
+09/07/2011  12:16 PM    <DIR>          .
+09/07/2011  12:16 PM    <DIR>          ..
+09/07/2011  12:16 PM               155 dir.txt
+08/12/2011  08:55 PM               209 Listing_02_1.m
+08/12/2011  08:55 PM               273 Listing_02_2.m
+08/12/2011  08:55 PM               164 Listing_02_3.m
+               4 File(s)            801 bytes
+               2 Dir(s)  114,049,990,656 bytes free
