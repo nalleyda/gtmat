@@ -1,0 +1,15 @@
+Inputs:
+    1. vector/statement (logical)
+    2. vector/statement (logical)
+
+Outputs:
+    1. t (logical) or f (logical)
+
+Format:
+    tORf=and(a, b)
+
+Description:
+    True if both a and b are true.
+
+Note:
+    Equivalent to ampersand (&) symbol.

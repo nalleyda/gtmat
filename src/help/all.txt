@@ -1,0 +1,11 @@
+Inputs:
+    1. vector/statement (logical)
+
+Outputs:
+    1. t (logical) or f (logical)
+
+Format:
+    tORf=all(vec)
+
+Description:
+    True if all of the values in vec, a logical vector, are true.

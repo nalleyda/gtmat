@@ -1,0 +1,18 @@
+Inputs:
+    1. string (char)
+
+Outputs:
+    1. vector (logical)
+
+Form:
+    TorFvec=isspace(str)
+
+Description:
+    Tests for the space character.
+
+Example:
+    TorF=isspace('Holy Moly');
+    %TorF=[0 0 0 0 1 0 0 0 0]
+
+
+

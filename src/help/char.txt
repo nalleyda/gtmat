@@ -1,0 +1,15 @@
+Inputs:
+    1. number or vector (double)
+
+Outputs:
+    1. input as char (char)
+
+Form:
+    str=char(vec)
+
+Description:
+    Casts to a character type. Given numeric value(s), outputs the characters with those ascii values.
+
+Example:
+    str=char([97 32 65 32 122 32 90])
+    %str='a A z Z'

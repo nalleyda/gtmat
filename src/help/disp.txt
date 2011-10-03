@@ -1,0 +1,14 @@
+Inputs:
+	1a. array/vector (double)
+		or
+	1b. string (char) 
+
+Outputs:
+	n/a
+
+Form:
+a.
+	disp(x)
+
+Description:
+	Displays an array or text.

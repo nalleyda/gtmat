@@ -1,0 +1,32 @@
+Inputs:
+    1. string containing escape characters (char)
+    2. input to replace conversion character (char or double)
+    + additional inputs for every conversion character that needs to be replaced
+
+Outputs:
+    1. formatted string (char)
+
+Form:
+    str=sprintf(str, var1, var2, etc…)
+
+Description:
+    Outputs formatted string.  The second input and any following inputs replace their corresponding conversion characters contained in the first input. Escape characters may be used for additional formatting.
+
+Example:
+    hour=7;
+    min=41;
+    city='Memphis';
+    str=sprintf('It is %d:%d in %s.', hour, min, city)
+    %str='It is 7:41 in Memphis.'
+
+*Note:
+    Conversion characters:
+	%s --- char
+	%d --- double
+
+    Escape characters are as follows:
+	\n --- new line character
+	\t --- tab
+	\\ --- backslash
+	%% --- percent character
+	'' --- single quotation mark

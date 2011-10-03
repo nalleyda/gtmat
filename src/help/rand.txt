@@ -1,0 +1,22 @@
+Inputs:
+    1. number of rows (double)
+    2. number of columns (double)
+
+Outputs:
+    1. array of random values (double)
+
+Format:
+    arr=rand(r,c)
+
+Description:
+    Calculates an r*c array of evenly distributed random numbers in the range 0 
+through 1.
+
+Example:
+    arr=rand(3,2);
+    %arr= [ 0.8147    0.9134
+    %       0.9058    0.6324
+    %       0.1270    0.0975 ]
+
+Note:
+    Remember that answers will vary because the values are random.

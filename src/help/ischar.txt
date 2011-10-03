@@ -1,0 +1,23 @@
+Inputs:
+    1. value (any)
+
+Outputs:
+    1. true or false (logical)
+
+Form:
+    TorF=ischar(val)
+
+Description:
+    Converts a number to its numerical representation with n digits
+
+Examples:
+(1)
+    TorF=ischar('double');
+    %TorF=t
+
+(2)
+    A=-5;
+    TorF=ischar(A)
+    %TorF=f
+
+

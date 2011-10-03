@@ -1,0 +1,24 @@
+Inputs:
+    1a. vector (double)
+        or
+    1b. array (double)
+
+    *2b. 1 (double) or 2 (double)
+
+Outputs:
+    1a. sum of values (double)
+        or
+    1b. vector of sums (double)
+
+Format:
+a.
+    S=sum(vec)
+b.
+    Svec=sum(arr)
+
+Description:
+a.  Totals the values in the input.
+b.  Without a second input (or if the second input is 1), totals the values in 
+each COLUMN of the input, returning a ROW vector of values. 
+    *If the second input is 2, totals the values in each ROW of the input, 
+returning a COLUMN vector of values.

@@ -1,0 +1,14 @@
+Inputs:
+    1. vector/statement (logical)
+
+Outputs:
+    1. t (logical) or f (logical)
+
+Format:
+    tORf=not(x)
+
+Description:
+    True if x is false; false if x is true.
+
+Note:
+    Equivalent to tidle (~) symbol.

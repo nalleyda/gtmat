@@ -1,0 +1,13 @@
+Inputs:
+    1. 3-dimension array (double)
+
+Outputs:
+    1. image array (uint8)
+
+Form:
+    img=uint8(arr3D)
+
+Description:
+    Casts to unsigned integer type with 8 bits
+
+

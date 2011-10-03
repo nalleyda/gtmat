@@ -1,0 +1,19 @@
+Inputs:
+	1. staring value (double)
+	2. ending value (double)
+	3. length of desired output (double)
+
+Outputs:
+	1. vector (double)
+
+Form:
+	vec=length(start, finish, length)
+
+Description:
+	Defines a linearly spaced vector.
+
+Example:
+	vec=linspace(0,3,10)
+	%vec=[0  .3333  0.6667  1  1.3333  1.6667  2  2.3333  2.6667  3]
+		
+*Note: size() may be more useful in this case.

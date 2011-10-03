@@ -1,0 +1,18 @@
+Inputs:
+    1. string (char)
+    2. string (char)
+
+Outputs:
+    1. true or false (logical)
+
+Form:
+    TorF=strcmpi(str1, str2)
+
+Description:
+    Compares two strings without regard to case; returns true if equal.
+
+Example:
+    TorF=strcmpi('OUCH!','ouch!');
+    %TorF=t
+
+

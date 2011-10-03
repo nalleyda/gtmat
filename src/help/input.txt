@@ -1,0 +1,13 @@
+Inputs:
+    1. vector/statement (logical)
+
+Outputs:
+    1. t (logical) or f (logical)
+
+Format:
+    out=input(in)
+
+Description:
+    Requests and parses input from the user.
+
+**EDIT ME**

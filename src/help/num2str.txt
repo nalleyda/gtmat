@@ -1,0 +1,20 @@
+Inputs:
+    1. numeric value(double)
+
+Outputs:
+    1. numeric value (char)
+
+Form:
+    num_char=num2str(num_double, n)
+
+Description:
+    Converts a number to its numerical representation with n digits
+
+Example:
+    num=num2str(89.2754, 3);
+    %num='89.28'
+
+*Note:
+    This function automatically rounds the value, as if it were using the built-in round() function and then converting to class char.
+
+

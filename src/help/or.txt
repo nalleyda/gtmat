@@ -1,0 +1,15 @@
+Inputs:
+    1. vector/statement (logical)
+    2. vector/statement (logical)
+
+Outputs:
+    1. t (logical) or f (logical)
+
+Format:
+    tORf=or(a, b)
+
+Description:
+    True if either a or b is true.
+
+Note:
+    Equivalent to vertical bar (|) symbol.

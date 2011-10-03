@@ -1,0 +1,8 @@
+inputs:
+	(0)
+
+outputs:
+	(0)
+
+Description:
+	Clears the Workspace window.

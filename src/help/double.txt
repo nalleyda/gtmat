@@ -1,0 +1,15 @@
+Inputs:
+    1. string (char) or vector (logical)
+
+Outputs:
+    1. input as char (double)
+
+Form:
+    vec=double(in)
+
+Description:
+    Casts to type double. Given a string, outputs a vector of ascii values.  Given a logical vector of 1's and 0's, returns 1's and 0's class double.
+
+Example:
+    vec=double('Beatles')
+    %vec=[ 66  101  97  116  108  101  115 ]

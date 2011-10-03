@@ -1,0 +1,16 @@
+Inputs:
+    1. string containing name of function (char)
+
+Outputs:
+    1. number of possible inputs to function (double)
+
+Form:
+    out=nargout(str)
+
+Description:
+    Determines the number of output parameters actually requested by a function’s caller
+
+Example:
+    out=nargout('sort')
+    %out=2
+    %because mean can give 2 outputs

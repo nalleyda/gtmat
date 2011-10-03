@@ -1,0 +1,17 @@
+Inputs:
+    1. numeric value(double)
+
+Outputs:
+    1. numeric value (char)
+
+Form:
+    num_char=in2str(num_double)
+
+Description:
+    Converts an integer to its numerical representation
+
+Example:
+    num=in2str(546);
+    %num='546'
+
+

@@ -1,0 +1,15 @@
+Inputs:
+    1. numeric value (double)
+
+Outputs:
+    1. numeric value (double)
+
+Format:
+    y=ceil(x)
+
+Description:
+    Rounds the input value up to the closest integer towards positive infinity.
+
+Example:
+    num=ceil(5.4444);
+    %num=6
