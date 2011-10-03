@@ -1,0 +1,21 @@
+clear
+clf
+clc
+rows = 4
+cols = 2
+subplot(rows, cols, 1)
+inst('sax','saxophone');
+subplot(rows, cols, 2)
+inst('flute', 'flute');
+subplot(rows, cols, 3)
+inst('tbone','trombone');
+subplot(rows, cols, 4)
+inst('piano', 'piano');
+subplot(rows, cols, 5)
+inst('tpt', 'trumpet');
+subplot(rows, cols, 6)
+inst('mutetpt', 'm');
+subplot(rows, cols, 7)
+inst('violin');
+subplot(rows, cols, 8)
+inst('cello');

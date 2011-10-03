@@ -1,0 +1,20 @@
+ Volume in drive C has no label.
+ Volume Serial Number is 5C47-D8E8
+
+ Directory of C:\Users\dsmith\Documents\GT_Mat\Validation\Ch_07_Cells_and_Structures
+
+09/07/2011  03:10 PM    <DIR>          .
+09/07/2011  03:10 PM    <DIR>          ..
+08/12/2011  08:55 PM               335 beam.m
+08/12/2011  08:55 PM             2,951 buildCDs.m
+09/07/2011  03:10 PM                 0 dir.txt
+08/12/2011  08:55 PM               309 ison.m
+08/12/2011  08:55 PM               150 Listing_7_1.m
+08/12/2011  08:55 PM               448 Listing_7_4.m
+08/12/2011  08:55 PM             1,586 Listing_7_6.m
+08/12/2011  08:55 PM               262 makeCD.m
+08/12/2011  08:55 PM               388 nextconn.m
+08/12/2011  08:55 PM               329 totalNums.m
+08/12/2011  08:55 PM               306 touches.m
+              11 File(s)          7,064 bytes
+               2 Dir(s)  114,187,341,824 bytes free

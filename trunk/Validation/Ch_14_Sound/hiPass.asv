@@ -1,0 +1,8 @@
+function filter = hiPass(f,n)
+% build a high pass filter cutting of at item f of n
+filter = [zeros(1,f-1) 0.5 ones(1,n-f)];
+for index = 1:10
+    filter(f-index) = filter(f-index+1)/2;
+    filter(f+index) = 1 - filter(f - index);
+end
+
