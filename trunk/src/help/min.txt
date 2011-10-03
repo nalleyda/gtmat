@@ -1,0 +1,44 @@
+Inputs:
+    1a. vector (double)
+    1b. array (double)
+
+Outputs:
+    1a. minimum value (double)
+    2a. corresponding index (double)
+   or
+    1b. vector of minimum values (double)
+    2b. vector of corresponding indices (double)
+
+Format:
+a.  
+    [v in]=min(vec)
+b.
+    [v in]=min(arr)
+
+Description:
+a.
+    Given a vector, returns the minimum value within the vector and the index 
+where it was found.
+
+b.
+    Given an array, returns a row vector of the minimum values in each column of
+ the array. It also returns a row vector containing the row number where each 
+minimum value is located.
+    
+Examples:
+a.
+    [v in]=min([-5 3 -9 2 -11 9 -11]);
+    %v=-11
+    %in=5
+
+b.
+    arr= [  8     11    14
+            10    5     7
+            13    6     12];
+    [v in]=min(arr);
+    %v=[ 8   5   7]
+    %in=[ 1   2   2]
+
+Note:
+    If there are two or more equivalent minimum values, the index in the output 
+will be the earliest index where the minimum value occurred.

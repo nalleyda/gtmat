@@ -1,0 +1,17 @@
+Inputs:
+    1. number of rows (double)
+    2. number of columns (double)
+
+Outputs:
+    1. array of 0's (double)
+
+Format:
+    arr=zeros(r,c)
+
+Description:
+    Generates an r*c array filled with the value 0.
+
+Example:
+    arr=ones(2,3);
+    %arr= [ 0   0   0
+    %       0   0   0 ]

@@ -1,0 +1,11 @@
+Inputs:
+    (0)
+
+Outputs:
+    (0)
+
+Format:
+    clc
+
+Description:
+    Clears Command window.

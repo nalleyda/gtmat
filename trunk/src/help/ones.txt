@@ -1,0 +1,17 @@
+Inputs:
+    1. number of rows (double)
+    2. number of columns (double)
+
+Outputs:
+    1. array of 1's (double)
+
+Format:
+    arr=ones(r,c)
+
+Description:
+    Generates an r*c array filled with the value 1.
+
+Example:
+    arr=ones(2,4);
+    %arr= [ 1   1   1   1
+    %       1   1   1   1 ]

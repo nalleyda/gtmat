@@ -1,0 +1,23 @@
+Inputs:
+    1. numeric value (double)
+
+Outputs:
+    1. "magic" array (double)
+
+Format:
+    arr=magic(num)
+
+Description:
+    Generates a magic square. Given input "num", outputs a square array 
+including every integer 1 through num^2, in an order such that values in each 
+row, column, and main diagonal have the same sum.
+
+Example:
+    arr=magic(3)
+    %arr= [ 8     1     6
+    %       3     5     7
+    %       4     9     2 ]
+
+Note:
+    As you can see, thesum of each row, column, and main diagonal is the same 
+(in this case: 15).

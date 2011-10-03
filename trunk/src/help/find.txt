@@ -1,0 +1,17 @@
+Inputs:
+	1a. array (logical)
+		or
+	1b. vector (logical)
+
+Outputs:
+	1. vector (double)
+
+Form:
+a.
+	v=find(a)
+
+b.	v=find(v_in)
+
+Description:
+	a. Computes a column vector of the locations of the true values in a logical array.
+	b. Computes a vector of the locations of the true values in a logical vector. (Returns column vector if input vector is column vector; returns row vector is input vector is row vector.)

@@ -1,0 +1,11 @@
+inputs:
+	1. numeric value (double)
+
+outputs:
+	2. numeric value (double)
+
+Form:
+	y=floor(x)
+
+Description:
+	Rounds the input value down to the closest integer towards negative infinity.

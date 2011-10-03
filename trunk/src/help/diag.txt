@@ -1,0 +1,19 @@
+Inputs:
+	1a. array (double)
+		or
+	1b. vector (double)
+
+Outputs:
+	1a. vector (double)
+		or
+	1b. array (double)
+
+Form:
+a.
+	v=diag(a)
+b.
+	a=diag(v)
+
+Description:
+	a. Extracts the diagonal from an array (the diagonal running from upper left to lower right), and returns it as a column vector.
+	b. Constructs an array with the provided vector as the diagonal, nested in zeros.

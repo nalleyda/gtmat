@@ -1,0 +1,24 @@
+Inputs:
+    1a. vector (double)
+        or
+    1b. array (double)
+
+    *2b. 1 (double) or 2 (double)
+
+Outputs:
+    1a. average of values (double)
+        or
+    1b. vector of average values (double)
+
+Format:
+a.
+    avg=mean(vec)
+b.
+    avg_vec=mean(arr)
+
+Description:
+a.  Computes the average of the elements in the input.
+b.  Without a second input (or if the second input is 1), computes the average of the elements in the each 
+COLUMN of the input, returning a ROW vector of values. 
+    *If the second input is 2, computes the average of the elements in the each 
+ROW of the input, returning a COLUMN vector of values.

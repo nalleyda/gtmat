@@ -1,0 +1,8 @@
+inputs:
+	1. numeric value (double)
+
+outputs:
+	2. square root of numeric value (double)
+
+Description:
+	Returns the square root of the input value.

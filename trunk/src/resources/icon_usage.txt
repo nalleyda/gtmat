@@ -1,0 +1,15 @@
+Current usage of icon images:
+../resources/images/GT.png - the logo on the windows
+../resources/images/toolbar/file_new.png - file new../resources/images/toolbar/file_open.png - file open
+../resources/images/toolbar/file_save.png - file save
+../resources/images/toolbar/cut.png - cut
+../resources/images/toolbar/copy.png - copy
+../resources/images/toolbar/paste.png - paste
+../resources/images/toolbar/arrow_move_up.png - undo
+../resources/images/toolbar/arrow_move_down.png - redo
+../resources/images/toolbar/help.gif - help
+../resources/images/toolbar/browse.png - browse
+../resources/images/toolbar/file_up.png - file up (to containing directory)
+../resources/images/toolbar/hand.gif - image pan mode
+../resources/images/toolbar/zoom.png - image zoom mode
+../resources/images/toolbar/target.png - image rotate mode

@@ -1,0 +1,12 @@
+Inputs:
+	1. array (double/logical/cell/struct/uint8)
+
+Outputs:
+	1. number of rows (double)
+        2. number of columns (double)
+
+Form:
+    [r c]=size(arr)
+
+Description:
+    Determines the dimensions of an array.

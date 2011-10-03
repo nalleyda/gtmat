@@ -1,0 +1,16 @@
+Inputs:
+    1. string containing name of function (char)
+
+Outputs:
+    1. number of possible inputs to function (double)
+
+Form:
+    out=nargin(str)
+
+Description:
+    Determines the number of input parameters actually supplied by a function’s caller
+
+Example:
+    out=nargin('mean')
+    %out=2
+    %because mean can take 2 inputs.

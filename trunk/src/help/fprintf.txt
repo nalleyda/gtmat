@@ -1,0 +1,36 @@
+Inputs:
+    1. file ID (logical)
+    2. string containing escape characters (char)
+    3. input to replace conversion character (char or double)
+    + additional inputs for every conversion character that needs to be replaced
+
+Outputs:
+    1. number of bytes that fprintf writes (double)
+
+Form:
+    num=fprintf(str, var1, var2, etc…)
+
+Description:
+    Prints formatted information into the file indicated by the file ID.  The third input and any following inputs replace their corresponding conversion characters contained in the second input. Escape characters may be used for additional formatting.
+
+Example:
+    fh=fopen('timeZones.txt', 'w');
+    hour=7;
+    min=41;
+    city='Memphis';
+    fprintf(fh, 'It is %d:%d in %s.', hour, min, city)
+    %ans=22
+    %timeZones.txt looks like:
+    %		It is 7:41 in Memphis.
+
+*Note:
+    Conversion characters:
+	%s --- char
+	%d --- double
+
+    Escape characters are as follows:
+	\n --- new line character
+	\t --- tab
+	\\ --- backslash
+	%% --- percent character
+	'' --- single quotation mark

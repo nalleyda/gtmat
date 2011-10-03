@@ -1,0 +1,18 @@
+Inputs:
+	1a. vector (double/logical/cell) or string (char)
+	1b. array (double/logical/cell/struct/uint8)
+
+Outputs:
+	1. numeric value (double)
+
+Form:
+a.
+	L=length(vec)
+b.
+	L=length(arr)
+
+Description:
+	a. Returns the length of a vector/string.
+	b. Returns the largest dimension of an array.*
+		
+*Note: size() may be more useful in this case.

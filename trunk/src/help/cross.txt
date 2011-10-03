@@ -1,0 +1,12 @@
+inputs:
+	1. vector (double)
+	2. vector (double)
+
+outputs:
+	2. numeric value (double)
+
+Form:
+	y=cross(vectorA,vectorB)
+
+Description:
+	Returns the cross product of the two input vectors.

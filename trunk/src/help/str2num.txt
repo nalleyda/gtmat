@@ -1,0 +1,17 @@
+Inputs:
+    1. numeric value (char)
+
+Outputs:
+    1. numeric value(double)
+
+Form:
+    num_double=str2num(num_char)
+
+Description:
+    Convert a string to its numerical equivalent
+
+Example:
+    num=str2num('0921');
+    %num=921
+
+

@@ -1,0 +1,11 @@
+Inputs:
+    1. numeric value (double)
+
+Outputs:
+    1. numeric value (double)
+
+Form:
+    y=fix(x)
+
+Description:
+    Rounds the input value to the closest integer towards zero.
