@@ -405,7 +405,11 @@ public class Matrix extends MatObject {
      * @return
      */
     public double get(int r, int c) {
-        return data[(c - 1) * size[ROW] + (r - 1)];
+        int it = (c - 1) * size[ROW] + (r - 1);
+        if(it == 25) {
+            it = 25;
+        }
+        return data[it];
     }
 
     /**
@@ -1287,19 +1291,10 @@ public class Matrix extends MatObject {
         if (n > 0) {
             res = new Matrix(1, n);
             res.data[0] = from;
-            res.n = 1;
-            if (inc > 0) {
-                newv = res.data[0] + inc;
-                while (newv <= to) {
-                    res.data[res.n++] = newv;
-                    newv += inc;
-                }
-            } else {
-                newv = res.data[0] + inc;
-                while (newv >= to) {
-                    res.data[res.n++] = newv;
-                    newv += inc;
-                }
+            res.n = n;
+            for(int i = 1; i < n; i++) {
+                from += inc;
+                res.data[i] = from;
             }
         } else {
             res = new Matrix(1, 0);
@@ -2821,7 +2816,7 @@ public Matrix sub(Matrix v) {
     public String toString() {
         int rows = size[ROW];
         int cols = size[COL];
-        StringBuilder res = new StringBuilder(5 * n);
+        String res = "";
         double d;
         if (type == MatObject.END) {
             return "end: " + geti(1);
@@ -2830,45 +2825,45 @@ public Matrix sub(Matrix v) {
             return "[]";
         }
         if (rows > 1) {
-            res.append("[\n   ");
+            res += "[\n   ";
         } else if (cols > 1) {
-            res.append("[");
+            res += "[";
         }
         for (int r = 1; r <= rows; r++) {
             for (int c = 1; c <= cols; c++) {
                 d = get(r, c);
                 if (Double.isNaN(d)) {
-                    res.append(" NaN");
+                    res+=" NaN";
                 } else if (Double.isInfinite(d)) {
-                    res.append(" inf");
+                    res += " inf";
                 } else {
                     switch (type) {
                         case DOUBLE:
                             if (d % 1 == 0) {
-                                res.append(" " + (int) d);
+                                res += " " + (int) d;
                             } else {
-                                res.append(" " + Format.format(d, 4));
+                                res += " " + Format.format(d, 4);
                             }
                             break;
                         case LOGICAL:
                             if (d > 0) {
-                                res.append(" t");
+                                res += " t";
                             } else {
-                                res.append(" f");
+                                res += " f";
                             }
                             break;
                         case INTEGER:
-                            res.append(" " + (int) d);
+                            res += " " + (int) d;
                             break;
                     }
                 }
             }
             if ((rows > 1) && (r < rows)) {
-                res.append("\n   ");
+                res += "\n   ";
             }
         }
         if (length() > 1) {
-            res.append(" ]");
+            res += " ]";
         }
         return res.toString();
     }
