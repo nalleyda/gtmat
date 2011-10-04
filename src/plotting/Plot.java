@@ -142,6 +142,7 @@ public class Plot extends Plots {
                     doLine = true;
                     break;
                 case '.':
+                case 'o':
                 case 's':
                 case '^':
                 case 'v':
@@ -205,13 +206,13 @@ public class Plot extends Plots {
         Matrix from = transform(1, ax);
         Matrix to;
         if(doSymb) g.drawString(symbol, (int) from.get(1)-chBk,
-                                        (int) from.get(2)+chDn);
+                                        (int) from.get(2)+chDn - 5);
         for(int i = 2; i <= x.n; i++) {
             to = transform(i, ax);
             if(doLine) g.drawLine((int) from.get(1), (int) from.get(2),
                                   (int) to.get(1),   (int) to.get(2));
             if(doSymb) g.drawString(symbol, (int) to.get(1) - chBk,
-                                            (int) to.get(2) + chDn);
+                                            (int) to.get(2) + chDn - 5);
             from = to;
         }
     }
