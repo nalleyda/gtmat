@@ -101,7 +101,7 @@ stat:
     |   HOLD^ (ON|OFF)
     |   SHADING^ (FLAT|INTERP)
     |   NEWLINE           ->
-    |   ELLIPSES NEWLINE  ->
+    //|   ELLIPSES NEWLINE  ->
     |   FUNCTION anything NEWLINE -> 
     ;
     
@@ -266,7 +266,7 @@ expr ( (COMMA?)! expr )* -> ^(CHCAT expr+)
 vcatArgs
 :    (str=ID DOT fld=ID ) -> ^(VECFIELD $str $fld)
 |    (str=ID DOT OPENP var=ID CLOSEP ) -> ^(VECFIELDV $str $var)
-|    hCat ( (SEMI|NEWLINE) hCat )* -> ^(VCAT hCat+)
+|    hCat ( (SEMI|NEWLINE/*|(ELLIPSES NEWLINE)*/) hCat )* -> ^(VCAT hCat+)
 ;
 cvcatArgs
     :    (str=ID DOT fld=ID) -> ^(CELLFIELD $str $fld)
@@ -297,7 +297,6 @@ BLOCK_END : 'end' '\n';//(~(')' | ';' | ':' | ',' | '/' | 'a'..'z' | 'A'..'Z' | 
 //THE_END : 'end' EOF;
 CLEAR : 'clear';
 FUNCTION : 'function';
-ELLIPSES : '...';
 CD : 'cd';
 CLC : 'clc';
 CLF : 'clf';
@@ -387,6 +386,8 @@ Exponent : ('e'|'E') ('+'|'-')? ('0'..'9')+ ;
 NEWLINE:'\r'? '\n' ;
 WS : (' ' | '\t' | '\n' | '\r' | '\f')+ {$channel = HIDDEN;};
 COMMENT : '\%' .* ('\n'|'\r') {$channel = HIDDEN;};
+ELLIPSES : '...' {$channel = HIDDEN;};
+
 
 
 // END:tokens
