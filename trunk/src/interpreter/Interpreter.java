@@ -658,6 +658,8 @@ public class Interpreter extends Thread {
             }
         }
 
+        System.out.println("\n\n\n\nAbout to check for script.\n\n\n\n");
+
         //Now, check to see if it was a parameter-less function call or script
         if (ret == null) {
             CellArray params = new CellArray();
@@ -893,11 +895,12 @@ public class Interpreter extends Thread {
                     
 
                     //Get the formal parameters
-                    String fileName = Main.getCurrentDirectory() + File.separator
+                    String fileName = Main.getCurrentDirectory() /*+ File.separator*/
                             + name + ".m";
                     String[][] paramNames = getParams(fileName);
                     Workspace ws = new Workspace(fileName);
                     //Check for scripts
+                    System.out.println("\n\n\n\nNow to check for script.\n\n\n\n");
                     if (paramNames == null) {
                         try {
                             br = new BufferedReader(new FileReader(fileName));
@@ -1102,13 +1105,15 @@ public class Interpreter extends Thread {
         if (!foundHeader) {
             ret = null;
         }
-        System.err.println("Params:");
-        for (int i = 0; i < ret[0].length; i++){
-            System.err.println(ret[0][i]);
-        }
-        System.err.println("Outputs:");
-        for (int i = 0; i < ret[1].length; i++){
-            System.err.println(ret[1][i]);
+        else{
+            System.err.println("Params:");
+            for (int i = 0; i < ret[0].length; i++){
+                System.err.println(ret[0][i]);
+            }
+            System.err.println("Outputs:");
+            for (int i = 0; i < ret[1].length; i++){
+                System.err.println(ret[1][i]);
+            }
         }
         return ret;
     }
