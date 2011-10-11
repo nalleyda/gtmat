@@ -386,7 +386,7 @@ Exponent : ('e'|'E') ('+'|'-')? ('0'..'9')+ ;
 NEWLINE:'\r'? '\n' ;
 WS : (' ' | '\t' | '\n' | '\r' | '\f')+ {$channel = HIDDEN;};
 COMMENT : '\%' .* ('\n'|'\r') {$channel = HIDDEN;};
-ELLIPSES : '...' {$channel = HIDDEN;};
+ELLIPSES : '...' NEWLINE* {$channel = HIDDEN;};
 
 
 

@@ -1,4 +1,4 @@
-// $ANTLR 3.4 /Users/zach/gt_mat/src/parser/Expr.g 2011-10-08 17:02:17
+// $ANTLR 3.4 /Users/zach/gt_mat/src/parser/Expr.g 2011-10-11 12:49:11
 
   package parser;
 
@@ -923,7 +923,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
                     // AST REWRITE
-                    // elements: actualParameters, str, fld, GETS, expr, SEMI
+                    // elements: GETS, SEMI, fld, str, expr, actualParameters
                     // token labels: str, fld
                     // rule labels: retval
                     // token list labels: 
@@ -1055,7 +1055,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
                     // AST REWRITE
-                    // elements: expr, actualParameters, str, var, SEMI, GETS
+                    // elements: actualParameters, expr, var, GETS, str, SEMI
                     // token labels: str, var
                     // rule labels: retval
                     // token list labels: 
@@ -1172,7 +1172,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
                     // AST REWRITE
-                    // elements: expr, GETS, SEMI, str, var
+                    // elements: expr, SEMI, str, var, GETS
                     // token labels: str, var
                     // rule labels: retval
                     // token list labels: 
@@ -1279,7 +1279,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
                     // AST REWRITE
-                    // elements: expr, fld, SEMI, str, GETS
+                    // elements: fld, GETS, SEMI, expr, str
                     // token labels: str, fld
                     // rule labels: retval
                     // token list labels: 
@@ -1393,7 +1393,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
                     // AST REWRITE
-                    // elements: actualParameters, SEMI, expr, ID
+                    // elements: actualParameters, ID, SEMI, expr
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -1482,7 +1482,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
                     // AST REWRITE
-                    // elements: GETS, expr, ID, SEMI
+                    // elements: SEMI, expr, ID, GETS
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -1598,7 +1598,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
                     // AST REWRITE
-                    // elements: p, chCat, SEMI, fn
+                    // elements: p, SEMI, fn, chCat
                     // token labels: fn
                     // rule labels: retval, p
                     // token list labels: 
@@ -1679,7 +1679,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
                     // AST REWRITE
-                    // elements: SEMI, expr
+                    // elements: expr, SEMI
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -3295,7 +3295,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
                     // AST REWRITE
-                    // elements: e, st, var
+                    // elements: var, e, st
                     // token labels: var, st
                     // rule labels: retval, e
                     // token list labels: 
@@ -3367,7 +3367,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
                     // AST REWRITE
-                    // elements: e, st, fld
+                    // elements: st, e, fld
                     // token labels: fld, st
                     // rule labels: retval, e
                     // token list labels: 
@@ -6094,7 +6094,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
                     // AST REWRITE
-                    // elements: str, fld
+                    // elements: fld, str
                     // token labels: str, fld
                     // rule labels: retval
                     // token list labels: 
@@ -6162,7 +6162,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
                     // AST REWRITE
-                    // elements: var, str
+                    // elements: str, var
                     // token labels: str, var
                     // rule labels: retval
                     // token list labels: 
