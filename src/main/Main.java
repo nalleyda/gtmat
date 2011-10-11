@@ -33,7 +33,7 @@ public class Main {
     public static String fileName = null;
     public static WorkspaceStack wstack = new WorkspaceStack();
     public static Stack<String> helperStack = new Stack<String>();
-    public static final String version = "1.11";
+    public static final String version = "1.13";
     
     public static HashMap<String, ArrayList<Boolean>> bpsMap;
     
@@ -521,70 +521,70 @@ public class Main {
         it= Figure.currentFig;
         Interpreter.grid(new MatString("ON"));
         it.title(new MatString("Surf Plot with prism color"));
-//        Figure.figure();
-//        Matrix dl = szz.del2();
-//        Plots.setColorMap("prism");
-//        Figure.setShading(Plot.INTERP);
-//        Figure.setColorbar(true);
-//        Plots.surf(sxx, syy, szz, dl);
-//        it = Figure.currentFig;
-//        it.title(new MatString("Surf gradient Plot with prism color"));
-//
-//        Figure.figure();
-//        Matrix par[] = new Matrix[5];
-//        par[0] = Matrix.zeros(1, 5);
-//        par[1] = new Matrix(
-//                "[-1, -1,  1, 1, -1]");
-//        par[2] = new Matrix(
-//                "[-1.3, -1.3,  1.3, 1.3, -1.3]");
-//        par[3] = new Matrix(
-//                "[-1, -1,  1,  1, -1]");
-//        par[4] = Matrix.zeros(1, 5);;
-//        xx = Matrix.vcat(par);
-//        par[0] = Matrix.zeros(1, 5);
-//        par[1] = new Matrix(
-//                "[1, -1, -1,  1,  1]");
-//        par[2] = new Matrix(
-//                "[1.3, -1.3, -1.3,  1.3,  1.3]");
-//        par[3] = new Matrix(
-//                "[1, -1, -1,  1,  1]");
-//        par[4] = Matrix.zeros(1, 5);
-//        yy = Matrix.vcat(par);
-//        par[0] = Matrix.ones(1, 5);
-//        par[1] = new Matrix(
-//                "[1,  1,  1,  1,  1]");
-//        par[2] = Matrix.zeros(1, 5);
-//        par[3] = new Matrix(
-//                "[-1, -1, -1, -1, -1]");
-//        par[4] = new Matrix(
-//                "[-1, -1, -1, -1, -1]");
-//        Matrix zz = Matrix.vcat(par);
-//        Plots.setColorMap("prism");
-//        Figure.setShading(Plot.INTERP);
-//        Figure.setColorbar(true);
-//        Plots.surf(xx, yy, zz, zz);
-//        Figure dat = Figure.currentFig;
-//        dat.title(new MatString("Cube Plot with prism color"));
-//        int n = 2;
-//        x = Matrix.colon(-n, n);
-//        xxyy = Matrix.meshgrid(x, x);
-//        xx = (Matrix) CellArray.get(xxyy, 1, 1);
-//        yy = (Matrix) CellArray.get(xxyy, 1, 2);
-//        sxx = Matrix.mult(xx, xx);
-//        syy = Matrix.mult(yy, yy);
-//        szz = Matrix.add(sxx, syy);
-//        szz = Matrix.sub(new Matrix(n*n*2), szz);
-//        Figure.figure();
-//        Figure.setHidden(true);
-//        Figure.setShading(Plot.INTERP);
-//        Plots.setColorMap("summer");
-//        Figure.setColorbar(true);
-//        Plots.surf(xx, yy, szz, szz);
-//        it = Figure.currentFig;
-//        it.title(new MatString("Surf Plot with Summer color"));
-//        it.xlabel(new MatString("X direction"));
-//        it.ylabel(new MatString("Y direction"));
-//        it.zlabel(new MatString("Z direction"));
+        Figure.figure();
+        Matrix dl = szz.del2();
+        Plots.setColorMap("prism");
+        Figure.setShading(Plot.INTERP);
+        Figure.setColorbar(true);
+        Plots.surf(sxx, syy, szz, dl);
+        it = Figure.currentFig;
+        it.title(new MatString("Surf gradient Plot with prism color"));
+
+        Figure.figure();
+        Matrix par[] = new Matrix[5];
+        par[0] = Matrix.zeros(1, 5);
+        par[1] = new Matrix(
+                "[-1, -1,  1, 1, -1]");
+        par[2] = new Matrix(
+                "[-1.3, -1.3,  1.3, 1.3, -1.3]");
+        par[3] = new Matrix(
+                "[-1, -1,  1,  1, -1]");
+        par[4] = Matrix.zeros(1, 5);;
+        xx = Matrix.vcat(par);
+        par[0] = Matrix.zeros(1, 5);
+        par[1] = new Matrix(
+                "[1, -1, -1,  1,  1]");
+        par[2] = new Matrix(
+                "[1.3, -1.3, -1.3,  1.3,  1.3]");
+        par[3] = new Matrix(
+                "[1, -1, -1,  1,  1]");
+        par[4] = Matrix.zeros(1, 5);
+        yy = Matrix.vcat(par);
+        par[0] = Matrix.ones(1, 5);
+        par[1] = new Matrix(
+                "[1,  1,  1,  1,  1]");
+        par[2] = Matrix.zeros(1, 5);
+        par[3] = new Matrix(
+                "[-1, -1, -1, -1, -1]");
+        par[4] = new Matrix(
+                "[-1, -1, -1, -1, -1]");
+        Matrix zz = Matrix.vcat(par);
+        Plots.setColorMap("prism");
+        Figure.setShading(Plot.INTERP);
+        Figure.setColorbar(true);
+        Plots.surf(xx, yy, zz, zz);
+        Figure dat = Figure.currentFig;
+        dat.title(new MatString("Cube Plot with prism color"));
+        int n = 2;
+        x = Matrix.colon(-n, n);
+        xxyy = Matrix.meshgrid(x, x);
+        xx = (Matrix) CellArray.get(xxyy, 1, 1);
+        yy = (Matrix) CellArray.get(xxyy, 1, 2);
+        sxx = Matrix.mult(xx, xx);
+        syy = Matrix.mult(yy, yy);
+        szz = Matrix.add(sxx, syy);
+        szz = Matrix.sub(new Matrix(n*n*2), szz);
+        Figure.figure();
+        Figure.setHidden(true);
+        Figure.setShading(Plot.INTERP);
+        Plots.setColorMap("summer");
+        Figure.setColorbar(true);
+        Plots.surf(xx, yy, szz, szz);
+        it = Figure.currentFig;
+        it.title(new MatString("Surf Plot with Summer color"));
+        it.xlabel(new MatString("X direction"));
+        it.ylabel(new MatString("Y direction"));
+        it.zlabel(new MatString("Z direction"));
         System.out.println("Ended tests");
     }
 }

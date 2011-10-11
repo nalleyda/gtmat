@@ -268,7 +268,7 @@ public class Matrix extends MatObject {
             double val = it.get(1);
             for (int i = 1; i <= in; i++) {
                 int col = 1;
-                int row = (int) ndx.get(i);
+                int row = ndx.geti(i);
                 while (row > size[ROW]) {
                     row -= size[ROW];
                     col++;
@@ -278,7 +278,7 @@ public class Matrix extends MatObject {
         } else {
             for (int i = 1; i <= in; i++) {
                 int col = 1;
-                int row = (int) ndx.get(i);
+                int row = ndx.geti(i);
                 while (row > size[ROW]) {
                     row -= size[ROW];
                     col++;
@@ -305,20 +305,20 @@ public class Matrix extends MatObject {
     }
 
     public static double max(Matrix ma[], int ndx) {
-        double res = ma[0].data[ndx];
+        double res = ma[0].get(ndx+1);
         for (int i = 1; i < ma.length; i++) {
-            if (ma[i].data[ndx] > res) {
-                res = ma[i].data[ndx];
+            if (ma[i].get(ndx+1) > res) {
+                res = ma[i].get(ndx+1);
             }
         }
         return res;
     }
 
     public static double min(Matrix ma[], int ndx) {
-        double res = ma[0].data[ndx];
+        double res = ma[0].get(ndx+1);
         for (int i = 1; i < ma.length; i++) {
-            if (ma[i].data[ndx] < res) {
-                res = ma[i].data[ndx];
+            if (ma[i].get(ndx+1) < res) {
+                res = ma[i].get(ndx+1);
             }
         }
         return res;
@@ -359,8 +359,8 @@ public class Matrix extends MatObject {
 
     public boolean isAll() {
         boolean res = true;
-        for (int i = 0; i < n; i++) {
-            if ((int) data[i] != (i + 1)) {
+        for (int i = 1; i <= n; i++) {
+            if (geti(i) != i) {
                 res = false;
                 break;
             }
@@ -443,6 +443,9 @@ public class Matrix extends MatObject {
      * @return
      */
     public double get(int i) {
+        if(data == null) {
+            System.out.println("Houston, we have a problem\n");
+        }
         return data[i - 1];
     }
 
@@ -485,7 +488,7 @@ public class Matrix extends MatObject {
             if (ind[i] > maxsize) {
                 throw new RuntimeException("Index Out Of Bounds");
             }
-            data[(int) ind[i] - 1] = vals[i];
+            set((int) ind[i], vals[i]);
         }
 
     }
@@ -507,19 +510,18 @@ public class Matrix extends MatObject {
                 || cndx.size[COL] != vals.size[COL]) {
             throw new RuntimeException("Matrix.set bad row or col vector size");
         }
-        int mxr = (int) ((Matrix) rndx.max().get(1, 1)).data[0];
-        int mxc = (int) ((Matrix) cndx.max().get(1, 2)).data[0];
+        int mxr = (int) ((Matrix) rndx.max().get(1, 1)).get(1);
+        int mxc = (int) ((Matrix) cndx.max().get(1, 2)).get(1);
         if (mxr > size[ROW]) {
             extend(mxr, size[COL]);
         }
         if (mxc > size[COL]) {
             extend(size[ROW], mxc);
         }
-        for (int ri = 0; ri < rndx.size[COL]; ri++) {
-            for (int ci = 0; ci < cndx.size[COL]; ci++) {
-                set((int) rndx.data[ri],
-                        (int) cndx.data[ci],
-                        vals.get(ri + 1, ci + 1));
+        for (int ri = 1; ri <= rndx.size[COL]; ri++) {
+            for (int ci = 1; ci <= cndx.size[COL]; ci++) {
+                set(rndx.geti(ri), cndx.geti(ci),
+                        vals.get(ri, ci));
             }
         }
     }
@@ -920,16 +922,17 @@ public class Matrix extends MatObject {
     }
 
     private static double interp1(Matrix x, Matrix y, double x0) {
-        if ((x0 < x.data[0]) || (x0 > x.data[x.n - 1])) {
+        if ((x0 < x.get(1)) || (x0 > x.get(x.n))) {
             return Double.NaN;
         }
         double res = 0;
         boolean found = false;
         for (int i = 1; !found && (i < x.n); i++) {
-            found = (x.data[i] >= x0);
+            found = (x.get(i+1) >= x0);
             if (found) {
-                res = y.data[i - 1]
-                        + (y.data[i] - y.data[i - 1]) * (x0 - x.data[i - 1]) / (x.data[i] - x.data[i - 1]);
+                res = y.get(i)
+                        + (y.get(i+1) - y.get(i)) * (x0 - x.get(i)) 
+                                         / (x.get(i+1) - x.get(i));
             }
         }
         return res;
@@ -949,8 +952,8 @@ public class Matrix extends MatObject {
             throw new RuntimeException("Matrix.interp1 params must be vectors");
         }
         Matrix res = new Matrix(xi);
-        for (int i = 0; i < xi.n; i++) {
-            res.data[i] = interp1(x, y, xi.data[i]);
+        for (int i = 1; i <= xi.n; i++) {
+            res.set(i, interp1(x, y, xi.get(i)));
         }
         return res;
     }
@@ -1021,8 +1024,8 @@ public class Matrix extends MatObject {
      */
     public Matrix negate() {
         Matrix res = new Matrix(this);
-        for (int i = 0; i < res.n; i++) {
-            res.data[i] = -data[i];
+        for (int i = 1; i <= res.n; i++) {
+            res.set(i, -get(i));
         }
         return res;
     }
@@ -1087,8 +1090,8 @@ public class Matrix extends MatObject {
 
     public static Matrix zeros(int rows, int cols) {
         Matrix res = new Matrix(rows, cols);
-        for (int i = 0; i < res.n; i++) {
-            res.data[i] = 0;
+        for (int i = 1; i <= res.n; i++) {
+            res.set(i, 0);
         }
         return res;
     }
@@ -1100,11 +1103,11 @@ public class Matrix extends MatObject {
      * @return
      */
     public static Matrix zeros(Matrix rowmat, Matrix colmat) {
-        int rows = (int) rowmat.data[0];
-        int cols = (int) colmat.data[0];
+        int rows = (int) rowmat.get(1);
+        int cols = (int) colmat.get(1);
         Matrix res = new Matrix(rows, cols);
-        for (int i = 0; i < res.n; i++) {
-            res.data[i] = 0;
+        for (int i = 1; i <= res.n; i++) {
+            res.set(i, 0);
         }
         return res;
     }
@@ -1116,11 +1119,11 @@ public class Matrix extends MatObject {
      * @return
      */
     public static Matrix ones(Matrix rowmat, Matrix colmat) {
-        int rows = (int) rowmat.data[0];
-        int cols = (int) colmat.data[0];
+        int rows = (int) rowmat.get(1);
+        int cols = (int) colmat.get(1);
         Matrix res = new Matrix(rows, cols);
-        for (int i = 0; i < res.n; i++) {
-            res.data[i] = 1;
+        for (int i = 1; i <= res.n; i++) {
+            res.set(i, 1);
         }
         return res;
     }
@@ -1133,8 +1136,8 @@ public class Matrix extends MatObject {
      */
     public static Matrix ones(int rows, int cols) {
         Matrix res = new Matrix(rows, cols);
-        for (int i = 0; i < res.n; i++) {
-            res.data[i] = 1;
+        for (int i = 1; i <= res.n; i++) {
+            res.set(i, 1);
         }
         return res;
     }
@@ -1149,8 +1152,8 @@ public class Matrix extends MatObject {
         int rows = (int) mrows.get(1);
         int cols = (int) mcols.get(1);
         Matrix res = new Matrix(rows, cols);
-        for (int i = 0; i < res.n; i++) {
-            res.data[i] = Math.random();
+        for (int i = 1; i <= res.n; i++) {
+            res.set(i, Math.random());
         }
         return res;
     }
@@ -1162,8 +1165,8 @@ public class Matrix extends MatObject {
      */
     public static Matrix rand(int rows, int cols) {
         Matrix res = new Matrix(rows, cols);
-        for (int i = 0; i < res.n; i++) {
-            res.data[i] = Math.random();
+        for (int i = 1; i <= res.n; i++) {
+            res.set(i, Math.random());
         }
         return res;
     }
@@ -1181,14 +1184,16 @@ public class Matrix extends MatObject {
     public static Matrix cumsum(Matrix m) {
         Matrix res = new Matrix(m);
         if(res.size[ROW] == 1) {
-            for(int i = 1; i < res.size[COL]; i++) {
-                res.data[i] += res.data[i-1];
+            for(int i = 2; i <= res.size[COL]; i++) {
+//                res.data[i] += res.data[i-1];
+                res.set(i, res.get(i) + res.get(i-1));
             }
         } else {
             for(int c = 0; c < res.size[COL]; c++) {
-                for(int r = 1; r < res.size[ROW]; r++) {
-                    int ndx = (c - 1) * res.size[ROW] + (r - 1);
-                    res.data[ndx] += res.data[ndx-1];
+                for(int r = 2; r <= res.size[ROW]; r++) {
+                    int i = (c - 1) * res.size[ROW] + (r - 1);
+//                    res.data[i] += res.data[i-1];
+                    res.set(i, res.get(i) + res.get(i-1));
                 }
             }
         }
@@ -1205,14 +1210,16 @@ public class Matrix extends MatObject {
     public static Matrix cumprod(Matrix m) {
         Matrix res = new Matrix(m);
         if(res.size[ROW] == 1) {
-            for(int i = 1; i < res.size[COL]; i++) {
-                res.data[i] *= res.data[i-1];
+            for(int i = 2; i <= res.size[COL]; i++) {
+//                res.data[i] *= res.data[i-1];
+                res.set(i, res.get(i) * res.get(i-1));
             }
         } else {
             for(int c = 0; c < res.size[COL]; c++) {
                 for(int r = 1; r < res.size[ROW]; r++) {
-                    int ndx = (c - 1) * res.size[ROW] + (r - 1);
-                    res.data[ndx] *= res.data[ndx-1];
+                    int i = (c - 1) * res.size[ROW] + (r - 1);
+//                    res.data[i] *= res.data[i-1];
+                      res.set(i, res.get(i) * res.get(i-1));
                 }
             }
         }
@@ -1222,8 +1229,8 @@ public class Matrix extends MatObject {
     
     public Matrix ceil() {
         Matrix res = new Matrix(this);
-        for (int i = 0; i < n; i++) {
-            res.data[i] = Math.ceil(data[i]);
+        for (int i = 1; i <= n; i++) {
+            res.set(i, Math.ceil(get(i)));
         }
         res.type = INTEGER;
         return res;
@@ -1235,8 +1242,8 @@ public class Matrix extends MatObject {
 
     public Matrix round() {
         Matrix res = new Matrix(this);
-        for (int i = 0; i < n; i++) {
-            res.data[i] = Math.round(data[i]);
+        for (int i = 1; i <= n; i++) {
+            res.set(i, Math.round(get(i)));
         }
         res.type = INTEGER;
         return res;
@@ -1290,11 +1297,11 @@ public class Matrix extends MatObject {
         int n = (int) ((to - from) / inc) + 1;
         if (n > 0) {
             res = new Matrix(1, n);
-            res.data[0] = from;
+            res.set(1, from);
             res.n = n;
-            for(int i = 1; i < n; i++) {
+            for(int i = 2; i <= n; i++) {
                 from += inc;
-                res.data[i] = from;
+                res.set(i, from);
             }
         } else {
             res = new Matrix(1, 0);
@@ -1349,10 +1356,10 @@ public class Matrix extends MatObject {
             dv = (to - from) / (n - 1);
         }
         res = new Matrix(1, n);
-        res.data[0] = from;
+        res.set(1, from);
         res.n = n;
-        for (int i = 1; i < n; i++) {
-            res.data[i] = res.data[i - 1] + dv;
+        for (int i = 2; i <= n; i++) {
+            res.set(i, res.get(i-1) + dv);
         }
         return res;
     }
@@ -1384,7 +1391,7 @@ public class Matrix extends MatObject {
             throw new RuntimeException("Magic must be called with an integer, scalar argument");
         }
 
-        int n = (int) (n1.data[0]);
+        int n = n1.geti(1);
         if (n % 2 == 0) {
             throw new RuntimeException("Matrix.magic must have odd parameters");
         }
@@ -1418,9 +1425,9 @@ public class Matrix extends MatObject {
         for (int r = 1; r <= size; r++) {
             for (int c = 1; c <= size; c++) {
                 it = x.pow(2 * size - r - c);
-                A.set(r, c, it.sum().data[0]);
+                A.set(r, c, it.sum().get(1));
             }
-            B.set(r, 1, it.mult(y).sum().data[0]);
+            B.set(r, 1, it.mult(y).sum().get(1));
         }
         Matrix Ai = A.inv();
         Matrix cf = Ai.matMult(B);
@@ -1436,10 +1443,10 @@ public class Matrix extends MatObject {
     public static Matrix polyval(Matrix cf, Matrix x) {
         /* evaluate the polynomial c0*x^n + c1*x^n-1 + ... + cn-1*x + cn
         returning a sVector of the same length as x */
-        Matrix res = Matrix.ones(1, x.n).mult(cf.data[0]);
-        for (int nc = 1; nc < cf.n; nc++) {
-            for (int id = 0; id < res.n; id++) {
-                res.data[id] = res.data[id] * x.data[id] + cf.data[nc];
+        Matrix res = Matrix.ones(1, x.n).mult(cf.get(1));
+        for (int nc = 2; nc <= cf.n; nc++) {
+            for (int id = 1; id <= res.n; id++) {
+                res.set(id, res.get(id) * x.get(id) + cf.get(nc));
             }
         }
         return res;
@@ -1468,7 +1475,7 @@ public class Matrix extends MatObject {
          * and that they are monotonically increasing.  [An ugly sort might
          * remove this constraint later]
          */
-        double h = (x.data[np - 1] - x.data[0]) / (np - 1);
+        double h = (x.get(np) - x.get(1)) / (np - 1);
         // build an (n-2 by n-2) array to invert
         Matrix A = Matrix.zeros(np - 2, np - 2);
         A.set(1, 1, 6);
@@ -1487,7 +1494,7 @@ public class Matrix extends MatObject {
         double Mi = 2 * M.get(1) - M.get(2);
         double Mip1;
         double cf[] = new double[4];
-        int at = 0;
+        int at = 1;
         boolean keepGoing = false;
         for (int i = 1; i < np; i++) {
             if (i < (np - 1)) {
@@ -1499,10 +1506,9 @@ public class Matrix extends MatObject {
             cf[1] = Mi / 2;                                         // bi
             cf[2] = (y.get(i + 1) - y.get(i)) / h - (Mip1 + 2 * Mi) * h / 6;// ci
             cf[3] = y.get(i);                                     // di
-            while (at < xi.n && (keepGoing || xi.data[at] <= x.get(i + 1))) {
-                double it = xi.data[at] - x.get(i);
-                res.data[at] = ((cf[0] * it + cf[1]) * it + cf[2]) * it
-                        + cf[3];
+            while (at <= xi.n && (keepGoing || xi.get(at) <= x.get(i + 1))) {
+                double it = xi.get(at) - x.get(i);
+                res.set(at, ((cf[0] * it + cf[1]) * it + cf[2]) * it + cf[3]);
                 at++;
             }
             Mi = Mip1;
@@ -1783,15 +1789,15 @@ public class Matrix extends MatObject {
     public CellArray sort() {
         CellArray res = new CellArray(1, 2);
         pa = new Pair[n];
-        for (int i = 0; i < n; i++) {
-            pa[i] = new Pair(data[i], i + 1);
+        for (int i = 1; i <= n; i++) {
+            pa[i-1] = new Pair(get(i), i);
         }
         sort(0, n - 1);
         Matrix v = new Matrix(1, n);
         Matrix o = new Matrix(1, n);
-        for (int i = 0; i < n; i++) {
-            v.data[i] = pa[i].value;
-            o.data[i] = pa[i].order;
+        for (int i = 1; i <= n; i++) {
+            v.set(i,  pa[i-1].value);
+            o.set(i,  pa[i-1].order);
         }
         res.set(1, 1, v);
         res.set(1, 2, o);
@@ -1805,8 +1811,8 @@ public class Matrix extends MatObject {
      */
     public Matrix add(double x) {
         Matrix res = new Matrix(this);
-        for (int i = 0; i < n; i++) {
-            res.data[i] = data[i] + x;
+        for (int i = 1; i <= n; i++) {
+            res.set(i, get(i) + x);
         }
         return res;
     }
@@ -1818,8 +1824,9 @@ public class Matrix extends MatObject {
      */
     public Matrix pow(double x) {
         Matrix res = new Matrix(this);
-        for (int i = 0; i < n; i++) {
-            res.data[i] = Math.pow(data[i], x);
+        for (int i = 1; i <= n; i++) {
+//            res.data[i] = Math.pow(data[i], x);
+            res.set(i,  Math.pow(get(i), x));
         }
         return res;
     }
@@ -1830,8 +1837,9 @@ public class Matrix extends MatObject {
      */
     public Matrix sin() {
         Matrix res = new Matrix(this);
-        for (int i = 0; i < n; i++) {
-            res.data[i] = Math.sin(data[i]);
+        for (int i = 1; i <= n; i++) {
+//            res.data[i] = Math.sin(data[i]);
+            res.set(i,  Math.sin(get(i)));
         }
         return res;
     }
@@ -1843,8 +1851,9 @@ public class Matrix extends MatObject {
      */
     public Matrix sub(double x) {
         Matrix res = new Matrix(this);
-        for (int i = 0; i < n; i++) {
-            res.data[i] = data[i] - x;
+        for (int i = 1; i <= n; i++) {
+//            res.data[i] = data[i] - x;
+            res.set(i, get(i) - x);
         }
         return res;
     }
@@ -1856,8 +1865,9 @@ public class Matrix extends MatObject {
      */
     public Matrix mult(double x) {
         Matrix res = new Matrix(this);
-        for (int i = 0; i < n; i++) {
-            res.data[i] = data[i] * x;
+        for (int i = 1; i <= n; i++) {
+//            res.data[i] = data[i] * x;
+            res.set(i, get(i) * x);
         }
         return res;
     }
@@ -1869,8 +1879,9 @@ public class Matrix extends MatObject {
      */
     public Matrix div(double x) {
         Matrix res = new Matrix(this);
-        for (int i = 0; i < n; i++) {
-            res.data[i] = data[i] / x;
+        for (int i = 1; i <= n; i++) {
+//            res.data[i] = data[i] / x;
+            res.set(i, get(i) / x);
         }
         return res;
     }
@@ -1882,8 +1893,9 @@ public class Matrix extends MatObject {
      */
     public Matrix mexp(double x) {
         Matrix res = new Matrix(this);
-        for (int i = 0; i < n; i++) {
-            res.data[i] = Math.pow(data[i], x);
+        for (int i = 1; i <= n; i++) {
+//            res.data[i] = Math.pow(data[i], x);
+            res.set(i,  Math.pow(get(i), x));
         }
         return res;
     }
@@ -1898,19 +1910,22 @@ public class Matrix extends MatObject {
         if (n != v.n) {
             if (n == 1) {
                 res = new Matrix(v);
-                for (int i = 0; i < v.n; i++) {
-                    res.data[i] = data[0] + res.data[i];
+                for (int i = 1; i <= v.n; i++) {
+//                    res.data[i] = data[0] + res.data[i];
+                    res.set(i, get(1) + v.get(i));
                 }
             } else if (v.n == 1) {
-                for (int i = 0; i < n; i++) {
-                    res.data[i] = v.data[0] + data[i];
+                for (int i = 1; i <= n; i++) {
+//                    res.data[i] = v.data[0] + data[i];
+                    res.set(i, v.get(1) + get(i));
                 }
             } else {
                 throw new RuntimeException("Matrix.add unequal sizes");
             }
         } else {
-            for (int i = 0; i < n; i++) {
-                res.data[i] = data[i] + v.data[i];
+            for (int i = 1; i <= n; i++) {
+ //               res.data[i] = data[i] + v.data[i];
+                    res.set(i, get(i) + v.get(i));
             }
         }
         return res;
@@ -1926,19 +1941,22 @@ public Matrix sub(Matrix v) {
         if (n != v.n) {
             if (n == 1) {
                 res = new Matrix(v);
-                for (int i = 0; i < v.n; i++) {
-                    res.data[i] = data[0] - res.data[i];
+                for (int i = 1; i <= v.n; i++) {
+//                    res.data[i] = data[0] + res.data[i];
+                    res.set(i, get(1) - v.get(i));
                 }
             } else if (v.n == 1) {
-                for (int i = 0; i < n; i++) {
-                    res.data[i] = data[i] - v.data[0];
+                for (int i = 1; i <= n; i++) {
+//                    res.data[i] = v.data[0] + data[i];
+                    res.set(i, v.get(1) - get(i));
                 }
             } else {
-                throw new RuntimeException("Matrix.sub unequal sizes");
+                throw new RuntimeException("Matrix.add unequal sizes");
             }
         } else {
-            for (int i = 0; i < n; i++) {
-                res.data[i] = data[i] - v.data[i];
+            for (int i = 1; i <= n; i++) {
+ //               res.data[i] = data[i] + v.data[i];
+                    res.set(i, get(i) - v.get(i));
             }
         }
         return res;
@@ -1954,19 +1972,22 @@ public Matrix sub(Matrix v) {
         if (n != v.n) {
             if (n == 1) {
                 res = new Matrix(v);
-                for (int i = 0; i < v.n; i++) {
-                    res.data[i] = data[0] * res.data[i];
+                for (int i = 1; i <= v.n; i++) {
+//                    res.data[i] = data[0] + res.data[i];
+                    res.set(i, get(1) * v.get(i));
                 }
             } else if (v.n == 1) {
-                for (int i = 0; i < n; i++) {
-                    res.data[i] = v.data[0] * data[i];
+                for (int i = 1; i <= n; i++) {
+//                    res.data[i] = v.data[0] + data[i];
+                    res.set(i, v.get(1) * get(i));
                 }
             } else {
-                throw new RuntimeException("??? Error using ==> mtimes Inner matrix dimensions must agree.");
+                throw new RuntimeException("Matrix.add unequal sizes");
             }
         } else {
-            for (int i = 0; i < n; i++) {
-                res.data[i] = data[i] * v.data[i];
+            for (int i = 1; i <= n; i++) {
+ //               res.data[i] = data[i] + v.data[i];
+                    res.set(i, get(i) * v.get(i));
             }
         }
         return res;
@@ -1982,19 +2003,22 @@ public Matrix sub(Matrix v) {
         if (n != v.n) {
             if (n == 1) {
                 res = new Matrix(v);
-                for (int i = 0; i < v.n; i++) {
-                    res.data[i] = data[0] / res.data[i];
+                for (int i = 1; i <= v.n; i++) {
+//                    res.data[i] = data[0] + res.data[i];
+                    res.set(i, get(1) / v.get(i));
                 }
             } else if (v.n == 1) {
-                for (int i = 0; i < n; i++) {
-                    res.data[i] = data[i] / v.data[0];
+                for (int i = 1; i <= n; i++) {
+//                    res.data[i] = v.data[0] + data[i];
+                    res.set(i, v.get(1) / get(i));
                 }
             } else {
                 throw new RuntimeException("Matrix.add unequal sizes");
             }
         } else {
-            for (int i = 0; i < n; i++) {
-                res.data[i] = data[i] / v.data[i];
+            for (int i = 1; i <= n; i++) {
+ //               res.data[i] = data[i] + v.data[i];
+                    res.set(i, get(i) / v.get(i));
             }
         }
         return res;
@@ -2009,8 +2033,8 @@ public Matrix sub(Matrix v) {
         if (n != v.n) {
             throw new RuntimeException("Matrix.add unequal sizes");
         }
-        for (int i = 0; i < n; i++) {
-            data[i] = data[i] + v.data[i];
+        for (int i = 1; i <= n; i++) {
+            set(i, get(i) + v.get(i));
         }
     }
 
@@ -2023,8 +2047,8 @@ public Matrix sub(Matrix v) {
         if (n != v.n) {
             throw new RuntimeException("Matrix.add unequal sizes");
         }
-        for (int i = 0; i < n; i++) {
-            data[i] = data[i] * v.data[i];
+        for (int i = 1; i <= n; i++) {
+            set(i, get(i) * v.get(i));
         }
     }
 
@@ -2037,8 +2061,8 @@ public Matrix sub(Matrix v) {
         if (n != v.n) {
             throw new RuntimeException("Matrix.add unequal sizes");
         }
-        for (int i = 0; i < n; i++) {
-            data[i] = data[i] / v.data[i];
+        for (int i = 1; i <= n; i++) {
+            set(i, get(i) / v.get(i));
         }
     }
 
@@ -2051,8 +2075,8 @@ public Matrix sub(Matrix v) {
         if (n != v.n) {
             throw new RuntimeException("Matrix.add unequal sizes");
         }
-        for (int i = 0; i < n; i++) {
-            data[i] = data[i] - v.data[i];
+        for (int i = 1; i <= n; i++) {
+            set(i, get(i) - v.get(i));
         }
     }
 
@@ -2062,8 +2086,8 @@ public Matrix sub(Matrix v) {
      * @return
      */
     public void addIP(double x) {
-        for (int i = 0; i < n; i++) {
-            data[i] = data[i] + x;
+        for (int i = 1; i <= n; i++) {
+            set(i, get(i) + x);
         }
     }
 
@@ -2073,8 +2097,8 @@ public Matrix sub(Matrix v) {
      * @return
      */
     public void multIP(double x) {
-        for (int i = 0; i < n; i++) {
-            data[i] = data[i] * x;
+        for (int i = 1; i <= n; i++) {
+            set(i, get(i) * x);
         }
     }
 
@@ -2084,8 +2108,8 @@ public Matrix sub(Matrix v) {
      * @return
      */
     public void divIP(double x) {
-        for (int i = 0; i < n; i++) {
-            data[i] = data[i] / x;
+        for (int i = 1; i <= n; i++) {
+            set(i, get(i) / x);
         }
     }
 
@@ -2095,8 +2119,8 @@ public Matrix sub(Matrix v) {
      * @return
      */
     public void subIP(double x) {
-        for (int i = 0; i < n; i++) {
-            data[i] = data[i] - x;
+        for (int i = 1; i <= n; i++) {
+            set(i, get(i) - x);
         }
     }
 
@@ -2151,19 +2175,22 @@ public Matrix sub(Matrix v) {
         if (n != v.n) {
             if (n == 1) {
                 res = new Matrix(v);
-                for (int i = 0; i < v.n; i++) {
-                    res.data[i] = Math.pow(data[0], v.data[i]);
+                for (int i = 1; i <= v.n; i++) {
+//                    res.data[i] = Math.pow(data[0], v.data[i]);
+                    res.set(i, Math.pow(get(1), v.get(i)));
                 }
             } else if (v.n == 1) {
-                for (int i = 0; i < n; i++) {
-                    res.data[i] = Math.pow(data[i], v.data[0]);
+                for (int i = 1; i <= n; i++) {
+//                    res.data[i] = Math.pow(data[i], v.data[0]);
+                    res.set(i, Math.pow(v.get(1),  get(i)));
                 }
             } else {
                 throw new RuntimeException("Matrix.add unequal sizes");
             }
         } else {
-            for (int i = 0; i < n; i++) {
-                res.data[i] = Math.pow(data[i], v.data[i]);
+            for (int i = 1; i <= n; i++) {
+ //               res.data[i] = Math.pow(data[i], v.data[i]);
+                    res.set(i, Math.pow(get(i), v.get(i)));
             }
         }
         return res;
@@ -2181,10 +2208,10 @@ public Matrix sub(Matrix v) {
         }
         if (n == 1) {
             res = res.mexp(v);
-        } else if (v.data[0] % 1 != 0) {
+        } else if (v.get(1) % 1 != 0) {
             throw new RuntimeException("exponent must not be fractional");
         } else {
-            int nt = (int) v.data[0];
+            int nt = (int) v.get(1);
             if (nt == 0) {
                 res = Matrix.ones(size[ROW], size[COL]);
             } else if (nt < 0) {
@@ -2224,8 +2251,8 @@ public Matrix sub(Matrix v) {
 
     private static Matrix lt1(double v, Matrix m) {
         Matrix res = new Matrix(m);
-        for (int i = 0; i < m.n; i++) {
-            res.data[i] = (v < m.data[i]) ? 1 : 0;
+        for (int i = 1; i <= m.n; i++) {
+            res.set(i, (v < m.get(i)) ? 1 : 0);
         }
         res.type = LOGICAL;
         return res;
@@ -2233,8 +2260,8 @@ public Matrix sub(Matrix v) {
 
     private static Matrix gt1(double v, Matrix m) {
         Matrix res = new Matrix(m);
-        for (int i = 0; i < m.n; i++) {
-            res.data[i] = (v > m.data[i]) ? 1 : 0;
+        for (int i = 1; i <= m.n; i++) {
+            res.set(i, (v > m.get(i)) ? 1 : 0);
         }
         res.type = LOGICAL;
         return res;
@@ -2242,8 +2269,8 @@ public Matrix sub(Matrix v) {
 
     private static Matrix ge1(double v, Matrix m) {
         Matrix res = new Matrix(m);
-        for (int i = 0; i < m.n; i++) {
-            res.data[i] = (v >= m.data[i]) ? 1 : 0;
+        for (int i = 1; i <= m.n; i++) {
+            res.set(i, (v >= m.get(i)) ? 1 : 0);
         }
         res.type = LOGICAL;
         return res;
@@ -2251,8 +2278,8 @@ public Matrix sub(Matrix v) {
 
     private static Matrix le1(double v, Matrix m) {
         Matrix res = new Matrix(m);
-        for (int i = 0; i < m.n; i++) {
-            res.data[i] = (v <= m.data[i]) ? 1 : 0;
+        for (int i = 1; i <= m.n; i++) {
+            res.set(i, (v <= m.get(i)) ? 1 : 0);
         }
         res.type = LOGICAL;
         return res;
@@ -2260,8 +2287,8 @@ public Matrix sub(Matrix v) {
 
     private static Matrix eq1(double v, Matrix m) {
         Matrix res = new Matrix(m);
-        for (int i = 0; i < m.n; i++) {
-            res.data[i] = (Math.abs(v - m.data[i]) < Math.ulp(v)) ? 1 : 0;
+        for (int i = 1; i <= m.n; i++) {
+            res.set(i, (Math.abs(v - m.get(i)) < Math.ulp(v)) ? 1 : 0);
         }
         res.type = LOGICAL;
         return res;
@@ -2269,8 +2296,8 @@ public Matrix sub(Matrix v) {
 
     private static Matrix ne1(double v, Matrix m) {
         Matrix res = new Matrix(m);
-        for (int i = 0; i < m.n; i++) {
-            res.data[i] = (Math.abs(v - m.data[i]) >= Math.ulp(v)) ? 1 : 0;
+        for (int i = 1; i <= m.n; i++) {
+            res.set(i, (Math.abs(v - m.get(i)) >= Math.ulp(v)) ? 1 : 0);
         }
         res.type = LOGICAL;
         return res;
@@ -2278,8 +2305,8 @@ public Matrix sub(Matrix v) {
 
     public static Matrix isNotNaN(Matrix m) {
         Matrix res = new Matrix(m);
-        for (int i = 0; i < m.n; i++) {
-            res.data[i] = Double.isNaN(m.data[i]) ? 0 : 1;
+        for (int i = 1; i <= m.n; i++) {
+            res.set(i, Double.isNaN(m.get(i)) ? 0 : 1);
         }
         res.type = LOGICAL;
         res = find(res);
@@ -2288,9 +2315,9 @@ public Matrix sub(Matrix v) {
 
     private static Matrix and1(double v, Matrix m) {
         Matrix res = new Matrix(m);
-        for (int i = 0; i < m.n; i++) {
-            double x = m.data[i];
-            res.data[i] = (v > Math.ulp(v) && x > Math.ulp(x)) ? 1 : 0;
+        for (int i = 1; i <= m.n; i++) {
+            double x = m.get(i);
+            res.set(i, (v > Math.ulp(v) && x > Math.ulp(x)) ? 1 : 0);
         }
         res.type = LOGICAL;
         return res;
@@ -2298,9 +2325,9 @@ public Matrix sub(Matrix v) {
 
     private static Matrix or1(double v, Matrix m) {
         Matrix res = new Matrix(m);
-        for (int i = 0; i < m.n; i++) {
-            double x = m.data[i];
-            res.data[i] = (v > Math.ulp(v) || x > Math.ulp(x)) ? 1 : 0;
+        for (int i = 1; i <= m.n; i++) {
+            double x = m.get(i);
+            res.set(i, (v > Math.ulp(v) || x > Math.ulp(x)) ? 1 : 0);
         }
         res.type = LOGICAL;
         return res;
@@ -2322,8 +2349,8 @@ public Matrix sub(Matrix v) {
             throw new RuntimeException("Matrix.gt unequal sizes");
         }
         Matrix res = new Matrix(this);
-        for (int i = 0; i < n; i++) {
-            res.data[i] = (data[i] > m.data[i]) ? 1 : 0;
+        for (int i = 1; i <= n; i++) {
+            res.set(i, (get(i) > m.get(i)) ? 1 : 0);
         }
         res.type = LOGICAL;
         return res;
@@ -2345,8 +2372,8 @@ public Matrix sub(Matrix v) {
             throw new RuntimeException("Matrix.lt unequal sizes");
         }
         Matrix res = new Matrix(this);
-        for (int i = 0; i < n; i++) {
-            res.data[i] = (data[i] < m.data[i]) ? 1 : 0;
+         for (int i = 1; i <= n; i++) {
+            res.set(i, (get(i) < m.get(i)) ? 1 : 0);
         }
         res.type = LOGICAL;
         return res;
@@ -2368,8 +2395,8 @@ public Matrix sub(Matrix v) {
             throw new RuntimeException("Matrix.ge unequal sizes");
         }
         Matrix res = new Matrix(this);
-        for (int i = 0; i < n; i++) {
-            res.data[i] = (data[i] >= m.data[i]) ? 1 : 0;
+        for (int i = 1; i <= n; i++) {
+            res.set(i, (get(i) >= m.get(i)) ? 1 : 0);
         }
         res.type = LOGICAL;
         return res;
@@ -2391,8 +2418,8 @@ public Matrix sub(Matrix v) {
             throw new RuntimeException("Matrix.le unequal sizes");
         }
         Matrix res = new Matrix(this);
-        for (int i = 0; i < n; i++) {
-            res.data[i] = (data[i] <= m.data[i]) ? 1 : 0;
+        for (int i = 1; i <= n; i++) {
+            res.set(i, (get(i) <= m.get(i)) ? 1 : 0);
         }
         res.type = LOGICAL;
         return res;
@@ -2414,8 +2441,8 @@ public Matrix sub(Matrix v) {
             throw new RuntimeException("Matrix.eq unequal sizes");
         }
         Matrix res = new Matrix(this);
-        for (int i = 0; i < n; i++) {
-            res.data[i] = ((data[i] - m.data[i]) < Math.ulp(data[i])) ? 1 : 0;
+        for (int i = 1; i <= n; i++) {
+            res.set(i, ((get(i) - m.get(i) < Math.ulp(get(i)))) ? 1 : 0);
         }
         res.type = LOGICAL;
         return res;
@@ -2437,8 +2464,8 @@ public Matrix sub(Matrix v) {
             throw new RuntimeException("Matrix.ne unequal sizes");
         }
         Matrix res = new Matrix(this);
-        for (int i = 0; i < n; i++) {
-            res.data[i] = ((data[i] - m.data[i]) >= Math.ulp(data[i])) ? 1 : 0;
+        for (int i = 1; i <= n; i++) {
+            res.set(i, ((get(i) - m.get(i) >= Math.ulp(get(i)))) ? 1 : 0);
         }
         res.type = LOGICAL;
         return res;
@@ -2460,9 +2487,9 @@ public Matrix sub(Matrix v) {
             throw new RuntimeException("Matrix.ne unequal sizes");
         }
         Matrix res = new Matrix(this);
-        for (int i = 0; i < n; i++) {
-            double x = m.data[i];
-            res.data[i] = (data[i] > Math.ulp(data[i]) && x > Math.ulp(x)) ? 1 : 0;
+        for (int i = 1; i <= n; i++) {
+            double x = m.get(i);
+            res.set(i, (get(i) > Math.ulp(get(i)) && x > Math.ulp(x)) ? 1 : 0);
         }
         res.type = LOGICAL;
         return res;
@@ -2484,9 +2511,9 @@ public Matrix sub(Matrix v) {
             throw new RuntimeException("Matrix.ne unequal sizes");
         }
         Matrix res = new Matrix(this);
-        for (int i = 0; i < n; i++) {
-            double x = m.data[i];
-            res.data[i] = (data[i] > Math.ulp(data[i]) || x > Math.ulp(x)) ? 1 : 0;
+        for (int i = 1; i <= n; i++) {
+            double x = m.get(i);
+            res.set(i, (get(i) > Math.ulp(get(i)) || x > Math.ulp(x)) ? 1 : 0);
         }
         res.type = LOGICAL;
         return res;
@@ -2499,8 +2526,8 @@ public Matrix sub(Matrix v) {
     public Matrix floor() {
         Matrix res = new Matrix(this);
         res.type = INTEGER;
-        for (int i = 0; i < n; i++) {
-            res.data[i] = Math.floor(data[i]);
+        for (int i = 1; i <= n; i++) {
+            res.set(i, Math.floor(get(i)));
         }
         return res;
     }
@@ -2660,12 +2687,12 @@ public Matrix sub(Matrix v) {
     public CellArray max() {
         CellArray res = new CellArray(1, 2);
         if (size[ROW] == 1) {
-            double best = data[0];
+            double best = get(1);
             int where = 1;
-            for (int c = 1; c < size[COL]; c++) {
-                if (data[c] > best) {
-                    best = data[c];
-                    where = c + 1;
+            for (int c = 2; c <= size[COL]; c++) {
+                if (get(c) > best) {
+                    best = get(c);
+                    where = c;
                 }
             }
             res.set(1, 1, new Matrix(best));
@@ -2673,11 +2700,11 @@ public Matrix sub(Matrix v) {
         } else {
             Matrix bestm = new Matrix(1, size[COL]);
             Matrix wherem = new Matrix(1, size[COL]);
-            for (int c = 0; c < size[COL]; c++) {
+            for (int c = 1; c <= size[COL]; c++) {
                 CellArray ca =
-                        index(colon(1, size[ROW]), new Matrix(c + 1)).transpose().max();
-                bestm.data[c] = ((Matrix) ca.get(1, 1)).data[0];
-                wherem.data[c] = ((Matrix) ca.get(1, 2)).data[0];
+                        index(colon(1, size[ROW]), new Matrix(c)).transpose().max();
+                bestm.set(c, ((Matrix) ca.get(1, 1)).get(1));
+                wherem.set(c, ((Matrix) ca.get(1, 2)).get(1));
             }
             res.set(1, 1, new Matrix(bestm));
             res.set(1, 2, new Matrix(wherem));
@@ -2686,20 +2713,20 @@ public Matrix sub(Matrix v) {
     }
 
     public double getMin() {
-        double res = data[0];
-        for (int i = 1; i < n; i++) {
-            if (data[i] < res) {
-                res = data[i];
+        double res = get(1);
+        for (int i = 2; i <= n; i++) {
+            if (get(i) < res) {
+                res = get(i);
             }
         }
         return res;
     }
 
     public double getMax() {
-        double res = data[0];
+        double res = get(1);
         for (int i = 1; i < n; i++) {
-            if (data[i] > res) {
-                res = data[i];
+            if (get(i) > res) {
+                res = get(i);
             }
         }
         return res;
@@ -2712,12 +2739,12 @@ public Matrix sub(Matrix v) {
     public CellArray min() {
         CellArray res = new CellArray(1, 2);
         if (size[ROW] == 1) {
-            double best = data[0];
+            double best = get(1);
             int where = 1;
-            for (int c = 1; c < size[COL]; c++) {
-                if (data[c] < best) {
-                    best = data[c];
-                    where = c + 1;
+            for (int c = 2; c <= size[COL]; c++) {
+                if (get(c) < best) {
+                    best = get(c);
+                    where = c;
                 }
             }
             res.set(1, 1, new Matrix(best));
@@ -2725,11 +2752,11 @@ public Matrix sub(Matrix v) {
         } else {
             Matrix bestm = new Matrix(1, size[COL]);
             Matrix wherem = new Matrix(1, size[COL]);
-            for (int c = 0; c < size[COL]; c++) {
+            for (int c = 1; c <= size[COL]; c++) {
                 CellArray ca =
                         index(colon(1, size[ROW]), new Matrix(c + 1)).transpose().min();
-                bestm.data[c] = ((Matrix) ca.get(1, 1)).data[0];
-                wherem.data[c] = ((Matrix) ca.get(1, 2)).data[0];
+                bestm.set(c, ((Matrix) ca.get(1, 1)).get(1));
+                wherem.set(c, ((Matrix) ca.get(1, 2)).get(1));
             }
             res.set(1, 1, new Matrix(bestm));
             res.set(1, 2, new Matrix(wherem));
@@ -2792,17 +2819,17 @@ public Matrix sub(Matrix v) {
     }
 
     public void setLower(int ndx, Matrix m) {
-        for (int i = 0; i < m.n; i++) {
-            if (m.data[i] < data[ndx - 1]) {
-                data[ndx - 1] = m.data[i];
+        for (int i = 1; i <= m.n; i++) {
+            if (m.get(i) < get(ndx)) {
+                set(ndx, m.get(i));
             }
         }
     }
 
     public void setUpper(int ndx, Matrix m) {
-        for (int i = 0; i < m.n; i++) {
-            if (m.data[i] > data[ndx - 1]) {
-                data[ndx - 1] = m.data[i];
+        for (int i = 1; i <= m.n; i++) {
+            if (m.get(i) > get(ndx)) {
+                set(ndx, m.get(i));
             }
         }
     }

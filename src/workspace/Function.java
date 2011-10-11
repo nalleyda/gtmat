@@ -463,6 +463,8 @@ public class Function {
                 Matrix.class, Matrix.class, Matrix.class));
         ht.put("sort", new Function("sort", "jmatrix.Matrix", 1,
                 Matrix.class));
+        ht.put("sparse", new Function("sparse", "jmatrix.Sparse", 3,
+                Matrix.class, Matrix.class, Matrix.class));
         ht.put("sound", new Function("sound", "sound.Sound", 2,
                 SignedByte.class, Matrix.class));
         ht.put("splined", new Function("spline", "jmatrix.Matrix", 3,
