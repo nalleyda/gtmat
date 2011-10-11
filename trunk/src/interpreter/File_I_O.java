@@ -58,13 +58,13 @@ public class File_I_O {
                         tk = new StringTokenizer(str, "|");
                         token = tk.nextToken();  // sequence number
                         token = tk.nextToken();  // line number
-                        int line = Integer.parseInt(token);
+                        int lineStr = Integer.parseInt(token);
                         token = tk.nextToken();  // Node type
                         int type = Integer.parseInt(token);
                         String tname = "" + TreeWalker.convert(type);
                         keepGoing = true;
                         GT_Token gttk = new GT_Token(type, tname);
-                        gttk.setLine(line);
+                        gttk.setLine(lineStr);
                         theTree = new CommonTree(gttk);
                         while (keepGoing && tk.hasMoreTokens()) {
                             token = tk.nextToken();
@@ -152,6 +152,7 @@ public class File_I_O {
         String treeStr = outputTree(tr);
         output.print(header + "\n");
         output.print(treeStr);
+        output.close();
         return res;
     }
     private static int opens = 0;
@@ -173,10 +174,24 @@ public class File_I_O {
     private static String stripQuotes(String str) {
         boolean keepGoing = true;
         int from, to;
-        from = str.indexOf('%');
-        if (from >= 0) {
-            str = str.substring(0, from - 1);
+        int ticks = 0;
+        // first scan the string for a % outside quotes
+        // if found, it's a comment - remove the rest of the line
+        for(int i = 0; keepGoing && (i < str.length()); i++) {
+            char ch = str.charAt(i);
+            switch(ch) {
+                case '\'':
+                    ticks++;
+                    break;
+                case '%':
+                    if((ticks & 1) == 0) {
+                        str = str.substring(0, i);
+                        keepGoing = false;
+                    }
+                    break;
+            }
         }
+        keepGoing = true;
         while (keepGoing) {
             from = str.indexOf('\'');
             keepGoing = from >= 0;
