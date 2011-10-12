@@ -392,6 +392,8 @@ public class Function {
                 Matrix.class, double.class));
         ht.put("get2", new Function("sindex", "jmatrix.Matrix", 3,
                 Matrix.class, double.class, double.class));
+        ht.put("gplot", new Function("sindex", "plotting.Plots", 3,
+                Matrix.class, Matrix.class, MatString.class));
         ht.put("gt", new Function("gt", "jmatrix.Matrix", 2,
                 Matrix.class, Matrix.class));
         ht.put("hcat", new Function("hcat", "jmatrix.Matrix", 1, Matrix.class));
