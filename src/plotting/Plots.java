@@ -24,6 +24,10 @@ public class Plots {
     public static void grid(boolean on) {
          Figure.setGrid(on);
     }
+    
+    public static void gplot(Matrix A, Matrix coord, MatString ltype) {
+        String ctl = ltype.toString();
+    }
 
     public static void plot(int type, Matrix x, Matrix y, String str) {
         Figure myFig = Figure.getCurrent();
