@@ -332,6 +332,7 @@ public class File_I_O {
         }
         if (buffer == null) {
             res = false;
+            result += "end\n";
         }
         newFile = saveTFile(tName, result, header);
         return res;

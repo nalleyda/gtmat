@@ -2,19 +2,17 @@ clear
 clc
 close all
 %   Listing 17.14 Testing graph search algorithms
-makeGraph; %  call script to make the graph:
+makeGraph;   % call script to make the graph:
 start = 1;
 while start > 0
 gplot(A, coord, 'ro-')
 hold on
 for index = 1:length(coord)
-   str = char('A' + index - 1);
-   text(coord(index,1) + 0.2, ...
-               coord(index,2) + 0.3, str);
+str = char('A' + index - 1);
+text(coord(index,1) + 0.2, ...
+coord(index,2) + 0.3, str);
 end
-axis([0 11 0 10]) 
-axis off
-hold on
+axis([0 11 0 10]); axis off; hold on
 ch = input('Starting node: ','s');
 start = ch - 'A' + 1;
 if start > 0
