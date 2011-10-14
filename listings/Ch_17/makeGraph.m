@@ -1,8 +1,12 @@
 % Listing 17.07 Constructing a simple graph
 % edge weights
 cost = [2 2 2 2 2 3 3 3 3 1 2 1 3];
-% edge directions
-dir = [2 2 2 2 2 2 2 2 2 2 2 2 2];
+% edge directions [0: both; 1: forward; 2: back]
+%                        1 1 1 1
+%      1 2 3 4 5 6 7 8 9 0 1 2 3
+% from A A A A A B B C D F E G E
+%   to B C D E F F C D E G G H H 
+dir = [1 1 1 0 1 1 1 1 0 1 1 1 0];
 % connectivity
 node = [ 1 2 3 4 5; ... % edges from A
         1 6 7 0 0; ... % edges from B

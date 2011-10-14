@@ -33,7 +33,7 @@ public class Main {
     public static String fileName = null;
     public static WorkspaceStack wstack = new WorkspaceStack();
     public static Stack<String> helperStack = new Stack<String>();
-    public static final String version = "1.13";
+    public static final String version = "1.15";
     
     public static HashMap<String, ArrayList<Boolean>> bpsMap;
     
