@@ -60,7 +60,7 @@ public class Function {
 
     }
 
-    public static MatObject checkSpecialCases(String fname, CellArray args) {
+    public static MatObject checkSpecialCases(String fname, CellArray args) throws Exception{
         CellArray ca = null;
         Matrix xv = null;
         if (fname.equals("meshgrid")) {
@@ -273,7 +273,14 @@ public class Function {
         } else if (fname.equals("csvread")) {
             // csvread called with one answer
             ca = FileIO.csvread(args.get(1).toString());
-        } 
+        } else if (fname.equals("save")) {
+            MatObject.save(new MatString(args.get(1)));
+            ca = new CellArray(new Matrix(1));
+        } else if (fname.equals("load")) {
+            MatObject.load(new MatString(args.get(1)));
+            ca = new CellArray(new Matrix(1));
+        }
+        
         if (ca == null) {
             return null;
         } else {
@@ -498,6 +505,10 @@ public class Function {
         //Other functions
         ht.put("cd", new Function("cd", "main.Main", 1, MatString.class));
         //ht.put("fopen", new Function("fopen", "fileIO.FileIO", 2, String.class, String.class));
+        ht.put("load", new Function("load", "jmatrix.MatObject", 1, MatString.class));
+        ht.put("save", new Function("save", "jmatrix.MatObject", 1, MatString.class));
+
+
 
     }
 

@@ -8,7 +8,8 @@ import interpreter.*;
 import parser.*;
 import main.*;
 import workspace.*;
-
+import java.util.Scanner;
+import java.io.File;
 /**
  *
  * @author dsmith
@@ -132,6 +133,39 @@ public abstract class MatObject {
         }
         return ov;
     }
+
+    
+    public static void load(MatString nameIn) throws Exception{
+        String name = nameIn.toString();
+        Scanner scan = new Scanner(new File(name + ".mat"));
+        scan.useDelimiter("\\Z");//Read the whole file
+        GTStringStream matStream = new GTStringStream(scan.next());
+        GTParser.process(matStream);
+    }
+    
+    public static void save(MatString nameIn) throws Exception{
+        String name = nameIn.toString();
+        save(Main.wstack.peek().getVariable(name).getData(), name);
+    }
+
+    public static void save(MatObject m, String name) throws Exception{
+        if (m instanceof Matrix){
+            Matrix.save((Matrix)m, name);
+        }
+        else{
+            throw new Exception("Not yet implemented!");
+        }
+        //...
+    }
+
+   /* GTStringStream s = null;
+        try {
+            s = new GTStringStream("x = 4\n");
+            s.append("y = 12\n");
+            s.append("y/x\n");
+            System.out.println(s);
+        } catch(IOException e){};
+        process(s);*/
     
     public static MatComplex complex(Matrix rl, Matrix im) {
         MatComplex res = new MatComplex(rl, im);
