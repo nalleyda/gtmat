@@ -135,17 +135,29 @@ public abstract class MatObject {
     }
 
     
-    public static void load(MatString nameIn) throws Exception{
+    public static Matrix load(MatString nameIn){
+        try{
         String name = nameIn.toString();
         Scanner scan = new Scanner(new File(name + ".mat"));
         scan.useDelimiter("\\Z");//Read the whole file
         GTStringStream matStream = new GTStringStream(scan.next());
         GTParser.process(matStream);
+        }
+        catch(Exception e){
+            return new Matrix(-1);
+        }
+        return new Matrix(1);
     }
     
-    public static void save(MatString nameIn) throws Exception{
+    public static Matrix save(MatString nameIn){
+        try{
         String name = nameIn.toString();
         save(Main.wstack.peek().getVariable(name).getData(), name);
+        }
+        catch(Exception e){
+            return new Matrix(-1);
+        }
+        return new Matrix(1);
     }
 
     public static void save(MatObject m, String name) throws Exception{

@@ -273,13 +273,13 @@ public class Function {
         } else if (fname.equals("csvread")) {
             // csvread called with one answer
             ca = FileIO.csvread(args.get(1).toString());
-        } else if (fname.equals("save")) {
-            MatObject.save(new MatString(args.get(1)));
+        } /*else if (fname.equals("save")) {
+            ca = MatObject.save(new MatString(args.get(1)));
             ca = new CellArray(new Matrix(1));
         } else if (fname.equals("load")) {
-            MatObject.load(new MatString(args.get(1)));
+            ca = MatObject.load(new MatString(args.get(1)));
             ca = new CellArray(new Matrix(1));
-        }
+        }*/
         
         if (ca == null) {
             return null;
