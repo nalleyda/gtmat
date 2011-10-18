@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.util.Arrays;
 import java.lang.reflect.Method;
+import java.io.File;
+import java.io.FileWriter;
 import main.*;
 
 /**
@@ -234,6 +236,31 @@ public class Matrix extends MatObject {
 
     public Matrix empty() {
         return new Matrix();
+    }
+
+    //@TODO: save method taking only a name, searches local ws for matrix
+
+    /*
+     * Used to save as a .mat file
+     */
+    public static void save(Matrix m, String name) throws Exception{
+
+        FileWriter fw = new FileWriter(new File(name + ".mat"));
+        fw.flush();
+        StringBuilder ret = new StringBuilder(name + "=[");
+        int rows = m.size[ROW];
+        int cols = m.size[COL];
+
+        for (int r = 1; r <= rows; r++){
+            for (int c = 1; c <= cols; c++){
+                ret.append(m.get(r,c) + ",");
+            }
+            ret.replace(ret.length()-1, ret.length(), ";");
+        }
+        ret.replace(ret.length()-1, ret.length(), "];");
+        System.out.println(ret);
+        fw.write(ret.toString());
+        fw.close();
     }
 
     /**
@@ -2967,6 +2994,8 @@ public Matrix sub(Matrix v) {
         StringBuilder sb = new StringBuilder(10);
         sb.append("xa");
         System.out.println(sb.toString());
+
+        save(new Matrix(2,3,1,2,3,4,5,6), "mymat");
     }
 
     class Pair {
