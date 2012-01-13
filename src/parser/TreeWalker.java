@@ -173,9 +173,10 @@ public class TreeWalker {
                 res = a.caret(b);
                 break;
             case CD:
+            	//@TODO - we get "<missing id>" here from string literals
                 if (n > 0) {
                     fld = ((CommonTree) tree.getChild(0)).getText();
-                    Main.cd(fld);
+                    Main.cd(fld);//@TODO: this assumes cd takes in a hard-coded string - BAD
                 }
                 break;
             case CELLFIELD:
@@ -675,7 +676,7 @@ public class TreeWalker {
     public static boolean validateTokens() {
         boolean res = true;
         BufferedReader in = null;
-        String name = "src" + File.separator + "parser" + File.separator + "Expr.tokens";
+        String name = /*"src" + File.separator + */"parser" + File.separator + "Expr.tokens";
         try {
             in = new BufferedReader(new FileReader(name));
         } catch (IOException e) {
@@ -701,6 +702,8 @@ public class TreeWalker {
         } catch (Exception e) {
         }
         if (!res) {
+        	
+        	//LinkedList<>
             System.err.println("\n IF YOU SEE THIS MESSAGE, YOU MUST DO THE FOLLOWING:");
             System.err.println(" You have changed the grammar in a way that has changed");
             System.err.println("the list of tokens - an unfortunate consequence of this");
