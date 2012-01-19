@@ -419,6 +419,7 @@ public class Function {
         ht.put("interp1", new Function("interp1", "jmatrix.Matrix", 3,
                 Matrix.class, Matrix.class, Matrix.class));
         ht.put("inv", new Function("inv", "jmatrix.Matrix", 1, Matrix.class));
+        ht.put("isprime", new Function("isprime", "jmatrix.Matrix", 1, Matrix.class));
         ht.put("le", new Function("le", "jmatrix.Matrix", 2,
                 Matrix.class, Matrix.class));
         ht.put("length", new Function("length", "jmatrix.MatObject", 1, MatObject.class));
@@ -451,6 +452,8 @@ public class Function {
                 Matrix.class, Matrix.class));
         ht.put("pow", new Function("pow", "jmatrix.Matrix", 2,
                 Matrix.class, double.class));
+        ht.put("primes", new Function("primes", "jmatrix.Matrix", 1, 
+        		Matrix.class));
         ht.put("rand", new Function("rand", "jmatrix.Matrix", 2,
                 Matrix.class, Matrix.class));
         ht.put("real", new Function("real", "jmatrix.MatComplex", 1,
