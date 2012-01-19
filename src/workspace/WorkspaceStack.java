@@ -1,6 +1,8 @@
 package workspace;
 
 import jmatrix.*;
+import jmatrix.MatObject.Type;
+
 import java.util.Stack;
 import java.util.ArrayList;
 import interpreter.DataHolder;
@@ -50,7 +52,7 @@ public class WorkspaceStack{
             Workspace curWorkspace = wstack.peek();
             DefaultListModel varList = curWorkspace.getVarList();
             Variable rhsvar = new Variable(name, rhs);
-            int type = rhs.type;
+            Type type = rhs.type;
 
             int i = 0;
             MatObject lhs = null;
@@ -65,7 +67,7 @@ public class WorkspaceStack{
             }
             else{
                 switch (type){
-                    case MatObject.DOUBLE:
+                    case DOUBLE:
                         lhs = Matrix.zeros(rhs.size[Matrix.ROW], rhs.size[Matrix.COL]);
                         
                         break;
@@ -74,7 +76,7 @@ public class WorkspaceStack{
 
             
             switch (type){
-                case MatObject.DOUBLE:
+                case DOUBLE:
                     if (indices.length == 1){
                         Matrix.set((Matrix)lhs, (Matrix)indices[0], (Matrix)rhs);
                     }

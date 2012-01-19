@@ -15,7 +15,7 @@ public class CellArray extends MatObject {
     public CellArray() {
         super();
         cell = new MatObject[1];
-        type = CELL;
+        type = Type.CELL;
     }
 
     public MatObject[] getData(){
@@ -55,7 +55,7 @@ public class CellArray extends MatObject {
         } else {
             cell = null;
         }
-        type = CELL;
+        type = Type.CELL;
     }
 
     public CellArray empty() {

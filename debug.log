@@ -1,1 +1,12 @@
 debug log opened
+Tree is BODY with 1 children type: BODY
+   Tree is = with 2 children type: GETS
+      Tree is 5 with 0 children type: DOUBLE
+Tree is BODY with 1 children type: BODY
+   Tree is = with 2 children type: GETS
+      Tree is 7 with 0 children type: DOUBLE
+Tree is BODY with 1 children type: BODY
+   Tree is GETS with 1 children type: GETS
+      Tree is + with 2 children type: PLUS
+         Tree is a with 0 children type: ID
+         Tree is b with 0 children type: ID
