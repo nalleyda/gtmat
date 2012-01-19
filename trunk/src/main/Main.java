@@ -17,7 +17,7 @@ import javax.swing.DefaultListModel;
 import parser.TreeWalker;
 import java.util.Stack;
 import java.awt.Color;
-
+import jmatrix.MatObject.Type;
 /**
  *
  * @author dsmith
@@ -240,15 +240,14 @@ public class Main {
             //If the variable does exist, inputs are indices
             if (((Variable) varList.get(i)).getVarName().equals(name)) {
                 MatObject data = ((Variable) varList.get(i)).getData();
-                int type = data.type;
+                Type type = data.type;
 
                 if (inputs.length == 0) {
                     MatObject it = ((Variable) varList.get(i)).getData();
                     return (MatObject) it.copy();
                 }
-
                 switch (type) {
-                    case MatObject.DOUBLE:
+                    case DOUBLE:
                         //(row, col) indexing method
                         if (inputs.length == 2) {
                             return Matrix.get((Matrix) data, (Matrix) inputs[0], (Matrix) inputs[1]);
@@ -301,17 +300,19 @@ public class Main {
         Color clr = Color.cyan;
         int rgb = clr.getRGB();
         String str = Integer.toHexString(rgb);
+        System.out.println("Started test");
+        /*
         int red = clr.getRed();
         int green = clr.getGreen();
         int blue = clr.getBlue();
         int alpha = clr.getAlpha();
-        
-        System.out.println("Started test");
+
         double nan = Math.exp(1000);
         double pinf = 1.0/0;
         double minf = -1.0/0;
         double valpi = 4.0 * Math.atan(1.0);
         double ev = Math.exp(1.0);
+        */
         Matrix x = new Matrix(-42);
         debug.println("x is " + x + ":: " + x.info());
         Matrix v0 = Matrix.zeros(2, 3);
@@ -505,14 +506,15 @@ public class Main {
 //        debug.println("yy is " + syy);
         szz = (Matrix) cc.get(1, 3);
 //        debug.println("zz is " + szz);
-        Figure it;
+        @SuppressWarnings("unused")
+		Figure it;
         Figure.figure();
         Figure.setHidden(true);
         Plots.setColorMap("autumn");
         Figure.setColorbar(true);
         Plots.mesh(sxx, syy, szz);
         it = Figure.currentFig;
-        it.title(new MatString("Mesh Plot with Autumn color"));
+        Figure.title(new MatString("Mesh Plot with Autumn color"));
         Figure.figure();
         Plots.setColorMap("prism");
         Figure.setShading(Plot.INTERP);
@@ -520,7 +522,7 @@ public class Main {
         Plots.surf(sxx, syy, szz, szz);
         it= Figure.currentFig;
         Interpreter.grid(new MatString("ON"));
-        it.title(new MatString("Surf Plot with prism color"));
+        Figure.title(new MatString("Surf Plot with prism color"));
         Figure.figure();
         Matrix dl = szz.del2();
         Plots.setColorMap("prism");
@@ -528,7 +530,7 @@ public class Main {
         Figure.setColorbar(true);
         Plots.surf(sxx, syy, szz, dl);
         it = Figure.currentFig;
-        it.title(new MatString("Surf gradient Plot with prism color"));
+        Figure.title(new MatString("Surf gradient Plot with prism color"));
 
         Figure.figure();
         Matrix par[] = new Matrix[5];
@@ -563,8 +565,7 @@ public class Main {
         Figure.setShading(Plot.INTERP);
         Figure.setColorbar(true);
         Plots.surf(xx, yy, zz, zz);
-        Figure dat = Figure.currentFig;
-        dat.title(new MatString("Cube Plot with prism color"));
+        Figure.title(new MatString("Cube Plot with prism color"));
         int n = 2;
         x = Matrix.colon(-n, n);
         xxyy = Matrix.meshgrid(x, x);
@@ -581,10 +582,10 @@ public class Main {
         Figure.setColorbar(true);
         Plots.surf(xx, yy, szz, szz);
         it = Figure.currentFig;
-        it.title(new MatString("Surf Plot with Summer color"));
-        it.xlabel(new MatString("X direction"));
-        it.ylabel(new MatString("Y direction"));
-        it.zlabel(new MatString("Z direction"));
+        Figure.title(new MatString("Surf Plot with Summer color"));
+        Figure.xlabel(new MatString("X direction"));
+        Figure.ylabel(new MatString("Y direction"));
+        Figure.zlabel(new MatString("Z direction"));
         System.out.println("Ended tests");
     }
 }

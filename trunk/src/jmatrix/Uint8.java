@@ -4,10 +4,7 @@
  */
 package jmatrix;
 
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.awt.*;
-import java.io.*;
 
 /**
  *
@@ -24,7 +21,7 @@ public class Uint8 extends MatObject {
     public Uint8() {
         super();
         data = null;
-        type = MatObject.UINT8;
+        type = Type.UINT8;
     }
 
     /**
@@ -34,7 +31,7 @@ public class Uint8 extends MatObject {
     public Uint8(int rows, int cols) {
         super(rows, cols, 3);
         data = new BufferedImage(cols, rows, BufferedImage.TYPE_INT_RGB);
-        type = MatObject.UINT8;
+        type = Type.UINT8;
     }
 
     /**

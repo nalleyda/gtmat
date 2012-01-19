@@ -8,6 +8,7 @@ import javax.swing.text.*;
 import workspace.*;
 import fileIO.*;
 import jmatrix.*;
+import jmatrix.MatObject.Type;
 import main.*;
 import parser.*;
 import plotting.*;
@@ -47,9 +48,9 @@ public class Interpreter extends Thread {
         nan = new Matrix(Double.NaN);
         inf = new Matrix(Double.POSITIVE_INFINITY);
         mtrue = new Matrix(1);
-        mtrue.type = MatObject.LOGICAL;
+        mtrue.type = Type.LOGICAL;
         mfalse = new Matrix(0);
-        mfalse.type = MatObject.LOGICAL;
+        mfalse.type = Type.LOGICAL;
     }
     /*
      * this is a tacky way for a rule to distinguish
@@ -182,6 +183,7 @@ public class Interpreter extends Thread {
             Main.interactions.appendString(sb.toString() + "\n", 0);
         }
         catch (Exception e){
+        	e.printStackTrace();
             throw new Exception("Invalid target for help.");
         }
         

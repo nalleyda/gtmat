@@ -4,7 +4,6 @@
  */
 package jmatrix;
 
-import main.Main;
 import java.lang.RuntimeException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
@@ -36,7 +35,7 @@ public class UnsignedByte extends MatObject {
         n = 1;
         size = new int[2];
         dimensions = 2;
-        type = BYTE;
+        type = Type.BYTE;
         data = new double[1];
         // byte boundary
         if (x > 255){
@@ -59,7 +58,7 @@ public class UnsignedByte extends MatObject {
         n = 3;
         size = new int[2];
         dimensions = 2;
-        type = BYTE;
+        type = Type.BYTE;
         data = new double[3];
         if (x > 255){
             x = 255;
@@ -92,7 +91,7 @@ public class UnsignedByte extends MatObject {
         n = 2;
         size = new int[2];
         dimensions = 2;
-        type = BYTE;
+        type = Type.BYTE;
         data = new double[2];
         if (x > 255){
             x = 255;
@@ -123,7 +122,7 @@ public class UnsignedByte extends MatObject {
         n = x.length;
         size = new int[2];
         dimensions = 2;
-        type = BYTE;
+        type = Type.BYTE;
         data = new double[n];
         for(int i = 0; i < n; i++) {
             if (x[i] > 255){
@@ -144,7 +143,7 @@ public class UnsignedByte extends MatObject {
         n = x.length;
         size = new int[2];
         dimensions = 2;
-        type = BYTE;
+        type = Type.BYTE;
         data = new double[n];
         for(int i = 0; i < n; i++) {
             data[i] = x[i] >= 0 ? x[i] : 0;
@@ -164,7 +163,7 @@ public class UnsignedByte extends MatObject {
         } else {
             data = null;
         }
-        type = BYTE;
+        type = Type.BYTE;
         size = new int[2];
         size[ROW] = rows;
         size[COL] = cols;
@@ -220,7 +219,7 @@ public class UnsignedByte extends MatObject {
      * @param str
      */
     public UnsignedByte(String str) {
-        ArrayList<Double> a = new ArrayList();
+        ArrayList<Double> a = new ArrayList<Double>();
         StringTokenizer tk = new StringTokenizer(str, "[], ");
 
         while (tk.hasMoreTokens()) {
@@ -236,7 +235,7 @@ public class UnsignedByte extends MatObject {
         size = new int[2];
         size[COL] = n;
         size[ROW] = 1;
-        type = DOUBLE;
+        type = Type.DOUBLE;
     }
 
     public void copyValues(Matrix ndx, MatObject src) {
@@ -1284,7 +1283,7 @@ public class UnsignedByte extends MatObject {
                 res.data[i] = 0;
             }
         }
-        res.type = LOGICAL;
+        res.type = Type.LOGICAL;
         return res;
     }
 
@@ -1294,7 +1293,7 @@ public class UnsignedByte extends MatObject {
      */
     public UnsignedByte floor() {
         UnsignedByte res = new UnsignedByte(this);
-        res.type = INTEGER;
+        res.type = Type.INTEGER;
         return res;
     }
 

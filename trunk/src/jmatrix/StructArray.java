@@ -15,7 +15,7 @@ public class StructArray extends MatObject {
     private Structure theArray[];
 
     public StructArray() {
-        type = STRUCT;
+        type = Type.STRUCT;
         theArray = new Structure[0];
     }
 
@@ -28,7 +28,7 @@ public class StructArray extends MatObject {
     public StructArray(int rows, int cols, Structure... data){
         super(rows, cols);
         copyData(data);
-        type = STRUCT;
+        type = Type.STRUCT;
         checkFields();
     }
 
@@ -39,7 +39,7 @@ public class StructArray extends MatObject {
         } else {
             theArray = null;
         }
-        type = STRUCT;
+        type = Type.STRUCT;
     }
     
     @Override

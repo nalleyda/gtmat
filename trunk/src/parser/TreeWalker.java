@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package parser;
 
 import org.antlr.runtime.tree.*;
@@ -16,7 +12,7 @@ import workspace.*;
 import java.util.Stack;
 import main.*;
 import plotting.*;
-
+import jmatrix.MatObject.Type;
 /**
  *
  * @author dsmith
@@ -76,7 +72,7 @@ public class TreeWalker {
     private static String arrayName = null;
     private static int soFar = 0;
     public static MatObject staticExpr = null;
-    public static ArrayList<WhoKnowsWhat> wnwStack = new ArrayList();
+    public static ArrayList<WhoKnowsWhat> wnwStack = new ArrayList<WhoKnowsWhat>();
     private static Stack<DataHolder> dhStack = new Stack<DataHolder>();
     private static int debugLine = 0;
     
@@ -295,7 +291,7 @@ public class TreeWalker {
                 break;
             case END:
                 res = new Matrix(soFar);
-                res.type = MatObject.END;
+                res.type = Type.END;
                 break;
             case EQ:
                 a = process(space + "   ", tree.getChild(0));
@@ -763,7 +759,7 @@ public class TreeWalker {
         Matrix m;
         if (o instanceof Matrix) {
             m = (Matrix) o;
-            if (m.type == MatObject.END) {
+            if (m.type == Type.END) {
                 int ndx = m.geti(1);
                 boolean found = false;
                 Workspace curW = Interpreter.getWorkspace();
@@ -839,10 +835,10 @@ public class TreeWalker {
          *      containing all of Matrix or MatString
          */
         boolean res = false;
-        int aType = a.type;
-        int bType = b.type;
+        Type aType = a.type;
+        Type bType = b.type;
         Matrix m = null;
-        if (bType == MatObject.CELL) {
+        if (bType == Type.CELL) {
             CellArray ca = (CellArray) b;
             for (int i = 1; i <= b.n; i++) {
                 MatObject it = ca.get(i);
@@ -854,17 +850,17 @@ public class TreeWalker {
         } else {
             if (aType != bType) {
                 throw new RuntimeException("bad types in switch case");
-            } else if (aType == MatObject.DOUBLE && (a.length() > 1 || b.length() > 1)) {
+            } else if (aType == Type.DOUBLE && (a.length() > 1 || b.length() > 1)) {
                 throw new RuntimeException("vector in switch case");
             } else {
                 switch (aType) {
-                    case MatObject.DOUBLE:
+                    case DOUBLE:
                         m = a.eq(b);
                         break;
-                    case MatObject.INTEGER:
+                    case INTEGER:
                         m = a.eq(b);
                         break;
-                    case MatObject.CHAR:
+                    case CHAR:
                         m = a.eq(b);
                 }
                 res = m.get(1) > 0;

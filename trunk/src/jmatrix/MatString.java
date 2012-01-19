@@ -4,7 +4,6 @@
  */
 
 package jmatrix;
-
 /**
  *
  * @author dsmith
@@ -12,7 +11,7 @@ package jmatrix;
 public class MatString extends UnsignedByte {
     public MatString(String s) {
         super(s.getBytes());
-        type = CHAR;
+        type = Type.CHAR;
     }
         /**
      * clone a matObject
@@ -40,7 +39,7 @@ public class MatString extends UnsignedByte {
         } else {
             throw new RuntimeException("illegal math operation");
         }
-        type = CHAR;
+        type = Type.CHAR;
         dimensions = o.dimensions;
         size = new int[dimensions];
         for (int i = 0; i < dimensions; i++) {
@@ -62,7 +61,7 @@ public class MatString extends UnsignedByte {
         n = rows * cols;
         size = new int[2];
         dimensions = 2;
-        type = DOUBLE;
+        type = Type.DOUBLE;
         size[COL] = cols;
         size[ROW] = rows;
     }

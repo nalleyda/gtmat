@@ -18,13 +18,13 @@ public class MatComplex extends MatObject {
     private static double blackAlpha = 0.16;
 
     public MatComplex() {
-        type = COMPLEX;
+        type = Type.COMPLEX;
         data = new Complex[0];
     }
     
     public MatComplex(Matrix m) {
         super(m);
-        type = COMPLEX;
+        type = Type.COMPLEX;
         data = new Complex[length()];
         for(int i = 0; i < length(); i++) {
             data[i] = new Complex(m.data[i], 0);
@@ -33,7 +33,7 @@ public class MatComplex extends MatObject {
 
     public MatComplex(Matrix rl, Matrix im) {
         super(rl);
-        type = COMPLEX;
+        type = Type.COMPLEX;
         data = new Complex[length()];
         for(int i = 0; i < length(); i++) {
             data[i] = new Complex(rl.data[i], im.data[i]);
@@ -42,7 +42,7 @@ public class MatComplex extends MatObject {
 
     public MatComplex(MatComplex mc) {
         super(mc);
-        type = COMPLEX;
+        type = Type.COMPLEX;
         data = new Complex[length()];
         for(int i = 0; i < length(); i++) {
             data[i] = mc.data[i].copy();
@@ -51,7 +51,7 @@ public class MatComplex extends MatObject {
 
     public MatComplex(int n) {
         super(n);
-        type = COMPLEX;
+        type = Type.COMPLEX;
         data = new Complex[n];
         for(int i = 0; i < length(); i++) {
             data[i] = new Complex(0, 0);
