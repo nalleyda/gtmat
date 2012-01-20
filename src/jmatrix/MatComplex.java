@@ -5,8 +5,6 @@
 
 package jmatrix;
 import main.*;
-import java.io.*;
-
 /**
  *
  * @author dsmith
