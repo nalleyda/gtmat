@@ -672,7 +672,7 @@ public class TreeWalker {
     public static boolean validateTokens() {
         boolean res = true;
         BufferedReader in = null;
-        String name = /*"src" + File.separator + */"parser" + File.separator + "Expr.tokens";
+        String name = "src" + File.separator + "parser" + File.separator + "Expr.tokens";
         try {
             in = new BufferedReader(new FileReader(name));
         } catch (IOException e) {

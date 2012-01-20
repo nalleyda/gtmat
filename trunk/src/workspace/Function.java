@@ -2,6 +2,8 @@ package workspace;
 
 import java.lang.reflect.Method;
 import jmatrix.*;
+
+import java.util.HashMap;
 import java.util.Hashtable;
 import interpreter.*;
 import java.util.ArrayList;
@@ -28,7 +30,7 @@ public class Function {
     private int numArgs;
     private String fullPackage; //i.e. java.lang.Math for sin
     private Class[] paramTypes; //i.e.Class.forName("jmatrix.Matrix")
-    private static Hashtable<String, Function> ht;// </editor-fold>
+    private static HashMap<String, Function> ht;// </editor-fold>
 
     public Function(String name, String fullPackage, int numArgs, Class... paramTypes) {
         this.name = name;
@@ -314,7 +316,7 @@ public class Function {
      * store every function, hard-coded once.
      */
     public static void createFunctionTable() {
-        ht = new Hashtable();
+        ht = new HashMap<String, Function>();
 
         /*
          * Math Library
