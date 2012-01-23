@@ -1,19 +1,19 @@
 package exception;
 
 /**
- * Exception for strings not ended properly.
+ * Exception for an undefined variable
  * @author Josh Sizemore
  */
 
-public class StringNotTerminated extends Exception {
+public class UndefinedVariable extends Exception {
 
-	public StringNotTerminated(String filename, int lineNumber, String stackTrace) {
+	public UndefinedVariable(String filename, int lineNumber, String stackTrace) {
 		super(filename, lineNumber);
 	}
 	
 	public String toString() {
 		message = "Error at " + filename + ": " + "line " + lineNumber + "\n" 
-					+ "String not terminated properly";
+					+ "Undefined function or variable";
 		return message;
 	}
 }

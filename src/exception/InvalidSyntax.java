@@ -8,7 +8,7 @@ package exception;
 public class InvalidSyntax extends Exception {
 
 	public InvalidSyntax(String filename, int lineNumber, String stackTrace) {
-		super(filename, lineNumber, stackTrace);
+		super(filename, lineNumber);
 	}
 	
 	public String toString() {

@@ -8,7 +8,7 @@ package exception;
 public class InnerMatrixDimensions extends Exception {
 
 	public InnerMatrixDimensions(String filename, int lineNumber, String stackTrace) {
-		super(filename, lineNumber, stackTrace);
+		super(filename, lineNumber);
 	}
 	
 	public String toString() {

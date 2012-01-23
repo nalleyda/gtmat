@@ -9,7 +9,7 @@ package exception;
 public class MatrixNotSquare extends Exception {
 
 	public MatrixNotSquare(String filename, int lineNumber, String stackTrace) {
-		super(filename, lineNumber, stackTrace);
+		super(filename, lineNumber);
 	}
 	
 	public String toString() {
