@@ -1,19 +1,19 @@
 package exception;
 
 /**
- * Exception for strings not ended properly.
+ * Exception for using too few input arguments.
  * @author Josh Sizemore
  */
 
-public class StringNotTerminated extends Exception {
+public class TooFewInputs extends Exception {
 
-	public StringNotTerminated(String filename, int lineNumber, String stackTrace) {
+	public TooFewInputs(String filename, int lineNumber, String stackTrace) {
 		super(filename, lineNumber);
 	}
 	
 	public String toString() {
 		message = "Error at " + filename + ": " + "line " + lineNumber + "\n" 
-					+ "String not terminated properly";
+					+ "Too few input arguments";
 		return message;
 	}
 }

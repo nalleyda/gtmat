@@ -10,13 +10,10 @@ public abstract class Exception {
 	
 	protected String filename;
 	protected int lineNumber;
-	protected String stackTrace;
 	protected String message;
-	// protected int errorIndex; // potentially used to point to the location of a syntax error
 	
-	public Exception(String filename, int lineNumber, String stackTrace) {
+	public Exception(String filename, int lineNumber) {
 		this.filename = filename;
 		this.lineNumber = lineNumber;
-		this.stackTrace = stackTrace;
 	}
 }

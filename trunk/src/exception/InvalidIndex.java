@@ -8,7 +8,7 @@ package exception;
 public class InvalidIndex extends Exception {
 
 	public InvalidIndex(String filename, int lineNumber, String stackTrace) {
-		super(filename, lineNumber, stackTrace);
+		super(filename, lineNumber);
 	}
 	
 	public String toString() {
