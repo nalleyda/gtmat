@@ -11,10 +11,13 @@ options {
 
 tokens{
 //Do we need this?
+ELSE_ROOT;
+ELSEIF_ROOT;
 FUNC_ARGS;
 FUNC_CALL;
 HCAT_CELL;
 HCAT_VEC;
+IF_ROOT;
 UNARY_OP;
 VCAT_CELL;
 VCAT_VEC;
@@ -37,7 +40,7 @@ VCAT_VEC;
  
 start	: prog EOF!;
  
-prog		: line ((NEWLINE*)! line)*;
+prog		: block+;//(block | NEWLINE)+;//block ((NEWLINE*)! block)*;
  
 //index		: OPENP (expr (COMMA expr)*)? CLOSEP ;
 
@@ -52,19 +55,21 @@ exprList	: expr (COMMA! expr)*	;
 functionArgs	:  expr (COMMA expr)* -> ^(FUNC_ARGS expr*);
 
 functionCall 	: (ID OPENP) => (ID^ (
-	/*(OPENP) => */(OPENP! (functionArgs | ()) CLOSEP!)?//functionArgs? CLOSEP)
+	/*(OPENP) => */(OPENP! functionArgs? CLOSEP!)?//functionArgs? CLOSEP)
 	//| ( )
 	))
 	;
 
 //functionCall	: functionLeft;
 
-functionCallOrStructure	: functionCall (DOT^ (OPENP! expr CLOSEP! | ID))?;//structAccess?;//((functionCall DOT) => functionCall DOT structAccess) | functionCall;
+functionCallOrStructure	: functionCall (DOT^ (OPENP! expr CLOSEP! | functionCall))?;//ID /*| functionCall*/))?;//structAccess?;//((functionCall DOT) => functionCall DOT structAccess) | functionCall;
 
 /*
  * Chain of Precedence
  */
-term	: OPENP! expr CLOSEP!
+term	: EMPTY_VEC 
+	| EMPTY_CELL
+	| OPENP! expr CLOSEP!
 	//| cellArray		//OPENC! exprList CLOSEC!
 	//| vector		//OPENB! exprList CLOSEB!
 	| STRING_LITERAL
@@ -73,12 +78,24 @@ term	: OPENP! expr CLOSEP!
 	//| functionCall
 	//| structure
 	| functionCallOrStructure //(DOT (OPENP | ID) => DOT structAccess)
+	| END
+	| vector
+	| cellArray
+	| COLON
+	//| TRANS_ID
+	//| EMPTY_STRING
 	//| functionCallOrStructure
 	;
 	
-transponent	: term (
+transponent	/*: term ;/*(
+		  	  (((EMPTY_STRING) => (EMPTY_STRING | SINGLE_QUOTE | DOT_TRANSPOSE)+) | SINGLE_QUOTE)
+		  	| ( ((DOT_CARET | CARET) term)* | (SINGLE_QUOTE | DOT_TRANSPOSE)*)
+		  	)
+		  	
+		  ;*/
+		: (term (
 		( (DOT_CARET | CARET)^ term)*
-		| (SINGLE_QUOTE | DOT_TRANSPOSE)^
+		| (SINGLE_QUOTE | DOT_TRANSPOSE /*| EMPTY_STRING*/)*)
 		)
 		;
 	
@@ -108,9 +125,9 @@ scOr	: scAnd (SC_OR scAnd)* ;
 
 //hCatVec : openB ;
 
-scOr_or_vec	: scOr | vector;
+//scOr_or_vec	: scOr | vector;
 
-scOr_or_cell	: scOr | cellArray;
+//scOr_or_cell	: scOr | cellArray;
 
 hCatVec	: expr ((COMMA)? expr)* -> ^(HCAT_VEC expr+);// -> ^(HCAT_VEC expr+);
 
@@ -118,20 +135,56 @@ vCatVec	: hCatVec ((SEMI) hCatVec)* -> ^(VCAT_VEC hCatVec+);// -> ^(VCAT_VEC exp
 
 vector	: OPENB! vCatVec CLOSEB!;
 
-hCatCell: scOr_or_cell ((COMMA)? scOr_or_cell)*  -> ^(HCAT_CELL scOr_or_cell+);
+hCatCell: expr ((COMMA)? expr)*  -> ^(HCAT_CELL expr+);
 
 vCatCell: hCatCell ((SEMI)! hCatCell)* -> ^(VCAT_CELL hCatCell+);
 
 cellArray	: OPENC! vCatCell CLOSEC! ;	
 
-expr	: vector | cellArray | scOr;// | unary;
+expr	: /*vector | cellArray |*/ scOr;// -> ^(ELSEIF_ROOT );// | unary;
 	/*| OPENB vCatVec CLOSEB
 	| OPENC*/
 	
 //lhs	: (functionCallOrStructure EQUALS) => (functionCallOrStructure EQUALS);
+
+//getsLine:	(functionCallOrStructure EQUALS) => (functionCallOrStructure EQUALS expr SEMI?);
 	
-line	: (((functionCallOrStructure EQUALS) => (functionCallOrStructure EQUALS)) | ( )) 
- expr SEMI?;
+line	: /*getsLine | expr;*/(((functionCallOrStructure EQUALS) => (functionCallOrStructure EQUALS))?// | ( )) 
+ expr SEMI?);// -> ^(ELSEIF_ROOT (functionCallOrStructure EQUALS)) | ( ))  expr SEMI?);*/
+ 
+/*ifBlock	: IF expr NEWLINE block 
+	  (((ELSEIF) => (ELSEIF expr NEWLINE block)+) | ())
+	  ELSE NEWLINE block
+	  NEWLINE+ END ;*/
+	  
+ifBlock : 
+	IF^ e1=expr b1=block
+        (ELSEIF e2=expr b2=block)*
+        (ELSE b3=block)?
+        BLOCK_END! //NEWLINE
+    	;
+    
+switchBlock :	
+	SWITCH^ expr
+	(CASE expr block)*
+	(OTHERWISE block)?
+	BLOCK_END!
+	;
+	
+forBlock :	
+	FOR^ ID EQUALS expr 
+	block 
+	BLOCK_END! 
+	;
+	
+whileBlock :	
+	WHILE^ expr
+	block
+	BLOCK_END!
+	;
+	
+
+block	: (ifBlock | switchBlock | forBlock | whileBlock | line)+;
 	 
 //expr	: 'a'+;
 
@@ -139,6 +192,11 @@ line	: (((functionCallOrStructure EQUALS) => (functionCallOrStructure EQUALS)) |
 
 
 //Special High Priority
+//EMPTY_STRING	: '\'\''	;
+BLOCK_END	: 'end' '\r'? '\n'	;	//We insert an extra newline at the end of every file before processing to avoid last-line problems
+EMPTY_VEC	: '[' ']' 	;
+EMPTY_CELL	: '{' '}'	;
+SINGLE_QUOTE	: '$';//'\''	;
 
 //Keywords
 BREAK		: 'break'	;
@@ -183,7 +241,7 @@ DOT_TRANSPOSE	: '.\''		;
 ELE_AND		: '&'		;
 ELE_OR		: '|'		;
 EQUALS		: '='		;
-ECLAMATION	: '!'		;
+EXCLAMATION	: '!'		;
 GREATER_THAN	: '>'		;
 GREATER_EQUAL	: '>='		;
 ISEQUAL		: '=='		;
@@ -201,7 +259,7 @@ PLUS		: '+'		;
 SC_AND		: '&&'		;
 SC_OR		: '||'		;
 SEMI		: ';'		;
-SINGLE_QUOTE	: '\''		;
+//SINGLE_QUOTE	: '\''		;
 SLASH		: '/'		;
 STAR		: '*'		;
 
@@ -211,22 +269,25 @@ fragment DIGIT		: ('0'..'9')		;
 fragment LETTER		: ('a'..'z' | 'A'..'Z')	;
 fragment UNDERSCORE	: '_'			;
  
-COMMENT : '\%' .* ('\n'|'\r') {$channel = HIDDEN;};
+COMMENT : '\%' .* NEWLINE {$channel = HIDDEN;};
 DOUBLE	: ((DIGIT+ DOT DIGIT*) | (DOT DIGIT+) | DIGIT+) EXPONENT? ;
-ELLIPSIS: '...'	NEWLINE* {$channel = HIDDEN;}	;
+ELLIPSIS: '...'	NEWLINE+ {$channel = HIDDEN;}	;
 EXPONENT: ('e' | 'E') ('+' | '-')? ('0'..'9')+  ;
 ID 	: LETTER (LETTER | DIGIT | UNDERSCORE)*	;
-NEWLINE	: '\r'? '\n'	;
+
+//TRANS_ID	: ID (SINGLE_QUOTE)*		;
+
+NEWLINE	: '\r'? '\n'	{$channel = HIDDEN;};
 STRING_LITERAL
-      	: SINGLE_QUOTE 
+      	: '\'' 
           {StringBuilder b = new StringBuilder();}
-          ( SINGLE_QUOTE SINGLE_QUOTE          {b.appendCodePoint('\'');}
-          | c = ~(SINGLE_QUOTE | '\r' | '\n')  {b.appendCodePoint(c);}
+          ( '\'' '\''          {b.appendCodePoint('\'');}
+          | c = ~('\'' | '\r' | '\n')  {b.appendCodePoint(c);}
           )*
-          SINGLE_QUOTE
+          '\''
           {setText(b.toString());}
         ;
-WS 	: (' ' | '\t' | '\n' | '\r' | '\f')+ {$channel = HIDDEN;};
+WS 	: (' ' | '\t' | /*'\n' | '\r' |*/ '\f')+ {$channel = HIDDEN;};
 
 
 
