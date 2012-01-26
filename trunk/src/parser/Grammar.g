@@ -149,7 +149,7 @@ expr	: /*vector | cellArray |*/ scOr;// -> ^(ELSEIF_ROOT );// | unary;
 
 //getsLine:	(functionCallOrStructure EQUALS) => (functionCallOrStructure EQUALS expr SEMI?);
 	
-line	: /*getsLine | expr;*/(((functionCallOrStructure EQUALS) => (functionCallOrStructure EQUALS))?// | ( )) 
+line	: /*getsLine | expr;*/(((term EQUALS) => (term EQUALS))?// | ( )) 
  expr SEMI?);// -> ^(ELSEIF_ROOT (functionCallOrStructure EQUALS)) | ( ))  expr SEMI?);*/
  
 /*ifBlock	: IF expr NEWLINE block 
