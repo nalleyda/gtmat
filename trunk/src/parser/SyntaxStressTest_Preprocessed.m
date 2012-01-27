@@ -1,4 +1,4 @@
-
+[x,y] = max(arr,2);
 'Strings should be removed with second highest priority) (. See?'
 ('Strings in parentheses still work');
 a = 'Strings should be removed with second highest priority) (. See?';
