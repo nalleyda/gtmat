@@ -8,11 +8,9 @@ package jmatrix;
 import java.lang.RuntimeException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
-import java.util.Arrays;
 import java.lang.reflect.Method;
 import java.io.File;
 import java.io.FileWriter;
-import main.*;
 
 /**
  *
@@ -316,16 +314,64 @@ public class Matrix extends MatObject {
 	}
 
 	public static void set(Matrix m, int r, int c, double val) {
-		m.set(r, c, val);
+		 if (r > m.size[ROW]) {
+			 m.extend(r, m.size[COL]);
+		 }
+		 if (c > m.size[COL]) {
+			 m.extend(m.size[ROW], c);
+		 }
+		 m.data[(c - 1) * m.size[ROW] + (r - 1)] = val;
+		
 	}
 
 	public static void set(Matrix m, int i, double val) {
-		m.set(i, val);
+		 if (i > m.n) {
+			 throw new RuntimeException("Matrix:set(i...) i too big");
+		 };
+		 m.data[i - 1] = val;
 	}
 
-	public static void set(Matrix m, Matrix rn, Matrix cn, Matrix val) {
-		m.oldset(rn, cn, val);
+	public static void set(Matrix m, Matrix rndx, Matrix cndx, Matrix vals) {
+		 if (rndx.size[ROW] != 1
+				 || cndx.size[ROW] != 1) {
+			 throw new RuntimeException("Matrix.set bad row or col vector");
+		 }
+		 if (rndx.size[COL] != vals.size[ROW]
+		                                 || cndx.size[COL] != vals.size[COL]) {
+			 throw new RuntimeException("Matrix.set bad row or col vector size");
+		 }
+		 int mxr = (int) ((Matrix) rndx.max().get(1, 1)).get(1);
+		 int mxc = (int) ((Matrix) cndx.max().get(1, 2)).get(1);
+		 if (mxr > m.size[ROW]) {
+			 m.extend(mxr, m.size[COL]);
+		 }
+		 if (mxc > m.size[COL]) {
+			 m.extend(m.size[ROW], mxc);
+		 }
+		 for (int ri = 1; ri <= rndx.size[COL]; ri++) {
+			 for (int ci = 1; ci <= cndx.size[COL]; ci++) {
+				 m.set(rndx.geti(ri), cndx.geti(ci),
+						 vals.get(ri, ci));
+			 }
+		 }
+		
 	}
+	
+	 /**
+	  * set a value in a matrix
+	  * @param r - the row
+	  * @param c - the column
+	  * @param val - the value
+	  */
+	 public void set(int r, int c, double val) {
+		 if (r > size[ROW]) {
+			 extend(r, size[COL]);
+		 }
+		 if (c > size[COL]) {
+			 extend(size[ROW], c);
+		 }
+		 data[(c - 1) * size[ROW] + (r - 1)] = val;
+	 }
 
 	public static Matrix index(Matrix m, Matrix ri, Matrix ci) {
 		return m.index(ri, ci);
@@ -439,21 +485,7 @@ public class Matrix extends MatObject {
 		return data[it];
 	 }
 
-	 /**
-	  * set a value in a matrix
-	  * @param r - the row
-	  * @param c - the column
-	  * @param val - the value
-	  */
-	 public void set(int r, int c, double val) {
-		 if (r > size[ROW]) {
-			 extend(r, size[COL]);
-		 }
-		 if (c > size[COL]) {
-			 extend(size[ROW], c);
-		 }
-		 data[(c - 1) * size[ROW] + (r - 1)] = val;
-	 }
+
 
 	 /**
 	  * get from a linearized matrix
@@ -3092,9 +3124,11 @@ public class Matrix extends MatObject {
 
 		   save(new Matrix(2,3,1,2,3,4,5,6), "mymat");
 		   
-		   System.out.println(primes(new Matrix(23)));
+		   
 		   System.out.println(isprime(new Matrix(79)));
 		   System.out.println(isprime(new Matrix(42)));
+		   /*System.out.println(*/isprime(primes(new Matrix(1000000)));//);
+		   System.out.println("hasdfhasdf");
 	   }
 
 	   class Pair {

@@ -26,8 +26,8 @@ public class File_I_O {
         int rootIndex = 0;
         BufferedReader in = null;
         boolean keepGoing = true;
-        LinkedList<CommonTree> treeList = new LinkedList();
-        nodes = new LinkedList();
+        LinkedList<CommonTree> treeList = new LinkedList<CommonTree>();
+        nodes = new LinkedList<TreeNode>();
         CommonTree theTree = null;
         currentTFile = name;
         if (name != null) {

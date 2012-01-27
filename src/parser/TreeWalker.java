@@ -104,14 +104,14 @@ public class TreeWalker {
                 + " with " + n + " children"
                 + " type: " + nodeType);
         int lineNumber = tree.getLine();
-        System.out.println("At line " + lineNumber);
+
         //Check for break points on this line.
         if (Main.wstack.peek().getDataHolder() != null && lineNumber != debugLine) {
             synchronized (Main.wstack.peek().getDataHolder()) {
                 if (Main.bpsMap.get(Main.wstack.peek().getFunctionName()) != null
                         && Main.bpsMap.get(Main.wstack.peek().getFunctionName()).size() >= lineNumber
                         && Main.bpsMap.get(Main.wstack.peek().getFunctionName()).get(lineNumber)) {
-                    System.out.println("Waiting");
+                    
                     DataHolder dh = Main.wstack.peek().getDataHolder();
                     Main.wstack.peek().setDataHolder(new DataHolder());
                     dhStack.push(dh);
@@ -120,7 +120,6 @@ public class TreeWalker {
                     dh.wait();
                     debugLine = lineNumber;
                     Main.wstack.peek().setDataHolder(dh);
-                    System.out.println("Finished waiting");
                 }
             }
         }
@@ -413,7 +412,7 @@ public class TreeWalker {
             case ID:
                 str = tree.getText();
                 res = Interpreter.getValue(str);
-                System.out.println("In ID: " + res);
+                
                 if (res == null) {
                     Interpreter.displayError("Undefined Variable " + str);
                     throw new RuntimeException("Undefined Variable " + str);
@@ -807,7 +806,7 @@ public class TreeWalker {
     public static void process(CommonTree tree) {
 //        Main.debug.println(tree.toStringTree());
         try {
-            System.out.println("Result = " + process("", tree));
+        	process("", tree);
         } catch (Exception e) {
             Interpreter.displayError(e.getMessage());
             e.printStackTrace();
