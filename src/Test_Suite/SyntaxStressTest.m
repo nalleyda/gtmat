@@ -1,3 +1,5 @@
+[a, b] = max(1,2)
+
 % This file is meant to cause the grammar great pains - it should test
 % every oddity that MATLAB allows. Add as much weird code to it as you can
 % come up with. Eventually, this should be a thoroughly convincing test

@@ -11,13 +11,18 @@ options {
 
 tokens{
 //Do we need this?
+BLOCK;
+COLON_ARGS;
 ELSE_ROOT;
 ELSEIF_ROOT;
 FUNC_ARGS;
 FUNC_CALL;
 HCAT_CELL;
 HCAT_VEC;
-IF_ROOT;
+FOR_LOOP;
+IF_STAT;
+SWITCH_STAT;
+WHILE_LOOP;
 UNARY_OP;
 VCAT_CELL;
 VCAT_VEC;
@@ -46,7 +51,7 @@ prog		: block+;//(block | NEWLINE)+;//block ((NEWLINE*)! block)*;
 
 //structAccess	: DOT (OPENP expr CLOSEP | ID) ;
 
-exprList	: expr (COMMA! expr)*	;
+//exprList	: expr (COMMA! expr)*	;
 
 //idRule		: ID	;
 
@@ -94,28 +99,39 @@ transponent	/*: term ;/*(
 		  	
 		  ;*/
 		: (term (
-		( (DOT_CARET | CARET)^ term)*
-		| (SINGLE_QUOTE | DOT_TRANSPOSE /*| EMPTY_STRING*/)*)
+		( (DOT_CARET^ | CARET^) term)*
+		| (SINGLE_QUOTE^ | DOT_TRANSPOSE^ /*| EMPTY_STRING*/)*)
 		)
 		;
 	
-unary	: (PLUS! | MINUS | NOT)* transponent;/// -> ((MINUS | NOT)* transponent);
+unary	: (PLUS! | MINUS^ | NOT^)* transponent;/// -> ((MINUS | NOT)* transponent);
 
-mult	: unary ( (DOT_STAR | DOT_SLASH | DOT_BACKSLASH | STAR | SLASH | BACKSLASH) unary )* ;
+mult	: unary ( (DOT_STAR^ | DOT_SLASH^ | DOT_BACKSLASH^ | STAR^ | SLASH^ | BACKSLASH^) unary )* ;
 
-add	: mult ( (PLUS | MINUS) mult)*	;
+add	: mult ( (PLUS^ | MINUS^) mult)*	;
 
-colon	: add (COLON add)* ;
+colonEnd:	(COLON add)+ -> ^(COLON_ARGS add+);
 
-logical	: colon ( (LESS_THAN | GREATER_THAN | LESS_EQUAL | GREATER_EQUAL | ISEQUAL | NOT_EQUAL) colon )* ;
+colon	: add (colonEnd^)?;//(COLON add)* -> ^(COLON_ARGS add+);//{boolean multipleArgs = false;} 
+	//add (/*(COLON add)?*/ COLON add)* -> ^(COLON add*)
+	//a1=add ((COLON a2=add ((COLON a3=add) |() /*-> ^(COLON add*)*/) | ()) //-> (COLON_ARGS $a1 $a2 $a3) | ())//-> ^(
+	//{if (multipleArgs) -> COLON;}
+	//;// -> ;//add (COLON^ add)*;//  -> ^(COLON_ARGS add*);
+	/*add | 
+	(add (COLON add)+ -> ^(COLON_ARGS add*));*/
+	//-> ^(COLON add+)
+	//;
+	//expr (COMMA expr)* -> ^(FUNC_ARGS expr*);
 
-eleAnd	: logical (ELE_AND logical)* ;
+logical	: colon ( (LESS_THAN^ | GREATER_THAN^ | LESS_EQUAL^ | GREATER_EQUAL^ | ISEQUAL^ | NOT_EQUAL^) colon )* ;
 
-eleOr	: eleAnd (ELE_OR eleAnd)* ;
+eleAnd	: logical (ELE_AND^ logical)* ;
 
-scAnd	: eleOr (SC_AND eleOr)* ;
+eleOr	: eleAnd (ELE_OR^ eleAnd)* ;
 
-scOr	: scAnd (SC_OR scAnd)* ;
+scAnd	: eleOr (SC_AND^ eleOr)* ;
+
+scOr	: scAnd (SC_OR^ scAnd)* ;
 
 //hCatArgList : (COMMA (expr | vCatCell))+ ;
 
@@ -149,42 +165,56 @@ expr	: /*vector | cellArray |*/ scOr;// -> ^(ELSEIF_ROOT );// | unary;
 
 //getsLine:	(functionCallOrStructure EQUALS) => (functionCallOrStructure EQUALS expr SEMI?);
 	
-line	: /*getsLine | expr;*/(((term EQUALS) => (term EQUALS))?// | ( )) 
- expr SEMI?);// -> ^(ELSEIF_ROOT (functionCallOrStructure EQUALS)) | ( ))  expr SEMI?);*/
+line	: /*getsLine | expr;*/(((term EQUALS) => (term EQUALS^))?// | ( )) 
+ expr (SEMI!)?);// -> ^(ELSEIF_ROOT (functionCallOrStructure EQUALS)) | ( ))  expr SEMI?);*/
  
 /*ifBlock	: IF expr NEWLINE block 
 	  (((ELSEIF) => (ELSEIF expr NEWLINE block)+) | ())
 	  ELSE NEWLINE block
 	  NEWLINE+ END ;*/
 	  
+ifPart	: IF^ expr block?;
+elseifPart	: (ELSEIF^ e2=expr b2=block?);
+elsePart	:(ELSE^ b3=block?);
 ifBlock : 
-	IF^ e1=expr b1=block
-        (ELSEIF e2=expr b2=block)*
-        (ELSE b3=block)?
-        BLOCK_END! //NEWLINE
+	ifPart// -> ^(IF expr block?))
+        elseifPart*// -> ^(ELSEIF expr block?))
+        elsePart?
+        BLOCK_END //NEWLINE
+        -> ^(IF_STAT ifPart elseifPart* elsePart?)
+       // -> FUNC_ARGS
+        //-> ^(IF $e1 $b1? (ELSEIF $e2 $b2?)* ELSE $b3?)
     	;
     
+switchPart	: SWITCH^ expr;
+casePart	: CASE expr block?;
+otherwiseBlock	: OTHERWISE block?;
 switchBlock :	
-	SWITCH^ expr
-	(CASE expr block)*
-	(OTHERWISE block)?
-	BLOCK_END!
+	switchPart
+	casePart*
+	otherwiseBlock?
+	BLOCK_END
+	-> ^(SWITCH_STAT switchPart casePart* otherwiseBlock?)
 	;
-	
-forBlock :	
-	FOR^ ID EQUALS expr 
-	block 
-	BLOCK_END! 
-	;
-	
-whileBlock :	
-	WHILE^ expr
-	block
-	BLOCK_END!
-	;
-	
 
-block	: (ifBlock | switchBlock | forBlock | whileBlock | line)+;
+forPart	: FOR^ ID EQUALS expr;	
+forBlock :	
+	forPart
+	block?
+	BLOCK_END
+	-> ^(FOR_LOOP forPart block?)
+	;
+	
+whilePart	: WHILE^ expr;
+whileBlock :	
+	whilePart
+	block?
+	BLOCK_END
+	-> ^(WHILE_LOOP whilePart block?)
+	;
+	
+blockPart	:(ifBlock | switchBlock | forBlock | whileBlock | line);
+block	: blockPart+ -> ^(BLOCK blockPart+);
 	 
 //expr	: 'a'+;
 
