@@ -1,13 +1,14 @@
-package exception;
+package gtmatException;
+
 
 /**
  * Recursion overflow error.  For functions that exceed the recursion limit.
  * @author Josh Sizemore
  */
 
-public class RecursionOverflow extends Exception {
+public class RecursionOverflowException extends GTMatException {
 
-	public RecursionOverflow(String filename, int lineNumber, String stackTrace) {
+	public RecursionOverflowException(String filename, int lineNumber, String stackTrace) {
 		super(filename, lineNumber);
 	}
 	

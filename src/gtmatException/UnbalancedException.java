@@ -1,13 +1,14 @@
-package exception;
+package gtmatException;
+
 
 /**
  * Unbalanced parenthesis, brackets, or braces.
  * @author Josh Sizemore
  */
 
-public class Unbalanced extends Exception {
+public class UnbalancedException extends GTMatException {
 
-	public Unbalanced(String filename, int lineNumber, String stackTrace) {
+	public UnbalancedException(String filename, int lineNumber, String stackTrace) {
 		super(filename, lineNumber);
 	}
 	

@@ -1,13 +1,14 @@
-package exception;
+package gtmatException;
+
 
 /**
  * Undefined function.  For non-existent functions and invalid inputs.
  * @author Josh Sizemore
  */
 
-public class UndefinedFunction extends Exception {
+public class UndefinedFunctionException extends GTMatException {
 	
-	public UndefinedFunction(String filename, int lineNumber, String stackTrace) {
+	public UndefinedFunctionException(String filename, int lineNumber, String stackTrace) {
 		super(filename, lineNumber);
 	}
 	

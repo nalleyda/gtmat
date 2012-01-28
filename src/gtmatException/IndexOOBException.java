@@ -1,13 +1,14 @@
-package exception;
+package gtmatException;
+
 
 /**
  * Array index out of bounds. For attempted access to indexes outside of an array.
  * @author Josh Sizemore
  */
 
-public class IndexOOB extends Exception {
+public class IndexOOBException extends GTMatException {
 
-	public IndexOOB(String filename, int lineNumber, String stackTrace) {
+	public IndexOOBException(String filename, int lineNumber, String stackTrace) {
 		super(filename, lineNumber);
 	}
 	

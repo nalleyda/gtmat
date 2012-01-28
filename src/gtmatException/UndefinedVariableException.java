@@ -1,13 +1,14 @@
-package exception;
+package gtmatException;
+
 
 /**
  * Exception for an undefined variable
  * @author Josh Sizemore
  */
 
-public class UndefinedVariable extends Exception {
+public class UndefinedVariableException extends GTMatException {
 
-	public UndefinedVariable(String filename, int lineNumber, String stackTrace) {
+	public UndefinedVariableException(String filename, int lineNumber, String stackTrace) {
 		super(filename, lineNumber);
 	}
 	

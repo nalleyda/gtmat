@@ -1,4 +1,5 @@
-package exception;
+package gtmatException;
+
 
 /**
  * Matrix not square exception.  For using exponents on arrays.
@@ -6,9 +7,9 @@ package exception;
  *
  */
 
-public class MatrixNotSquare extends Exception {
+public class MatrixNotSquareException extends GTMatException {
 
-	public MatrixNotSquare(String filename, int lineNumber, String stackTrace) {
+	public MatrixNotSquareException(String filename, int lineNumber, String stackTrace) {
 		super(filename, lineNumber);
 	}
 	

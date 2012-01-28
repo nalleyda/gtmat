@@ -1,13 +1,14 @@
-package exception;
+package gtmatException;
+
 
 /**
  * Exception for users attempting to access a non-cell array object with {}
  * @author Josh Sizemore
  */
 
-public class InvalidCellAccess extends Exception {
+public class InvalidCellAccessException extends GTMatException {
 
-	public InvalidCellAccess(String filename, int lineNumber, String stackTrace) {
+	public InvalidCellAccessException(String filename, int lineNumber, String stackTrace) {
 		super(filename, lineNumber);
 	}
 	

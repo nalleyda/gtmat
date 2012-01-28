@@ -1,13 +1,14 @@
-package exception;
+package gtmatException;
+
 
 /**
  * Array Dimension error.  For array addition and subtraction.
  * @author Josh Sizemore
  */
 
-public class MatrixDimensions extends Exception {
+public class MatrixDimensionsException extends GTMatException {
 
-	public MatrixDimensions(String filename, int lineNumber, String stackTrace) {
+	public MatrixDimensionsException(String filename, int lineNumber, String stackTrace) {
 		super(filename, lineNumber);
 	}
 	

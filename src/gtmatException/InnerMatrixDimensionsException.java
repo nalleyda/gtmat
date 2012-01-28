@@ -1,13 +1,14 @@
-package exception;
+package gtmatException;
+
 
 /**
  * Array inner dimension error.  For array multiplication and division.
  * @author Josh Sizemore
  */
 
-public class InnerMatrixDimensions extends Exception {
+public class InnerMatrixDimensionsException extends GTMatException {
 
-	public InnerMatrixDimensions(String filename, int lineNumber, String stackTrace) {
+	public InnerMatrixDimensionsException(String filename, int lineNumber, String stackTrace) {
 		super(filename, lineNumber);
 	}
 	
