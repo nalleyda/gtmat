@@ -1,13 +1,14 @@
-package exception;
+package gtmatException;
+
 
 /**
  * Exception for strings not ended properly.
  * @author Josh Sizemore
  */
 
-public class StringNotTerminated extends Exception {
+public class StringNotTerminatedException extends GTMatException {
 
-	public StringNotTerminated(String filename, int lineNumber, String stackTrace) {
+	public StringNotTerminatedException(String filename, int lineNumber, String stackTrace) {
 		super(filename, lineNumber);
 	}
 	

@@ -1,13 +1,14 @@
-package exception;
+package gtmatException;
+
 
 /**
  * Exception for including too many output arguments
  * @author Josh Sizemore
  */
 
-public class TooManyOutputs extends Exception {
+public class TooManyOutputsException extends GTMatException {
 
-	public TooManyOutputs(String filename, int lineNumber, String stackTrace) {
+	public TooManyOutputsException(String filename, int lineNumber, String stackTrace) {
 		super(filename, lineNumber);
 	}
 	

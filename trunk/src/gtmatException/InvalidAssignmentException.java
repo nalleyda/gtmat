@@ -1,13 +1,14 @@
-package exception;
+package gtmatException;
+
 
 /**
  * Exception for attempting an invalid assignment
  * @author Josh Sizemore
  */
 
-public class InvalidAssignment extends Exception {
+public class InvalidAssignmentException extends GTMatException {
 
-	public InvalidAssignment(String filename, int lineNumber, String stackTrace) {
+	public InvalidAssignmentException(String filename, int lineNumber, String stackTrace) {
 		super(filename, lineNumber);
 	}
 	

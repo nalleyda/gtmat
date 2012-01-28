@@ -1,13 +1,14 @@
-package exception;
+package gtmatException;
+
 
 /**
  * Exception for having too many input arguments for a function
  * @author Josh Sizemore
  */
 
-public class TooManyInputs extends Exception {
+public class TooManyInputsException extends GTMatException {
 
-	public TooManyInputs(String filename, int lineNumber, String stackTrace) {
+	public TooManyInputsException(String filename, int lineNumber, String stackTrace) {
 		super(filename, lineNumber);
 	}
 	

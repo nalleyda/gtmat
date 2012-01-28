@@ -1,13 +1,14 @@
-package exception;
+package gtmatException;
+
 
 /**
  * For invalid syntax.
  * @author Josh Sizemore
  */
 
-public class InvalidSyntax extends Exception {
+public class InvalidSyntaxException extends GTMatException {
 
-	public InvalidSyntax(String filename, int lineNumber, String stackTrace) {
+	public InvalidSyntaxException(String filename, int lineNumber, String stackTrace) {
 		super(filename, lineNumber);
 	}
 	

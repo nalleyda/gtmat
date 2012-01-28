@@ -1,13 +1,14 @@
-package exception;
+package gtmatException;
+
 
 /**
  * Invalid index for an array access. For users attempting to index into an array using a non-int, or negetive number
  * @author Josh Sizemore
  */
 
-public class InvalidIndex extends Exception {
+public class InvalidIndexException extends GTMatException {
 
-	public InvalidIndex(String filename, int lineNumber, String stackTrace) {
+	public InvalidIndexException(String filename, int lineNumber, String stackTrace) {
 		super(filename, lineNumber);
 	}
 	
