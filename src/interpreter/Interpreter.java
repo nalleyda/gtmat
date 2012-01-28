@@ -1233,7 +1233,7 @@ public class Interpreter extends Thread {
 			if (((Variable) varList.get(i)).getVarName().equals(name)) {
 				MatObject data = ((Variable) varList.get(i)).getData();
 				int nv = inputs.length;
-				int nd = data.dimensions;
+				int nd = data.size.length;
 				if(nv > nd) {
 					for(int k = nv-1; k >= nd; k--) {
 						inputs[nd-1] = (Matrix) inputs[nd-1].dotmult(inputs[k]);

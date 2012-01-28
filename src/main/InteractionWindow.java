@@ -237,6 +237,14 @@ public class InteractionWindow {
             ble.printStackTrace();
         }
     }
+    
+    /**
+     * Print the given RuntimeException to the InteractionWindow.
+     * @param exception The exception to print.
+     */
+    public void printError(RuntimeException exception) {
+    	appendString(exception.toString(), 0);
+    }
 
     /**
      * This listener is used for hitting up/down in the command window.

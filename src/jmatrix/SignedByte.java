@@ -34,7 +34,6 @@ public class SignedByte extends MatObject {
     public SignedByte(int num) {
         n = num;
         size = new int[2];
-        dimensions = 2;
         type = Type.BYTE;
         data = new byte[num];
         size[COL] = num;
@@ -64,7 +63,6 @@ public class SignedByte extends MatObject {
         size = new int[2];
         size[ROW] = rows;
         size[COL] = cols;
-        dimensions = 2;
     }
 
     /**

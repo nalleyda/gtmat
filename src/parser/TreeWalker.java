@@ -671,7 +671,7 @@ public class TreeWalker {
     public static boolean validateTokens() {
         boolean res = true;
         BufferedReader in = null;
-        String name = /*"src" + File.separator +*/ "parser" + File.separator + "Expr.tokens";
+        String name = "src" + File.separator + "parser" + File.separator + "Expr.tokens";
         try {
             in = new BufferedReader(new FileReader(name));
         } catch (IOException e) {
@@ -734,7 +734,7 @@ public class TreeWalker {
             if (o == null) {
                 o = staticExpr;
             }
-            if (soFar > o.dimensions) {
+            if (soFar > o.size.length) {
                 throw new RuntimeException("colon beyond index size range");
             } else {
                 double sz[] = o.size();
@@ -775,7 +775,7 @@ public class TreeWalker {
                             if (wnw.size == 1) {
                                 m = new Matrix(data.n);
                             } else {
-                                int dims = data.dimensions;
+                                int dims = data.size.length;
                                 if (ndx > dims) {
                                     m = new Matrix(1);
                                 } else {
