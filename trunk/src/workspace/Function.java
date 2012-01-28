@@ -74,7 +74,7 @@ public class Function {
     For N-D arrays, SIZE(X) returns a 1-by-N vector of dimension lengths.
     Trailing singleton dimensions are ignored.*/
             MatObject o = args.get(1);
-            int nd = o.dimensions;
+            int nd = o.size.length;
             xv = new Matrix(1, nd);
             for(int ndx = 1; ndx <= nd; ndx++) {
                 xv.set(ndx, o.size[ndx-1]);

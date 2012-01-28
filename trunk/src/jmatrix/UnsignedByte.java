@@ -34,7 +34,6 @@ public class UnsignedByte extends MatObject {
     public UnsignedByte(double x) {
         n = 1;
         size = new int[2];
-        dimensions = 2;
         type = Type.BYTE;
         data = new double[1];
         // byte boundary
@@ -57,7 +56,6 @@ public class UnsignedByte extends MatObject {
     public UnsignedByte(double x, double y, double z) {
         n = 3;
         size = new int[2];
-        dimensions = 2;
         type = Type.BYTE;
         data = new double[3];
         if (x > 255){
@@ -90,7 +88,6 @@ public class UnsignedByte extends MatObject {
     public UnsignedByte(double x, double y) {
         n = 2;
         size = new int[2];
-        dimensions = 2;
         type = Type.BYTE;
         data = new double[2];
         if (x > 255){
@@ -121,7 +118,6 @@ public class UnsignedByte extends MatObject {
     public UnsignedByte(double x[]) {
         n = x.length;
         size = new int[2];
-        dimensions = 2;
         type = Type.BYTE;
         data = new double[n];
         for(int i = 0; i < n; i++) {
@@ -142,7 +138,6 @@ public class UnsignedByte extends MatObject {
     public UnsignedByte(byte x[]) {
         n = x.length;
         size = new int[2];
-        dimensions = 2;
         type = Type.BYTE;
         data = new double[n];
         for(int i = 0; i < n; i++) {
@@ -167,7 +162,6 @@ public class UnsignedByte extends MatObject {
         size = new int[2];
         size[ROW] = rows;
         size[COL] = cols;
-        dimensions = 2;
     }
 
     /**
@@ -181,9 +175,8 @@ public class UnsignedByte extends MatObject {
             data[i] = v.data[i];
         }
         type = v.type;
-        dimensions = v.dimensions;
-        size = new int[dimensions];
-        for (int i = 0; i < dimensions; i++) {
+        size = new int[v.size.length];
+        for (int i = 0; i < v.size.length; i++) {
             size[i] = v.size[i];
         }
     }
@@ -195,9 +188,8 @@ public class UnsignedByte extends MatObject {
             data[i] = init;
         }
         type = v.type;
-        dimensions = v.dimensions;
-        size = new int[dimensions];
-        for (int i = 0; i < dimensions; i++) {
+        size = new int[v.size.length];
+        for (int i = 0; i < v.size.length; i++) {
             size[i] = v.size[i];
         }
     }
@@ -1353,7 +1345,7 @@ public class UnsignedByte extends MatObject {
      * @return
      */
     public UnsignedByte inv() {
-        if (dimensions != 2
+        if (size.length != 2
                 || (size[ROW] != size[COL])) {
             throw new RuntimeException("Matrix.inv matrix must be square");
         }

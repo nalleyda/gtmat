@@ -48,7 +48,6 @@ public abstract class MatObject {
 	public static final int CLR = 2;
 	public int n;          // number of data items
 	public int size[];     // sizes of each dimension [rows cols clrs]
-	public int dimensions; // size of size
 	public Type type;       // see types above
 
 	public abstract MatObject copy();
@@ -56,14 +55,7 @@ public abstract class MatObject {
 	public abstract MatObject zeroed();
 	public abstract void copyValues(Matrix ndx, MatObject src) throws Exception;
 
-	public MatObject() {
-		n = 0;
-		size = new int[2];
-		dimensions = 2;
-		type = Type.NONE;
-		size[ROW] = 1;
-		size[COL] = 0;
-	}
+
 
 	/**
 	 * Create a MatObject with the given sizes.
@@ -86,7 +78,6 @@ public abstract class MatObject {
 	public MatObject(MatObject mo) {
 		this.n = mo.n;
 		this.size = mo.size;
-		this.dimensions = mo.dimensions;
 		this.type = mo.type;
 	}
 
@@ -376,8 +367,8 @@ public abstract class MatObject {
 	 }
 
 	 public double[] size() {
-		 double res[] = new double[dimensions];
-		 for (int i = 0; i < dimensions; i++) {
+		 double res[] = new double[size.length];
+		 for (int i = 0; i < size.length; i++) {
 			 res[i] = size[i];
 		 }
 		 return res;
@@ -400,7 +391,7 @@ public abstract class MatObject {
 			 return 0;
 		 }
 		 int mx = size[0];
-		 for (int i = 1; i < dimensions; i++) {
+		 for (int i = 1; i < size.length; i++) {
 			 if (size[i] > mx) {
 				 mx = size[i];
 			 }
@@ -418,9 +409,9 @@ public abstract class MatObject {
 
 	 public String info() {
 		 String res = type + "[";
-		 for (int i = 0; i < dimensions; i++) {
+		 for (int i = 0; i < size.length; i++) {
 			 res += " " + size[i];
-			 if (i < (dimensions - 1)) {
+			 if (i < (size.length - 1)) {
 				 res += " x";
 			 }
 		 }

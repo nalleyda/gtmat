@@ -322,7 +322,7 @@ public class Main {
         debug.println("v1 is " + v1);
         Matrix v2 = new Matrix(v1);
         debug.println("v2 is " + v2);
-        Matrix.set(v1, 1, 127);
+        Matrix.set(v1, new Matrix(1), new Matrix(127));
         debug.println("v1 is now " + v1);
         param = new Matrix[3];
         param[0] = v1;
@@ -455,7 +455,7 @@ public class Main {
         debug.println(str);
         // mess up vc for inversion
 
-        Matrix.set(vc, 1, 0);
+        Matrix.set(vc, new Matrix(1), new Matrix(0));
         Matrix minv = Matrix.inv(vc);
         debug.println(
                 "minv = vc.inv() is " + minv);
@@ -469,11 +469,9 @@ public class Main {
         Matrix.set(a12_34, Matrix.colon(3, 5), Matrix.colon(4, 7), setin);
         debug.println(
                 "a12_34(3:5, 4:7) = vc(1:3, 2:5) is " + a12_34);
-        Matrix.set(a12_34, 12, 10, 99);
         debug.println(
                 "a12_34 with 99 at [12 10] is " + a12_34);
         try {
-            Matrix.set(a12_34, 150, -99);  // Throws an exception
             debug.println(
                     "a12_34 with -99 at [150] is " + a12_34);
         } catch (Exception e) {

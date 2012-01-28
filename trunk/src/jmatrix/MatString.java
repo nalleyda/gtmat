@@ -40,9 +40,8 @@ public class MatString extends UnsignedByte {
             throw new RuntimeException("illegal math operation");
         }
         type = Type.CHAR;
-        dimensions = o.dimensions;
-        size = new int[dimensions];
-        for (int i = 0; i < dimensions; i++) {
+        size = new int[o.size.length];
+        for (int i = 0; i < o.size.length; i++) {
             size[i] = o.size[i];
         }
     }
@@ -60,7 +59,6 @@ public class MatString extends UnsignedByte {
         this.data = data;
         n = rows * cols;
         size = new int[2];
-        dimensions = 2;
         type = Type.DOUBLE;
         size[COL] = cols;
         size[ROW] = rows;
