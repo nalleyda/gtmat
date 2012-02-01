@@ -1,394 +1,360 @@
+/**
+  * Should take all symobls to tokens for TreeWalker (e.g., 'EXP)
+  */
+
 grammar Expr;
 options {
-    output=AST;
-    ASTLabelType=CommonTree; // type of $stat.tree ref etc...
-}
-tokens {
-NEGATE;
-CALL;
-EMPTY_VECTOR;
-VECTOR;
-CELL;
-STRUCT;
-STRUCTA;
-STRUCTAV;
-STRUCTV;
-VECFIELD;
-CELLFIELD;
-VECFIELDV;
-CELLFIELDV;
-MULTI_RETURN;
-HCAT;
-CVCAT;
-CHCAT;
-VCAT;
-INDEX;
-BODY;
-LINE;
-TRANSPOSE;
+	output = AST;
+	ASTLabelType = CommonTree;
+	memoize = true;	
 }
 
-
-@header {
-  package parser;
+tokens{
+FUNC_ARGS;
+ID;
+DOT;
+DOT_CARET;
+CARET;
+SINGLE_QUOTE;
+DOT_TRANSPOSE;
+MINUS;
+NOT;
+DOT_STAR;
+DOT_SLASH;
+DOT_BACKSLASH;
+STAR;
+SLASH;
+BACKSLASH;
+PLUS;
+COLON_ARGS;
+LESS_THAN;
+GREATER_THAN;
+LESS_EQUAL;
+GREATER_EQUL;
+ISEQUAL;
+NOT_EQUAL;
+ELE_AND;
+ELE_OR;
+SC_AND;
+SC_OR;
+HCAT_VEC;
+VCAT_VEC;
+HCAT_CELL;
+VCAT_CELL;
+EQUALS;
+IF;
+ELSEIF;
+ELSE;
+IF_STAT;
+SWITCH;
+CASE;
+OTHERWISE;
+SWITCH_STAT;
+FOR;
+FOR_LOOP; 
+WHILE;
+WHILE_LOOP;
+BLOCK;
 }
 
-
-@lexer::header {
-  package parser;
+@header{
+	package parser;
 }
 
+@lexer::header{
+	package parser;
+}
 
+//prog 	: expr EOF;
 
-
-// START:stat
-/** Match a series of stat rules and, for each one, print out the
- *  tree stat returns, $stat.tree.  toStringTree() prints the tree
- *  out in form: (root child1 ... childN).  ANTLR's default tree 
- *  construction mechanism will build a list (flat tree) of the stat
- *  result trees.  This tree will be the input to the tree parser.
+	
+/*
+ * Helper Definitions
  */
-prog:   body EOF!
-;
-
-
-body : 
-        parts -> ^(BODY parts)
-;
-parts :
-( (stat 
-  | ifStat
-  | switchStat
-  | whileStat
-  | forStat
-  | tryCatch)   )* 
-        ;
-
-
-// realend : (END NEWLINE) -> END;
-
-
-stat:
-        (ID OPENP actualParameters CLOSEP DOT ID GETS)
-         => str=ID OPENP actualParameters CLOSEP  DOT fld=ID GETS expr SEMI? 
-         -> ^(GETS ^(STRUCTA $str $fld actualParameters) expr SEMI?)
-    |   (ID OPENP actualParameters CLOSEP DOT OPENP)
-         => str=ID OPENP actualParameters CLOSEP DOT OPENP var=ID CLOSEP GETS expr SEMI? 
-         -> ^(GETS ^(STRUCTAV $str $var actualParameters) expr SEMI?)
-    | (ID DOT OPENP) 
-    => str=ID DOT OPENP var=ID CLOSEP GETS expr SEMI?
-    -> ^(GETS ^(STRUCTV $str $var) expr SEMI?)
-    |    (ID DOT ID) 
-    => str=ID DOT fld=ID GETS expr SEMI? 
-    -> ^(GETS ^(STRUCT $str $fld) expr SEMI?)
-    |   (ID OPENP actualParameters CLOSEP GETS)
-         => ID OPENP actualParameters CLOSEP GETS expr SEMI? 
-         -> ^(INDEX ID actualParameters expr SEMI?)
-    |   (ID GETS) => ID GETS expr SEMI? -> ^(GETS ID expr SEMI?)
-    |   (OPENB chCat CLOSEB GETS) =>  (OPENB chCat CLOSEB GETS fn=ID OPENP p=actualParameters CLOSEP SEMI?)
-            -> ^(MULTI_RETURN chCat $fn $p SEMI?)
-    |   expr SEMI?        -> ^(GETS expr SEMI?)
-    |   CLEAR^
-    |   COLORBAR^
-    |   FIGURE^
-    |   CLC^
-    |   CLF^
-    |   CLOSE^ ALL
-    |   COLORMAP^ ID
-    |   CD^ ID
-    |   AXIS^ (ON | OFF | EQUAL| expr)
-    |   GRID^ (ON|OFF)
-    |   HOLD^ (ON|OFF)
-    |   SHADING^ (FLAT|INTERP)
-    |   NEWLINE           ->
-    //|   ELLIPSES NEWLINE  ->
-    |   FUNCTION anything NEWLINE -> 
-    ;
-    
-anything: (~NEWLINE)*;    
-    
-ifStat
-    : IF^ e1=expr b1=body 
-      (ELSEIF! e2=expr b2= body)*
-      (ELSE! b3=body)?
-      BLOCK_END!
-    ;
-
-tryCatch
-    : TRY^ b1=body 
-      CATCH! b3=body
-      BLOCK_END!
-    ;
-
-
-forStat
-: FOR^ ID GETS! expr body BLOCK_END!
-;
-
-
-whileStat
-: WHILE^ expr body BLOCK_END!
-;
-
-
-switchStat 
-: SWITCH^ ID (caseClause )* defaultClause? BLOCK_END!
-;
-caseClause 
-: CASE^ expr body
-;
-defaultClause 
-: OTHERWISE^ body
-;
-actualParameters
-: expr (COMMA expr)* -> expr*
-;
-term : (ID OPENP actualParameters CLOSEP DOT OPENP) 
-                    => st=ID OPENP e=actualParameters CLOSEP DOT OPENP var=ID CLOSEP
-                    -> ^(STRUCTAV $st $var $e)
-        | (ID OPENP actualParameters CLOSEP DOT ) 
-                    => st=ID OPENP e=actualParameters CLOSEP DOT fld=ID
-                    -> ^(STRUCTA $st $fld $e)
-        |   (ID OPENP actualParameters CLOSEP) => ID OPENP actualParameters CLOSEP 
-                                -> ^(CALL ID actualParameters)
-        | (ID DOT OPENP) => st=ID DOT OPENP var=ID CLOSEP
-                                -> ^(STRUCTV $st $var)
-        | (ID DOT ID) => st=ID DOT fld=ID 
-                                -> ^(STRUCT $st $fld)
-    | OPENB CLOSEB -> EMPTY_VECTOR
-    | DOUBLE 
-    |   ID
-    |   OPENP! expr CLOSEP!
-    | STRING_LITERAL
-    | END
-    ;
  
+start	: prog EOF!;
+ 
+prog		: block+;//(block | NEWLINE)+;//block ((NEWLINE*)! block)*;
+ 
+//index		: OPENP (expr (COMMA expr)*)? CLOSEP ;
+
+//structAccess	: DOT (OPENP expr CLOSEP | ID) ;
+
+//exprList	: expr (COMMA! expr)*	;
+
+//idRule		: ID	;
+
+//funcArgs	: (expr (COMMA! expr)*)?;
+
+functionArgs	:  expr (COMMA expr)* -> ^(FUNC_ARGS expr*);
+
+functionCall 	: (ID OPENP) => (ID^ (
+	/*(OPENP) => */(OPENP! functionArgs? CLOSEP!)?//functionArgs? CLOSEP)
+	//| ( )
+	))
+	;
+
+//functionCall	: functionLeft;
+
+functionCallOrStructure	: functionCall (DOT^ (OPENP! expr CLOSEP! | functionCall))?;//ID /*| functionCall*/))?;//structAccess?;//((functionCall DOT) => functionCall DOT structAccess) | functionCall;
+
+/*
+ * Chain of Precedence
+ */
+term	: EMPTY_VEC 
+	| EMPTY_CELL
+	| OPENP! expr CLOSEP!
+	//| cellArray		//OPENC! exprList CLOSEC!
+	//| vector		//OPENB! exprList CLOSEB!
+	| STRING_LITERAL
+	| DOUBLE
+	//| idRule
+	//| functionCall
+	//| structure
+	| functionCallOrStructure //(DOT (OPENP | ID) => DOT structAccess)
+	| END
+	| vector
+	| cellArray
+	| COLON
+	//| TRANS_ID
+	//| EMPTY_STRING
+	//| functionCallOrStructure
+	;
+	
+transponent	/*: term ;/*(
+		  	  (((EMPTY_STRING) => (EMPTY_STRING | SINGLE_QUOTE | DOT_TRANSPOSE)+) | SINGLE_QUOTE)
+		  	| ( ((DOT_CARET | CARET) term)* | (SINGLE_QUOTE | DOT_TRANSPOSE)*)
+		  	)
+		  	
+		  ;*/
+		: (term (
+		( (DOT_CARET^ | CARET^) term)*
+		| (SINGLE_QUOTE^ | DOT_TRANSPOSE^ /*| EMPTY_STRING*/)*)
+		)
+		;
+	
+unary	: (PLUS! | MINUS^ | NOT^)* transponent;/// -> ((MINUS | NOT)* transponent);
+
+mult	: unary ( (DOT_STAR^ | DOT_SLASH^ | DOT_BACKSLASH^ | STAR^ | SLASH^ | BACKSLASH^) unary )* ;
+
+add	: mult ( (PLUS^ | MINUS^) mult)*	;
+
+colonEnd:	(COLON add)+ -> ^(COLON_ARGS add+);
+
+colon	: add (colonEnd^)?;//(COLON add)* -> ^(COLON_ARGS add+);//{boolean multipleArgs = false;} 
+	//add (/*(COLON add)?*/ COLON add)* -> ^(COLON add*)
+	//a1=add ((COLON a2=add ((COLON a3=add) |() /*-> ^(COLON add*)*/) | ()) //-> (COLON_ARGS $a1 $a2 $a3) | ())//-> ^(
+	//{if (multipleArgs) -> COLON;}
+	//;// -> ;//add (COLON^ add)*;//  -> ^(COLON_ARGS add*);
+	/*add | 
+	(add (COLON add)+ -> ^(COLON_ARGS add*));*/
+	//-> ^(COLON add+)
+	//;
+	//expr (COMMA expr)* -> ^(FUNC_ARGS expr*);
+
+logical	: colon ( (LESS_THAN^ | GREATER_THAN^ | LESS_EQUAL^ | GREATER_EQUAL^ | ISEQUAL^ | NOT_EQUAL^) colon )* ;
+
+eleAnd	: logical (ELE_AND^ logical)* ;
+
+eleOr	: eleAnd (ELE_OR^ eleAnd)* ;
+
+scAnd	: eleOr (SC_AND^ eleOr)* ;
+
+scOr	: scAnd (SC_OR^ scAnd)* ;
+
+//hCatArgList : (COMMA (expr | vCatCell))+ ;
+
+//hCatVec	: ( (COMMA vecArg)* )? CLOSEB) | scOr ;
+
+//vCatVec : ( (SEMI vecArg)* )? CLOSEB) | hCatVec ;
+
+//hCatVec : openB ;
+
+//scOr_or_vec	: scOr | vector;
+
+//scOr_or_cell	: scOr | cellArray;
+
+hCatVec	: expr ((COMMA)? expr)* -> ^(HCAT_VEC expr+);// -> ^(HCAT_VEC expr+);
+
+vCatVec	: hCatVec ((SEMI) hCatVec)* -> ^(VCAT_VEC hCatVec+);// -> ^(VCAT_VEC expr+);
+
+vector	: OPENB! vCatVec CLOSEB!;
+
+hCatCell: expr ((COMMA)? expr)*  -> ^(HCAT_CELL expr+);
+
+vCatCell: hCatCell ((SEMI)! hCatCell)* -> ^(VCAT_CELL hCatCell+);
+
+cellArray	: OPENC! vCatCell CLOSEC! ;	
+
+expr	: /*vector | cellArray |*/ scOr;// -> ^(ELSEIF_ROOT );// | unary;
+	/*| OPENB vCatVec CLOSEB
+	| OPENC*/
+	
+//lhs	: (functionCallOrStructure EQUALS) => (functionCallOrStructure EQUALS);
+
+//getsLine:	(functionCallOrStructure EQUALS) => (functionCallOrStructure EQUALS expr SEMI?);
+	
+line	: /*getsLine | expr;*/(((term EQUALS) => (term EQUALS^))?// | ( )) 
+ expr (SEMI!)?);// -> ^(ELSEIF_ROOT (functionCallOrStructure EQUALS)) | ( ))  expr SEMI?);*/
+ 
+/*ifBlock	: IF expr NEWLINE block 
+	  (((ELSEIF) => (ELSEIF expr NEWLINE block)+) | ())
+	  ELSE NEWLINE block
+	  NEWLINE+ END ;*/
+	  
+ifPart	: IF^ expr block?;
+elseifPart	: (ELSEIF^ e2=expr b2=block?);
+elsePart	:(ELSE^ b3=block?);
+ifBlock : 
+	ifPart// -> ^(IF expr block?))
+        elseifPart*// -> ^(ELSEIF expr block?))
+        elsePart?
+        BLOCK_END //NEWLINE
+        -> ^(IF_STAT ifPart elseifPart* elsePart?)
+       // -> FUNC_ARGS
+        //-> ^(IF $e1 $b1? (ELSEIF $e2 $b2?)* ELSE $b3?)
+    	;
     
-   
-transponent
-    : term 
-    (
-    ( DOTCARET^
-    | CARET^
-    | DOTTICK^
-    | TICK^
-    ) 
-    term)*
-    ;
-      
-unary
-: (PLUS! | negation^)* transponent
-;
-negation
-: MINUS -> NEGATE
-;
-mult
-    : unary (
-    ( MULT^
-    | DOTMULT^
-    | DIV^
-    | DOTDIV^
-    | BACK^
-    | DOTBACK^
-    )
-    unary)*
-    ; 
-    
-add:   mult ((PLUS^|MINUS^) mult)*
-    ; 
-   
-colonParameters
-: mightBeEnd (COLON mightBeEnd)* -> mightBeEnd*
-;
+switchPart	: SWITCH^ expr;
+casePart	: CASE^ expr block?;
+otherwiseBlock	: OTHERWISE^ block?;
+switchBlock :	
+	switchPart
+	casePart*
+	otherwiseBlock?
+	BLOCK_END
+	-> ^(SWITCH_STAT switchPart casePart* otherwiseBlock?)
+	;
 
-
-//endIndex: END ((PLUS^|MINUS^|MULT^|DIV^|DOTMULT^|DOTDIV^) (add | END))*;//((OPENP) END) => END;//END (COMMA | COLON | CLOSEP | SEMI) => END;
-mightBeEnd: (add);//| endIndex);
-
-
-colon 
-    : (mightBeEnd COLON) => colonParameters -> ^(COLON colonParameters)
-    |  mightBeEnd
-    | COLON
-    ;
-   
-    
-relation
-    : colon (
-    ( LT^
-    | GT^
-    | LE^
-    | GE^
-    | EQ^
-    | NE^
-    )
-    colon)*
-    ;
-
-
-eleAnd
-    : relation (
-    ( AND^
-    )
-    relation)*
-    ;
-
-
-eleOr
-    : eleAnd (
-    ( OR^
-    )
-    eleAnd)*
-    ;
-    
-scAnd
-    : eleOr (
-    ( SCAND^
-    )
-    eleOr)*
-    ;
-    
-scOr
-    : scAnd (
-    ( SCOR^
-    )
-    scAnd)*
-    ;
-
-
-hCat :
-expr ( (COMMA?)! expr )* -> ^(HCAT expr+)
-;
-chCat :
-expr ( (COMMA?)! expr )* -> ^(CHCAT expr+)
-;
-    
-vcatArgs
-:    (str=ID DOT fld=ID ) -> ^(VECFIELD $str $fld)
-|    (str=ID DOT OPENP var=ID CLOSEP ) -> ^(VECFIELDV $str $var)
-|    hCat ( (SEMI|NEWLINE/*|(ELLIPSES NEWLINE)*/) hCat )* -> ^(VCAT hCat+)
-;
-cvcatArgs
-    :    (str=ID DOT fld=ID) -> ^(CELLFIELD $str $fld)
-|    (str=ID DOT OPENP var=ID CLOSEP ) -> ^(CELLFIELDV $str $var)
-|    chCat ( (SEMI|NEWLINE) chCat )* -> ^(CVCAT chCat+)
-;
-vCat
-    : (OPENB! vcatArgs CLOSEB!)
-    ;
-    
-cellCat
-    : (OPENC! cvcatArgs CLOSEC!)
-    ;
-    
-expr
-    : (scOr | cellCat | vCat)
-    ;
-
-
-// END:expr
+forPart	: FOR^ ID EQUALS expr;	
+forBlock :	
+	forPart
+	block?
+	BLOCK_END
+	-> ^(FOR_LOOP forPart block?)
+	;
+	
+whilePart	: WHILE^ expr;
+whileBlock :	
+	whilePart
+	block?
+	BLOCK_END
+	-> ^(WHILE_LOOP whilePart block?)
+	;
+	
+blockPart	:(ifBlock | switchBlock | forBlock | whileBlock | line);
+block	: blockPart+ -> ^(BLOCK blockPart+);
+	 
+//expr	: 'a'+;
 
 
 
 
-// START:tokens
-//ENDIND : ~'\n' 'end'; 
-BLOCK_END : 'end' '\n';//(~(')' | ';' | ':' | ',' | '/' | 'a'..'z' | 'A'..'Z' | '0'..'9'));
-//THE_END : 'end' EOF;
-CLEAR : 'clear';
-FUNCTION : 'function';
-CD : 'cd';
-CLC : 'clc';
-CLF : 'clf';
-FIGURE : 'figure';
-GRID : 'grid';
-HOLD : 'hold';
-EQUAL : 'equal';
-ON : 'on';
-OFF : 'off';
-CLOSE : 'close';
-ALL : 'all';
-GETS : '=';
-SWITCH : 'switch';
-CASE : 'case';
-OTHERWISE
-: 'otherwise';
-IF : 'if';
-ELSE : 'else';
-ELSEIF : 'elseif';
-END : 'end';
-FOR : 'for';
-WHILE : 'while';
-TRY : 'try';
-CATCH : 'catch';
-COMMA : ',';
-OPENB : '[';
-CLOSEB : ']';
-OPENC : '{';
-CLOSEC : '}';
-OPENP : '(';
-CLOSEP : ')';
-NOT : '~';
-SEMI : ';';
-PLUS : '+';
-MINUS : '-';
-DOT : '.';
-DOTMULT : '.*';
-DOTDIV : './';
-MULT : '*';
-DIV : '/';
-DOTCARET : '.^';
-CARET : '^';
-DOTTICK : '.\'';
-TICK : '\'';
-BACK : '\\';
-DOTBACK : '.\\';
-EQ : '==';
-NE : '~=';
-LT : '<';
-LE : '<=';
-GT : '>';
-GE : '>=';
-AND : '&';
-OR : '|';
-SCAND : '&&';
-SCOR : '||';
-COLORBAR : 'colorbar';
-SHADING : 'shading';
-FLAT : 'flat';
-INTERP : 'interp';
-AXIS : 'axis';
-COLORMAP: 'colormap';
+//Special High Priority
+//EMPTY_STRING	: '\'\''	;
+BLOCK_END	: 'end' '\r'? '\n'	;	//We insert an extra newline at the end of every file before processing to avoid last-line problems
+EMPTY_VEC	: '[' ']' 	;
+EMPTY_CELL	: '{' '}'	;
+SINGLE_QUOTE	: '$';//'\''	;
+
+//Keywords
+BREAK		: 'break'	;
+CASE		: 'case'	;
+CATCH		: 'catch'	;
+CLASSDEF	: 'classdef'	;
+CONTINUE	: 'continue'	;
+ELSE		: 'else'	;
+ELSEIF		: 'elseif'	;
+END		: 'end'		;
+FOR		: 'for'		;
+FUNCTION	: 'function'	;
+GLOBAL		: 'global'	;
+IF		: 'if'		;
+OTHERWISE	: 'otherwise'	;
+PARFOR		: 'parfor'	;
+PERSISTENT	: 'persistent'	;
+RETURN		: 'return'	;
+SPMD		: 'spmd'	;
+SWITCH		: 'switch'	;
+TRY		: 'try'		;
+WHILE		: 'while'	;
+
+//Operators
+AT		: '@'		;
+BACKSLASH	: '\\'		;
+CARET		: '^'		;
+CLOSE_BLOCK	: '%}'		;
+CLOSEB		: ']'		;
+CLOSEC		: '}'		;
+CLOSEP		: ')'		;
+COLON		: ':'		;
+COMMA		: ','		;
+DOUBLE_QUOTE	: '"'		;
+DOT		: '.'		;
+DOT_BACKSLASH	: '.\\'		;
+DOT_CARET	: '.^'		;
+//DOT_OPENP	: '.('		;	//might need high priority
+DOT_SLASH	: './'		;
+DOT_STAR	: '.*'		;
+DOT_TRANSPOSE	: '.\''		;
+ELE_AND		: '&'		;
+ELE_OR		: '|'		;
+EQUALS		: '='		;
+EXCLAMATION	: '!'		;
+GREATER_THAN	: '>'		;
+GREATER_EQUAL	: '>='		;
+ISEQUAL		: '=='		;
+LESS_EQUAL	: '<='		;
+LESS_THAN	: '<'		;
+MINUS		: '-'		;
+NOT		: '~'		;
+NOT_EQUAL	: '~='		;
+OPEN_BLOCK	: '%{'		;
+OPENB		: '['		;
+OPENC		: '{'		;
+OPENP		: '('		;
+PERCENT		: '%'		;
+PLUS		: '+'		;
+SC_AND		: '&&'		;
+SC_OR		: '||'		;
+SEMI		: ';'		;
+//SINGLE_QUOTE	: '\''		;
+SLASH		: '/'		;
+STAR		: '*'		;
 
 
-fragment LETTER : ('a'..'z' | 'A'..'Z' | '_') ;
-fragment DIGIT : '0'..'9';
+//Dynamically Defined
+fragment DIGIT		: ('0'..'9')		;
+fragment LETTER		: ('a'..'z' | 'A'..'Z')	;
+fragment UNDERSCORE	: '_'			;
+ 
+COMMENT : '\%' .* NEWLINE {$channel = HIDDEN;};
+DOUBLE	: ((DIGIT+ DOT DIGIT*) | (DOT DIGIT+) | DIGIT+) EXPONENT? ;
+ELLIPSIS: '...'	NEWLINE+ {$channel = HIDDEN;}	;
+EXPONENT: ('e' | 'E') ('+' | '-')? ('0'..'9')+  ;
+ID 	: LETTER (LETTER | DIGIT | UNDERSCORE)*	;
+
+//TRANS_ID	: ID (SINGLE_QUOTE)*		;
+
+NEWLINE	: '\r'? '\n'	{$channel = HIDDEN;};
 STRING_LITERAL
-      : TICK 
-        {StringBuilder b = new StringBuilder();}
-        ( TICK TICK                 {b.appendCodePoint('\'');}
-        | c = ~(TICK | '\r' | '\n')  {b.appendCodePoint(c);}
-        )*
-        TICK
-        {setText(b.toString());}
+      	: '\'' 
+          {StringBuilder b = new StringBuilder();}
+          ( '\'' '\''          {b.appendCodePoint('\'');}
+          | c = ~('\'' | '\r' | '\n')  {b.appendCodePoint(c);}
+          )*
+          '\''
+          {setText(b.toString());}
         ;
+WS 	: (' ' | '\t' | /*'\n' | '\r' |*/ '\f')+ {$channel = HIDDEN;};
 
 
 
 
-ID : LETTER (LETTER | DIGIT)*;
-COLON:  ':';
-DOUBLE:   DIGIT+ '.' DIGIT* Exponent?
-    |   '.' DIGIT+ Exponent?
-    |   DIGIT+ Exponent?
-;
-Exponent : ('e'|'E') ('+'|'-')? ('0'..'9')+ ;
-NEWLINE:'\r'? '\n' ;
-WS : (' ' | '\t' | '\n' | '\r' | '\f')+ {$channel = HIDDEN;};
-COMMENT : '\%' .* ('\n'|'\r') {$channel = HIDDEN;};
-ELLIPSES : '...' NEWLINE* {$channel = HIDDEN;};
 
 
 
-// END:tokens
+
+
+
 

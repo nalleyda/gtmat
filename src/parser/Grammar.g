@@ -10,22 +10,51 @@ options {
 }
 
 tokens{
-//Do we need this?
-BLOCK;
-COLON_ARGS;
-ELSE_ROOT;
-ELSEIF_ROOT;
 FUNC_ARGS;
-FUNC_CALL;
-HCAT_CELL;
+ID;
+DOT;
+DOT_CARET;
+CARET;
+SINGLE_QUOTE;
+DOT_TRANSPOSE;
+MINUS;
+NOT;
+DOT_STAR;
+DOT_SLASH;
+DOT_BACKSLASH;
+STAR;
+SLASH;
+BACKSLASH;
+PLUS;
+COLON_ARGS;
+LESS_THAN;
+GREATER_THAN;
+LESS_EQUAL;
+GREATER_EQUL;
+ISEQUAL;
+NOT_EQUAL;
+ELE_AND;
+ELE_OR;
+SC_AND;
+SC_OR;
 HCAT_VEC;
-FOR_LOOP;
-IF_STAT;
-SWITCH_STAT;
-WHILE_LOOP;
-UNARY_OP;
-VCAT_CELL;
 VCAT_VEC;
+HCAT_CELL;
+VCAT_CELL;
+EQUALS;
+IF;
+ELSEIF;
+ELSE;
+IF_STAT;
+SWITCH;
+CASE;
+OTHERWISE;
+SWITCH_STAT;
+FOR;
+FOR_LOOP; 
+WHILE;
+WHILE_LOOP;
+BLOCK;
 }
 
 @header{
@@ -87,6 +116,8 @@ term	: EMPTY_VEC
 	| vector
 	| cellArray
 	| COLON
+	| TRUE
+	| FALSE
 	//| TRANS_ID
 	//| EMPTY_STRING
 	//| functionCallOrStructure
@@ -187,8 +218,8 @@ ifBlock :
     	;
     
 switchPart	: SWITCH^ expr;
-casePart	: CASE expr block?;
-otherwiseBlock	: OTHERWISE block?;
+casePart	: CASE^ expr block?;
+otherwiseBlock	: OTHERWISE^ block?;
 switchBlock :	
 	switchPart
 	casePart*
@@ -237,6 +268,7 @@ CONTINUE	: 'continue'	;
 ELSE		: 'else'	;
 ELSEIF		: 'elseif'	;
 END		: 'end'		;
+FALSE		: 'false'	;
 FOR		: 'for'		;
 FUNCTION	: 'function'	;
 GLOBAL		: 'global'	;
@@ -247,6 +279,7 @@ PERSISTENT	: 'persistent'	;
 RETURN		: 'return'	;
 SPMD		: 'spmd'	;
 SWITCH		: 'switch'	;
+TRUE		: 'true'	;
 TRY		: 'try'		;
 WHILE		: 'while'	;
 
