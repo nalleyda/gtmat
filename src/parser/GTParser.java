@@ -67,7 +67,8 @@ public class GTParser {
             CommonTree tr = (CommonTree) r.getTree(); 
             tr = (CommonTree) tr.getChild(0);
             tr = (CommonTree) tr.getChild(1);
-            res = TreeWalker.process("", tr);
+            //TODO death?
+           // res = TreeWalker.process("", tr);
         } catch (RecognitionException e) {
             e.printStackTrace();
         }
