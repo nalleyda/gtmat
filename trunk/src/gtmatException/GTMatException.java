@@ -17,7 +17,7 @@ public abstract class GTMatException extends RuntimeException {
 		this.lineNumber = lineNumber;
 	}
 	
-	public static void Throw(Exception e) {
-		main.InteractionWindow.printError(e);
+	public static void Throw(GTMatException e) {
+		main.Main.interactions.printError(e);
 	}
 }
