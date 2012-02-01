@@ -14,6 +14,11 @@ import workspace.*;
  */
 public abstract class MatObject {
 	
+	//returns true iff this would cause an if statement to execute in Matlab
+	public boolean conditionalIsTrue() throws Exception{
+		throw new Exception("Calling a dummy method. This should be implemented in the child classes.");
+	}
+	
 	/** 
 	 * Enum to represent the type of an object.
 	 * @author taylorhope
