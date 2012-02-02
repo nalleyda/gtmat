@@ -12,6 +12,8 @@ import java.lang.reflect.Method;
 import java.io.File;
 import java.io.FileWriter;
 
+import functions.*;
+
 /**
  *
  * @author dsmith
@@ -763,19 +765,7 @@ public class Matrix extends MatObject {
 	}
 	
 
-	/**
-	 * Add a single element to the given matrix
-	 * @param m The matrix to add to
-	 * @param x The double to add
-	 * @return A new matrix with x added to all of the elements in m.
-	 */
-	public static Matrix add(Matrix m, double x) {
-		Matrix res = new Matrix(m);
-        for (int i = 0; i < m.n; i++) {
-            res.data[i] = m.data[i] + x;
-        }
-        return res;
-	}
+	
 
 	/**
 	 * Raise a matrix to a power
@@ -846,48 +836,8 @@ public class Matrix extends MatObject {
         return res;
 	}
 
-	/**
-	 * Add one matrix to another
-	 * @param m one matrix
-	 * @param v another matrix
-	 * @return m + v
-	 */
-	public static Matrix add(Matrix m, Matrix v) {
-        Matrix res = new Matrix(m);
-        if (m.n != v.n) {
-            if (m.n == 1) {
-                res = new Matrix(v);
-                for (int i = 0; i < v.n; i++) {
-                    res.data[i] = m.data[0] + res.data[i];
-                }
-            } else if (v.n == 1) {
-                for (int i = 0; i < m.n; i++) {
-                    res.data[i] = v.data[0] + m.data[i];
-                }
-            } else {
-                //TODO Dimension mismatch exception
-            }
-        } else {
-            for (int i = 0; i < m.n; i++) {
-                res.data[i] = m.data[i] + v.data[i];
-            }
-        }
-        return res;
-	}
+	
 
-	/**
-	 * Add a matrix in place
-	 * @param m the matrix to add to
-	 * @param v the matrix to add
-	 */
-	public static void addIP(Matrix m, Matrix v) {
-        if (m.n != v.n) {
-            //TODO Dimension mismatch exception
-        }
-        for (int i = 0; i < m.n; i++) {
-            m.data[i] = m.data[i] + v.data[i];
-        }
-	}
 
 	/**
 	 * Multiply a matrix in place
@@ -931,16 +881,7 @@ public class Matrix extends MatObject {
         }
 	}
 
-	/**
-	 * Add a scalar to a matrix in place
-	 * @param m the matrix to change
-	 * @param x the scalar to add
-	 */
-	public static void addIP(Matrix m, double x) {
-        for (int i = 0; i < m.n; i++) {
-            m.data[i] = m.data[i] + x;
-        }
-	}
+
 
 	/**
 	 * Multiply a matrix by a scalar in place
@@ -2246,18 +2187,7 @@ public class Matrix extends MatObject {
 		return res;
 	}
 
-	/**
-	 *
-	 * @param x
-	 * @return
-	 */
-	public Matrix add(double x) {
-		Matrix res = new Matrix(this);
-		for (int i = 1; i <= n; i++) {
-			res.set(i, get(i) + x);
-		}
-		return res;
-	}
+
 
 	/**
 	 *
@@ -2342,37 +2272,7 @@ public class Matrix extends MatObject {
 		return res;
 	}
 
-	/**
-	 * add a matrix
-	 * @param v matrix to add
-	 * @return
-	 */
-	public Matrix add(Matrix v) {
-		Matrix res = new Matrix(this);
-		if (n != v.n) {
-			if (n == 1) {
-				res = new Matrix(v);
-				for (int i = 1; i <= v.n; i++) {
-					//                    res.data[i] = data[0] + res.data[i];
-					res.set(i, get(1) + v.get(i));
-				}
-			} else if (v.n == 1) {
-				for (int i = 1; i <= n; i++) {
-					//                    res.data[i] = v.data[0] + data[i];
-					res.set(i, v.get(1) + get(i));
-				}
-			} else {
-				throw new RuntimeException("Matrix.add unequal sizes");
-			}
-		} else {
-			for (int i = 1; i <= n; i++) {
-				//               res.data[i] = data[i] + v.data[i];
-				res.set(i, get(i) + v.get(i));
-			}
-		}
-		return res;
-	}
-
+	
 	/**
 	 * subtract a matrix
 	 * @param v matrix to add
@@ -2466,19 +2366,7 @@ public class Matrix extends MatObject {
 		return res;
 	}
 
-	/**
-	 * add a matrix in place
-	 * @param v matrix to add
-	 * @return
-	 */
-	public void addIP(Matrix v) {
-		if (n != v.n) {
-			throw new RuntimeException("Matrix.add unequal sizes");
-		}
-		for (int i = 1; i <= n; i++) {
-			set(i, get(i) + v.get(i));
-		}
-	}
+
 
 	/**
 	 * multiply a matrix in place
@@ -2522,16 +2410,7 @@ public class Matrix extends MatObject {
 		}
 	}
 
-	/**
-	 * add a scalar in place
-	 * @param v matrix to add
-	 * @return
-	 */
-	public void addIP(double x) {
-		for (int i = 1; i <= n; i++) {
-			set(i, get(i) + x);
-		}
-	}
+	
 
 	/**
 	 * multiply a scalar in place
@@ -2933,7 +2812,7 @@ public class Matrix extends MatObject {
 			 }
 		 }
 		 Matrix rndx = Matrix.colon(1, n);
-		 return m.index(rndx, rndx.add(n));
+		 return m.index(rndx, Add.add(rndx, new Matrix(n)));
 	 }
 
 	 /**

@@ -51,28 +51,8 @@ it = m(end, end, end, end) % returns m(6,6)
  */
 public class TreeWalker {
 
-	public enum TYPE {
-		/*
-		 * CAUTION: IF YOU EDIT THIS LIST, YOU _MUST_ change the
-		 *          Main.version
-		 */
-
-		ZERO, REFERENCE, TWO, THREE, ALL, AND, AXIS, BACK, BLOCK_END, BODY,
-		CALL, CARET, CASE, CATCH, CD, CELL, CELLFIELD, CELLFIELDV, CHCAT,
-		CLC, CLEAR, CLF, CLOSE, CLOSEB, CLOSEC, CLOSEP, COLON, COLORBAR, COLORMAP,
-		COMMA, COMMENT, CVCAT, DIGIT, DIV, DOT, DOTBACK, DOTCARET,
-		DOTDIV, DOTMULT, DOTTICK, DOUBLE, ELLIPSES, ELSE, ELSEIF, EMPTY_VECTOR,
-		END, EQ, EQUAL, Exponent, FIGURE, FLAT, FOR, FUNCTION, GE, GETS, GRID, GT, HCAT,
-		HOLD, ID, IF, INDEX, INTERP, LE, LETTER, LINE, LT, MINUS,
-		MULT, MULTI_RETURN, NE, NEGATE, NEWLINE, NOT, OFF, ON,
-		OPENB, OPENC, OPENP, OR, OTHERWISE, PLUS, SCAND, SCOR, SEMI,
-		SHADING, STRING_LITERAL, STRUCT, STRUCTA, STRUCTAV, STRUCTV,
-		SWITCH, TICK, TRANSPOSE, TRY, VCAT, VECFIELD, VECFIELDV, VECTOR,
-		WHILE, WS
-	}
-
 	//TODO re-generate code, add tokens TRUE and FALSE
-	public enum NEW_TYPE{
+	public enum TYPE{
 		ZERO, REFERENCE, TWO, THREE,
 		AT,
 		BACKSLASH,
@@ -191,7 +171,7 @@ public class TreeWalker {
 
 	public static MatObject eval(Tree tree) throws Exception{
 		MatObject res = null;
-		NEW_TYPE nodeType = new_convert(tree.getType());
+		TYPE nodeType = convert(tree.getType());
 		String str = tree.getText();
 
 		switch(nodeType){
@@ -229,15 +209,15 @@ public class TreeWalker {
 
 		//TODO: [x,y] = foo();
 		case EQUALS://assign rhs to lhs, possibly multiple on lhs
-			NEW_TYPE lhsType = new_convert(tree.getChild(0).getType());
-			if (lhsType == NEW_TYPE.ID){//single output
+			TYPE lhsType = convert(tree.getChild(0).getType());
+			if (lhsType == TYPE.ID){//single output
 				Interpreter.assign(tree.getChild(0).getText(), eval(tree.getChild(1)), true);
 			}
-			else if (lhsType == NEW_TYPE.VCAT_VEC){//multiple assignments
+			else if (lhsType == TYPE.VCAT_VEC){//multiple assignments
 				CellArray rhs = (CellArray)eval(tree.getChild(1));
 				//MatObject lhs = evaluate(tree.getChild(0));
 				Tree lhsTree = tree.getChild(0).getChild(0);//should be VCAT_VEC -> HCAT_VEC
-				if (tree.getChild(0).getChildCount()!=1 || new_convert(lhsTree.getType()) != NEW_TYPE.HCAT_VEC){
+				if (tree.getChild(0).getChildCount()!=1 || convert(lhsTree.getType()) != TYPE.HCAT_VEC){
 					throw new Exception("Bad LHS assignment.");
 				}
 				for (int i = 1; i <= lhsTree.getChildCount(); i++){
@@ -282,7 +262,7 @@ public class TreeWalker {
 			return HorizontalConcatenate.horizontalConcatenate(arr.toArray(new MatObject[0]));
 
 		case ID: //Need to get the value stored in the associated variable, or call the function
-			if (tree.getChildCount() > 0 && new_convert(tree.getChild(0).getType()) == NEW_TYPE.FUNC_CALL){//function call or indexing
+			if (tree.getChildCount() > 0 && convert(tree.getChild(0).getType()) == TYPE.FUNC_CALL){//function call or indexing
 				eval(tree.getChild(0));
 			}
 			else{
@@ -296,13 +276,13 @@ public class TreeWalker {
 				eval(tree.getChild(0).getChild(1));
 			}
 			else{
-				for (int i = 1; i < tree.getChildCount() && new_convert(tree.getChild(i).getType()) == NEW_TYPE.ELSEIF; i++){
+				for (int i = 1; i < tree.getChildCount() && convert(tree.getChild(i).getType()) == TYPE.ELSEIF; i++){
 					if (eval(tree.getChild(i).getChild(0)).conditionalIsTrue()){
 						eval(tree.getChild(i).getChild(1));
 						break;
 					}
 				}
-				if (new_convert(tree.getChild(tree.getChildCount()-1).getType()) == NEW_TYPE.ELSE){
+				if (convert(tree.getChild(tree.getChildCount()-1).getType()) == TYPE.ELSE){
 					eval(tree.getChild(tree.getChildCount()-1).getChild(0));
 				}
 			}
@@ -344,7 +324,7 @@ public class TreeWalker {
 			MatObject se = eval(tree.getChild(0));
 			
 			int lastCaseInd;
-			if (new_convert(tree.getChild(tree.getChildCount()-1).getType()) == NEW_TYPE.OTHERWISE){
+			if (convert(tree.getChild(tree.getChildCount()-1).getType()) == TYPE.OTHERWISE){
 				lastCaseInd = tree.getChildCount()-2;
 			}
 			else{
@@ -421,7 +401,7 @@ public class TreeWalker {
 				StringTokenizer tkn = new StringTokenizer(line, "=");
 				String it = tkn.nextToken();
 				int ndx = Integer.parseInt(tkn.nextToken());
-				NEW_TYPE nodeNdx = new_convert(ndx);
+				TYPE nodeNdx = convert(ndx);
 				String itsName = nodeNdx.name();
 				if (!it.equals(itsName)) {
 					res = false;
@@ -476,29 +456,15 @@ public class TreeWalker {
 		}
 	}
 
-	public static NEW_TYPE new_convert(int value){
-		NEW_TYPE ret = null;
-		NEW_TYPE values[] = NEW_TYPE.values();
+	public static TYPE convert(int value){
+		TYPE ret = null;
+		TYPE values[] = TYPE.values();
 		for (int i = 0; i < values.length && ret == null; i++){
 			if (values[i].ordinal() == value){
 				ret = values[i];
 			}
 		}
 		return ret;
-	}
-
-	public static TYPE convert(int value) {
-		TYPE result = null; // or: = ReturnValue.UNDEFINED
-		TYPE values[] = TYPE.values();
-		int i = 0;
-		while (i < values.length && result == null) {
-			if (values[i].ordinal() == value) {
-				result = values[i];
-			} else {
-				i++;
-			}
-		}
-		return result;
 	}
 
 	private static boolean matches(MatObject a, MatObject b) {
@@ -540,15 +506,6 @@ public class TreeWalker {
 			}
 		}
 		return res;
-	}
-
-	private static boolean isTest(int typ) {
-		return (typ == TYPE.LT.ordinal()
-				|| typ == TYPE.GT.ordinal()
-				|| typ == TYPE.LE.ordinal()
-				|| typ == TYPE.GE.ordinal()
-				|| typ == TYPE.EQ.ordinal()
-				|| typ == TYPE.NE.ordinal());
 	}
 
 	public static void popDataHolder() {
