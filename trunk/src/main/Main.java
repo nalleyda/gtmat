@@ -10,6 +10,8 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.DefaultComboBoxModel;
+
+import functions.*;
 import interpreter.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -334,7 +336,7 @@ public class Main {
         debug.println("v1 > v2 is " + c);
         Matrix v3A = Matrix.mult(v1, 5);
         debug.println("v1 * 5 is " + v3A);
-        Matrix v3 = Matrix.add(v3A, v2);
+        Matrix v3 = Add.add(v3A, v2);
         debug.println("v3 = v1 * 5 + v2 is " + v3);
         Matrix v4 = Matrix.div(v1, 3.7);
         debug.println("v4 = v1 / 3.7 is " + v4);
@@ -571,7 +573,7 @@ public class Main {
         yy = (Matrix) CellArray.get(xxyy, 1, 2);
         sxx = Matrix.mult(xx, xx);
         syy = Matrix.mult(yy, yy);
-        szz = Matrix.add(sxx, syy);
+        szz = Add.add(sxx, syy);
         szz = Matrix.sub(new Matrix(n*n*2), szz);
         Figure.figure();
         Figure.setHidden(true);

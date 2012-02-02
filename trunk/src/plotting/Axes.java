@@ -16,6 +16,8 @@ import java.awt.Graphics2D;
 import java.awt.FontMetrics;
 import java.awt.image.BufferedImage;
 
+import functions.Add;
+
 /**
  *
  * @author dsmith
@@ -268,10 +270,10 @@ public class Axes {
     public Matrix transform(Matrix a) {
         Matrix it = a.sub(center);
         Matrix rot = rotMat.matMult(it.transpose());
-        rot.addIP(center);
+        rot = Add.add(rot, center);
         rot.multIP(scale);
         rot.multIP(macroScale);
-        rot.addIP(offset);
+        rot = Add.add(rot, offset);
         if (showit && out++ < 300) {
             Main.debug.println("Original matrix " + a);
             Main.debug.println("                   center: " + center
@@ -741,7 +743,7 @@ public class Axes {
             case PAN:
                 Matrix diff = new Matrix((double) (xv - baseX),
                         (double) (yv - baseY), 0.0);
-                offset = baseOffset.add(diff);
+                offset = Add.add(baseOffset, diff);
                 toolString = "Pan: " + offset;
                 break;
             case ZOOM:
