@@ -320,7 +320,7 @@ public class Main {
         Matrix v0 = Matrix.zeros(2, 3);
         debug.println("v0 is " + v0);
         Matrix v1 = Matrix.ones(1, 6);
-        v1 = Matrix.mult(v1, 42);
+        v1 = Mult.mult(v1, new Matrix(42));
         debug.println("v1 is " + v1);
         Matrix v2 = new Matrix(v1);
         debug.println("v2 is " + v2);
@@ -334,7 +334,7 @@ public class Main {
         debug.println("[v1 x v2] is " + hc);
         Matrix c = Matrix.gt(v1, v2);
         debug.println("v1 > v2 is " + c);
-        Matrix v3A = Matrix.mult(v1, 5);
+        Matrix v3A = Mult.mult(v1, new Matrix(5));
         debug.println("v1 * 5 is " + v3A);
         Matrix v3 = Add.add(v3A, v2);
         debug.println("v3 = v1 * 5 + v2 is " + v3);
@@ -373,7 +373,7 @@ public class Main {
         Plots.plot(Plot.PLOT_2, sth, ssinth, "r*");
         Matrix cth = Matrix.applyFunction(sth, "cos");
         Plots.plot(Plot.PLOT_2, sth, cth,"b");
-        Matrix rad = Matrix.applyFunction("atan2", ssinth, cth).mult(0.333);
+        Matrix rad = Mult.mult(Matrix.applyFunction("atan2", ssinth, cth), new Matrix(0.333));
         debug.println("sin(th) is " + ssinth);
         debug.println("cos(th) is " + cth);
         debug.println("atan2(cth, ssinth)/3 is " + rad);
@@ -480,7 +480,7 @@ public class Main {
             debug.println(
                     "a12_34.set(150, -99) throws " + e);
         }
-        Matrix rnd = Matrix.rand(new Matrix(5), new Matrix(3)).mult(100);
+        Matrix rnd = Mult.mult(Matrix.rand(new Matrix(5), new Matrix(3)), new Matrix(100));
 
         debug.println("rand(5,3) is " + rnd);
         ca = Matrix.sort(Matrix.reshape(rnd, 1, 15));
@@ -571,10 +571,10 @@ public class Main {
         xxyy = Matrix.meshgrid(x, x);
         xx = (Matrix) CellArray.get(xxyy, 1, 1);
         yy = (Matrix) CellArray.get(xxyy, 1, 2);
-        sxx = Matrix.mult(xx, xx);
-        syy = Matrix.mult(yy, yy);
+        sxx = Mult.mult(xx, xx);
+        syy = Mult.mult(yy, yy);
         szz = Add.add(sxx, syy);
-        szz = Matrix.sub(new Matrix(n*n*2), szz);
+        szz = Subtract.subtract(new Matrix(n*n*2), szz);
         Figure.figure();
         Figure.setHidden(true);
         Figure.setShading(Plot.INTERP);

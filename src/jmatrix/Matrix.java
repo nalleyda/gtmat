@@ -794,33 +794,9 @@ public class Matrix extends MatObject {
         return res;
 	}
 
-	/**
-	 * Subtract x from every element in m
-	 * @param m the matrix to use
-	 * @param x the number to subtract 
-	 * @return a matrix such that ret(i) = m(i) - x
-	 */
-	public static Matrix sub(Matrix m, double x) {
-        Matrix res = new Matrix(m);
-        for (int i = 0; i < m.n; i++) {
-            res.data[i] = m.data[i] - x;
-        }
-        return res;
-	}
+	
 
-	/**
-	 * Multiply every element in m by x
-	 * @param m the matrix to use
-	 * @param x the number to use 
-	 * @return a matrix such that ret(i) = x*m(i)
-	 */
-	public static Matrix mult(Matrix m, double x) {
-        Matrix res = new Matrix(m);
-        for (int i = 0; i < m.n; i++) {
-            res.data[i] = m.data[i] * x;
-        }
-        return res;
-	}
+
 
 	/**
 	 * Divide every element in m by x
@@ -836,22 +812,7 @@ public class Matrix extends MatObject {
         return res;
 	}
 
-	
 
-
-	/**
-	 * Multiply a matrix in place
-	 * @param m the matrix to change
-	 * @param v the matrix to multiply by
-	 */
-	public static void multIP(Matrix m, Matrix v) {
-        if (m.n != v.n) {
-            //TODO Dimension mismatch exception
-        }
-        for (int i = 0; i < m.n; i++) {
-            m.data[i] = m.data[i] * v.data[i];
-        }
-	}
 
 	/**
 	 * Divide a matrix in place
@@ -868,33 +829,6 @@ public class Matrix extends MatObject {
 	}
 
 	/**
-	 * Subtract a matrix in place
-	 * @param m the matrix to change
-	 * @param v the matrix to subtract
-	 */
-	public static void subIP(Matrix m, Matrix v) {
-        if (m.n != v.n) {
-            //TODO Dimension mismatch exception
-        }
-        for (int i = 0; i < m.n; i++) {
-            m.data[i] = m.data[i] - v.data[i];
-        }
-	}
-
-
-
-	/**
-	 * Multiply a matrix by a scalar in place
-	 * @param m the matrix to change
-	 * @param x the scalar to multiply by
-	 */
-	public static void multIP(Matrix m, double x) {
-        for (int i = 0; i < m.n; i++) {
-            m.data[i] = m.data[i] * x;
-        }
-	}
-
-	/**
 	 * Divide a matrix by a scalar in place
 	 * @param m the matrix to change
 	 * @param x the scalar to divide by
@@ -905,74 +839,6 @@ public class Matrix extends MatObject {
         }
 	}
 
-	/**
-	 * Subtract a scalar from a matrix in place
-	 * @param m the matrix to change
-	 * @param x the scalar to subtract
-	 */
-	public static void subIP(Matrix m, double x) {
-        for (int i = 0; i < m.n; i++) {
-            m.data[i] = m.data[i] - x;
-        }
-	}
-
-	/**
-	 * Subtract one matrix from another
-	 * @param m one matrix
-	 * @param v another matrix
-	 * @return m-v
-	 */
-	public static Matrix sub(Matrix m, Matrix v) {
-        Matrix res = new Matrix(m);
-        if (m.n != v.n) {
-            if (m.n == 1) {
-                res = new Matrix(v);
-                for (int i = 0; i < v.n; i++) {
-                    res.data[i] = m.data[0] - v.data[i];
-                }
-            } else if (v.n == 1) {
-                for (int i = 0; i < m.n; i++) {
-                    res.data[i] = m.data[i] - v.data[0];
-                }
-            } else {
-                //TODO Dimension mismatch exception.
-            }
-        } else {
-            for (int i = 0; i < m.n; i++) {
-                res.data[i] = m.data[i] - v.data[i];
-            }
-        }
-        return res;
-	}
-
-	/**
-	 * Multiply two matrices
-	 * @param m a matrix
-	 * @param v another matrix
-	 * @return m * v
-	 */
-	public static Matrix mult(Matrix m, Matrix v) {
-        Matrix res = new Matrix(m);
-        if (m.n != v.n) {
-            if (m.n == 1) {
-                res = new Matrix(v);
-                for (int i = 0; i < v.n; i++) {
-                    res.data[i] = m.data[0] * res.data[i];
-                }
-            } else if (v.n == 1) {
-                for (int i = 0; i < m.n; i++) {
-                    res.data[i] = v.data[0] * m.data[i];
-                }
-            } else {
-                //TODO Dimension mismatch exception
-            }
-        } else {
-            for (int i = 0; i < m.n; i++) {
-                res.data[i] = m.data[i] * v.data[i];
-            }
-        }
-        return res;
-	}
 
 	/**
 	 * Matrix multiply two matrices
@@ -982,7 +848,7 @@ public class Matrix extends MatObject {
 	 */
 	public static Matrix matMult(Matrix m, Matrix a) {
         if(m.n == 1 || a.n == 1) {
-            return mult(m, a);
+            return Mult.mult(m, a);
         }
         if (m.size[COL] != a.size[ROW]) {
             //TODO Inner matrix dimensions must agree exception
@@ -1159,7 +1025,7 @@ public class Matrix extends MatObject {
 	 * @param ci
 	 * @return
 	 */
-	public static Matrix get(Matrix m, Matrix ri, Matrix ci) throws Exception {
+	public static Matrix get(Matrix m, Matrix ri, Matrix ci){
 		double[] rows = ri.data;
 		double[] cols = ci.data;
 		int i = 0;
@@ -1191,7 +1057,7 @@ public class Matrix extends MatObject {
 	 * @param ind
 	 * @return
 	 */
-	public static Matrix get(Matrix m, Matrix ind) throws Exception {
+	public static Matrix get(Matrix m, Matrix ind){
 		double[] mdata = m.data;
 		double[] indices = ind.data;
 		double[] newmat = new double[indices.length];
@@ -1199,7 +1065,7 @@ public class Matrix extends MatObject {
 			try {
 				newmat[i] = mdata[(int) indices[i] - 1];
 			} catch (Exception e) {
-				throw new Exception("??? Index out of bounds.");
+				//TODO add exception
 			}
 		}
 		Matrix res = new Matrix(newmat, ind.size[ROW], ind.size[COL]);
@@ -1826,7 +1692,7 @@ public class Matrix extends MatObject {
 	public static Matrix polyval(Matrix cf, Matrix x) {
 		/* evaluate the polynomial c0*x^n + c1*x^n-1 + ... + cn-1*x + cn
         returning a sVector of the same length as x */
-		Matrix res = Matrix.ones(1, x.n).mult(cf.get(1));
+		Matrix res = Mult.mult(Matrix.ones(1, x.n), Matrix.get(cf, new Matrix(1)));
 		for (int nc = 2; nc <= cf.n; nc++) {
 			for (int id = 1; id <= res.n; id++) {
 				res.set(id, res.get(id) * x.get(id) + cf.get(nc));
@@ -1851,7 +1717,7 @@ public class Matrix extends MatObject {
 		if (y.n != np || x.size[ROW] != 1 || y.size[ROW] != 1) {
 			throw new RuntimeException("Matrix.spline bad x or y inputs");
 		}
-		/*
+		/* 
 		 * we need to solve n-2 equations to determine the curvature values Mi
 		 * at each of the interior [x y] points.
 		 * we also assume that the x values are uniformly spaced at h
@@ -2221,34 +2087,6 @@ public class Matrix extends MatObject {
 	 * @param x
 	 * @return
 	 */
-	public Matrix sub(double x) {
-		Matrix res = new Matrix(this);
-		for (int i = 1; i <= n; i++) {
-			//            res.data[i] = data[i] - x;
-			res.set(i, get(i) - x);
-		}
-		return res;
-	}
-
-	/**
-	 *
-	 * @param x
-	 * @return
-	 */
-	public Matrix mult(double x) {
-		Matrix res = new Matrix(this);
-		for (int i = 1; i <= n; i++) {
-			//            res.data[i] = data[i] * x;
-			res.set(i, get(i) * x);
-		}
-		return res;
-	}
-
-	/**
-	 *
-	 * @param x
-	 * @return
-	 */
 	public Matrix div(double x) {
 		Matrix res = new Matrix(this);
 		for (int i = 1; i <= n; i++) {
@@ -2272,37 +2110,6 @@ public class Matrix extends MatObject {
 		return res;
 	}
 
-	
-	/**
-	 * subtract a matrix
-	 * @param v matrix to add
-	 * @return
-	 */
-	public Matrix sub(Matrix v) {
-		Matrix res = new Matrix(this);
-		if (n != v.n) {
-			if (n == 1) {
-				res = new Matrix(v);
-				for (int i = 1; i <= v.n; i++) {
-					//                    res.data[i] = data[0] + res.data[i];
-					res.set(i, get(1) - v.get(i));
-				}
-			} else if (v.n == 1) {
-				for (int i = 1; i <= n; i++) {
-					//                    res.data[i] = v.data[0] + data[i];
-					res.set(i, v.get(1) - get(i));
-				}
-			} else {
-				throw new RuntimeException("Matrix.add unequal sizes");
-			}
-		} else {
-			for (int i = 1; i <= n; i++) {
-				//               res.data[i] = data[i] + v.data[i];
-				res.set(i, get(i) - v.get(i));
-			}
-		}
-		return res;
-	}
 
 	/**
 	 * mult a matrix
@@ -2396,20 +2203,6 @@ public class Matrix extends MatObject {
 		}
 	}
 
-	/**
-	 * add a matrix in place
-	 * @param v matrix to add
-	 * @return
-	 */
-	public void subIP(Matrix v) {
-		if (n != v.n) {
-			throw new RuntimeException("Matrix.add unequal sizes");
-		}
-		for (int i = 1; i <= n; i++) {
-			set(i, get(i) - v.get(i));
-		}
-	}
-
 	
 
 	/**
@@ -2431,17 +2224,6 @@ public class Matrix extends MatObject {
 	public void divIP(double x) {
 		for (int i = 1; i <= n; i++) {
 			set(i, get(i) / x);
-		}
-	}
-
-	/**
-	 * add a scalar in place
-	 * @param v matrix to add
-	 * @return
-	 */
-	public void subIP(double x) {
-		for (int i = 1; i <= n; i++) {
-			set(i, get(i) - x);
 		}
 	}
 
