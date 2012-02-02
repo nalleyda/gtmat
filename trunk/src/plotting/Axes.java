@@ -16,7 +16,7 @@ import java.awt.Graphics2D;
 import java.awt.FontMetrics;
 import java.awt.image.BufferedImage;
 
-import functions.Add;
+import functions.*;
 
 /**
  *
@@ -105,7 +105,7 @@ public class Axes {
         Pmax.set(2, m.get(4));
         Pmin.set(3, m.get(5));
         Pmax.set(3, m.get(6));
-        center = Pmax.sub(Pmin).div(2);
+        center = Subtract.subtract(Pmax, Pmin).div(2);
     }
 
     /*
@@ -150,7 +150,7 @@ public class Axes {
         elr = 0;
         macroScale = 1;
         zoomed = false;
-        center = Pmax.sub(Pmin).div(2);
+        center = Subtract.subtract(Pmax, Pmin).div(2);
         drawAxes = true;
         px = new int[4];
         py = new int[4];
@@ -189,7 +189,7 @@ public class Axes {
                 Pmax.setUpper(3, pl.z);
             }
         }
-        center = Pmax.sub(Pmin).div(2);
+        center = Subtract.subtract(Pmax, Pmin).div(2);
     }
 
     public void setAngles(double azd, double eld) {
@@ -268,7 +268,7 @@ public class Axes {
     private static boolean showit = false;
 
     public Matrix transform(Matrix a) {
-        Matrix it = a.sub(center);
+        Matrix it = Subtract.subtract(a, center);
         Matrix rot = rotMat.matMult(it.transpose());
         rot = Add.add(rot, center);
         rot.multIP(scale);

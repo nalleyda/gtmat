@@ -14,6 +14,7 @@ import java.util.StringTokenizer;
 import javax.swing.JFileChooser;
 import jmatrix.*;
 import main.*;
+import functions.*;
 
 public class FileIO {
 
@@ -338,13 +339,13 @@ public class FileIO {
     public static void test() throws FileNotFoundException {
         Matrix a = new Matrix(4);
         Matrix b = new Matrix(3);
-        a = Matrix.mult(a, b);
+        a = Mult.mult(a, b);
         String it = sprintf("result is [%f %f]\n", a, b);
         Main.debug.println(it);
         int out = FileIO.fopen("outputTrash.txt", "w");
         int in = FileIO.fopen("config.ini", "r");
         fprintf(out, "The coords are [%f %f]\n", a, b);
-        a = Matrix.mult(a, b);
+        a = Mult.mult(a, b);
         fprintf(out, "The coords are now [%f %f]\n", a, b);
         MatObject line = new MatString("");
         while (MatObject.isChar(line)) {
