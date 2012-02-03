@@ -198,14 +198,14 @@ public class TreeWalker {
 		case DOT_SLASH:
 			return Divide.divide(eval(tree.getChild(0)), eval(tree.getChild(1)));
 		case DOT_STAR:
-			return Mult.mult(eval(tree.getChild(0)), eval(tree.getChild(0)));
+			return Mult.mult(eval(tree.getChild(0)), eval(tree.getChild(1)));
 		case DOT_TRANSPOSE:
 			return Transpose.transpose(eval(tree.getChild(0)));
 			
 		case ELE_AND:
-			return ElementAnd.elementAnd(eval(tree.getChild(0)), eval(tree.getChild(0)));
+			return ElementAnd.elementAnd(eval(tree.getChild(0)), eval(tree.getChild(1)));
 		case ELE_OR:
-			return ElementOr.elementOr(eval(tree.getChild(0)), eval(tree.getChild(0)));
+			return ElementOr.elementOr(eval(tree.getChild(0)), eval(tree.getChild(1)));
 
 		//TODO: [x,y] = foo();
 		case EQUALS://assign rhs to lhs, possibly multiple on lhs
@@ -313,7 +313,7 @@ public class TreeWalker {
 		case SINGLE_QUOTE:
 			return ConjugateTranspose.conjugateTranspose(eval(tree.getChild(0)));
 		case SLASH:
-			return MatDivide.matDivide((Matrix)eval(tree.getChild(0)), Matrix.inv((Matrix)eval(tree.getChild(1))));
+			return MatDivide.matDivide((Matrix)eval(tree.getChild(0)), (Matrix)eval(tree.getChild(1)));
 		case STAR:
 			return MatMult.matMult((Matrix)eval(tree.getChild(0)), (Matrix)eval(tree.getChild(1)));
 		case STRING_LITERAL:

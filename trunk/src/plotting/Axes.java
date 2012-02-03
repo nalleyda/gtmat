@@ -6,11 +6,13 @@ package plotting;
 import java.awt.Color;
 import main.Main;
 import jmatrix.*;
+
 import java.awt.event.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.awt.Dimension;
 import java.lang.RuntimeException;
+import java.lang.reflect.InvocationTargetException;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.FontMetrics;
@@ -105,7 +107,15 @@ public class Axes {
         Pmax.set(2, m.get(4));
         Pmin.set(3, m.get(5));
         Pmax.set(3, m.get(6));
-        center = Subtract.subtract(Pmax, Pmin).div(2);
+        try {
+			center = (Matrix) Divide.divide(Subtract.subtract(Pmax, Pmin), new Matrix(2));
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
     }
 
     /*
@@ -150,7 +160,15 @@ public class Axes {
         elr = 0;
         macroScale = 1;
         zoomed = false;
-        center = Subtract.subtract(Pmax, Pmin).div(2);
+        try {
+			center = (Matrix) Divide.divide(Subtract.subtract(Pmax, Pmin), new Matrix(2));
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
         drawAxes = true;
         px = new int[4];
         py = new int[4];
@@ -189,7 +207,15 @@ public class Axes {
                 Pmax.setUpper(3, pl.z);
             }
         }
-        center = Subtract.subtract(Pmax, Pmin).div(2);
+        try {
+			center = (Matrix) Divide.divide(Subtract.subtract(Pmax, Pmin), new Matrix(2));
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
     }
 
     public void setAngles(double azd, double eld) {
@@ -269,7 +295,7 @@ public class Axes {
 
     public Matrix transform(Matrix a) {
         Matrix it = Subtract.subtract(a, center);
-        Matrix rot = rotMat.matMult(it.transpose());
+        Matrix rot = MatMult.matMult(rotMat, Transpose.transpose(it));
         rot = Add.add(rot, center);
         rot.multIP(scale);
         rot.multIP(macroScale);
@@ -278,7 +304,7 @@ public class Axes {
             Main.debug.println("Original matrix " + a);
             Main.debug.println("                   center: " + center
                     + "; scale: " + scale + "; offset: " + offset);
-            Main.debug.println("Result: " + rot.transpose());
+            Main.debug.println("Result: " + Transpose.transpose(rot));
         }
         return rot;
     }
@@ -799,6 +825,6 @@ public class Axes {
         Matrix a = new Matrix(5, 15, 10);
         Main.debug.println("first point is " + a);
         Matrix p = ax.transform(a);
-        Main.debug.println("display coord is " + p.transpose());
+        Main.debug.println("display coord is " + Transpose.transpose(p));
     }
 }

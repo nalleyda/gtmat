@@ -4,6 +4,7 @@ package jmatrix;
  * Parent of all Matlab classes with dimensions
  */
 import java.lang.RuntimeException;
+import functions.*;
 import interpreter.*;
 import main.*;
 import workspace.*;
@@ -176,7 +177,7 @@ public abstract class MatObject {
 	 public Matrix mult(MatObject o) {
 		 Matrix res = new Matrix(this);
 		 Matrix ov = castToMatrix(o);
-		 return res.matMult(ov);
+		 return MatMult.matMult(res,ov);
 	 }
 
 	 /**
@@ -187,7 +188,13 @@ public abstract class MatObject {
 	 public Matrix div(MatObject o) {
 		 Matrix res = new Matrix(this);
 		 Matrix ov = castToMatrix(o);
-		 return res.matDiv(ov);
+		 try {
+			return (Matrix) MatDivide.matDivide(res, ov);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
 	 }
 
 

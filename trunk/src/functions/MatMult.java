@@ -4,6 +4,35 @@ import jmatrix.*;
 
 public class MatMult {
 	public static MatObject matMult(MatObject o1, MatObject o2) throws Exception{
-		throw new Exception("Calling a dummy method.");
+		return (MatObject)MatMult.class.getMethod("matMult", o1.getClass(), o2.getClass()).invoke(null, new Object[] {o1, o2});
+	}
+	
+	/**
+	 * Matrix multiply two matrices
+	 * @param m a matrix
+	 * @param a another matrix
+	 * @return m * a
+	 */
+	public static Matrix matMult(Matrix m, Matrix a) {
+        if(m.n == 1 || a.n == 1) {
+            return Mult.mult(m, a);
+        }
+        if (m.size[MatObject.COL] != a.size[MatObject.ROW]) {
+            //TODO Inner matrix dimensions must agree exception
+        }
+        int nc = m.size[MatObject.COL];
+        Matrix res = new Matrix(m.size[MatObject.ROW], a.size[MatObject.COL]);
+        for (int r = 1; r <= m.size[MatObject.ROW]; r++) {
+            for (int c = 1; c <= a.size[MatObject.COL]; c++) {
+                double sum = 0;
+                for (int it = 1; it <= nc; it++) {
+                    double v1 = m.get(r, it);
+                    double v2 = a.get(it, c);
+                    sum += v1 * v2;
+                }
+                res.set(r, c, sum);
+            }
+        }
+        return res;
 	}
 }

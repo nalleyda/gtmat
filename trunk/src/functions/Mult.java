@@ -4,7 +4,7 @@ import jmatrix.*;
 
 public class Mult {
 	public static MatObject mult(MatObject o1, MatObject o2) throws Exception{
-		throw new Exception("Calling a dummy method.");
+		return (MatObject)Mult.class.getMethod("mult", o1.getClass(), o2.getClass()).invoke(null, new Object[] {o1, o2});
 	}
 	
 	
@@ -35,5 +35,16 @@ public class Mult {
             }
         }
         return res;
+	}
+	
+	public static void main(String[] args){
+		MatObject a = new Matrix(3);
+		MatObject b = new Matrix(4);
+		try {
+			System.out.println(Mult.mult(a,b));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
