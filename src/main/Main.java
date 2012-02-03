@@ -1,6 +1,8 @@
 package main;
 
 import java.io.*;
+import java.lang.reflect.InvocationTargetException;
+
 import jmatrix.*;
 import plotting.*;
 import workspace.*;
@@ -296,7 +298,7 @@ public class Main {
 */
     }
 
-    public static void Plot_Test() {
+    public static void Plot_Test() throws IllegalArgumentException, SecurityException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
         Matrix param[];
 
         Color clr = Color.cyan;
@@ -338,7 +340,7 @@ public class Main {
         debug.println("v1 * 5 is " + v3A);
         Matrix v3 = Add.add(v3A, v2);
         debug.println("v3 = v1 * 5 + v2 is " + v3);
-        Matrix v4 = Matrix.div(v1, 3.7);
+        Matrix v4 = (Matrix) Divide.divide(v1, new Matrix(3.7));
         debug.println("v4 = v1 / 3.7 is " + v4);
         Matrix v5 = Matrix.floor(v4);
         debug.println("v5 = floor(v4) is " + v5);
@@ -439,7 +441,7 @@ public class Main {
 
         debug.println("ndx = vc(1:3:6, 4:6) is "
                 + ndx);
-        Matrix tsp = Matrix.transpose(ndx);
+        Matrix tsp = Transpose.transpose(ndx);
         debug.println(
                 "tsp = ndx' is " + tsp + ":: " + tsp.info());
         double[] sz = tsp.size();
@@ -458,10 +460,10 @@ public class Main {
         // mess up vc for inversion
 
         Matrix.set(vc, new Matrix(1), new Matrix(0));
-        Matrix minv = Matrix.inv(vc);
+        Matrix minv = MatInverse.matInverse(vc);
         debug.println(
                 "minv = vc.inv() is " + minv);
-        Matrix check = Matrix.matMult(minv, vc);
+        Matrix check = MatMult.matMult(minv, vc);
         debug.println(
                 "minv*vc is " + check);
         Matrix setin = Matrix.sindex(vc, Matrix.colon(1, 3), Matrix.colon(2, 5));

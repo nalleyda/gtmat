@@ -4,7 +4,7 @@ import jmatrix.*;
 
 public class Subtract {
 	public static MatObject subtract(MatObject o1, MatObject o2) throws Exception{
-		throw new Exception("Calling a dummy method.");
+		return (MatObject)Subtract.class.getMethod("subtract", o1.getClass(), o2.getClass()).invoke(null, new Object[] {o1, o2});
 	}
 	
 	/**

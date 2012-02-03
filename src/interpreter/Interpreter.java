@@ -5,6 +5,7 @@
 package interpreter;
 
 import javax.swing.text.*;
+import functions.*;
 import workspace.*;
 import fileIO.*;
 import jmatrix.*;
@@ -149,8 +150,8 @@ public class Interpreter extends Thread {
 		}
 		Matrix ma = (Matrix) a;
 		Matrix mb = (Matrix) b;
-		Matrix mc = Matrix.inv(ma);
-		res = Matrix.matMult(mc, mb);
+		Matrix mc = MatInverse.matInverse(ma);
+		res = MatMult.matMult(mc, mb);
 		return res;
 	}
 

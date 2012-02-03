@@ -794,123 +794,12 @@ public class Matrix extends MatObject {
         return res;
 	}
 
+
 	
 
 
-
-	/**
-	 * Divide every element in m by x
-	 * @param m the matrix to use
-	 * @param x the number to use 
-	 * @return a matrix such that ret(i) = m(i)/x
-	 */
-	public static Matrix div(Matrix m, double x) {
-        Matrix res = new Matrix(m);
-        for (int i = 0; i < m.n; i++) {
-            res.data[i] = m.data[i] / x;
-        }
-        return res;
-	}
-
-
-
-	/**
-	 * Divide a matrix in place
-	 * @param m the matrix to change
-	 * @param v the matrix to divide by
-	 */
-	public static void divIP(Matrix m, Matrix v) {
-        if (m.n != v.n) {
-            //TODO Dimension mismatch exception
-        }
-        for (int i = 0; i < m.n; i++) {
-            m.data[i] = m.data[i] / v.data[i];
-        }
-	}
-
-	/**
-	 * Divide a matrix by a scalar in place
-	 * @param m the matrix to change
-	 * @param x the scalar to divide by
-	 */
-	public static void divIP(Matrix m, double x) {
-        for (int i = 0; i < m.n; i++) {
-            m.data[i] = m.data[i] / x;
-        }
-	}
-
-
-	/**
-	 * Matrix multiply two matrices
-	 * @param m a matrix
-	 * @param a another matrix
-	 * @return m * a
-	 */
-	public static Matrix matMult(Matrix m, Matrix a) {
-        if(m.n == 1 || a.n == 1) {
-            return Mult.mult(m, a);
-        }
-        if (m.size[COL] != a.size[ROW]) {
-            //TODO Inner matrix dimensions must agree exception
-        }
-        int nc = m.size[COL];
-        Matrix res = new Matrix(m.size[ROW], a.size[COL]);
-        for (int r = 1; r <= m.size[ROW]; r++) {
-            for (int c = 1; c <= a.size[COL]; c++) {
-                double sum = 0;
-                for (int it = 1; it <= nc; it++) {
-                    double v1 = m.get(r, it);
-                    double v2 = a.get(it, c);
-                    sum += v1 * v2;
-                }
-                res.set(r, c, sum);
-            }
-        }
-        return res;
-	}
-
-	/**
-	 * Matrix Divide one matrix by another
-	 * @param m one matrix
-	 * @param v another matrix
-	 * @return (inv(m') * v')'
-	 */
-	public static Matrix matDiv(Matrix m, Matrix v) {
-        if (v.size[COL] != v.size[ROW]) {
-            //TODO Inner matrix dimensions must agree exception
-        }
-        Matrix res = transpose(matMult(inv(transpose(v)), transpose(m)));
-        return res;
-	}
 	
-	/**
-	 * Divide one matrix by another
-	 * @param m one matrix
-	 * @param v another matrix
-	 * @return m * inv(b)
-	 */
-	public static Matrix div(Matrix m, Matrix v) {
-        Matrix res = new Matrix(m);
-        if (m.n != v.n) {
-            if (m.n == 1) {
-                res = new Matrix(v);
-                for (int i = 0; i < v.n; i++) {
-                    res.data[i] = m.data[0] / res.data[i];
-                }
-            } else if (v.n == 1) {
-                for (int i = 0; i < m.n; i++) {
-                    res.data[i] = m.data[i] / v.data[0];
-                }
-            } else {
-                //TODO Dimension mismatch exception
-            }
-        } else {
-            for (int i = 0; i < m.n; i++) {
-                res.data[i] = m.data[i] / v.data[i];
-            }
-        }
-        return res;
-	}
+	
 
 
 	/**
@@ -1074,14 +963,7 @@ public class Matrix extends MatObject {
 		return res;
 	}
 
-	/**
-	 * Transpose a matrix
-	 * @param m the matrix to transpose
-	 * @return transpose of m
-	 */
-	public static Matrix transpose(Matrix m) {
-		return m.transpose();
-	}
+	
 
 	/**
 	 * The cross product of two vectors
@@ -1103,9 +985,7 @@ public class Matrix extends MatObject {
 		return res;
 	}
 
-	public static Matrix inv(Matrix m) {
-		return m.inv();
-	}
+	
 
 	/**
 	 * Find the max and index of a matrix
@@ -1130,7 +1010,7 @@ public class Matrix extends MatObject {
             Matrix wherem = new Matrix(1, m.size[COL]);
             for (int c = 0; c < m.size[COL]; c++) {
                 CellArray ca =
-                        m.index(colon(1, m.size[ROW]), new Matrix(c + 1)).transpose().max();
+                        Transpose.transpose(m.index(colon(1, m.size[ROW]), new Matrix(c + 1))).max();
                 bestm.data[c] = ((Matrix) ca.get(1, 1)).data[0];
                 wherem.data[c] = ((Matrix) ca.get(1, 2)).data[0];
             }
@@ -1678,8 +1558,8 @@ public class Matrix extends MatObject {
 			}
 			B.set(r, 1, it.mult(y).sum().get(1));
 		}
-		Matrix Ai = A.inv();
-		Matrix cf = Ai.matMult(B);
+		Matrix Ai = MatInverse.matInverse(A);
+		Matrix cf = MatMult.matMult(Ai,B);
 		return cf;
 	}
 
@@ -1739,7 +1619,7 @@ public class Matrix extends MatObject {
 		for (int r = 1; r <= (np - 2); r++) {
 			B.set(r, 1, (y.get(r) - 2 * y.get(r + 1) + y.get(r + 2)) * 6 / (h * h));
 		}
-		Matrix M = A.inv().matMult(B);
+		Matrix M = MatMult.matMult(MatInverse.matInverse(A), B);
 		double Mi = 2 * M.get(1) - M.get(2);
 		double Mip1;
 		double cf[] = new double[4];
@@ -2082,19 +1962,7 @@ public class Matrix extends MatObject {
 		return res;
 	}
 
-	/**
-	 *
-	 * @param x
-	 * @return
-	 */
-	public Matrix div(double x) {
-		Matrix res = new Matrix(this);
-		for (int i = 1; i <= n; i++) {
-			//            res.data[i] = data[i] / x;
-			res.set(i, get(i) / x);
-		}
-		return res;
-	}
+	
 
 	/**
 	 *
@@ -2142,37 +2010,7 @@ public class Matrix extends MatObject {
 		return res;
 	}
 
-	/**
-	 * div a matrix
-	 * @param v matrix to add
-	 * @return
-	 */
-	public Matrix div(Matrix v) {
-		Matrix res = new Matrix(this);
-		if (n != v.n) {
-			if (n == 1) {
-				res = new Matrix(v);
-				for (int i = 1; i <= v.n; i++) {
-					//                    res.data[i] = data[0] + res.data[i];
-					res.set(i, get(1) / v.get(i));
-				}
-			} else if (v.n == 1) {
-				for (int i = 1; i <= n; i++) {
-					//                    res.data[i] = v.data[0] + data[i];
-					res.set(i, v.get(1) / get(i));
-				}
-			} else {
-				throw new RuntimeException("Matrix.add unequal sizes");
-			}
-		} else {
-			for (int i = 1; i <= n; i++) {
-				//               res.data[i] = data[i] + v.data[i];
-				res.set(i, get(i) / v.get(i));
-			}
-		}
-		return res;
-	}
-
+	
 
 
 	/**
@@ -2189,20 +2027,6 @@ public class Matrix extends MatObject {
 		}
 	}
 
-	/**
-	 * divide a matrix in place
-	 * @param v matrix to add
-	 * @return
-	 */
-	public void divIP(Matrix v) {
-		if (n != v.n) {
-			throw new RuntimeException("Matrix.add unequal sizes");
-		}
-		for (int i = 1; i <= n; i++) {
-			set(i, get(i) / v.get(i));
-		}
-	}
-
 	
 
 	/**
@@ -2216,57 +2040,10 @@ public class Matrix extends MatObject {
 		}
 	}
 
-	/**
-	 * divide a scalar in place
-	 * @param v matrix to add
-	 * @return
-	 */
-	public void divIP(double x) {
-		for (int i = 1; i <= n; i++) {
-			set(i, get(i) / x);
-		}
-	}
 
-	/**
-	 *
-	 * @param a
-	 * @return
-	 */
-	public Matrix matMult(Matrix a) {
-		if(n == 1 || a.n == 1) {
-			return mult(a);
-		}
-		if (size[COL] != a.size[ROW]) {
-			throw new RuntimeException("Matrix.mult unequal inner dimensions");
-		}
-		int nc = size[COL];
-		Matrix res = new Matrix(size[ROW], a.size[COL]);
-		for (int r = 1; r <= size[ROW]; r++) {
-			for (int c = 1; c <= a.size[COL]; c++) {
-				double sum = 0;
-				for (int it = 1; it <= nc; it++) {
-					double v1 = get(r, it);
-					double v2 = a.get(it, c);
-					sum += v1 * v2;
-				}
-				res.set(r, c, sum);
-			}
-		}
-		return res;
-	}
+	
 
-	/**
-	 * divide this by a
-	 * @param a
-	 * @return (a'\this')'
-	 */
-	public Matrix matDiv(Matrix a) {
-		if (a.size[COL] != a.size[ROW]) {
-			throw new RuntimeException("Matrix.divide not square");
-		}
-		Matrix res = inv(a.transpose()).matMult(transpose()).transpose();
-		return res;
-	}
+	
 
 	/**
 	 *
@@ -2319,10 +2096,10 @@ public class Matrix extends MatObject {
 				res = Matrix.ones(size[ROW], size[COL]);
 			} else if (nt < 0) {
 				nt = -nt;
-				res = inv(res);
+				res = MatInverse.matInverse(res);
 			}
 			for (int i = 0; i < nt; i++) {
-				res = res.matMult(res);
+				res = MatMult.matMult(res, res);
 			}
 		}
 		return res;
@@ -2488,20 +2265,6 @@ public class Matrix extends MatObject {
 	 }
 
 	 /**
-	  * transpose a matrix
-	  * @return transposed matrix
-	  */
-	 public Matrix transpose() {
-		 Matrix res = new Matrix(size[COL], size[ROW]);
-		 for (int r = 1; r <= size[ROW]; r++) {
-			 for (int c = 1; c <= size[COL]; c++) {
-				 res.set(c, r, get(r, c));
-			 }
-		 }
-		 return res;
-	 }
-
-	 /**
 	  *
 	  * @return
 	  */
@@ -2532,70 +2295,7 @@ public class Matrix extends MatObject {
 		 }
 		 return res;  
 	 }
-	 /**
-	  *
-	  * @return
-	  */
-	 public Matrix inv() {
-		 if (size.length != 2
-				 || (size[ROW] != size[COL])) {
-			 throw new RuntimeException("Matrix.inv matrix must be square");
-		 }
-		 int n = size[ROW];
-		 int bcols = 2 * n;
-		 Matrix them[] = new Matrix[2];
-		 them[0] = new Matrix(this);
-		 them[1] = identity(n);
-		 Matrix m = hcat(them);
-		 // repeat the following three steps for all columns except the last
-		 for (int col = 1; col <= n; col++) {
-			 if (col < n) {
-				 // swap largest row to top
-				 double mxv = Math.abs(m.get(col + 1, col));
-				 int at = col;
-				 for (int r = col + 1; r <= n; r++) {
-					 double it = Math.abs(m.get(r, col));
-					 if (it > mxv) {
-						 mxv = it;
-						 at = r;
-					 }
-				 }
-				 if (at != col) {
-					 // swap all of row at with row col
-					 for (int c = 1; c <= bcols; c++) {
-						 double temp = m.get(col, c);
-						 double it = m.get(at, c);
-						 m.set(col, c, it);
-						 m.set(at, c, temp);
-					 }
-				 }
-			 }
-			 //            Main.debug.println("swap to top " + col + " -> " + m);
-			 // force diagonal to one
-			 double val = m.get(col, col);
-			 if (val == 0) {
-				 throw new RuntimeException("Matrix.inv not invertible");
-			 }
-			 for (int c = 1; c <= bcols; c++) {
-				 double it = m.get(col, c) / val;
-				 m.set(col, c, it);
-			 }
-			 //            Main.debug.println("diag one " + col + " -> " + m);
-			 // subtract row (col) from each row except (col) scaled by its first val
-			 for (int r = 1; r <= n; r++) {
-				 if (r != col) {
-					 double factor = m.get(r, col);
-					 for (int c = 1; c <= bcols; c++) {
-						 double it = m.get(r, c) - m.get(col, c) * factor;
-						 m.set(r, c, it);
-					 }
-				 }
-				 //                Main.debug.println("zero off diag " + col + " " + r + " -> " + m);
-			 }
-		 }
-		 Matrix rndx = Matrix.colon(1, n);
-		 return m.index(rndx, Add.add(rndx, new Matrix(n)));
-	 }
+
 
 	 /**
 	  *  Find the max and location of a Matrix
@@ -2618,8 +2318,7 @@ public class Matrix extends MatObject {
 			 Matrix bestm = new Matrix(1, size[COL]);
 			 Matrix wherem = new Matrix(1, size[COL]);
 			 for (int c = 1; c <= size[COL]; c++) {
-				 CellArray ca =
-						 index(colon(1, size[ROW]), new Matrix(c)).transpose().max();
+				 CellArray ca = Transpose.transpose(index(colon(1, size[ROW]), new Matrix(c))).max();
 				 bestm.set(c, ((Matrix) ca.get(1, 1)).get(1));
 				 wherem.set(c, ((Matrix) ca.get(1, 2)).get(1));
 			 }
@@ -2671,7 +2370,7 @@ public class Matrix extends MatObject {
 			 Matrix wherem = new Matrix(1, size[COL]);
 			 for (int c = 1; c <= size[COL]; c++) {
 				 CellArray ca =
-						 index(colon(1, size[ROW]), new Matrix(c + 1)).transpose().min();
+						 Transpose.transpose(index(colon(1, size[ROW]), new Matrix(c + 1))).min();
 				 bestm.set(c, ((Matrix) ca.get(1, 1)).get(1));
 				 wherem.set(c, ((Matrix) ca.get(1, 2)).get(1));
 			 }
