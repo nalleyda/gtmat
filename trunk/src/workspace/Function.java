@@ -39,8 +39,8 @@ public class Function {
         this.paramTypes = paramTypes;
     }
 
-    public static MatObject applyFunction(Function f, CellArray ca) {
-        MatObject res = null;
+    public static MatObject[] applyFunction(Function f, CellArray ca) {
+        MatObject[] res = null;
         MatObject arguments[] = new MatObject[ca.length()];
         for(int i = 0; i < ca.length(); i++) {
             arguments[i] = ca.get(i+1);
@@ -51,9 +51,9 @@ public class Function {
 
             // Check if we're using a built-in Java math method
             if (myClass.equals(Math.class)) {
-                res = Matrix.applyMathMethodToMatrix(f.getName(), arguments);
+                res = new MatObject[]{Matrix.applyMathMethodToMatrix(f.getName(), arguments)};
             } else {//We're using one our our methods
-                res = (MatObject) myMethod.invoke(null, (Object[]) arguments);
+                res = (MatObject[]) myMethod.invoke(null, (Object[]) arguments);
             }
         } catch (Exception e) {
             e.printStackTrace(System.err);
@@ -62,7 +62,7 @@ public class Function {
 
     }
 
-    public static MatObject checkSpecialCases(String fname, CellArray args) throws Exception{
+    public static MatObject[] checkSpecialCases(String fname, CellArray args) throws Exception{
         CellArray ca = null;
         Matrix xv = null;
         if (fname.equals("meshgrid")) {
@@ -286,7 +286,7 @@ public class Function {
         if (ca == null) {
             return null;
         } else {
-            return ca.get(1);
+            return ca.getData();//ca.get(1);
         }
     }
 
@@ -556,13 +556,13 @@ public class Function {
 
             Function sqrt = getFunction("round");
             CellArray ca = new CellArray( new Matrix(2, 2, 1.11, 3.93, 2.5, 4.001) );
-            Matrix y = (Matrix) applyFunction(sqrt, ca);
+            Matrix y = (Matrix) applyFunction(sqrt, ca)[0];
             System.out.println(y);
 
             Function linspace = getFunction("linspace2");
             ca.set(1, 1, new Matrix(1));
             ca.hcat(new Matrix(2));
-            Matrix z = (Matrix) Interpreter.call("zeros", ca);
+            Matrix z = (Matrix) Interpreter.call("zeros", ca)[0];
             //(Matrix)applyFunction(linspace, new Matrix(1), new Matrix(2));
             System.out.println(z);
 

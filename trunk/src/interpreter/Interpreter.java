@@ -294,27 +294,27 @@ public class Interpreter extends Thread {
 			}
 			firstHelperCall = false;
 
-			CellArray helperRes = checkHelperFunctions(tname, params);
+			MatObject[] helperRes = checkHelperFunctions(tname, params);
 			if (helperRes != null){
 				System.out.println("\n\n\n\n\n\n\nFOUND A HELPER\n\n\n\n\n");
-				for (i = 0; i < rtv.n && i < helperRes.n; i++){
+				for (i = 0; i < rtv.n && i < helperRes.length; i++){
 					nm = ((MatString) rtv.get(i+1)).toString();
-					assign(nm, helperRes.get(i+1), showIt);
+					assign(nm, helperRes[i], showIt);
 				}
 			}
 
 			firstHelperCall = true;
 
 			if (helperRes == null){
-				CellArray results = checkLocalFunctions(name, params);
+				MatObject[] results = checkLocalFunctions(name, params);
 				System.out.println("\n\n\n\n\n\n\n\n\n\n\n\nRESULTS: " + results);
 				if (results == null) {
 					throw new RuntimeException("unknown multi-return function call");
 				}
 				else {
-					for (i = 0; i < rtv.n && i < results.n; i++) {
+					for (i = 0; i < rtv.n && i < results.length; i++) {
 						nm = ((MatString) rtv.get(i + 1)).toString();
-						assign(nm, results.get(i + 1), showIt);
+						assign(nm, results[i], showIt);
 					}
 				}
 			}
@@ -327,7 +327,7 @@ public class Interpreter extends Thread {
 
 	public static void setStruct(String name, String fld, MatObject data, boolean showIt) throws Exception {
 		Workspace curW = getWorkspace();
-		MatObject val = getValue(name);
+		MatObject val = getValue(name)[0];
 		StructArray strcta = null;
 		if (val == null || !(val instanceof StructArray)) {
 			strcta = new StructArray(new Structure(fld, data));
@@ -343,8 +343,8 @@ public class Interpreter extends Thread {
 	}
 
 	public static void assignStrV(String name, String var, MatObject data, boolean showIt) throws Exception {
-		MatObject val = getValue(name);
-		MatString fldv = (MatString) getValue(var);
+		MatObject val = getValue(name)[0];
+		MatString fldv = (MatString) getValue(var)[0];
 		String fld = fldv.toString();
 		setStruct(name, fld, data, showIt);
 	}
@@ -354,7 +354,7 @@ public class Interpreter extends Thread {
 	}
 
 	public static void assignStrAV(String name, String var, Matrix mndx, MatObject data, boolean showIt) throws Exception {
-		String fld = ((MatString) getValue(var)).toString();
+		String fld = ((MatString) getValue(var)[0]).toString();
 		setStructA(name, fld, mndx, data, showIt);
 	}
 
@@ -373,12 +373,12 @@ public class Interpreter extends Thread {
 	}
 
 	public static Matrix getAllVecFieldsV(String str, String var) throws Exception {
-		String fld = ((MatString) getValue(var)).toString();
+		String fld = ((MatString) getValue(var)[0]).toString();
 		return getAllVecFields(str, fld);
 	}
 
 	public static Matrix getAllVecFields(String str, String fld) throws Exception {
-		StructArray strca = (StructArray) getValue(str);
+		StructArray strca = (StructArray) getValue(str)[0];
 		int num = strca.n;
 		double value;
 		Matrix res = new Matrix(1, num);
@@ -396,12 +396,12 @@ public class Interpreter extends Thread {
 	}
 
 	public static CellArray getAllCellFieldsV(String str, String var) throws Exception {
-		String fld = ((MatString) getValue(var)).toString();
+		String fld = ((MatString) getValue(var)[0]).toString();
 		return getAllCellFields(str, fld);
 	}
 
 	public static CellArray getAllCellFields(String str, String fld) throws Exception {
-		StructArray strca = (StructArray) getValue(str);
+		StructArray strca = (StructArray) getValue(str)[0];
 		int num = strca.n;
 		CellArray res = new CellArray(1, num);
 		for (int i = 1; i <= num; i++) {
@@ -414,7 +414,7 @@ public class Interpreter extends Thread {
 
 	private static void setStructA(String name, String fld, Matrix mndx, MatObject data, boolean showIt) throws Exception {
 		Workspace curW = getWorkspace();
-		StructArray stra = (StructArray) getValue(name);
+		StructArray stra = (StructArray) getValue(name)[0];
 		String fnames[] = stra.fieldNames();
 		String newfnames[] = null;
 		if (mndx.n > 1) {
@@ -539,7 +539,7 @@ public class Interpreter extends Thread {
 	//    }
 	public static MatObject getField(String str, String fld) throws Exception {
 		MatObject res = null;
-		MatObject val = getValue(str);
+		MatObject val = getValue(str)[0];
 		if (val != null && (val instanceof StructArray)) {
 			StructArray strct = (StructArray) val;
 			res = strct.getField(fld);
@@ -549,7 +549,7 @@ public class Interpreter extends Thread {
 
 	public static MatObject getFieldA(String str, String fld, int ndx) throws Exception {
 		MatObject res = null;
-		MatObject val = getValue(str);
+		MatObject val = getValue(str)[0];
 		if (val != null && (val instanceof StructArray)) {
 			StructArray strct = (StructArray) val;
 			Structure it = strct.get(ndx);
@@ -560,8 +560,8 @@ public class Interpreter extends Thread {
 
 	public static MatObject getFieldAV(String str, String var, int ndx) throws Exception {
 		MatObject res = null;
-		MatObject val = getValue(str);
-		String fld = ((MatString) getValue(var)).toString();
+		MatObject val = getValue(str)[0];
+		String fld = ((MatString) getValue(var)[0]).toString();
 		if (val != null && (val instanceof StructArray)) {
 			StructArray strct = (StructArray) val;
 			Structure it = strct.get(ndx);
@@ -572,8 +572,8 @@ public class Interpreter extends Thread {
 
 	public static MatObject getFieldV(String str, String var) throws Exception {
 		MatObject res = null;
-		MatObject val = getValue(str);
-		String fld = ((MatString) getValue(var)).toString();
+		MatObject val = getValue(str)[0];
+		String fld = ((MatString) getValue(var)[0]).toString();
 		if (val != null && (val instanceof StructArray)) {
 			StructArray strct = (StructArray) val;
 			res = strct.getField(fld);
@@ -628,35 +628,35 @@ public class Interpreter extends Thread {
     }
 	 */
 
-	public static MatObject getValue(String name) throws Exception {
+	public static MatObject[] getValue(String name) throws Exception {
 		if (name.equals("pi")) {
-			return pi;
+			return new MatObject[]{pi};
 		}
 		if (name.equals("NaN")) {
-			return nan;
+			return new MatObject[]{nan};
 		}
 		if (name.equals("eps")) {
-			return eps;
+			return new MatObject[]{eps};
 		}
 		if (name.equals("inf")) {
-			return inf;
+			return new MatObject[]{inf};
 		}
 		if (name.equals("true")) {
-			return mtrue;
+			return new MatObject[]{mtrue};
 		}
 		if (name.equals("false")) {
-			return mfalse;
+			return new MatObject[]{mfalse};
 		}
 
 		Workspace curW = getWorkspace();
 		DefaultListModel varList = curW.getVarList();
-		MatObject ret = null;
+		MatObject[] ret = null;
 
 		//First, we check to see if the variable already exists
 		for (int i = 0; i < varList.size(); i++) {
 			//If the variable does exist, inputs are indices
 			if (((Variable) varList.get(i)).getVarName().equals(name)) {
-				ret = ((Variable) varList.get(i)).getData();
+				ret = new MatObject[]{((Variable) varList.get(i)).getData()};
 				break;
 			}
 		}
@@ -667,18 +667,18 @@ public class Interpreter extends Thread {
 		if (ret == null) {
 			CellArray params = new CellArray();
 			params.setData(new MatObject[0]);
-			CellArray localres = checkLocalFunctions(name, params);
+			MatObject[] localres = checkLocalFunctions(name, params);
 
 			if (localres != null){
 				/*CellArray dummy = new CellArray();
                 MatObject[] dummyData = {null};
                 dummy.setData(dummyData);*/
 
-				if (localres.get(1) == null){//We ran a script
-					ret = localres;
+				if (localres == null){//We ran a script
+					ret = null;
 				}
 				else{
-					ret = localres.get(1);
+					ret = localres;
 				}
 			}
 
@@ -788,8 +788,8 @@ public class Interpreter extends Thread {
 	 * otherwise, pass the cell array of args (can be mixed types)
 	 */
 	private static String myFileName = "";
-	public static MatObject call(String name, CellArray ca) throws Exception{
-		MatObject res = null;
+	public static MatObject[] call(String name, CellArray ca) throws Exception{
+		MatObject[] res = null;
 		//System.out.println("\n\nName: " + name + "\nArguments: " + ((MatObject)(ca.getData()[0])).toString() + "\n\n");
 		myFileName = name;
 		boolean allMat = true;
@@ -805,16 +805,17 @@ public class Interpreter extends Thread {
 			for (int i = 0; i < ca.n; i++) {
 				params[i] = (Matrix) ca.get(i + 1);
 			}
-			res = checkForVariable(name, params);
+			res = new MatObject[] {checkForVariable(name, params)};
+			if (res[0] == null) res = null;
 		}
 		if (res == null){
 
 			//If we're not trying to index, see if it is a helper function
 			if (!Main.helperStack.isEmpty()){
 				String tname = Main.helperStack.peek() + "_" + name;
-				CellArray helperRes = checkHelperFunctions(tname, ca);
+				MatObject[] helperRes = checkHelperFunctions(tname, ca);
 				if (helperRes != null){
-					res = helperRes.getData()[0];
+					res = helperRes;
 				}
 			}
 
@@ -823,10 +824,10 @@ public class Interpreter extends Thread {
 		if (res == null) {
 
 			//If it's not a helper function, see if it is a user-defined function
-			CellArray localres = checkLocalFunctions(name, ca);
+			/*CellArray*/MatObject[] localres = checkLocalFunctions(name, ca);
 			System.out.println("\nResults: \n" + localres);
 			if (localres != null) {
-				res = localres.getData()[0];
+				res = localres;
 
 			}
 
@@ -874,9 +875,9 @@ public class Interpreter extends Thread {
 	}
 
 
-	public static CellArray checkHelperFunctions(String tname, CellArray ca) throws Exception {
+	public static MatObject[] checkHelperFunctions(String tname, CellArray ca) throws Exception {
 
-		CellArray res = null;
+		MatObject[] res = null;
 		File dir = new File(Main.getCurrentDirectory());
 		//GTStringStream ss = null;
 
@@ -952,7 +953,8 @@ public class Interpreter extends Thread {
 
 					}
 
-					res = new CellArray(resData);
+					//res = new CellArray(resData);
+					res = resData;
 					//System.out.println(res);
 
 					Main.wstack.remove();
@@ -965,8 +967,8 @@ public class Interpreter extends Thread {
 		return res;
 	}
 
-	public static CellArray checkLocalFunctions(String name, CellArray ca) throws Exception {
-		CellArray res = null;
+	public static MatObject[] checkLocalFunctions(String name, CellArray ca) throws Exception {
+		MatObject[] res = null;
 		File dir = new File(Main.getCurrentDirectory());
 		GTStringStream ss = null;
 
@@ -1005,9 +1007,9 @@ public class Interpreter extends Thread {
 						catch (Exception e1) {
 							throw new RuntimeException("function stream " + e1);
 						}
-						res = new CellArray();
+						/*res = new CellArray();
 						MatObject[] data = {null};
-						res.setData(data);
+						res.setData(data);*/
 						return res;
 					}
 
@@ -1074,7 +1076,7 @@ public class Interpreter extends Thread {
 
 					}
 
-					res = new CellArray(resData);
+					res = resData;//new CellArray(resData);
 
 					Main.wstack.remove();
 					Main.helperStack.pop();
@@ -1267,7 +1269,7 @@ public class Interpreter extends Thread {
 					ret = MatObject.get(data, (Matrix) inputs[0]);
 				} //3 or more comma-separated inputs
 				else {
-					//@todo: fix me
+					//TODO: fix me
 				}
 				break;
 			}
