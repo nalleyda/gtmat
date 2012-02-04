@@ -187,9 +187,9 @@ public class TreeWalker {
 			switch(tree.getChildCount()){
 			case 2:
 				//TODO generalize - just matrix now
-				Matrix.colon((Matrix)eval(tree.getChild(1)), (Matrix)eval(tree.getChild(0)));
+				return Matrix.colon((Matrix)eval(tree.getChild(1)), (Matrix)eval(tree.getChild(0)));
 			case 3:
-				Matrix.colon((Matrix)eval(tree.getChild(2)), (Matrix)eval(tree.getChild(0)), (Matrix)eval(tree.getChild(1)));
+				return Matrix.colon((Matrix)eval(tree.getChild(2)), (Matrix)eval(tree.getChild(0)), (Matrix)eval(tree.getChild(1)));
 			}
 		case DOUBLE:
 			return new Matrix(Double.parseDouble(tree.getText()));
@@ -210,8 +210,14 @@ public class TreeWalker {
 		//TODO: [x,y] = foo();
 		case EQUALS://assign rhs to lhs, possibly multiple on lhs
 			TYPE lhsType = convert(tree.getChild(0).getType());
+			TYPE rhsType = convert(tree.getChild(1).getType());
 			if (lhsType == TYPE.ID){//single output
-				Interpreter.assign(tree.getChild(0).getText(), eval(tree.getChild(1)), true);
+				if (rhsType == TYPE.ID && tree.getChild(1).getChildCount() > 0){//function call
+					Interpreter.assign(tree.getChild(0).getText(), ((CellArray)eval(tree.getChild(1))).get(1), true);
+				}
+				else{
+					Interpreter.assign(tree.getChild(0).getText(), eval(tree.getChild(1)), true);
+				}
 			}
 			else if (lhsType == TYPE.VCAT_VEC){//multiple assignments
 				CellArray rhs = (CellArray)eval(tree.getChild(1));
@@ -241,8 +247,12 @@ public class TreeWalker {
 				eval(tree.getChild(1));
 			}
 			
-		case FUNC_CALL:
-			throw new Exception("Fix FUNC_CALL in TreeWalker.");
+		case FUNC_ARGS:
+			ArrayList<MatObject> arglist = new ArrayList<MatObject>();
+			for (int i = 0; i < tree.getChildCount(); i++){
+				arglist.add(eval(tree.getChild(i)));
+			}
+			return new CellArray(arglist.toArray(new MatObject[0]));
 
 		case GREATER_EQUAL:
 			return GreaterEqual.greaterEqual(eval(tree.getChild(0)), eval(tree.getChild(1)));
@@ -262,14 +272,25 @@ public class TreeWalker {
 			return HorizontalConcatenate.horizontalConcatenate(arr.toArray(new MatObject[0]));
 
 		case ID: //Need to get the value stored in the associated variable, or call the function
-			if (tree.getChildCount() > 0 && convert(tree.getChild(0).getType()) == TYPE.FUNC_CALL){//function call or indexing
-				eval(tree.getChild(0));
+			//TODO indexing out of bounds is broken somewhere? try: x = 1; y = x(400);
+			MatObject[] retVal;
+			if (tree.getChildCount() > 0 && convert(tree.getChild(0).getType()) == TYPE.FUNC_ARGS){//function call or indexing
+				CellArray args = (CellArray)eval(tree.getChild(0));
+				retVal = Interpreter.call(tree.getText(), args);
 			}
 			else{
-				return Interpreter.getValue(str);
+				//TODO make sure this works with foo()
+				retVal = Interpreter.getValue(str);
 				//dprint("In ID: " + res);
 			} 
-			break; 
+			
+			//Check if we're doing an assignment; if so, pack up return values
+			if (convert(tree.getParent().getType()) == TYPE.EQUALS){
+				return new CellArray(retVal);
+			}
+			else{//We just want the first return value, such as foo(max(vec))
+				return retVal[0];
+			}
 		
 		case IF_STAT:
 			if (eval(tree.getChild(0).getChild(0)).conditionalIsTrue()){//

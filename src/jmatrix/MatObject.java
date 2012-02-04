@@ -549,7 +549,7 @@ public abstract class MatObject {
 		  * 
 		  */
 		 Workspace curW = Interpreter.getWorkspace();
-		 MatObject val = Interpreter.getValue(name);
+		 MatObject val = Interpreter.getValue(name)[0];
 		 if(val == null) {
 			 val = expr.zeroed();
 		 }
