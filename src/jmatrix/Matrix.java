@@ -1093,64 +1093,7 @@ public class Matrix extends MatObject {
 		return res;
 	}
 
-	/**
-	 * horizontal concatenation (an array of matrices)
-	 * @param m
-	 * @return
-	 */
-	public static Matrix hcat(Matrix[] m) {
-		Matrix res;
-		int cols = 0;
-		int rows = m[0].size[ROW];
-		int col = 0;
-		// calculate cols and check rows
-		for (int i = 0; i < m.length; i++) {
-			cols += m[i].size[COL];
-			if (m[i].size[ROW] != rows) {
-				throw new RuntimeException("Matrix.hcat bad rows in item " + i);
-			}
-		}
-		res = new Matrix(rows, cols);
-		// copy all matrices into res
-		for (int i = 0; i < m.length; i++) {
-			Matrix it = m[i];
-			for (int c = 1; c <= it.size[COL]; c++) {
-				for (int r = 1; r <= rows; r++) {
-					res.set(r, c + col, it.get(r, c));
-				}
-			}
-			col += it.size[COL];
-		}
-		return res;
-	}
-
-	/**
-	 * horizontal concatenation (an array of matrices)
-	 * @param m
-	 * @return
-	 */
-	public Matrix hcat(Matrix m) {
-		Matrix res = null;
-		int rows = size[ROW];
-		// calculate cols and check rows
-		int mcols = m.size[COL];
-		int cols = size[COL];
-		if (m.size[ROW] != size[ROW]) {
-			throw new RuntimeException("Matrix.hcat bad rows");
-		}
-		res = new Matrix(rows, cols + mcols);
-		res.type = m.type;
-		// copy all matrices into res
-		for (int r = 1; r <= rows; r++) {
-			for (int c = 1; c <= cols; c++) {
-				res.set(r, c, get(r, c));
-			}
-			for (int c = 1; c <= mcols; c++) {
-				res.set(r, c + cols, m.get(r, c));
-			}
-		}
-		return res;
-	}
+	
 
 	/**
 	 * horizontal concatenation (an array of matrices)
@@ -1165,63 +1108,6 @@ public class Matrix extends MatObject {
 		return res;
 	}
 
-	/**
-	 * vertical concatenation (array of matrices)
-	 * @param m
-	 * @return
-	 */
-	public static Matrix vcat(Matrix[] m) {
-		Matrix res;
-		int rows = 0;
-		int cols = m[0].size[COL];
-		int row = 0;
-		// calculate cols and check rows
-		for (int i = 0; i < m.length; i++) {
-			rows += m[i].size[ROW];
-			if (m[i].size[COL] != cols) {
-				throw new RuntimeException("Matrix.vcat bad columns in item " + i);
-			}
-		}
-		res = new Matrix(rows, cols);
-		// copy all matrices into res
-		for (int i = 0; i < m.length; i++) {
-			Matrix it = m[i];
-			for (int c = 1; c <= cols; c++) {
-				for (int r = 1; r <= it.size[ROW]; r++) {
-					res.set(r + row, c, it.get(r, c));
-				}
-			}
-			row += it.size[ROW];
-		}
-		return res;
-	}
-
-	/**
-	 * vertical concatenation Matrix
-	 * @param m
-	 * @return
-	 */
-	public Matrix vcat(Matrix m) {
-		Matrix res = null;
-		int rows = size[ROW];
-		// calculate cols and check rows
-		int mrows = m.size[ROW];
-		int cols = size[COL];
-		if (m.size[COL] != size[COL]) {
-			throw new RuntimeException("Matrix.vcat bad cols");
-		}
-		res = new Matrix(rows + mrows, cols);
-		// copy all matrices into res
-		for (int c = 1; c <= cols; c++) {
-			for (int r = 1; r <= rows; r++) {
-				res.set(r, c, get(r, c));
-			}
-			for (int r = 1; r <= mrows; r++) {
-				res.set(r + rows, c, m.get(r, c));
-			}
-		}
-		return res;
-	}
 
 	
 	public static Matrix zeros(int rows, int cols) {
