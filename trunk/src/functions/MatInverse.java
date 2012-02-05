@@ -17,7 +17,8 @@ public class MatInverse {
 		 Matrix them[] = new Matrix[2];
 		 them[0] = new Matrix(m1);
 		 them[1] = m1.identity(n);
-		 Matrix m = m1.hcat(them);
+		 
+		 Matrix m = HorizontalConcatenate.horizontalConcatenate(m1, them[0], them[1]);
 		 // repeat the following three steps for all columns except the last
 		 for (int col = 1; col <= n; col++) {
 			 if (col < n) {

@@ -371,7 +371,7 @@ public class TreeWalker {
 			for (int i = 0; i < tree.getChildCount(); i++){
 				arr.add(eval(tree.getChild(i)));
 			}
-			return HorizontalConcatenate.horizontalConcatenate(arr.toArray(new MatObject[0]));
+			return HorizontalConcatenate.horizontalConcatenate(arr);
 
 		case ID: //Need to get the value stored in the associated variable, or call the function
 			//TODO indexing out of bounds is broken somewhere? try: x = 1; y = x(400);
@@ -484,18 +484,22 @@ public class TreeWalker {
 			return new Logical(1);*/
 
 		case VCAT_CELL:
+			if (tree.getChildCount() == 1) return eval(tree.getChild(0));
 			ArrayList<MatObject> arrcv = new ArrayList<MatObject>();
 			for (int i = 0; i < tree.getChildCount(); i++){
 				arrcv.add(eval(tree.getChild(i)));
 			}
 			return VerticalConcatenate.verticalConcatenateCell(arrcv.toArray(new MatObject[0]));
 		case VCAT_VEC:
+			if (tree.getChildCount() == 1) return eval(tree.getChild(0));
+			
 			ArrayList<MatObject> arrv = new ArrayList<MatObject>();
 			for (int i = 0; i < tree.getChildCount(); i++){
 				arrv.add(eval(tree.getChild(i)));
 			}
-			return VerticalConcatenate.verticalConcatenate(arrv.toArray(new MatObject[0]));
+			return VerticalConcatenate.verticalConcatenate(arrv);
 		case WHILE:
+			//TODO this should be WHILE_LOOP - tokens are off by one - also see VCAT_VEC
 			while (eval(tree.getChild(0).getChild(0)).conditionalIsTrue()){
 				eval(tree.getChild(1));
 			}
