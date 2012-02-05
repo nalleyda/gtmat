@@ -19,6 +19,14 @@ import functions.*;
  * @author dsmith
  */
 public class Matrix extends MatObject {
+	
+	public boolean conditionalIsTrue(){
+		//double error = .0000001;
+		for (int i = 0; i < data.length; i++){
+			if (data[i] != 0) return true;//return any(this)
+		}
+		return false;
+	}
 
 	public double data[];  // always store a vector of doubles
 	// stored in column order
