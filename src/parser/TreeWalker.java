@@ -88,61 +88,61 @@ public class TreeWalker {
 		ELSEIF,
 		/*ELSEIF_ROOT,
     	ELSE_ROOT,*/
-    	EMPTY_CELL,
-    	EMPTY_VEC,
-    	END,
-    	EQUALS,
-    	EXCLAMATION,
-    	EXPONENT,
-    	FOR,
-    	FOR_LOOP,
-    	FUNCTION,
-    	FUNC_ARGS,
-    	FUNC_CALL,
-    	GLOBAL,
-    	GREATER_EQUAL,
-    	GREATER_THAN,
-    	HCAT_CELL,
-    	HCAT_VEC,
-    	ID,
-    	IF,
-    	IF_STAT,
-    	ISEQUAL,
-    	LESS_EQUAL,
-    	LESS_THAN,
-    	LETTER,
-    	MINUS,
-    	NEWLINE,
-    	NOT,
-    	NOT_EQUAL,
-    	OPENB,
-    	OPENC,
-    	OPENP,
-    	OPEN_BLOCK,
-    	OTHERWISE,
-    	PARFOR,
-    	PERCENT,
-    	PERSISTENT,
-    	PLUS,
-    	RETURN,
-    	SC_AND,
-    	SC_OR,
-    	SEMI,
-    	SINGLE_QUOTE,
-    	SLASH,
-    	SPMD,
-    	STAR,
-    	STRING_LITERAL,
-    	SWITCH,
-    	SWITCH_STAT,
-    	TRY,
-    	UNARY_OP,
-    	UNDERSCORE,
-    	VCAT_CELL,
-    	VCAT_VEC,
-    	WHILE,
-    	WHILE_LOOP,
-    	WS
+		EMPTY_CELL,
+		EMPTY_VEC,
+		END,
+		EQUALS,
+		EXCLAMATION,
+		EXPONENT,
+		FOR,
+		FOR_LOOP,
+		FUNCTION,
+		FUNC_ARGS,
+		FUNC_CALL,
+		GLOBAL,
+		GREATER_EQUAL,
+		GREATER_THAN,
+		HCAT_CELL,
+		HCAT_VEC,
+		ID,
+		IF,
+		IF_STAT,
+		ISEQUAL,
+		LESS_EQUAL,
+		LESS_THAN,
+		LETTER,
+		MINUS,
+		NEWLINE,
+		NOT,
+		NOT_EQUAL,
+		OPENB,
+		OPENC,
+		OPENP,
+		OPEN_BLOCK,
+		OTHERWISE,
+		PARFOR,
+		PERCENT,
+		PERSISTENT,
+		PLUS,
+		RETURN,
+		SC_AND,
+		SC_OR,
+		SEMI,
+		SINGLE_QUOTE,
+		SLASH,
+		SPMD,
+		STAR,
+		STRING_LITERAL,
+		SWITCH,
+		SWITCH_STAT,
+		TRY,
+		UNARY_OP,
+		UNDERSCORE,
+		VCAT_CELL,
+		VCAT_VEC,
+		WHILE,
+		WHILE_LOOP,
+		WS
 	}
 	/*public enum NEW_TYPE{
     	FUNC_ARGS, ID, DOT, DOT_CARET, CARET, SINGLE_QUOTE, DOT_TRANSPOSE, 
@@ -161,11 +161,52 @@ public class TreeWalker {
 	private static int debugLine = 0;
 
 	private static final boolean DEBUGGING = true;
+	private static ArrayList<String> calls = new ArrayList<String>();
 
 	public static void dprint(String s){
 		if (DEBUGGING){
 			System.out.println(s);
 		}
+	}
+	
+	public static Matrix evalEnd(Tree tree) throws Exception{
+		try{
+			Tree curTree = tree;//Used to keep up with which child we are
+			Tree curParent = tree.getParent().getParent();
+			String curCall;// = calls.get(calls.size()-1);
+			for (int i = calls.size()-1; i >= 0; i++){
+				curCall = calls.get(i);
+				if (Main.wstack.peek().getVariable(curCall) != null){//Find the first variable
+					MatObject var = Main.wstack.peek().getVariable(curCall).getData();
+					//Find the proper ancestor
+					while (!(convert(curParent.getType()) == TYPE.ID && curParent.getText().equals(curCall))){
+						curTree = curTree.getParent();//curParent;
+						curParent = curParent.getParent();
+					}
+					Tree faTree = curParent.getChild(0);
+					if (faTree.getChildCount() == 1){
+						return new Matrix(var.n);
+					}
+					else{
+						for (int j = 0; j < faTree.getChildCount(); j++){
+							if (faTree.getChild(j) == curTree){
+								if (var.size.length <= j){//consider x = 1:5; y = x(1,end);
+									return new Matrix(1);
+								}
+								else{
+									return new Matrix(var.size[j]);
+								}
+							}
+						}
+					}
+				}
+				throw new Exception("The use of \"end\" is incorrect here.");
+			}
+		}
+		catch (Exception e){
+			throw new Exception("The use of \"end\" is incorrect here.");
+		}
+		throw new Exception("The use of \"end\" is incorrect here.");
 	}
 
 
@@ -176,12 +217,18 @@ public class TreeWalker {
 
 		switch(nodeType){
 		case BLOCK:	//Just evaluate everything - no need to store results
-		for (int i = 0; i < tree.getChildCount(); i++){
-			eval(tree.getChild(i));
-		}
-		break; 
+			for (int i = 0; i < tree.getChildCount(); i++){
+				eval(tree.getChild(i));
+			}
+			break; 
 		case CARET:
 			return MatPower.matPower(eval(tree.getChild(0)), eval(tree.getChild(1)));
+		case COLON:
+			return Matrix.colon(new Matrix(1), evalEnd(tree));
+			/*tree.setChild(1, new CommonTree());
+			tree.getChild(1).setParent(tree);
+			((CommonTree)tree.getChild(1)).
+			nodeType = TYPE.COLON_ARGS;*/
 		case COLON_ARGS:
 			//BE CAREFUL - the rightmost (i.e., last) child is actually the one that belongs first - see ANTLR debugger
 			switch(tree.getChildCount()){
@@ -201,57 +248,112 @@ public class TreeWalker {
 			return Mult.mult(eval(tree.getChild(0)), eval(tree.getChild(1)));
 		case DOT_TRANSPOSE:
 			return Transpose.transpose(eval(tree.getChild(0)));
-			
+
 		case ELE_AND:
 			return ElementAnd.elementAnd(eval(tree.getChild(0)), eval(tree.getChild(1)));
 		case ELE_OR:
 			return ElementOr.elementOr(eval(tree.getChild(0)), eval(tree.getChild(1)));
 
-		//TODO: [x,y] = foo();
+		case END:
+			return evalEnd(tree);
+
+			/*try{
+				while (true){
+					Tree candidate = curTree.getParent().getParent();
+					if (Main.wstack.peek().getVariable(candidate.getText()) != null){//check if candidate represents a variable
+						Tree parent = candidate.getChild(0); // The FUNC_ARGS token
+						MatObject var = Main.wstack.peek().getVariable(candidate.getText()).getData();
+
+						if (parent.getChildCount() == 1){//Linear indexing
+							return new Matrix(var.n);
+						}
+						else{
+							//Search for the correct argument
+							for (int i = 0; i < parent.getChildCount(); i++){
+								if (parent.getChild(i) == curTree){	//Check addresses to prevent ambiguity
+									return new Matrix(var.size[i]);
+								}
+							}
+							throw new Exception("This should never happen!");
+						}
+					}
+					curTree = candidate;
+				}
+			}
+			catch(Exception e){
+				throw new Exception("The use of \"end\" is incorrect here.");
+			}*/
+
+
+			//TODO: [x,y] = foo();
 		case EQUALS://assign rhs to lhs, possibly multiple on lhs
-			TYPE lhsType = convert(tree.getChild(0).getType());
-			TYPE rhsType = convert(tree.getChild(1).getType());
+			Tree lhs = tree.getChild(0);
+			Tree rhs = tree.getChild(1);
+			TYPE lhsType = convert(lhs.getType());
+			TYPE rhsType = convert(rhs.getType());
+
+			/*if (lhsType == TYPE.ID){//single variable assignment
+				if (rhsType == TYPE.ID && tree.getChild(1).getChildCount() > 0)
+			}*/
 			if (lhsType == TYPE.ID){//single output
-				if (rhsType == TYPE.ID && tree.getChild(1).getChildCount() > 0){//function call
-					Interpreter.assign(tree.getChild(0).getText(), ((CellArray)eval(tree.getChild(1))).get(1), true);
+				if (lhs.getChildCount() == 0){//no lhs indexing
+					//if (rhsType == TYPE.ID && tree.getChild(1).getChildCount() > 0){//function call
+					Interpreter.assign(tree.getChild(0).getText(), eval(tree.getChild(1)), true);
+					/*}
+					else{
+						Interpreter.assign(tree.getChild(0).getText(), eval(tree.getChild(1)), true);
+					}*/
+					return null;
 				}
 				else{
-					Interpreter.assign(tree.getChild(0).getText(), eval(tree.getChild(1)), true);
+					calls.add(lhs.getText());
+					//Evaluate every dimension of indexing
+					ArrayList<MatObject> lhsArgs = new ArrayList<MatObject>();
+					for (int i = 0; i < lhs.getChild(0).getChildCount(); i++){
+						lhsArgs.add(eval(lhs.getChild(0).getChild(i)));
+					}
+					CellArray lhsInd = new CellArray(lhsArgs.toArray(new MatObject[0]));
+					MatObject.index(lhs.getText(), lhsInd, eval(rhs), true);
+					calls.remove(calls.size()-1);
+					return null;
 				}
 			}
 			else if (lhsType == TYPE.VCAT_VEC){//multiple assignments
-				CellArray rhs = (CellArray)eval(tree.getChild(1));
+				CellArray rhsRes = (CellArray)eval(tree.getChild(1));
 				//MatObject lhs = evaluate(tree.getChild(0));
 				Tree lhsTree = tree.getChild(0).getChild(0);//should be VCAT_VEC -> HCAT_VEC
 				if (tree.getChild(0).getChildCount()!=1 || convert(lhsTree.getType()) != TYPE.HCAT_VEC){
 					throw new Exception("Bad LHS assignment.");
 				}
 				for (int i = 1; i <= lhsTree.getChildCount(); i++){
-					Interpreter.assign(lhsTree.getChild(i).getText(), rhs.get(i), true);
+					Interpreter.assign(lhsTree.getChild(i).getText(), rhsRes.get(i), true);
 				}
 			}
 			else{
 				throw new Exception("Something is wrong with your assignment...");
 			}
 			break;
-			
-		//TODO put this back
-		/*case FALSE:
+
+			//TODO put this back
+			/*case FALSE:
 			return new Logical(0);*/
-			
+
 		case FOR_LOOP:
 			MatObject loopOver = eval(tree.getChild(0).getChild(2));
 			String loopVar = tree.getChild(0).getChild(0).getText();
 			for (int i = 0; i < loopOver.n; i++){
-				Interpreter.assign(loopVar, Matrix.get(loopOver, new Matrix(i)), true);
+				Interpreter.assign(loopVar, MatObject.get(loopOver, new Matrix(i+1)), false);
 				eval(tree.getChild(1));
 			}
-			
+			return null;
+
 		case FUNC_ARGS:
+			calls.add(tree.getParent().getText());
 			ArrayList<MatObject> arglist = new ArrayList<MatObject>();
 			for (int i = 0; i < tree.getChildCount(); i++){
 				arglist.add(eval(tree.getChild(i)));
 			}
+			calls.remove(calls.size()-1);
 			return new CellArray(arglist.toArray(new MatObject[0]));
 
 		case GREATER_EQUAL:
@@ -283,15 +385,18 @@ public class TreeWalker {
 				retVal = Interpreter.getValue(str);
 				//dprint("In ID: " + res);
 			} 
-			
-			//Check if we're doing an assignment; if so, pack up return values
-			if (convert(tree.getParent().getType()) == TYPE.EQUALS){
+
+			//Check if we're doing a multiple assignment; if so, pack up return values from rhs
+			if (convert(tree.getParent().getType()) == TYPE.EQUALS && tree.getParent().getChild(1) == tree && convert(tree.getParent().getChild(0).getType()) != TYPE.ID){
 				return new CellArray(retVal);
 			}
-			else{//We just want the first return value, such as foo(max(vec))
+			else if (retVal != null){//We just want the first return value, such as foo(max(vec))
 				return retVal[0];
 			}
-		
+			else{
+				return null;
+			}
+
 		case IF_STAT:
 			if (eval(tree.getChild(0).getChild(0)).conditionalIsTrue()){//
 				eval(tree.getChild(0).getChild(1));
@@ -339,11 +444,11 @@ public class TreeWalker {
 			return MatMult.matMult((Matrix)eval(tree.getChild(0)), (Matrix)eval(tree.getChild(1)));
 		case STRING_LITERAL:
 			return new MatString(tree.getText());
-			
+
 		case SWITCH_STAT:
 			//An evaluated switch_expression is a scalar or string
 			MatObject se = eval(tree.getChild(0));
-			
+
 			int lastCaseInd;
 			if (convert(tree.getChild(tree.getChildCount()-1).getType()) == TYPE.OTHERWISE){
 				lastCaseInd = tree.getChildCount()-2;
@@ -351,33 +456,33 @@ public class TreeWalker {
 			else{
 				lastCaseInd = tree.getChildCount()-1;
 			}
-			
+
 			MatObject ce;
 			boolean didOne = false;
 			out:
-			for (int i = 1; i <= lastCaseInd; i++){
-				ce = eval(tree.getChild(i).getChild(0));
+				for (int i = 1; i <= lastCaseInd; i++){
+					ce = eval(tree.getChild(i).getChild(0));
 
-				//An evaluated case_expression is a scalar, string, or ca of scalars or strings
-				if (ce instanceof CellArray){
-					for (int j = 0; j < ce.n; j++){
-						if (MatObject.get(ce, new Matrix(j)).equals(se)){
-							eval(tree.getChild(i).getChild(1));
-							didOne = true;
-							break out;
+					//An evaluated case_expression is a scalar, string, or ca of scalars or strings
+					if (ce instanceof CellArray){
+						for (int j = 0; j < ce.n; j++){
+							if (MatObject.get(ce, new Matrix(j)).equals(se)){
+								eval(tree.getChild(i).getChild(1));
+								didOne = true;
+								break out;
+							}
 						}
 					}
 				}
-			}
 			if (!didOne && lastCaseInd == tree.getChildCount()-2){
 				eval(tree.getChild(tree.getChildCount()-1));
 			}
 			break;
-			
-		//TODO put this back
-		/*case TRUE:
+
+			//TODO put this back
+			/*case TRUE:
 			return new Logical(1);*/
-			
+
 		case VCAT_CELL:
 			ArrayList<MatObject> arrcv = new ArrayList<MatObject>();
 			for (int i = 0; i < tree.getChildCount(); i++){
@@ -390,10 +495,11 @@ public class TreeWalker {
 				arrv.add(eval(tree.getChild(i)));
 			}
 			return VerticalConcatenate.verticalConcatenate(arrv.toArray(new MatObject[0]));
-		case WHILE_LOOP:
-			while (eval(tree.getChild(0)).conditionalIsTrue()){
+		case WHILE:
+			while (eval(tree.getChild(0).getChild(0)).conditionalIsTrue()){
 				eval(tree.getChild(1));
 			}
+			return null;
 		default:
 			throw new Exception(nodeType + " is not handled in TreeWalker.");
 
@@ -402,7 +508,7 @@ public class TreeWalker {
 	}
 
 
-	
+
 
 	public static boolean validateTokens() {
 		boolean res = true;
