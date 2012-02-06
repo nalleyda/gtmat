@@ -107,7 +107,7 @@ term	: EMPTY_VEC
 	//| cellArray		//OPENC! exprList CLOSEC!
 	//| vector		//OPENB! exprList CLOSEB!
 	| STRING_LITERAL
-	| DOUBLE
+	//| DOUBLE
 	//| idRule
 	//| functionCall
 	//| structure
@@ -118,6 +118,10 @@ term	: EMPTY_VEC
 	| COLON
 	| TRUE
 	| FALSE
+	//| /*(INTEGER? DOT) =>*/ (INTEGER? DOT INTEGER)
+	| INTEGER (DOT^ INTEGER)?
+	| DOT^ INTEGER
+	//| 
 	//| TRANS_ID
 	//| EMPTY_STRING
 	//| functionCallOrStructure
@@ -331,9 +335,10 @@ STAR		: '*'		;
 fragment DIGIT		: ('0'..'9')		;
 fragment LETTER		: ('a'..'z' | 'A'..'Z')	;
 fragment UNDERSCORE	: '_'			;
+INTEGER	: DIGIT+;
  
 COMMENT : '\%' .* NEWLINE {$channel = HIDDEN;};
-DOUBLE	: ((DIGIT+ DOT DIGIT*) | (DOT DIGIT+) | DIGIT+) EXPONENT? ;
+//DOUBLE	: (DIGIT* '.' DIGIT+) | DIGIT+;//DIGIT* ('.' DIGIT+)?;//((DIGIT* DOT DIGIT+) | DIGIT+ /*| (DOT DIGIT+)*/) EXPONENT? ;
 ELLIPSIS: '...'	NEWLINE+ {$channel = HIDDEN;}	;
 EXPONENT: ('e' | 'E') ('+' | '-')? ('0'..'9')+  ;
 ID 	: LETTER (LETTER | DIGIT | UNDERSCORE)*	;
