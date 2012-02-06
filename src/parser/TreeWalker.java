@@ -54,6 +54,97 @@ public class TreeWalker {
 	//TODO re-generate code, add tokens TRUE and FALSE
 	public enum TYPE{
 		ZERO, REFERENCE, TWO, THREE,
+		FUNC_ARGS,
+		ID,
+		DOT,
+		DOT_CARET,
+		CARET,
+		SINGLE_QUOTE,
+		DOT_TRANSPOSE,
+		MINUS,
+		NOT,
+		DOT_STAR,
+		DOT_SLASH,
+		DOT_BACKSLASH,
+		STAR,
+		SLASH,
+		BACKSLASH,
+		PLUS,
+		COLON_ARGS,
+		LESS_THAN,
+		GREATER_THAN,
+		LESS_EQUAL,
+		GREATER_EQUL,
+		ISEQUAL,
+		NOT_EQUAL,
+		ELE_AND,
+		ELE_OR,
+		SC_AND,
+		SC_OR,
+		HCAT_VEC,
+		VCAT_VEC,
+		HCAT_CELL,
+		VCAT_CELL,
+		EQUALS,
+		IF,
+		ELSEIF,
+		ELSE,
+		IF_STAT,
+		SWITCH,
+		CASE,
+		OTHERWISE,
+		SWITCH_STAT,
+		FOR,
+		FOR_LOOP,
+		WHILE,
+		WHILE_LOOP,
+		BLOCK,
+		COMMA,
+		OPENP,
+		CLOSEP,
+		EMPTY_VEC,
+		EMPTY_CELL,
+		STRING_LITERAL,
+		END,
+		COLON,
+		TRUE,
+		FALSE,
+		INTEGER,
+		GREATER_EQUAL,
+		SEMI,
+		OPENB,
+		CLOSEB,
+		OPENC,
+		CLOSEC,
+		BLOCK_END,
+		BREAK,
+		CATCH,
+		CLASSDEF,
+		CONTINUE,
+		FUNCTION,
+		GLOBAL,
+		PARFOR,
+		PERSISTENT,
+		RETURN,
+		SPMD,
+		TRY,
+		AT,
+		CLOSE_BLOCK,
+		DOUBLE_QUOTE,
+		EXCLAMATION,
+		OPEN_BLOCK,
+		PERCENT,
+		DIGIT,
+		LETTER,
+		UNDERSCORE,
+		NEWLINE,
+		COMMENT,
+		ELLIPSIS,
+		EXPONENT,
+		WS
+	}
+	/*public enum TYPE{
+		ZERO, REFERENCE, TWO, THREE,
 		AT,
 		BACKSLASH,
 		BLOCK,
@@ -86,8 +177,6 @@ public class TreeWalker {
 		ELLIPSIS,
 		ELSE,
 		ELSEIF,
-		/*ELSEIF_ROOT,
-    	ELSE_ROOT,*/
 		EMPTY_CELL,
 		EMPTY_VEC,
 		END,
@@ -143,7 +232,7 @@ public class TreeWalker {
 		WHILE,
 		WHILE_LOOP,
 		WS
-	}
+	}*/
 	/*public enum NEW_TYPE{
     	FUNC_ARGS, ID, DOT, DOT_CARET, CARET, SINGLE_QUOTE, DOT_TRANSPOSE, 
     	MINUS, NOT, DOT_STAR, DOT_SLASH, DOT_BACKSLASH, STAR, SLASH, 
@@ -238,8 +327,17 @@ public class TreeWalker {
 			case 3:
 				return Matrix.colon((Matrix)eval(tree.getChild(2)), (Matrix)eval(tree.getChild(0)), (Matrix)eval(tree.getChild(1)));
 			}
-		case DOUBLE:
+		case INTEGER:
 			return new Matrix(Double.parseDouble(tree.getText()));
+		case DOT:
+			if (convert(tree.getChild(0).getType()) == TYPE.INTEGER){
+				if (tree.getChildCount() == 1){
+					return new Matrix(Double.parseDouble("." + tree.getChild(0).getText()));
+				}
+				else if (tree.getChildCount() == 2){
+					return new Matrix(Double.parseDouble(tree.getChild(0).getText() + "." + tree.getChild(1).getText()));
+				}
+			}
 		case DOT_CARET:
 			return Power.power(eval(tree.getChild(0)), eval(tree.getChild(1)));
 		case DOT_SLASH:

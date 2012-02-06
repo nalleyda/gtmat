@@ -55,6 +55,7 @@ FOR_LOOP;
 WHILE;
 WHILE_LOOP;
 BLOCK;
+DOUBLE;
 }
 
 @header{
@@ -107,7 +108,7 @@ term	: EMPTY_VEC
 	//| cellArray		//OPENC! exprList CLOSEC!
 	//| vector		//OPENB! exprList CLOSEB!
 	| STRING_LITERAL
-	| DOUBLE
+	| (INT (DOT^ INT)? | (DOT^ INT)) //-> ^(DOUBLE DIGIT* DOT? DIGIT*)
 	//| idRule
 	//| functionCall
 	//| structure
@@ -329,7 +330,7 @@ fragment LETTER		: ('a'..'z' | 'A'..'Z')	;
 fragment UNDERSCORE	: '_'			;
  
 COMMENT : '\%' .* NEWLINE {$channel = HIDDEN;};
-DOUBLE	: ((DIGIT+ DOT DIGIT*) | (DOT DIGIT+) | DIGIT+) EXPONENT? ;
+//DOUBLE	: (/*(DIGIT+ DOT DIGIT+)*/ | (DOT DIGIT+) | DIGIT+) EXPONENT? ;
 ELLIPSIS: '...'	NEWLINE+ {$channel = HIDDEN;}	;
 EXPONENT: ('e' | 'E') ('+' | '-')? ('0'..'9')+  ;
 ID 	: LETTER (LETTER | DIGIT | UNDERSCORE)*	;
@@ -348,6 +349,7 @@ STRING_LITERAL
         ;
 WS 	: (' ' | '\t' | /*'\n' | '\r' |*/ '\f')+ {$channel = HIDDEN;};
 
+INT	: DIGIT+;
 
 
 
