@@ -8,7 +8,7 @@ package gtmatException;
 
 public class UnbalancedException extends GTMatException {
 
-	public UnbalancedException(String filename, int lineNumber, String stackTrace) {
+	public UnbalancedException(String filename, int lineNumber) {
 		super(filename, lineNumber);
 	}
 	

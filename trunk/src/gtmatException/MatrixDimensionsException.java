@@ -8,7 +8,7 @@ package gtmatException;
 
 public class MatrixDimensionsException extends GTMatException {
 
-	public MatrixDimensionsException(String filename, int lineNumber, String stackTrace) {
+	public MatrixDimensionsException(String filename, int lineNumber) {
 		super(filename, lineNumber);
 	}
 	

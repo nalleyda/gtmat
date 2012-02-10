@@ -8,7 +8,7 @@ package gtmatException;
 
 public class StringNotTerminatedException extends GTMatException {
 
-	public StringNotTerminatedException(String filename, int lineNumber, String stackTrace) {
+	public StringNotTerminatedException(String filename, int lineNumber) {
 		super(filename, lineNumber);
 	}
 	

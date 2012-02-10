@@ -8,7 +8,7 @@ package gtmatException;
 
 public class InvalidSyntaxException extends GTMatException {
 
-	public InvalidSyntaxException(String filename, int lineNumber, String stackTrace) {
+	public InvalidSyntaxException(String filename, int lineNumber) {
 		super(filename, lineNumber);
 	}
 	
