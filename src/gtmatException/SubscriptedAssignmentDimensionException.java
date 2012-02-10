@@ -8,7 +8,7 @@ package gtmatException;
 
 public class SubscriptedAssignmentDimensionException extends GTMatException {
 
-	public SubscriptedAssignmentDimensionException(String filename, int lineNumber, String stackTrace) {
+	public SubscriptedAssignmentDimensionException(String filename, int lineNumber) {
 		super(filename, lineNumber);
 	}
 	

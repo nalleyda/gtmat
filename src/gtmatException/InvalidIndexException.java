@@ -8,7 +8,7 @@ package gtmatException;
 
 public class InvalidIndexException extends GTMatException {
 
-	public InvalidIndexException(String filename, int lineNumber, String stackTrace) {
+	public InvalidIndexException(String filename, int lineNumber) {
 		super(filename, lineNumber);
 	}
 	

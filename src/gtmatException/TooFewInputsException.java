@@ -8,7 +8,7 @@ package gtmatException;
 
 public class TooFewInputsException extends GTMatException {
 
-	public TooFewInputsException(String filename, int lineNumber, String stackTrace) {
+	public TooFewInputsException(String filename, int lineNumber) {
 		super(filename, lineNumber);
 	}
 	

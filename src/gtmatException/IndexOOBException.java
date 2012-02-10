@@ -8,7 +8,7 @@ package gtmatException;
 
 public class IndexOOBException extends GTMatException {
 
-	public IndexOOBException(String filename, int lineNumber, String stackTrace) {
+	public IndexOOBException(String filename, int lineNumber) {
 		super(filename, lineNumber);
 	}
 	

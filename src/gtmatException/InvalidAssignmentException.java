@@ -8,7 +8,7 @@ package gtmatException;
 
 public class InvalidAssignmentException extends GTMatException {
 
-	public InvalidAssignmentException(String filename, int lineNumber, String stackTrace) {
+	public InvalidAssignmentException(String filename, int lineNumber) {
 		super(filename, lineNumber);
 	}
 	
