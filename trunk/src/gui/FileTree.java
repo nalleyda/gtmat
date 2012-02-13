@@ -1,4 +1,4 @@
-package main;
+package gui;
 /*
  * Copyright (c) Ian F. Darwin, http://www.darwinsys.com/, 1996-2002.
  * All rights reserved. Software written by Ian F. Darwin and others.
@@ -57,8 +57,9 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.event.TreeModelListener;
 import javax.swing.event.TreeModelEvent;
-import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.*;
+
+import main.Main;
 
 /**
  * Display a file system in a JTree view

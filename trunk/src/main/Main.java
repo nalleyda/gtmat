@@ -14,11 +14,13 @@ import javax.swing.UIManager;
 import javax.swing.DefaultComboBoxModel;
 
 import functions.*;
+import gui.InteractionWindow;
+import gui.TabbedPane;
 import interpreter.*;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.DefaultListModel;
-import parser.TreeWalker;
 import java.util.Stack;
 import java.awt.Color;
 import jmatrix.MatObject.Type;

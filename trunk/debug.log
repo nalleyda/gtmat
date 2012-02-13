@@ -1,15 +1,1 @@
 debug log opened
-Tree is BODY with 1 children type: BODY
-   Tree is = with 2 children type: GETS
-      Tree is VCAT with 2 children type: VCAT
-         Tree is HCAT with 2 children type: HCAT
-            Tree is 1 with 0 children type: DOUBLE
-            Tree is 2 with 0 children type: DOUBLE
-         Tree is HCAT with 2 children type: HCAT
-            Tree is 3 with 0 children type: DOUBLE
-            Tree is 4 with 0 children type: DOUBLE
-Tree is BODY with 1 children type: BODY
-   Tree is GETS with 1 children type: GETS
-      Tree is - with 2 children type: MINUS
-         Tree is a with 0 children type: ID
-         Tree is 7 with 0 children type: DOUBLE

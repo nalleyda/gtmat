@@ -3,6 +3,11 @@
  */
 package main;
 
+import gui.EditWindow;
+import gui.FileTree;
+import gui.MainSplitPane;
+import gui.TabbedPane;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import properties.*;

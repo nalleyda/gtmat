@@ -5,6 +5,7 @@ package jmatrix;
  */
 import java.lang.RuntimeException;
 import functions.*;
+import gui.TabbedPane;
 import interpreter.*;
 import main.*;
 import workspace.*;

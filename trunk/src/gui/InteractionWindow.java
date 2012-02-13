@@ -28,7 +28,7 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package main;
+package gui;
 /*
  * InteractionWindow.java requires one additional file:
  *   DocumentSizeFilter.java
@@ -41,6 +41,9 @@ import java.util.HashMap;
 import javax.swing.*;
 import javax.swing.text.*;
 import javax.swing.event.*;
+
+import main.GT_Mat;
+import main.Main;
 import fileIO.*;
 import irrelevant.*;
 import jmatrix.*;

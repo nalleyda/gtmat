@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package main;
+package gui;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -14,6 +14,8 @@ import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.event.*;
 import javax.swing.text.*;
+
+import main.Main;
 /**
  *  This class will display line numbers for a related text component. The text
  *  component must use the same line height for each line. TextLineNumber

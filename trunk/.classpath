@@ -3,6 +3,5 @@
 	<classpathentry excluding="exception/" kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="antlr-3.3-complete.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Josh/workspace/gtmat/antlr-3.3-complete.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

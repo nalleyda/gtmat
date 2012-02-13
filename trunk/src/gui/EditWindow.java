@@ -28,7 +28,7 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package main;
+package gui;
 /*
  * InteractionWindow.java requires one additional file:
  *   DocumentSizeFilter.java
@@ -47,6 +47,7 @@ import javax.swing.event.*;
 import javax.swing.undo.*;
 import fileIO.*;
 import parser.*;
+
 import org.antlr.runtime.*;
 import org.antlr.runtime.tree.*;
 
