@@ -7,6 +7,7 @@ package utilities;
 import main.*;
 import parser.*;
 import plotting.*;
+import gui.EditWindow;
 import interpreter.*;
 import javax.swing.*;
 import javax.swing.text.*;

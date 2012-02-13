@@ -8,6 +8,7 @@ import javax.swing.text.*;
 import functions.*;
 import workspace.*;
 import fileIO.*;
+import gui.TabbedPane;
 import jmatrix.*;
 import jmatrix.MatObject.Type;
 import main.*;

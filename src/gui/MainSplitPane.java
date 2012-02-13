@@ -29,12 +29,16 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */ 
 
-package main;
+package gui;
+
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
+
+import main.Main;
+
 import java.util.*;
 
 //MainSplitPane itself is not a visible component.

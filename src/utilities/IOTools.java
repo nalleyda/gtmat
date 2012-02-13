@@ -6,6 +6,8 @@ package utilities;
 
 import main.*;
 import properties.*;
+import gui.EditWindow;
+
 import javax.swing.*;
 import java.awt.Component;
 /**

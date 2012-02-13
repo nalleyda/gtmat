@@ -8,6 +8,8 @@ package parser;
  * We make no guarantees that this code is fit for any purpose. 
  * Visit http://www.pragmaticprogrammer.com/titles/tpantlr for more book information.
 ***/
+import interpreter.TreeWalker;
+
 import org.antlr.runtime.*;
 import org.antlr.runtime.tree.*;
 import workspace.Function;

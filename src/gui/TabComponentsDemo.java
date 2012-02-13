@@ -29,12 +29,13 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */ 
 
-package main;
+package gui;
 
 /*
  * TabComponentDemo.java requires one additional file:
  *   ButtonTabComponent.java
  */
+
 
 
 

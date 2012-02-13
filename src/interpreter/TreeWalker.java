@@ -1,4 +1,4 @@
-package parser;
+package interpreter;
 
 import org.antlr.runtime.tree.*;
 import java.lang.RuntimeException;
@@ -11,6 +11,7 @@ import interpreter.*;
 import workspace.*;
 import java.util.Stack;
 import main.*;
+import parser.WhoKnowsWhat;
 import plotting.*;
 import jmatrix.MatObject.Type;
 import functions.*;
@@ -615,7 +616,7 @@ public class TreeWalker {
 	public static boolean validateTokens() {
 		boolean res = true;
 		BufferedReader in = null;
-		String name = /*"src" + File.separator +*/ "parser" + File.separator + "Expr.tokens";
+		String name = "src" + File.separator + "parser" + File.separator + "Expr.tokens";
 		try {
 			in = new BufferedReader(new FileReader(name));
 		} catch (IOException e) {

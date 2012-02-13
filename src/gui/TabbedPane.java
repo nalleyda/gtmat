@@ -29,12 +29,13 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */ 
 
-package main;
+package gui;
 
 /*
  * TabbedPane.java requires one additional file:
  *   images/middle.gif.
  */
+
 
 import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
@@ -46,6 +47,8 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
+
+import main.Main;
 
 public class TabbedPane extends JPanel {
     public static FileTree fileTree = null;

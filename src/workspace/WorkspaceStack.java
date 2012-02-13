@@ -5,9 +5,10 @@ import jmatrix.MatObject.Type;
 
 import java.util.Stack;
 import java.util.ArrayList;
+
+import gui.TabbedPane;
 import interpreter.DataHolder;
 import javax.swing.DefaultListModel;
-import main.TabbedPane;
 import main.Main;
 /**
  * A simple system stack to hold Workspaces.
