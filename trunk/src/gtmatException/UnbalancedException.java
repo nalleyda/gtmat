@@ -8,8 +8,8 @@ package gtmatException;
 
 public class UnbalancedException extends GTMatException {
 
-	public UnbalancedException(String filename, int lineNumber) {
-		super(filename, lineNumber);
+	public UnbalancedException(String filename) {
+		super(filename);
 	}
 	
 	public String toString() {

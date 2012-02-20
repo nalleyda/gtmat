@@ -8,8 +8,8 @@ package gtmatException;
 
 public class UndefinedVariableException extends GTMatException {
 
-	public UndefinedVariableException(String filename, int lineNumber) {
-		super(filename, lineNumber);
+	public UndefinedVariableException(String filename) {
+		super(filename);
 	}
 	
 	public String toString() {

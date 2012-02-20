@@ -15,6 +15,7 @@ import parser.WhoKnowsWhat;
 import plotting.*;
 import jmatrix.MatObject.Type;
 import functions.*;
+import gtmatException.IndexOOBException;
 /**
  *
  * @author dsmith
@@ -604,8 +605,7 @@ public class TreeWalker {
 			}
 			return null;
 		default:
-			throw new Exception(nodeType + " is not handled in TreeWalker.");
-
+			gtmatException.GTMatException.Throw(new gtmatException.InvalidSyntaxException("unknown"));
 		}
 		return res;
 	}
@@ -672,6 +672,7 @@ public class TreeWalker {
 
 	public static void process(CommonTree tree) {
 		//        Main.debug.println(tree.toStringTree());
+		gtmatException.GTMatException.setLineNumber(tree.getLine());
 		try {
 			eval(tree);
 		} catch (Exception e1) {

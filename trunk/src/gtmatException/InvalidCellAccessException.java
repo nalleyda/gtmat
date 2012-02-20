@@ -8,8 +8,8 @@ package gtmatException;
 
 public class InvalidCellAccessException extends GTMatException {
 
-	public InvalidCellAccessException(String filename, int lineNumber) {
-		super(filename, lineNumber);
+	public InvalidCellAccessException(String filename) {
+		super(filename);
 	}
 	
 	public String toString() {

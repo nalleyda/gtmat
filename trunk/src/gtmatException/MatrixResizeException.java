@@ -2,19 +2,19 @@ package gtmatException;
 
 
 /**
- * Exception for strings not ended properly.
+ * For incorrectly resizing a matrix.
  * @author Josh Sizemore
  */
 
-public class StringNotTerminatedException extends GTMatException {
+public class MatrixResizeException extends GTMatException {
 
-	public StringNotTerminatedException(String filename) {
+	public MatrixResizeException(String filename) {
 		super(filename);
 	}
 	
 	public String toString() {
 		message = "Error at " + filename + ": " + "line " + lineNumber + "\n" 
-					+ "String not terminated properly";
+					+ "New matrix must have the same capacity as the old";
 		return message;
 	}
 }

@@ -8,8 +8,8 @@ package gtmatException;
 
 public class RecursionOverflowException extends GTMatException {
 
-	public RecursionOverflowException(String filename, int lineNumber) {
-		super(filename, lineNumber);
+	public RecursionOverflowException(String filename) {
+		super(filename);
 	}
 	
 	public String toString() {

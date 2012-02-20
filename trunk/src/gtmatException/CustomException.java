@@ -6,15 +6,18 @@ package gtmatException;
  * @author Josh Sizemore
  */
 
-public class IndexOOBException extends GTMatException {
+public class CustomException extends GTMatException {
 
-	public IndexOOBException(String filename) {
+	private String userMessage;
+	
+	public CustomException(String filename, String userMessage) {
 		super(filename);
+		this.userMessage = userMessage;
 	}
 	
 	public String toString() {
 		message = "Error at " + filename + ": " + "line " + lineNumber + "\n" 
-					+ "index exceeds matrix dimensions";
+					+ userMessage;
 		return message;
 	}
 }
