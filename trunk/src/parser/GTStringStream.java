@@ -7,6 +7,9 @@ package parser;
 
 import org.antlr.runtime.*;
 import org.antlr.runtime.tree.*;
+
+import interpreter.Interpreter;
+
 import java.io.*;
 /**
  *
@@ -22,6 +25,12 @@ public class GTStringStream extends ANTLRFileStream {
     }
 
     public void append(String str) {
+    	try {
+			str = Interpreter.preprocessTranspose(str);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         int nn = n + str.length();
         char nd[] = new char[nn];
         int out = 0;

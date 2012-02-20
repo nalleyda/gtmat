@@ -1000,7 +1000,7 @@ public class Interpreter extends Thread {
 							ss = new GTStringStream("");
 							String str = br.readLine();
 							while (str != null) {
-								ss.append(str + '\n');
+								ss.append(str + '\n');/*itshere*/
 								str = br.readLine();
 							}
 							GTParser.process(ss, new Interpreter());

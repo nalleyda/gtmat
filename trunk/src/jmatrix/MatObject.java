@@ -310,7 +310,7 @@ public abstract class MatObject {
 	 public Matrix le(MatObject o) {
 		 Matrix res = new Matrix(this);
 		 Matrix ov = castToMatrix(o);
-		 return Matrix.le(res, ov);
+		 return LessEqual.lessEqual(res, ov);
 	 }
 
 	 /**
