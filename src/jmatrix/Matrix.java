@@ -441,10 +441,10 @@ public class Matrix extends MatObject {
 	 */
 	public static Matrix ge(Matrix a, Matrix b) {
 		if (a.n == 1) {
-			return ge1(a.get(1), b);
+			return LessEqual.ge1(a.get(1), b);
 		}
 		if (b.n == 1) {
-			return le1(b.get(1), a);
+			return LessEqual.le1(b.get(1), a);
 		}
 		if (a.n != b.n) {
 			GTMatException.Throw(new MatrixDimensionsException("unknown"));
@@ -458,29 +458,6 @@ public class Matrix extends MatObject {
 	}
 
 
-	/**
-	 * Method to see where Matrix a <= Matrix b
-	 * @param a 
-	 * @param b
-	 * @return A matrix of logicals true at i iff a(i) <= b(i)
-	 */
-	public static Matrix le(Matrix a, Matrix b) {
-		if (a.n == 1) {
-			return le1(a.get(1), b);
-		}
-		if (b.n == 1) {
-			return ge1(b.get(1), a);
-		}
-		if (a.n != b.n) {
-			GTMatException.Throw(new MatrixDimensionsException("unknown"));
-		}
-		Matrix res = new Matrix(a);
-		for (int i = 0; i < a.n; i++) {
-			res.data[i] = (a.data[i] <= b.data[i]) ? 1 : 0;
-		}
-		res.type = Type.LOGICAL;
-		return res;
-	}
 
 	/**
 	 * Method to see where Matrix a == Matrix b
@@ -2042,23 +2019,6 @@ public class Matrix extends MatObject {
 		return res;
 	}
 
-	private static Matrix ge1(double v, Matrix m) {
-		Matrix res = new Matrix(m);
-		for (int i = 1; i <= m.n; i++) {
-			res.set(i, (v >= m.get(i)) ? 1 : 0);
-		}
-		res.type = Type.LOGICAL;
-		return res;
-	}
-
-	private static Matrix le1(double v, Matrix m) {
-		Matrix res = new Matrix(m);
-		for (int i = 1; i <= m.n; i++) {
-			res.set(i, (v <= m.get(i)) ? 1 : 0);
-		}
-		res.type = Type.LOGICAL;
-		return res;
-	}
 
 	private static Matrix eq1(double v, Matrix m) {
 		Matrix res = new Matrix(m);

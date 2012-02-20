@@ -53,7 +53,13 @@ public class Function {
             if (myClass.equals(Math.class)) {
                 res = new MatObject[]{Matrix.applyMathMethodToMatrix(f.getName(), arguments)};
             } else {//We're using one our our methods
-                res = (MatObject[]) myMethod.invoke(null, (Object[]) arguments);
+            	try{
+            		res = (MatObject[]) myMethod.invoke(null, (Object[]) arguments);
+            
+            	}
+            	catch(Exception e){
+            		res = new MatObject[] {(MatObject)myMethod.invoke(null, (Object[]) arguments)};
+            	}
             }
         } catch (Exception e) {
             e.printStackTrace(System.err);
