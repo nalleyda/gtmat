@@ -9,15 +9,19 @@ package gtmatException;
 public abstract class GTMatException extends RuntimeException {
 	
 	protected String filename;
-	protected int lineNumber;
+	protected static int lineNumber;
 	protected String message;
 	
-	public GTMatException(String filename, int lineNumber) {
+	
+	public GTMatException(String filename) {
 		this.filename = filename;
-		this.lineNumber = lineNumber;
 	}
 	
 	public static void Throw(GTMatException e) {
 		main.Main.interactions.printError(e);
+	}
+	
+	public static void setLineNumber(int ln) {
+		lineNumber=ln;
 	}
 }

@@ -8,8 +8,8 @@ package gtmatException;
 
 public class TooManyOutputsException extends GTMatException {
 
-	public TooManyOutputsException(String filename, int lineNumber) {
-		super(filename, lineNumber);
+	public TooManyOutputsException(String filename) {
+		super(filename);
 	}
 	
 	public String toString() {

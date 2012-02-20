@@ -9,8 +9,8 @@ package gtmatException;
 
 public class MatrixNotSquareException extends GTMatException {
 
-	public MatrixNotSquareException(String filename, int lineNumber) {
-		super(filename, lineNumber);
+	public MatrixNotSquareException(String filename) {
+		super(filename);
 	}
 	
 	public String toString() {
