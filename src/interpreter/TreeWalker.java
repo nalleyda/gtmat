@@ -505,12 +505,17 @@ public class TreeWalker<K,V>{
 		boolean res = true;
 		BufferedReader in = null;
 		String name = /*"src" + File.separator +*/ "parser" + File.separator + "Expr.tokens";
+		String name2 = "src" + File.separator + "parser" + File.separator + "Expr.tokens";
 		try {
-			in = new BufferedReader(new FileReader(name));
+			in = new BufferedReader(new FileReader(name2));
 		} catch (IOException e) {
-			e.printStackTrace();
-			System.err.println("Tokens file did not open");
-			System.exit(1);
+			try {
+				in = new BufferedReader(new FileReader(name));
+			} catch (IOException e2) {
+				e.printStackTrace();
+				System.err.println("Tokens file did not open");
+				System.exit(1);
+			}
 		}
 		int nt = 0;
 		try {
