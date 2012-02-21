@@ -246,7 +246,7 @@ public class InteractionWindow {
      * @param exception The exception to print.
      */
     public void printError(RuntimeException exception) {
-    	appendString(exception.toString(), 0);
+    	appendString(exception.toString() + "\n", 0);
     }
 
     /**
@@ -341,6 +341,10 @@ public class InteractionWindow {
          */
         public void enter() {
             displayCommand(enteredText);
+            if(enteredText.trim().isEmpty()) {
+            	nextLine();
+            	return;
+            }
             if(enteredText.equalsIgnoreCase("continue")) {                    
                 synchronized(Main.wstack.peek().getDataHolder()) {
                     TreeWalker.popDataHolder();
