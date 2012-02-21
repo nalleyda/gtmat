@@ -224,7 +224,10 @@ public class TreeWalker<K,V>{
 		switch(nodeType){
 		case BLOCK:	//Just evaluate everything - no need to store results
 			for (int i = 0; i < tree.getChildCount(); i++){
-				eval(tree.getChild(i));
+				MatObject resVal = eval(tree.getChild(i));
+				if (/*convert(tree.getChild(i).getType()) != TYPE.BLOCK &&*/ resVal != null){
+					Interpreter.displayString(resVal.toString() + "\n");
+				}
 			}
 			break; 
 		case CARET:
@@ -290,7 +293,7 @@ public class TreeWalker<K,V>{
 					else{
 						Interpreter.assign(tree.getChild(0).getText(), eval(tree.getChild(1)), true);
 					}*/
-					return null;
+					//return null;
 				}
 				else{
 					calls.add(lhs.getText());
@@ -302,7 +305,7 @@ public class TreeWalker<K,V>{
 					CellArray lhsInd = new CellArray(lhsArgs.toArray(new MatObject[0]));
 					MatObject.index(lhs.getText(), lhsInd, eval(rhs), true);
 					calls.remove(calls.size()-1);
-					return null;
+					//return null;
 				}
 			}
 			else if (lhsType == TYPE.VCAT_VEC){//multiple assignments
