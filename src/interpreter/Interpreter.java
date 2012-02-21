@@ -849,7 +849,7 @@ public class Interpreter extends Thread {
 
 		//If we get to this point, then the RHS is invalid
 		if (res == null) {
-			throw new RuntimeException("Invalid variable name or function call.");
+			throw new RuntimeException("Invalid variable name or function call - " + name);
 		}
 		return res;
 	}

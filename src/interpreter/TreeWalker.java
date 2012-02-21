@@ -1,5 +1,9 @@
 package interpreter;
 
+import java.util.Map.Entry;
+import java.util.Map;
+import java.util.Set;
+
 import org.antlr.runtime.tree.*;
 import java.lang.RuntimeException;
 import java.io.*;
@@ -51,199 +55,110 @@ it = m(end, end, end, end) % returns m(6,6)
  *   If you index A(end, end, end, end, ....) you will get the real dimensions
  *   as long as they exist and 1's after that.
  */
-public class TreeWalker {
+public class TreeWalker<K,V>{
+	
+	public void meth(Map<? extends K, ? extends V> m){
+		Set<?> s = m.entrySet();
+		for (Object o : s){
+			@SuppressWarnings("unchecked")
+			Entry<K,V> e = (Entry<K,V>)o;
+			e.getValue();
+		}
+	}
 
 	//TODO re-generate code, add tokens TRUE and FALSE
 	public enum TYPE{
 		ZERO, REFERENCE, TWO, THREE,
-		FUNC_ARGS,
-		ID,
-		DOT,
-		DOT_CARET,
-		CARET,
-		SINGLE_QUOTE,
-		DOT_TRANSPOSE,
-		MINUS,
-		NOT,
-		DOT_STAR,
-		DOT_SLASH,
-		DOT_BACKSLASH,
-		STAR,
-		SLASH,
+		AT,
 		BACKSLASH,
-		PLUS,
-		COLON_ARGS,
-		LESS_THAN,
-		GREATER_THAN,
-		LESS_EQUAL,
-		GREATER_EQUL,
-		ISEQUAL,
-		NOT_EQUAL,
-		ELE_AND,
-		ELE_OR,
-		SC_AND,
-		SC_OR,
-		HCAT_VEC,
-		VCAT_VEC,
-		HCAT_CELL,
-		VCAT_CELL,
-		EQUALS,
-		IF,
-		ELSEIF,
-		ELSE,
-		IF_STAT,
-		SWITCH,
-		CASE,
-		OTHERWISE,
-		SWITCH_STAT,
-		FOR,
-		FOR_LOOP,
-		WHILE,
-		WHILE_LOOP,
 		BLOCK,
-		COMMA,
-		OPENP,
-		CLOSEP,
-		EMPTY_VEC,
-		EMPTY_CELL,
-		STRING_LITERAL,
-		END,
-		COLON,
-		TRUE,
-		FALSE,
-		INTEGER,
-		GREATER_EQUAL,
-		SEMI,
-		OPENB,
-		CLOSEB,
-		OPENC,
-		CLOSEC,
 		BLOCK_END,
 		BREAK,
+		CARET,
+		CASE,
 		CATCH,
 		CLASSDEF,
-		CONTINUE,
-		FUNCTION,
-		GLOBAL,
-		PARFOR,
-		PERSISTENT,
-		RETURN,
-		SPMD,
-		TRY,
-		AT,
+		CLOSEB,
+		CLOSEC,
+		CLOSEP,
 		CLOSE_BLOCK,
-		DOUBLE_QUOTE,
-		EXCLAMATION,
-		OPEN_BLOCK,
-		PERCENT,
-		DIGIT,
-		LETTER,
-		UNDERSCORE,
-		NEWLINE,
+		COLON,
+		COLON_ARGS,
+		COMMA,
 		COMMENT,
+		CONTINUE,
+		DIGIT,
+		DOT,
+		DOT_BACKSLASH,
+		DOT_CARET,
+		DOT_SLASH,
+		DOT_STAR,
+		DOT_TRANSPOSE,
+		DOUBLE_QUOTE,
+		ELE_AND,
+		ELE_OR,
 		ELLIPSIS,
+		ELSE,
+		ELSEIF,
+		EMPTY_CELL,
+		EMPTY_VEC,
+		END,
+		EQUALS,
+		EXCLAMATION,
 		EXPONENT,
+		FALSE,
+		FOR,
+		FOR_LOOP,
+		FUNCTION,
+		FUNC_ARGS,
+		GLOBAL,
+		GREATER_EQUAL,
+		GREATER_EQUL,
+		GREATER_THAN,
+		HCAT_CELL,
+		HCAT_VEC,
+		ID,
+		IF,
+		IF_STAT,
+		INTEGER,
+		ISEQUAL,
+		LESS_EQUAL,
+		LESS_THAN,
+		LETTER,
+		MINUS,
+		NEWLINE,
+		NOT,
+		NOT_EQUAL,
+		OPENB,
+		OPENC,
+		OPENP,
+		OPEN_BLOCK,
+		OTHERWISE,
+		PARFOR,
+		PERCENT,
+		PERSISTENT,
+		PLUS,
+		RETURN,
+		SC_AND,
+		SC_OR,
+		SEMI,
+		SINGLE_QUOTE,
+		SLASH,
+		SPMD,
+		STAR,
+		STRING_LITERAL,
+		SWITCH,
+		SWITCH_STAT,
+		TRUE,
+		TRY,
+		UNDERSCORE,
+		VCAT_CELL,
+		VCAT_VEC,
+		WHILE,
+		WHILE_LOOP,
 		WS
 	}
-	/*public enum TYPE{
-		ZERO, REFERENCE, TWO, THREE,
-		AT,
-		BACKSLASH,
-		BLOCK,
-		BLOCK_END,
-		BREAK,
-		CARET,
-		CASE,
-		CATCH,
-		CLASSDEF,
-		CLOSEB,
-		CLOSEC,
-		CLOSEP,
-		CLOSE_BLOCK,
-		COLON,
-		COLON_ARGS,
-		COMMA,
-		COMMENT,
-		CONTINUE,
-		DIGIT,
-		DOT,
-		DOT_BACKSLASH,
-		DOT_CARET,
-		DOT_SLASH,
-		DOT_STAR,
-		DOT_TRANSPOSE,
-		DOUBLE,
-		DOUBLE_QUOTE,
-		ELE_AND,
-		ELE_OR,
-		ELLIPSIS,
-		ELSE,
-		ELSEIF,
-		EMPTY_CELL,
-		EMPTY_VEC,
-		END,
-		EQUALS,
-		EXCLAMATION,
-		EXPONENT,
-		FOR,
-		FOR_LOOP,
-		FUNCTION,
-		FUNC_ARGS,
-		FUNC_CALL,
-		GLOBAL,
-		GREATER_EQUAL,
-		GREATER_THAN,
-		HCAT_CELL,
-		HCAT_VEC,
-		ID,
-		IF,
-		IF_STAT,
-		ISEQUAL,
-		LESS_EQUAL,
-		LESS_THAN,
-		LETTER,
-		MINUS,
-		NEWLINE,
-		NOT,
-		NOT_EQUAL,
-		OPENB,
-		OPENC,
-		OPENP,
-		OPEN_BLOCK,
-		OTHERWISE,
-		PARFOR,
-		PERCENT,
-		PERSISTENT,
-		PLUS,
-		RETURN,
-		SC_AND,
-		SC_OR,
-		SEMI,
-		SINGLE_QUOTE,
-		SLASH,
-		SPMD,
-		STAR,
-		STRING_LITERAL,
-		SWITCH,
-		SWITCH_STAT,
-		TRY,
-		UNARY_OP,
-		UNDERSCORE,
-		VCAT_CELL,
-		VCAT_VEC,
-		WHILE,
-		WHILE_LOOP,
-		WS
-	}*/
-	/*public enum NEW_TYPE{
-    	FUNC_ARGS, ID, DOT, DOT_CARET, CARET, SINGLE_QUOTE, DOT_TRANSPOSE, 
-    	MINUS, NOT, DOT_STAR, DOT_SLASH, DOT_BACKSLASH, STAR, SLASH, 
-    	BACKSLASH, PLUS, COLON_ARGS, LESS_THAN, GREATER_THAN, LESS_EQUAL, 
-    	GREATER_EQUAL, ISEQUAL, NOT_EQUAL, ELE_AND, ELE_OR, SC_AND, SC_OR, 
-    	HCAT_VEC, VCAT_VEC, HCAT_CELL, VCAT_CELL, EQUALS, IF, ELSEIF, 
-    	ELSE, IF_STAT, SWITCH, CASE, OTHERWISE, SWITCH_STAT, FOR, FOR_LOOP, 
-    	WHILE, WHILE_LOOP, BLOCK
-    }*/
+	
 	private static String arrayName = null;
 	private static int soFar = 0;
 	public static MatObject staticExpr = null;
@@ -356,34 +271,6 @@ public class TreeWalker {
 
 		case END:
 			return evalEnd(tree);
-
-			/*try{
-				while (true){
-					Tree candidate = curTree.getParent().getParent();
-					if (Main.wstack.peek().getVariable(candidate.getText()) != null){//check if candidate represents a variable
-						Tree parent = candidate.getChild(0); // The FUNC_ARGS token
-						MatObject var = Main.wstack.peek().getVariable(candidate.getText()).getData();
-
-						if (parent.getChildCount() == 1){//Linear indexing
-							return new Matrix(var.n);
-						}
-						else{
-							//Search for the correct argument
-							for (int i = 0; i < parent.getChildCount(); i++){
-								if (parent.getChild(i) == curTree){	//Check addresses to prevent ambiguity
-									return new Matrix(var.size[i]);
-								}
-							}
-							throw new Exception("This should never happen!");
-						}
-					}
-					curTree = candidate;
-				}
-			}
-			catch(Exception e){
-				throw new Exception("The use of \"end\" is incorrect here.");
-			}*/
-
 
 			//TODO: [x,y] = foo();
 		case EQUALS://assign rhs to lhs, possibly multiple on lhs
@@ -512,6 +399,7 @@ public class TreeWalker {
 					eval(tree.getChild(tree.getChildCount()-1).getChild(0));
 				}
 			}
+			return null;
 
 		case ISEQUAL:
 			return IsEqual.isEqual(eval(tree.getChild(0)), eval(tree.getChild(1)));
@@ -745,4 +633,10 @@ public class TreeWalker {
 			dh.notify();
 		}
 	}
+	
+	
 }
+
+
+
+

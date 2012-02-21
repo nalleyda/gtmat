@@ -7,6 +7,7 @@ import org.antlr.runtime.*;
 import org.antlr.runtime.tree.*;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.StringTokenizer;
 import java.io.*;
 import main.*;
@@ -23,6 +24,21 @@ public class File_I_O {
     public static String currentTFile = null;
 
     public static void readandRunTFile(String name) throws Exception {
+    	
+    	
+    	//TODO fix t-files, remove the following lines
+    	name = name.substring(0,name.length()-2) + ".m";
+    	Scanner scan = new Scanner(new File(name));
+    	String curline;
+    	GTStringStream ss = new GTStringStream(""); 
+    	while (scan.hasNext()){
+    		ss.append(scan.nextLine() + "\n");
+    	}
+    	GTParser.process(ss, new Interpreter());
+    	return;
+    	
+    	//TODO put this back when tfiles are working
+    	/*
         int rootIndex = 0;
         BufferedReader in = null;
         boolean keepGoing = true;
@@ -92,7 +108,7 @@ public class File_I_O {
                 System.err.println("File " + name + " did not open");
                 System.exit(1);
             }
-        }
+        }*/
     }
 
     public static void deleteCurrent() {
@@ -416,4 +432,5 @@ public class File_I_O {
         }
         return res;
     }
+    
 }
