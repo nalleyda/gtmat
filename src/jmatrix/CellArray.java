@@ -14,7 +14,8 @@ public class CellArray extends MatObject {
 
     public CellArray() {
         super();
-        cell = new MatObject[1];
+        cell = new MatObject[0];
+        n = 0;
         type = Type.CELL;
     }
 

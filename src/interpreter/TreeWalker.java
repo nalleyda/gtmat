@@ -56,7 +56,7 @@ it = m(end, end, end, end) % returns m(6,6)
  *   as long as they exist and 1's after that.
  */
 public class TreeWalker<K,V>{
-	
+
 	public void meth(Map<? extends K, ? extends V> m){
 		Set<?> s = m.entrySet();
 		for (Object o : s){
@@ -158,7 +158,7 @@ public class TreeWalker<K,V>{
 		WHILE_LOOP,
 		WS
 	}
-	
+
 	private static String arrayName = null;
 	private static int soFar = 0;
 	public static MatObject staticExpr = null;
@@ -174,7 +174,7 @@ public class TreeWalker<K,V>{
 			System.out.println(s);
 		}
 	}
-	
+
 	public static Matrix evalEnd(Tree tree) throws Exception{
 		try{
 			Tree curTree = tree;//Used to keep up with which child we are
@@ -358,9 +358,12 @@ public class TreeWalker<K,V>{
 				retVal = Interpreter.call(tree.getText(), args);
 			}
 			else{
-				//TODO make sure this works with foo()
-				retVal = Interpreter.getValue(str);
-				//dprint("In ID: " + res);
+				retVal = Interpreter.call(tree.getText(), new CellArray());
+				if (retVal == null){
+					//TODO make sure this works with foo()
+					retVal = Interpreter.getValue(str);
+					//dprint("In ID: " + res);
+				}
 			} 
 
 			//Check if we're doing a multiple assignment; if so, pack up return values from rhs
@@ -471,7 +474,7 @@ public class TreeWalker<K,V>{
 			return VerticalConcatenate.verticalConcatenateCell(arrcv.toArray(new MatObject[0]));
 		case VCAT_VEC:
 			if (tree.getChildCount() == 1) return eval(tree.getChild(0));
-			
+
 			ArrayList<MatObject> arrv = new ArrayList<MatObject>();
 			for (int i = 0; i < tree.getChildCount(); i++){
 				arrv.add(eval(tree.getChild(i)));
@@ -629,8 +632,8 @@ public class TreeWalker<K,V>{
 			dh.notify();
 		}
 	}
-	
-	
+
+
 }
 
 

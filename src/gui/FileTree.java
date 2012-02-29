@@ -141,7 +141,6 @@ public class FileTree extends JPanel {
             curTop.add(curDir);
         }
         Vector ol = new Vector();
-        
         String[] tmp = dir.list();
         for (int i = 0; i < tmp.length; i++) {
             ol.addElement(tmp[i]);

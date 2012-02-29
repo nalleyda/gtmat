@@ -365,8 +365,6 @@ public class Function {
         /*
          * matrix Library
          */
-        ht.put("addd", new Function("add", "jmatrix.Matrix", 2,
-                Matrix.class, double.class));
         ht.put("add", new Function("add", "jmatrix.Matrix", 2,
                 Matrix.class, Matrix.class));
         ht.put("addIP", new Function("add", "jmatrix.Matrix", 2,
@@ -377,6 +375,7 @@ public class Function {
         ht.put("ceil", new Function("ceil", "jmatrix.Matrix", 1, Matrix.class));
         ht.put("colon", new Function("colon", "jmatrix.Matrix", 3,
                 Matrix.class, Matrix.class, Matrix.class));
+        ht.put("clear", new Function("clear", "functions.Clear", 0));
         ht.put("complex", new Function("complex", "jmatrix.MatObject", 2,
                 Matrix.class, Matrix.class));
         ht.put("cross", new Function("cross", "jmatrix.Matrix", 2,
