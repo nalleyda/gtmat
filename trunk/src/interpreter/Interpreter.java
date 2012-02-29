@@ -791,7 +791,8 @@ public class Interpreter extends Thread {
 	private static String myFileName = "";
 	public static MatObject[] call(String name, CellArray ca) throws Exception{
 		MatObject[] res = null;
-		//System.out.println("\n\nName: " + name + "\nArguments: " + ((MatObject)(ca.getData()[0])).toString() + "\n\n");
+		System.out.println(name);
+//		System.out.println("\n\nName: " + name + "\nArguments: " + ((MatObject)(ca.getData()[0])).toString() + "\n\n");
 		myFileName = name;
 		boolean allMat = true;
 		for (int i = 0; i < ca.length(); i++) {
