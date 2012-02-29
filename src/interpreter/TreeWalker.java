@@ -234,10 +234,6 @@ public class TreeWalker<K,V>{
 			return MatPower.matPower(eval(tree.getChild(0)), eval(tree.getChild(1)));
 		case COLON:
 			return Matrix.colon(new Matrix(1), evalEnd(tree));
-			/*tree.setChild(1, new CommonTree());
-			tree.getChild(1).setParent(tree);
-			((CommonTree)tree.getChild(1)).
-			nodeType = TYPE.COLON_ARGS;*/
 		case COLON_ARGS:
 			//BE CAREFUL - the rightmost (i.e., last) child is actually the one that belongs first - see ANTLR debugger
 			switch(tree.getChildCount()){
@@ -282,18 +278,9 @@ public class TreeWalker<K,V>{
 			TYPE lhsType = convert(lhs.getType());
 			TYPE rhsType = convert(rhs.getType());
 
-			/*if (lhsType == TYPE.ID){//single variable assignment
-				if (rhsType == TYPE.ID && tree.getChild(1).getChildCount() > 0)
-			}*/
 			if (lhsType == TYPE.ID){//single output
 				if (lhs.getChildCount() == 0){//no lhs indexing
-					//if (rhsType == TYPE.ID && tree.getChild(1).getChildCount() > 0){//function call
 					Interpreter.assign(tree.getChild(0).getText(), eval(tree.getChild(1)), true);
-					/*}
-					else{
-						Interpreter.assign(tree.getChild(0).getText(), eval(tree.getChild(1)), true);
-					}*/
-					//return null;
 				}
 				else{
 					calls.add(lhs.getText());
@@ -384,7 +371,8 @@ public class TreeWalker<K,V>{
 				return retVal[0];
 			}
 			else{
-				return null;
+				throw new Exception("Function " + tree.getText() + " not found.");
+				//TODO throw a real error
 			}
 
 		case IF_STAT:
