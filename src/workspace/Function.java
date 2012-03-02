@@ -517,6 +517,7 @@ public class Function {
         //ht.put("fopen", new Function("fopen", "fileIO.FileIO", 2, String.class, String.class));
         ht.put("load", new Function("load", "jmatrix.MatObject", 1, MatString.class));
         ht.put("save", new Function("save", "jmatrix.MatObject", 1, MatString.class));
+        ht.put("eval", new Function("eval", "interpreter.Interpreter", 1, MatString.class));
 
 
 
