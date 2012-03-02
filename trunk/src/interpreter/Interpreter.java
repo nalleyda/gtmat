@@ -968,6 +968,18 @@ public class Interpreter extends Thread {
 		System.out.println(Main.wstack.peek());
 		return res;
 	}
+	public static Matrix eval(MatString s){
+		GTStringStream ss = null;
+		try {
+			ss = new GTStringStream();
+			ss.append(s.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		GTParser.process(ss, new Interpreter());
+		return new Matrix(1);
+	}
 
 	public static MatObject[] checkLocalFunctions(String name, CellArray ca) throws Exception {
 		MatObject[] res = null;
