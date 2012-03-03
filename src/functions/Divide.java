@@ -1,6 +1,7 @@
 package functions;
 
 import java.lang.reflect.InvocationTargetException;
+import gtmatException.*;
 
 import jmatrix.*;
 
@@ -28,7 +29,7 @@ public class Divide {
                     res.data[i] = m.data[i] / v.data[0];
                 }
             } else {
-                //TODO Dimension mismatch exception
+                throw(new InnerMatrixDimensionsException("unknown"));
             }
         } else {
             for (int i = 0; i < m.n; i++) {

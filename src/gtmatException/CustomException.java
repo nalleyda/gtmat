@@ -17,7 +17,7 @@ public class CustomException extends GTMatException {
 	
 	public String toString() {
 		message = "Error at " + filename + ": " + "line " + lineNumber + "\n" 
-					+ userMessage;
+					+ userMessage ;
 		return message;
 	}
 }

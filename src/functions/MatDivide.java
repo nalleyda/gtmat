@@ -1,6 +1,7 @@
 package functions;
 
 import jmatrix.*;
+import gtmatException.*;
 
 public class MatDivide {
 	public static MatObject matDivide(MatObject o1, MatObject o2) throws Exception{
@@ -15,7 +16,7 @@ public class MatDivide {
 	 */
 	public static Matrix matDivide(Matrix m, Matrix v) {
         if (v.size[MatObject.COL] != v.size[MatObject.ROW]) {
-            //TODO Inner matrix dimensions must agree exception
+            throw(new MatrixDimensionsException("unknown"));
         }
         Matrix res = null;
 		try {

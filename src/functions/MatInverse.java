@@ -1,6 +1,7 @@
 package functions;
 
 import jmatrix.*;
+import gtmatException.*;
 
 public class MatInverse {
 	public static MatObject matInverse(MatObject o) throws Exception{
@@ -10,7 +11,7 @@ public class MatInverse {
 	public static Matrix matInverse(Matrix m1) {
 		if (m1.size.length != 2
 				 || (m1.size[MatObject.ROW] != m1.size[MatObject.COL])) {
-			 throw new RuntimeException("Matrix.inv matrix must be square");
+			 throw(new MatrixNotSquareException("unknown"));
 		 }
 		 int n = m1.size[MatObject.ROW];
 		 int bcols = 2 * n;

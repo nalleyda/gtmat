@@ -2,6 +2,7 @@ package functions;
 
 import jmatrix.*;
 import jmatrix.MatObject.Type;
+import gtmatException.*;
 
 public class LessEqual {
 	public static MatObject lessEqual(MatObject o1, MatObject o2) throws Exception{
@@ -22,7 +23,7 @@ public class LessEqual {
 			return ge1(b.get(1), a);
 		}
 		if (a.n != b.n) {
-			//TODO Dimension mismatch exception
+			throw(new MatrixDimensionsException("unknown"));
 		}
 		Matrix res = new Matrix(a);
 		for (int i = 0; i < a.n; i++) {

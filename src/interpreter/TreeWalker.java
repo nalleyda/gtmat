@@ -19,6 +19,7 @@ import parser.WhoKnowsWhat;
 import plotting.*;
 import jmatrix.MatObject.Type;
 import functions.*;
+import gtmatException.GTMatException;
 import gtmatException.IndexOOBException;
 /**
  *
@@ -563,8 +564,10 @@ public class TreeWalker<K,V>{
 		try {
 			eval(tree);
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			if(e1 instanceof GTMatException)
+				GTMatException.Throw((GTMatException)e1);
+			else 
+				e1.printStackTrace();
 		}
 		try {
 			// System.out.println("Result = " + process("", tree));

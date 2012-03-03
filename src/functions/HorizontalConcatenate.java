@@ -1,6 +1,7 @@
 package functions;
 
 import java.util.ArrayList;
+import gtmatException.*;
 
 import jmatrix.*;
 
@@ -30,7 +31,8 @@ public class HorizontalConcatenate {
 		for (int i = 0; i < m.length; i++) {
 			cols += m[i].size[MatObject.COL];
 			if (m[i].size[MatObject.ROW] != rows) {
-				throw new RuntimeException("Matrix.hcat bad rows in item " + i);
+				throw(new CustomException("unknown","Array row dimensions must agree"));
+				//throw new RuntimeException("Matrix.hcat bad rows in item " + i);
 			}
 		}
 		res = new Matrix(rows, cols);

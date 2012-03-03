@@ -1,6 +1,7 @@
 package functions;
 
 import jmatrix.*;
+import gtmatException.*;
 
 public class Subtract {
 	public static MatObject subtract(MatObject o1, MatObject o2) throws Exception{
@@ -26,7 +27,7 @@ public class Subtract {
                     res.data[i] = m.data[i] - v.data[0];
                 }
             } else {
-                //TODO Dimension mismatch exception.
+                throw(new MatrixDimensionsException("unknown"));
             }
         } else {
             for (int i = 0; i < m.n; i++) {
