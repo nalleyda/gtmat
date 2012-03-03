@@ -1,6 +1,7 @@
 package functions;
 
 import jmatrix.*;
+import gtmatException.*;
 
 public class MatMult {
 	public static MatObject matMult(MatObject o1, MatObject o2) throws Exception{
@@ -18,7 +19,7 @@ public class MatMult {
             return Mult.mult(m, a);
         }
         if (m.size[MatObject.COL] != a.size[MatObject.ROW]) {
-            //TODO Inner matrix dimensions must agree exception
+            throw(new InnerMatrixDimensionsException("unknown"));
         }
         int nc = m.size[MatObject.COL];
         Matrix res = new Matrix(m.size[MatObject.ROW], a.size[MatObject.COL]);

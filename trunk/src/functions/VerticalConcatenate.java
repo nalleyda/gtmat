@@ -1,6 +1,7 @@
 package functions;
 
 import java.util.ArrayList;
+import gtmatException.*;
 
 import jmatrix.*;
 
@@ -26,7 +27,8 @@ public class VerticalConcatenate {
 		for (int i = 0; i < m.length; i++) {
 			rows += m[i].size[MatObject.ROW];
 			if (m[i].size[MatObject.COL] != cols) {
-				throw new RuntimeException("Matrix.vcat bad columns in item " + i);
+				throw(new CustomException("unknown","Array column diminsions must agree"));
+				//throw new RuntimeException("Matrix.vcat bad columns in item " + i);
 			}
 		}
 		res = new Matrix(rows, cols);

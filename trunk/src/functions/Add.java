@@ -2,6 +2,7 @@ package functions;
 
 import jmatrix.*;
 import java.lang.reflect.*;
+import gtmatException.*;
 
 public class Add {
 	public static MatObject add(MatObject o1, MatObject o2) throws Exception{
@@ -30,7 +31,7 @@ public class Add {
                     res.data[i] = v.data[0] + m.data[i];
                 }
             } else {
-                //TODO Dimension mismatch exception
+                throw(new MatrixDimensionsException("unknown"));
             }
         } else {
             for (int i = 0; i < m.n; i++) {
