@@ -376,6 +376,7 @@ public class Function {
         ht.put("colon", new Function("colon", "jmatrix.Matrix", 3,
                 Matrix.class, Matrix.class, Matrix.class));
         ht.put("clear", new Function("clear", "functions.Clear", 0));
+        ht.put("clc", new Function("clc", "functions.CLC", 0));
         ht.put("complex", new Function("complex", "jmatrix.MatObject", 2,
                 Matrix.class, Matrix.class));
         ht.put("cross", new Function("cross", "jmatrix.Matrix", 2,
