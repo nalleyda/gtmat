@@ -5,4 +5,4 @@
  s = (top*1000) - startM;  % m
  
  initial_v = (2*g*s)^0.5 % the final answer
- clc
+ %clc
