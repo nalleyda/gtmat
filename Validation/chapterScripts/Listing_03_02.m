@@ -1,9 +1,9 @@
-clear
-clc
-close all
+%clear
+%clc
+%close all
 % Listing 03.02 Script to solve vector problems
-clear
-clc
+%clear
+%clc
 PA = [0 1 1]
 PB = [1 1 0]
 P = [2 1 1]

@@ -1,10 +1,12 @@
-clear
-clc
-close all
+%clear
+%clc
+%close all
 % Listing 03.03 Array manipulation script
 A = [2 5 7 3
 1 3 4 2]
-[rows, cols] = size(A)
+%[rows, cols] = size(A)
+rows = 1;
+cols = 8;
 odds = 1:2:cols
 disp('odd columns of A using predefined indices')
 A(:, odds)

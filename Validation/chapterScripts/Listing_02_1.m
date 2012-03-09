@@ -1,6 +1,6 @@
 
- clear
- clc
+ %clear
+ %clc
  
  A = 3;   % the first side of a triangle
  B = 4;   % the second side of a triangle
