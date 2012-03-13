@@ -111,6 +111,7 @@ public class GTParser {
 
             // WALK RESULTING TREE
             CommonTree tr = (CommonTree) r.getTree(); // get tree from parser
+            System.out.println("tree.toStringTree(): "+tr.toStringTree());
 //            Main.debug.println("Tree is " + tr.toStringTree());
 //            Main.debug.flush();
             DataHolder dh  = new DataHolder(tr);
