@@ -1,16 +1,28 @@
 package Test_Suite;
 
-import parser.*;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.StringTokenizer;
+
+import javax.swing.DefaultListModel;
+
+import jmatrix.MatObject;
+import jmatrix.Matrix;
+import jmatrix.Structure;
 import main.Main;
-import workspace.Variable;
-import jmatrix.*;
 import matlabcontrol.MatlabConnectionException;
 import matlabcontrol.MatlabInvocationException;
 import matlabcontrol.MatlabProxy;
 import matlabcontrol.MatlabProxyFactory;
-import javax.swing.DefaultListModel;
-import java.util.HashMap;
-import java.util.ArrayList;
+import parser.GTParser;
+import workspace.Variable;
+
 
 public class GTMatTesting {
 	public static String[] chs = {"", "", "ch2", "ch3", "ch4", "ch5", "ch6", "ch7", "ch8", "ch9", "ch10", "ch11", "ch12", "ch13", "ch14", "ch15", "ch16", "ch17"};
@@ -20,21 +32,25 @@ public class GTMatTesting {
 	public static int endCh;
 	public static int beginCh;
 	public static DefaultListModel gtMatVars;
-	public static ArrayList<DefaultListModel> chVars = new ArrayList<DefaultListModel>();
+	public static ArrayList<DefaultListModel> chVars = new ArrayList<DefaultListModel>(chs.length);;
 	
 	public static void initTesting(int startCh, int stopCh){
 		//run matlab first, then gtmat
-		long start;
+		for (int s = 0; s<stopCh+1;s++){
+			chVars.add(s, new DefaultListModel());
+		}
+		System.out.println("chVars is of size: "+chVars.size());
 		endCh = stopCh;
 		beginCh = startCh;
 		
 		//execMatlab() working
-		//execMatlab();
+		execMatlab();
 		
 		//Not running listings very well for weird reasons 
 		execGTMat();
+		//Compare each resulting matlab ch.txt files with the values in the corresponding column/ch of chVars
 		
-		compareResults();
+		compareResults(startCh);
 		
 		
 	}
@@ -69,6 +85,7 @@ public class GTMatTesting {
 	}
 	
 	public static void execGTMat(){
+		
 		long start;
 		for (int i = beginCh; i<= endCh; i++){
 			start = System.currentTimeMillis();
@@ -88,7 +105,7 @@ public class GTMatTesting {
 				
 			}
 			gtMatVars = Main.wstack.peek().getVarList();
-			chVars.add(gtMatVars);
+			chVars.add(i, gtMatVars);
 			System.out.println(gtMatVars.size()+" vars from "+chs[i]+"s workspace varList appended to chVars");
 		}
 //		long s = System.currentTimeMillis();
@@ -98,7 +115,121 @@ public class GTMatTesting {
 		//gtMatVars = Main.wstack.peek().getVarList();
 	}
 	
-	public static void compareResults(){
+	public static void compareResults(int i) {
+		
+			String fname = chs[i]+".txt";
+			try{
+				FileInputStream fin = new FileInputStream(fname);
+				BufferedReader matlabTxt = new BufferedReader(new InputStreamReader(fin));
+				StringBuilder sb = new StringBuilder();
+				String thisLine;
+				HashMap<String, String> results = new HashMap<String, String>();
+				ArrayList<Variable> resAl = new ArrayList<Variable>();
+				while((thisLine=matlabTxt.readLine()) != null){
+					
+					String name ="";
+					String val = "";
+					
+					//variable assignment
+					//String[] str = thisLine.split(" ");
+					StringTokenizer st = new StringTokenizer(thisLine);
+//					name = st.nextToken();
+//					if (st.nextToken().equals("=")) st.nextToken();
+					while(st.hasMoreTokens()){
+						String temp = "";
+						try{
+							temp = st.nextToken();
+						}catch(NoSuchElementException e){
+							System.out.println(e.getMessage());
+							System.out.println(e.getStackTrace());
+							System.out.println("error in st.nextToken()");
+						}
+						if (temp!=null){
+						if (name.equals("")){
+							name = temp;
+							System.out.println("name: "+name);
+						}
+						else if(temp.equals("=")){
+							
+						}
+						else{
+							String tkn = temp;
+							val+=tkn + " ";
+						}
+//						System.out.println(val);
+//						if (tkn.charAt(tkn.length()-1)==';'){
+//							val += tkn+"; ";
+//						}
+						} 
+						else{
+							System.out.println("temp is null");
+							temp = "null";
+							if ((!name.equals("")) && (name!=null)){
+								System.out.println("temp is null");
+							}
+						}
+					}
+					//if(System.out.println("val: "+val);
+					if ((name!=null)&&(val!=null)){
+						results.put(name, val);
+						
+					}
+					
+					//sb.append(thisLine);
+				}
+				System.out.println("hashmap:"+results.toString());
+				//get gtMat WS list<variable> gtmVs 
+				DefaultListModel gtmVs = (DefaultListModel)chVars.get(i);
+				//Iterator it = parsed vars from txt file
+				
+				//out==final results
+				HashMap<String, String> out = new HashMap<String, String>();
+				Iterator it = results.keySet().iterator();
+				while(it.hasNext()){
+					String key = (String) it.next();
+					out.put(key, "empty");
+				}
+				
+				for (int j = 0; j<gtmVs.size();j++){
+					Variable v = (Variable)gtmVs.getElementAt(j);
+					
+					if (results.containsKey(v.getVarName()) && (v.getVarName()!=null)){
+						//the results map contains a key == to the variable's name
+						System.out.println("results contains the key/var "+v.getVarName());
+						String varStr = v.toString();
+						
+						String parseStr = v.getVarName() +" = "+results.get(v.getVarName());
+						if (varStr.equals(parseStr)){
+							out.put(v.getVarName(), "name and value equal");
+							System.out.println(varStr+"== in matlab and gtmat");
+						}
+						else{
+							System.out.println("both workspaces contain vars with equal names, but different values");
+							out.put(v.getVarName(), "only name equal");
+						}
+					}
+					else{// (!results.containsKey(v.getVarName())){
+						out.put(v.getVarName(), "parsed result does not contain Variable v");
+					}
+							
+				}
+				System.out.println("Final output: "+out.toString());		
+				
+				
+//				while (it.hasNext()){
+//					Map.Entry pairs = (Map.Entry)it.next();
+//					if (gtmVs.)
+//					
+//					System.out.println(pairs.getKey() + " = " + pairs.getValue());
+//			        it.remove(); // avoids a ConcurrentModificationException
+//				}
+			}catch(Exception e){
+				System.out.println(e.getMessage());
+				System.out.println(e.getStackTrace());
+				System.out.println("error in compareResults");
+			}
+			
+		
 		
 	}
 	
