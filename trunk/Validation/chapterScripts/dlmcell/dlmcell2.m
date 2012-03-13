@@ -47,7 +47,7 @@ if ~iscell(cell_array)
     disp('Error - Input cell_array not of the type "cell"!'); 
     return;
 end;
-delimiter = '\t';
+delimiter = ' ';
 append = 'w';
 if nargin > 2
     for i = 1:size(varargin,2)
@@ -102,9 +102,9 @@ for j = 1:size(cell_array,2)
      end
 end;
 % At the end of a row, a newline is written to the output file.
-fprintf(output_file,'\r\n');
+fprintf(output_file,'; ');
 end;
-
+fprintf(output_file,'\n');
 %% Close output file.    
 %fclose(output_file);
 
