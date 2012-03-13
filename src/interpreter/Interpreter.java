@@ -827,7 +827,7 @@ public class Interpreter extends Thread {
 
 			//If it's not a helper function, see if it is a user-defined function
 			/*CellArray*/MatObject[] localres = checkLocalFunctions(name, ca);
-			System.out.println("\nResults: \n" + localres);
+			System.out.println("\nResults: " + localres);
 			if (localres != null) {
 				res = localres;
 
@@ -850,6 +850,7 @@ public class Interpreter extends Thread {
 
 		//If we get to this point, then the RHS is invalid
 		if (res == null) {
+			System.out.println("exception thrown in Interpreter at: "+System.currentTimeMillis());
 			throw new RuntimeException("Invalid variable name or function call - " + name);
 		}
 		return res;
@@ -1001,7 +1002,7 @@ public class Interpreter extends Thread {
 
 
 					//Get the formal parameters
-					String fileName = Main.getCurrentDirectory() /*+ File.separator*/
+					String fileName = Main.getCurrentDirectory() + File.separator
 					+ name + ".m";
 					String[][] paramNames = getParams(fileName);
 					Workspace ws = new Workspace(fileName);
@@ -1016,6 +1017,7 @@ public class Interpreter extends Thread {
 								ss.append(str + '\n');/*itshere*/
 								str = br.readLine();
 							}
+							System.out.println("ss, the contents of the file:"+ss.toString());
 							GTParser.process(ss, new Interpreter());
 						}
 						catch (Exception e1) {
