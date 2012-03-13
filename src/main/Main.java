@@ -21,6 +21,9 @@ import interpreter.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.DefaultListModel;
+
+import Test_Suite.GTMatTesting;
+
 import java.util.Stack;
 import java.awt.Color;
 import jmatrix.MatObject.Type;
@@ -177,7 +180,8 @@ public class Main {
                 interactions.getTextPane().requestFocusInWindow();
             }
         });
-
+        GTMatTesting.initTesting(2,2);
+        //GTMatTesting.testGTMat(3, 3);
         /*   System.out.println("Interpreter Tests");
         System.out.println(new Matrix(1,2,3,4));
         Matrix x = (Matrix)Interpreter.call("add", new Matrix(2,2,1,2,3,4), new Matrix(2,2,5,6,7,8));
