@@ -225,13 +225,19 @@ public class TreeWalker<K,V>{
 		switch(nodeType){
 		case BLOCK:	//Just evaluate everything - no need to store results
 			for (int i = 0; i < tree.getChildCount(); i++){
+				try{
 				MatObject resVal = eval(tree.getChild(i));
 				if (/*convert(tree.getChild(i).getType()) != TYPE.BLOCK &&*/ resVal != null){
 					Interpreter.displayString(resVal.toString() + "\n");
 				}
+				}catch (Exception e){
+					System.out.println("eval(tree.getChild("+i+")) threw an exception");
+				}
 			}
 			break; 
 		case CARET:
+			//System.out.println("exec.ing eval ("+tree.getChild(0).toString()+", "+tree.getChild(1).toString()+")");
+			System.out.println("in treewalker, exec. at :"+System.currentTimeMillis());
 			return MatPower.matPower(eval(tree.getChild(0)), eval(tree.getChild(1)));
 		case COLON:
 			return Matrix.colon(new Matrix(1), evalEnd(tree));
