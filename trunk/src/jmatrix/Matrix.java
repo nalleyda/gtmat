@@ -2502,10 +2502,10 @@ public class Matrix extends MatObject {
 				 }
 			 }
 			 if ((rows > 1) && (r < rows)) {
-				 res += "; ";
+				 res += ";";
 			 }
 		 }
-		 res += "]";
+		 res += " ]";
 		 return res;
 	 }
 
