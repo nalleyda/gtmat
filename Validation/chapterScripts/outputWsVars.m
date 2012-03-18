@@ -22,10 +22,22 @@ for cr=1:numRows
         if ischar(var)
             format = '%s = %s\n';
         else isnumeric(var)
+            [r c] = size(var);
+            t='[ ';
+            if r*c>1  
+                for i=1:r-1
+                    t = [t, num2str(var(i,:)), '; '];
+                end
+                t = [t, num2str(var(end,:)), ' ]'];
+                var = t;
+            else
+                var = num2str(vals{cr, 1});
+            end
+                    
             format='%s = %s\n';
-            var = num2str(vals{cr, 1});
+            %var = num2str(vals{cr, 1});
         end
-        disp(strcat('fid=',fid))
+        disp(var);
         fprintf(fid, format, w{cr, 1}, var);
         
     end
