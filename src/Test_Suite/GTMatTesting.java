@@ -6,12 +6,12 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.StringTokenizer;
 
 import javax.swing.DefaultListModel;
 
+import jmatrix.CellArray;
 import jmatrix.MatObject;
 import jmatrix.Matrix;
 import jmatrix.Structure;
@@ -49,8 +49,12 @@ public class GTMatTesting {
 		//Not running listings very well for weird reasons 
 		execGTMat();
 		//Compare each resulting matlab ch.txt files with the values in the corresponding column/ch of chVars
+		checkResults();
+		//compareResults(startCh);
 		
-		compareResults(startCh);
+		//Can't test any cell array code in gtMat because horizontalConcatenate isn't implemented
+		//Other than that, the only other data type to test more and improve is structs.
+		//Lots of functions and other features in gtmat are not implemented, making running the scripts all the way through quite difficult.
 		
 		
 	}
@@ -66,9 +70,11 @@ public class GTMatTesting {
 					String fname = chs[i] + ".txt";
 					try{
 						//exec. the script, retrieve workspace var names, then write to .txt w/ outputWsVars(w, fname)
+//						proxy.eval("clear");
 						proxy.eval(chs[i]);
 						proxy.eval("w=who;");
 						proxy.eval("outputWsVars(w, '"+fname+"')");
+						if (i!=endCh) proxy.eval("clear");
 						
 					}catch(MatlabInvocationException mie){
 						System.out.println("Matlab invocation exception.");
@@ -90,15 +96,20 @@ public class GTMatTesting {
 		for (int i = beginCh; i<= endCh; i++){
 			start = System.currentTimeMillis();
 			String path = dirB + chs[i]	+ ".m";
-			System.out.println("path being passed to gtmat:"+path);
+			//System.out.println("path being passed to gtmat:"+path);
 			//GTParser.process(path);
+			
 			while(System.currentTimeMillis()-start<2000){
 						
 			}
+			
 			try{
 				GTParser.process(path);
+					
 			}catch(Exception e){
 				System.out.println(e.toString());
+				System.out.println(path+" threw an exception while being processed");
+				System.out.println(e.getMessage());
 			}
 			start = System.currentTimeMillis();
 			while(System.currentTimeMillis()-start<3000){
@@ -107,6 +118,19 @@ public class GTMatTesting {
 			gtMatVars = Main.wstack.peek().getVarList();
 			chVars.add(i, gtMatVars);
 			System.out.println(gtMatVars.size()+" vars from "+chs[i]+"s workspace varList appended to chVars");
+			if(i!=endCh){
+				try{
+					if(i!=endCh){
+						//System.out.println("")
+						Main.wstack.clear();
+						System.out.println("clearing stack in gtmat");
+					}
+					
+				} catch(Exception e){
+						System.out.println(e.getMessage());
+						System.out.println("execGTMat threw an exception on wstack.clear() at i="+i);
+				}
+			}
 		}
 //		long s = System.currentTimeMillis();
 //		while(System.currentTimeMillis()-s<2000){
@@ -115,9 +139,22 @@ public class GTMatTesting {
 		//gtMatVars = Main.wstack.peek().getVarList();
 	}
 	
-	public static void compareResults(int i) {
+	public static void checkResults(){
+		ArrayList<HashMap<String, String>> allRes = new ArrayList<HashMap<String, String>>(chs.length);
+		for (int i = beginCh;i<=endCh;i++){
+			System.out.println("Chapter "+i+" results: \n");
+			HashMap<String, String> chOut = compareResults(i);
+			allRes.add(chOut);
+			if (chOut.size()>0) System.out.println("chOut.toString(): "+chOut.toString());
+			else System.out.println("empty");
+			
+		}
+	}
+	
+	public static HashMap<String, String> compareResults(int i) {
 		
 			String fname = chs[i]+".txt";
+			HashMap<String, String> out = new HashMap<String, String>();
 			try{
 				FileInputStream fin = new FileInputStream(fname);
 				BufferedReader matlabTxt = new BufferedReader(new InputStreamReader(fin));
@@ -147,14 +184,15 @@ public class GTMatTesting {
 						if (temp!=null){
 						if (name.equals("")){
 							name = temp;
-							System.out.println("name: "+name);
+							//System.out.println("name: "+name);
 						}
 						else if(temp.equals("=")){
 							
 						}
 						else{
 							String tkn = temp;
-							val+=tkn + " ";
+							if (st.hasMoreTokens()) val+=tkn + " ";
+							else val+=tkn;
 						}
 //						System.out.println(val);
 //						if (tkn.charAt(tkn.length()-1)==';'){
@@ -183,54 +221,93 @@ public class GTMatTesting {
 				//Iterator it = parsed vars from txt file
 				
 				//out==final results
-				HashMap<String, String> out = new HashMap<String, String>();
+				//HashMap<String, String> out = new HashMap<String, String>();
 				Iterator it = results.keySet().iterator();
 				while(it.hasNext()){
 					String key = (String) it.next();
-					out.put(key, "empty");
+					out.put(key, "Variable from Matlab workspace not found in GTMat workspace. Incomplete execution of ch"+i+".m");
 				}
 				
 				for (int j = 0; j<gtmVs.size();j++){
 					Variable v = (Variable)gtmVs.getElementAt(j);
-					
+					//System.out.println(v.toString()+"<< from GTMat");
+					System.out.println(v.getVarName()+"'s type: "+MatObject.getClass(v.getData()));
 					if (results.containsKey(v.getVarName()) && (v.getVarName()!=null)){
 						//the results map contains a key == to the variable's name
-						System.out.println("results contains the key/var "+v.getVarName());
-						String varStr = v.toString();
+						//System.out.println("results contains the key/var "+v.getVarName());
+						String vStr = v.toString();
+						///varStr.replaceFirst("  ", "");
 						
 						String parseStr = v.getVarName() +" = "+results.get(v.getVarName());
+						//System.out.println(varStr.toString()+"<< from GTMat");
+//						System.out.println(varStr+"<< from GTMat");
+//						System.out.println(parseStr.toString()+"<< from MatLab \n");
+						String varStr = v.getVarName()+" = "+toFormatted(v.getData());
+						//implement format() to convert fucked up toString() of gtMat arrays to the form used in the matlab data
+//						if (MatObject.getClass(v.getData()).equals(MatObject.Type.LOGICAL)){
+//							varStr.replace('t', '1');
+//							varStr.replace('f', '0');
+//						}
+						
+						System.out.println(varStr+"<< toFormatted(), from GTMat");
+						System.out.println(vStr+"<< toString(), from GTMat");
+						//System.out.println(v.workspaceString())
+						System.out.println(parseStr+"<< from MatLab");
 						if (varStr.equals(parseStr)){
 							out.put(v.getVarName(), "name and value equal");
-							System.out.println(varStr+"== in matlab and gtmat");
+							//System.out.println(v.getVarName()+"== in matlab and gtmat");
 						}
 						else{
-							System.out.println("both workspaces contain vars with equal names, but different values");
-							out.put(v.getVarName(), "only name equal");
+							//System.out.println("both workspaces contain vars with equal names, but different values");
+							
+							
+							out.put(v.getVarName(), "name equal but values not");
 						}
 					}
 					else{// (!results.containsKey(v.getVarName())){
-						out.put(v.getVarName(), "parsed result does not contain Variable v");
+						out.put(v.getVarName(), "parsed result does not contain Variable v, or the names are formatted incorrectly");
+						//System.out.println("var names not equal");
 					}
-							
+					System.out.println(out.get(v.getVarName())+"\n");		
 				}
-				System.out.println("Final output: "+out.toString());		
+				//System.out.println("Final output for the ch: "+out.toString());		
 				
 				
-//				while (it.hasNext()){
-//					Map.Entry pairs = (Map.Entry)it.next();
-//					if (gtmVs.)
-//					
-//					System.out.println(pairs.getKey() + " = " + pairs.getValue());
-//			        it.remove(); // avoids a ConcurrentModificationException
-//				}
 			}catch(Exception e){
 				System.out.println(e.getMessage());
 				System.out.println(e.getStackTrace());
 				System.out.println("error in compareResults");
 			}
+		return out;
+		
+		
+	}
+	
+	public static String toFormatted(MatObject mo){
+		String newStr = "";
+		if ((mo instanceof Matrix)&&(mo.rows())>1){
+			if(mo.rows()>1){
+				newStr = mo.workspaceString();
+			}
+			else{
+				//newStr = mo.toString();
+			}
+		} 
+		else if (mo instanceof CellArray){
+			newStr = ((CellArray)mo).toFormat();
+		}
+		else
+			newStr = mo.toString();
+		
+		//MatObject.getClass(v.getData())
+		if ((mo.type).equals(MatObject.Type.LOGICAL) || (mo.type==MatObject.Type.LOGICAL)){
+			System.out.println("replacing t and f w/ 1 and 0");
 			
+			newStr = newStr.replace('t', '1');
+			newStr = newStr.replace('f', '0');
+		}
 		
-		
+		return newStr.trim();
 	}
 	
 	public static void testGTMat(int startCh, int stopCh){
