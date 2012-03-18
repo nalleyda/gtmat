@@ -227,6 +227,27 @@ public class CellArray extends MatObject {
         res += " }";
         return res;
     }
+    public String toFormat(){
+    	int rows = size[ROW];
+        int cols = size[COL];
+        String res="{";
+        MatObject d;
+//        if(rows > 1) res = "{\n   ";
+//        else res = "{";
+        for(int r = 1; r <= rows; r++) {
+            for(int c = 1; c <= cols; c++) {
+                d = get(r,c);
+                if(d instanceof MatString) {
+                    res += "" + d + "";
+                } else {
+                    res += "" + d + "";
+                }
+            }
+            if((rows > 1) && (r < rows)) res += ";";
+        }
+        res += " }\n";
+        return res;
+    }
 /*
              if(n == 0) return "[]";
         if (rows > 1) {
@@ -266,7 +287,8 @@ public class CellArray extends MatObject {
         }
  */
     public static void main(String[] args){
-        CellArray ca = new CellArray(1, 2, new Matrix(1), new Matrix(2));
-        System.out.println(ca);
+        CellArray ca = new CellArray(2, 2, new Matrix(1), new Matrix(2), new Matrix(3), new Matrix(4));
+        System.out.println(ca.toFormat());
+        
     }
 }
