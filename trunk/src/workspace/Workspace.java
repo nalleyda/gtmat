@@ -111,7 +111,7 @@ public class Workspace {
         return copy;
     }
 
-    public static void main(String[] args) {
+   /* public static void main(String[] args) {
         Variable x = new Variable("x", new Matrix(3));
         Variable y = new Variable("y", new Matrix(7));
         Variable xx = new Variable("xx", new Matrix(4));
@@ -152,5 +152,5 @@ public class Workspace {
         //System.out.println(hi);
 
 
-    }
+    }*/
 }
