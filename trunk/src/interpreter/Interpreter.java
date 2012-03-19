@@ -1031,7 +1031,7 @@ public class Interpreter extends Thread {
 						/*res = new CellArray();
 						MatObject[] data = {null};
 						res.setData(data);*/
-						return res;
+						return new MatObject[] {null};
 					}
 
 					String[] formalParamNames = paramNames[0];
