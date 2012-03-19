@@ -551,7 +551,28 @@ public abstract class MatObject {
 		  */
 		 Workspace curW = Interpreter.getWorkspace();
 		 MatObject val = Interpreter.getValue(name)[0];
-		 if(val == null) {
+		 if(val == null) {//didn't exist previously
+			 
+			 if (expr.n == 1){//assigning a scalar value
+				 
+				 int[] dim = new int[ca.n];//one dimension per comma
+				 for (int i = 0; i < dim.length; i++){
+					 Matrix indices = (Matrix)ca.get(i+1);
+					 double max = indices.get(1);
+					 for (int j = 2; j <= indices.n; j++){
+						 max = Math.max(indices.get(j), max);
+					 }
+					 dim[i] = (int)max;
+				 }
+				// MatObject ret = null;// = new MatObject(dim);
+				 if (expr instanceof Matrix){
+					 val = new Matrix(dim);
+				 }
+				 else{//TODO other data types
+					 throw new RuntimeException("Define indexing with scalars for non-matrices, now!");
+				 }
+				 
+			 }
 			 val = expr.zeroed();
 		 }
 		 int en = expr.n;

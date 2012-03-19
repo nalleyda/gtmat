@@ -13,9 +13,10 @@ public class MatDivide {
 	 * @param m one matrix
 	 * @param v another matrix
 	 * @return (inv(m') * v')'
+	 * @throws Exception 
 	 */
-	public static Matrix matDivide(Matrix m, Matrix v) {
-        if (v.size[MatObject.COL] != v.size[MatObject.ROW]) {
+	public static Matrix matDivide(Matrix m, Matrix v) throws Exception {
+        /*if (v.size[MatObject.COL] != v.size[MatObject.ROW]) {
             throw(new MatrixDimensionsException("unknown"));
         }
         Matrix res = null;
@@ -25,10 +26,21 @@ public class MatDivide {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        return res;
+        return res;*/
+		if (v.n == 1){//scalar division = dot division
+			Matrix res = m.copy();
+			double divisor = v.get(1);
+			for (int i = 1; i <= m.n; i++){
+				m.set(i, m.get(i)/divisor);
+			}
+		}
+		else{//neeed to invert
+			throw new Exception("Non-scalar division not yet implemented.");
+		}
+		return m;
 	}
 	
-	public static void main(String[] args){
+	/*public static void main(String[] args){
 		System.out.println(MatDivide.matDivide(new Matrix(3), new Matrix(2)));
-	}
+	}*/
 }

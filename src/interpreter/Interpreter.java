@@ -688,7 +688,12 @@ public class Interpreter extends Thread {
 
             }*/
 		}
-		return ret;
+		if (ret == null){
+			return new MatObject[]{null};
+		}
+		else{
+			return ret;
+		}
 	}
 
 	public static Matrix vector(Matrix m) {

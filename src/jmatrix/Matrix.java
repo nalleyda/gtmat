@@ -153,6 +153,19 @@ public class Matrix extends MatObject {
 		size[ROW] = rows;
 		size[COL] = cols;
 	}
+	
+	public Matrix(int... dims){
+		int n = 1;
+		for (int x : dims) n *= x;
+		if (n > 0){
+			data = new double[n];
+		}
+		else{
+			data = null;
+		}
+		type = Type.DOUBLE;
+		size = dims;
+	}
 
 	/**
 	 * clone a matrix
@@ -2509,7 +2522,7 @@ public class Matrix extends MatObject {
 		 return res;
 	 }
 
-	 public static void main(String a[]) throws Exception {
+	 /*public static void main(String a[]) throws Exception {
 		 Matrix m = Matrix.magic(new Matrix(7));
 		 System.out.println(m);
 
@@ -2546,9 +2559,9 @@ public class Matrix extends MatObject {
 
 		 System.out.println(isprime(new Matrix(79)));
 		 System.out.println(isprime(new Matrix(42)));
-		 /*System.out.println(*/isprime(primes(new Matrix(1000000)));//);
+		 /*System.out.println(isprime(primes(new Matrix(1000000)));//);
 		 System.out.println("hasdfhasdf");
-	 }
+	 }*/
 
 	 class Pair {
 

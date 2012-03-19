@@ -237,7 +237,6 @@ public class TreeWalker<K,V>{
 			break; 
 		case CARET:
 			//System.out.println("exec.ing eval ("+tree.getChild(0).toString()+", "+tree.getChild(1).toString()+")");
-			System.out.println("in treewalker, exec. at :"+System.currentTimeMillis());
 			return MatPower.matPower(eval(tree.getChild(0)), eval(tree.getChild(1)));
 		case COLON:
 			return Matrix.colon(new Matrix(1), evalEnd(tree));
@@ -290,15 +289,25 @@ public class TreeWalker<K,V>{
 					Interpreter.assign(tree.getChild(0).getText(), eval(tree.getChild(1)), true);
 				}
 				else{
-					calls.add(lhs.getText());
+					if (rhsType == TYPE.ID){
+						calls.add(rhs.getText());
+					}
+					if (lhsType == TYPE.ID){
+						calls.add(lhs.getText());
+					}
 					//Evaluate every dimension of indexing
 					ArrayList<MatObject> lhsArgs = new ArrayList<MatObject>();
 					for (int i = 0; i < lhs.getChild(0).getChildCount(); i++){
 						lhsArgs.add(eval(lhs.getChild(0).getChild(i)));
 					}
 					CellArray lhsInd = new CellArray(lhsArgs.toArray(new MatObject[0]));
+					if (lhsType == TYPE.ID){
+						calls.remove(calls.size()-1);
+					}
 					MatObject.index(lhs.getText(), lhsInd, eval(rhs), true);
-					calls.remove(calls.size()-1);
+					if (rhsType == TYPE.ID){
+						calls.remove(calls.size()-1);
+					}
 					//return null;
 				}
 			}
