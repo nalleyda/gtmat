@@ -239,6 +239,10 @@ public class TreeWalker<K,V>{
 			//System.out.println("exec.ing eval ("+tree.getChild(0).toString()+", "+tree.getChild(1).toString()+")");
 			return MatPower.matPower(eval(tree.getChild(0)), eval(tree.getChild(1)));
 		case COLON:
+			Workspace curw = Main.wstack.peek();
+			//MatObject lhs = curw.getVariable(tree.getParent().getText());
+			//if (curw.getVariable)
+			//TODO use call stack and horrible traversals to find what dimensions colon should use if on lhs and variable doesn't exist yet
 			return Matrix.colon(new Matrix(1), evalEnd(tree));
 		case COLON_ARGS:
 			//BE CAREFUL - the rightmost (i.e., last) child is actually the one that belongs first - see ANTLR debugger
@@ -318,8 +322,8 @@ public class TreeWalker<K,V>{
 				if (tree.getChild(0).getChildCount()!=1 || convert(lhsTree.getType()) != TYPE.HCAT_VEC){
 					throw new Exception("Bad LHS assignment.");
 				}
-				for (int i = 1; i <= lhsTree.getChildCount(); i++){
-					Interpreter.assign(lhsTree.getChild(i).getText(), rhsRes.get(i), true);
+				for (int i = 0; i <= lhsTree.getChildCount(); i++){
+					Interpreter.assign(lhsTree.getChild(i).getText(), rhsRes.get(i+1), true);
 				}
 			}
 			else{
