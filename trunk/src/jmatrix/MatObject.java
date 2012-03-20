@@ -258,7 +258,7 @@ public abstract class MatObject {
 	 public Matrix dotcaret(MatObject o) {
 		 Matrix res = new Matrix(this);
 		 Matrix ov = castToMatrix(o);
-		 return Matrix.mexp(res, ov);
+		 return Power.power(res, ov);//Matrix.mexp(res, ov);
 	 }
 
 	 /**
