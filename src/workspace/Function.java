@@ -80,12 +80,17 @@ public class Function {
     For N-D arrays, SIZE(X) returns a 1-by-N vector of dimension lengths.
     Trailing singleton dimensions are ignored.*/
             MatObject o = args.get(1);
-            int nd = o.size.length;
+            /*int nd = o.size.length;
             xv = new Matrix(1, nd);
             for(int ndx = 1; ndx <= nd; ndx++) {
                 xv.set(ndx, o.size[ndx-1]);
             }
-            ca = new CellArray(xv);
+            ca = new CellArray(xv);*/
+        	MatObject[] data = new Matrix[o.size.length];
+        	for (int i = 0; i < data.length; i++){
+        		data[i] = new Matrix(o.size[i]);
+        	}
+        	ca = new CellArray(1, o.size.length, data);
         } else if (fname.equals("fopen")){
             if (args.length() == 1){
                 ca = FileIO.fopen((MatString) args.get(1));
