@@ -21,6 +21,8 @@ import gtmatException.*;
  */
 public class Matrix extends MatObject {
 	
+	public static final double EPSILON = .0000000001;
+	
 	public boolean conditionalIsTrue(){
 		//double error = .0000001;
 		for (int i = 0; i < data.length; i++){
@@ -40,6 +42,8 @@ public class Matrix extends MatObject {
 	public Matrix() {
 		type = Type.DOUBLE;
 		data = new double[0];
+		n=0;
+		size = new int[]{0,0};
 	}
 
 	public Matrix(double x) {
@@ -154,7 +158,7 @@ public class Matrix extends MatObject {
 		size[COL] = cols;
 	}
 	
-	public Matrix(int... dims){
+	public Matrix(int[] dims){
 		int n = 1;
 		for (int x : dims) n *= x;
 		if (n > 0){
