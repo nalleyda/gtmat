@@ -180,7 +180,7 @@ public class Main {
                 interactions.getTextPane().requestFocusInWindow();
             }
         });
-        GTMatTesting.initTesting(2,2);//*********************************************************************************
+        //GTMatTesting.initTesting(2,2);//*********************************************************************************
         //GTMatTesting.testGTMat(3, 3);
         /*   System.out.println("Interpreter Tests");
         System.out.println(new Matrix(1,2,3,4));

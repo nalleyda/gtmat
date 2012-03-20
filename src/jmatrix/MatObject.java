@@ -4,6 +4,8 @@ package jmatrix;
  * Parent of all Matlab classes with dimensions
  */
 import java.lang.RuntimeException;
+import java.util.ArrayList;
+
 import functions.*;
 import gui.TabbedPane;
 import interpreter.*;
@@ -534,7 +536,7 @@ public abstract class MatObject {
 		 /* 
 		  * How this is supposed to work:
 		  * - we are dealing with a matlab line like: B([1 3 5], [2 7]) = something.
-		  * - the vslue of expr is the RHS
+		  * - the value of expr is the RHS
 		  * - the cell array index contains the multiple dimensions of indexing for B
 		  * - with everything else going on, the user might decide to put an empty vector
 		  * - into parts of B (sigh!)
@@ -549,6 +551,19 @@ public abstract class MatObject {
 		  *      - run find on them
 		  * 
 		  */
+		 
+		 /*if (expr instanceof Matrix && expr.type == Type.LOGICAL){//check for logical indexing
+			 Matrix expr2 = (Matrix)expr;
+			 int count = 0;
+			 ArrayList<Integer> ind = new ArrayList<Integer>();
+			 for (int i = 0; i < expr.n; i++){
+				 if (expr2.data[i] > Matrix.EPSILON || expr2.data[i] < -Matrix.EPSILON){
+					 ind.add(i);
+				 }
+			 }
+			 expr2 = new Matrix(1, ind.size());//create a column of indices
+		 }*/
+		 
 		 Workspace curW = Interpreter.getWorkspace();
 		 MatObject val = Interpreter.getValue(name)[0];
 		 if(val == null) {//didn't exist previously
@@ -564,7 +579,6 @@ public abstract class MatObject {
 					 }
 					 dim[i] = (int)max;
 				 }
-				// MatObject ret = null;// = new MatObject(dim);
 				 if (expr instanceof Matrix){
 					 val = new Matrix(dim);
 				 }
@@ -573,7 +587,7 @@ public abstract class MatObject {
 				 }
 				 
 			 }
-			 val = expr.zeroed();
+			 val = expr.zeroed();//TODO not entirely sure why things work with this line present...
 		 }
 		 int en = expr.n;
 		 Matrix offset = null;
@@ -582,7 +596,7 @@ public abstract class MatObject {
 		 int oi = 0;
 		 for(int i = 1; i <= ca.n; i++) {
 			 Matrix index = (Matrix) ca.get(1, i);
-			 if(index.type == Type.LOGICAL) {
+			 if(index.type == Type.LOGICAL) {//if any are logical, assume all are logical
 				 index = Matrix.find((Matrix) index);
 			 }
 			 if(i == 1) {
