@@ -63,7 +63,7 @@ public class Variable implements Comparator<Variable>{
                 return varName + " = null";
             }
             else{
-		return varName + " = " + data.toString();
+		return varName + " = " + data.toString().trim();
             }
 	}
 	
