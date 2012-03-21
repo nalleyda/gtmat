@@ -231,7 +231,9 @@ public class TreeWalker<K,V>{
 					Interpreter.displayString(resVal.toString() + "\n");
 				}
 				}catch (Exception e){
-					System.out.println("eval(tree.getChild("+i+")) threw an exception");
+					//System.out.println("eval(tree.getChild("+i+")) threw an exception");
+					//System.err.println(e.);
+					e.printStackTrace();
 				}
 			}
 			break; 
