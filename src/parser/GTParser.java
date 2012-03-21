@@ -94,6 +94,7 @@ public class GTParser {
         }
         catch (Exception e){
             e.printStackTrace();
+            System.out.println("process() threw an exception and likely did not complete running the ch script");
         }
         
         //process(sstr);
