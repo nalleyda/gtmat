@@ -796,7 +796,7 @@ public class Interpreter extends Thread {
 	private static String myFileName = "";
 	public static MatObject[] call(String name, CellArray ca) throws Exception{
 		MatObject[] res = null;
-		System.out.println(name);
+		//System.out.println(name);
 //		System.out.println("\n\nName: " + name + "\nArguments: " + ((MatObject)(ca.getData()[0])).toString() + "\n\n");
 		myFileName = name;
 		boolean allMat = true;
@@ -855,7 +855,7 @@ public class Interpreter extends Thread {
 
 		//If we get to this point, then the RHS is invalid
 		if (res == null) {
-			System.out.println("exception thrown in Interpreter at: "+System.currentTimeMillis());
+			//System.out.println("exception thrown in Interpreter at: "+System.currentTimeMillis());
 			throw new RuntimeException("Invalid variable name or function call - " + name);
 		}
 		return res;
