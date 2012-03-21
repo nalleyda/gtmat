@@ -77,9 +77,10 @@ public class GTMatTesting {
 						if (i!=endCh) proxy.eval("clear");
 						
 					}catch(MatlabInvocationException mie){
-						System.out.println("Matlab invocation exception.");
-						System.out.println("Exception msg:"+mie.getMessage());
-						System.out.println("StackTrace:"+mie.getStackTrace());
+						System.err.println("Matlab invocation exception.");
+//						System.out.println("Exception msg:"+mie.getMessage());
+//						System.out.println("StackTrace:"+mie.getStackTrace());
+						mie.printStackTrace();
 					}
 					//proxy.eval("")
 				}
@@ -108,7 +109,7 @@ public class GTMatTesting {
 					
 			}catch(Exception e){
 				System.out.println(e.toString());
-				System.out.println(path+" threw an exception while being processed");
+				//System.out.println(path+" threw an exception while being processed");
 				System.out.println(e.getMessage());
 			}
 			start = System.currentTimeMillis();
@@ -123,12 +124,13 @@ public class GTMatTesting {
 					if(i!=endCh){
 						//System.out.println("")
 						Main.wstack.clear();
-						System.out.println("clearing stack in gtmat");
+						//System.out.println("clearing stack in gtmat");
 					}
 					
 				} catch(Exception e){
-						System.out.println(e.getMessage());
-						System.out.println("execGTMat threw an exception on wstack.clear() at i="+i);
+//						System.out.println(e.getMessage());
+//						System.out.println("execGTMat threw an exception on wstack.clear() at i="+i);
+						e.printStackTrace();
 				}
 			}
 		}
