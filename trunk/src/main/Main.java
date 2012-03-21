@@ -180,8 +180,10 @@ public class Main {
                 interactions.getTextPane().requestFocusInWindow();
             }
         });
+        
+        GTMatTesting.initTesting(3,3);
         //GTMatTesting.initTesting(2,2);//*********************************************************************************
-        //GTMatTesting.testGTMat(3, 3);
+        
         /*   System.out.println("Interpreter Tests");
         System.out.println(new Matrix(1,2,3,4));
         Matrix x = (Matrix)Interpreter.call("add", new Matrix(2,2,1,2,3,4), new Matrix(2,2,5,6,7,8));
