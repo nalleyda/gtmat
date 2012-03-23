@@ -26,9 +26,9 @@ public class Matrix extends MatObject {
 	public boolean conditionalIsTrue(){
 		//double error = .0000001;
 		for (int i = 0; i < data.length; i++){
-			if (data[i] != 0) return true;//return any(this)
+			if (data[i] == 0) return false;//return any(this)
 		}
-		return false;
+		return true;
 	}
 
 	public double data[];  // always store a vector of doubles

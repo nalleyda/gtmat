@@ -36,7 +36,7 @@ public class IsEqual {
 	public static Matrix le1(double v, Matrix m) {
 		Matrix res = new Matrix(m);
 		for (int i = 1; i <= m.n; i++) {
-			res.set(i, (v <= m.get(i)) ? 1 : 0);
+			res.set(i, (v == m.get(i)) ? 1 : 0);
 		}
 		res.type = Type.LOGICAL;
 		return res;
@@ -45,7 +45,7 @@ public class IsEqual {
 	public static Matrix ge1(double v, Matrix m) {
 		Matrix res = new Matrix(m);
 		for (int i = 1; i <= m.n; i++) {
-			res.set(i, (v >= m.get(i)) ? 1 : 0);
+			res.set(i, (v == m.get(i)) ? 1 : 0);
 		}
 		res.type = Type.LOGICAL;
 		return res;

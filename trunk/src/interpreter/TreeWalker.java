@@ -228,13 +228,11 @@ public class TreeWalker<K,V>{
 				try{
 					MatObject resVal = null;
 					if (convert(tree.getChild(i).getType()) == TYPE.SEMI){
-						//for (int j = 0; j < tree.getChild(0).getChildCount(); j++){
-							resVal = eval(tree.getChild(i).getChild(0));
-						//}
+						resVal = eval(tree.getChild(i).getChild(0));
 					}
 					else{
 						resVal = eval(tree.getChild(i));
-						
+
 					}
 					if (/*convert(tree.getChild(i).getType()) != TYPE.BLOCK &&*/ resVal != null){
 						Interpreter.displayString(resVal.toString() + "\n");
@@ -342,9 +340,10 @@ public class TreeWalker<K,V>{
 			}
 			break;
 
-			//TODO put this back
-			/*case FALSE:
-			return new Logical(0);*/
+		case FALSE:
+			res = new Matrix(0);
+			res.type = MatObject.Type.LOGICAL;
+			return res;
 
 		case FOR_LOOP:
 			MatObject loopOver = eval(tree.getChild(0).getChild(2));
@@ -373,7 +372,7 @@ public class TreeWalker<K,V>{
 			for (int i = 0; i < tree.getChildCount(); i++){
 				arrc.add(eval(tree.getChild(i)));
 			}
-			return HorizontalConcatenate.horizontalConcatenateCell(arrc.toArray(new MatObject[0]));
+			return HorizontalConcatenate.hCatCell(arrc.toArray(new MatObject[0]));
 		case HCAT_VEC:
 			ArrayList<MatObject> arr = new ArrayList<MatObject>();
 			for (int i = 0; i < tree.getChildCount(); i++){
@@ -417,7 +416,7 @@ public class TreeWalker<K,V>{
 				for (int i = 1; i < tree.getChildCount() && convert(tree.getChild(i).getType()) == TYPE.ELSEIF; i++){
 					if (eval(tree.getChild(i).getChild(0)).conditionalIsTrue()){
 						eval(tree.getChild(i).getChild(1));
-						break;
+						return null;
 					}
 				}
 				if (convert(tree.getChild(tree.getChildCount()-1).getType()) == TYPE.ELSE){
@@ -460,7 +459,7 @@ public class TreeWalker<K,V>{
 
 		case SWITCH_STAT:
 			//An evaluated switch_expression is a scalar or string
-			MatObject se = eval(tree.getChild(0));
+			MatObject se = eval(tree.getChild(0).getChild(0));
 
 			int lastCaseInd;
 			if (convert(tree.getChild(tree.getChildCount()-1).getType()) == TYPE.OTHERWISE){
@@ -478,23 +477,31 @@ public class TreeWalker<K,V>{
 
 					//An evaluated case_expression is a scalar, string, or ca of scalars or strings
 					if (ce instanceof CellArray){
-						for (int j = 0; j < ce.n; j++){
-							if (MatObject.get(ce, new Matrix(j)).equals(se)){
+						for (int j = 1; j <= ce.n; j++){
+							if (IsEqual.isEqual(/*MatObject.get(ce, new Matrix(j))*/((CellArray)ce).get(j), se).conditionalIsTrue()){
 								eval(tree.getChild(i).getChild(1));
 								didOne = true;
 								break out;
 							}
 						}
 					}
+					else{
+						if (IsEqual.isEqual(ce, se).conditionalIsTrue()){
+							eval(tree.getChild(i).getChild(1));
+							didOne = true;
+							break out;
+						}
+					}
 				}
 			if (!didOne && lastCaseInd == tree.getChildCount()-2){
-				eval(tree.getChild(tree.getChildCount()-1));
+				eval(tree.getChild(tree.getChildCount()-1).getChild(0));
 			}
 			break;
 
-			//TODO put this back
-			/*case TRUE:
-			return new Logical(1);*/
+		case TRUE:
+			res = new Matrix(1);
+			res.type = MatObject.Type.LOGICAL;
+			return res;
 
 		case VCAT_CELL:
 			if (tree.getChildCount() == 1) return eval(tree.getChild(0));

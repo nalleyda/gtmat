@@ -17,7 +17,7 @@ public class GreaterEqual {
 	 */
 	public static Matrix greaterEqual(Matrix a, Matrix b) {
 		if (a.n == 1) {
-			return le1(a.get(1), b);
+			return ge1(a.get(1), b);
 		}
 		if (b.n == 1) {
 			return ge1(b.get(1), a);
