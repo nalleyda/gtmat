@@ -33,11 +33,12 @@ public class MatDivide {
 			for (int i = 1; i <= m.n; i++){
 				res.set(i, m.get(i)/divisor);
 			}
+			return res;
 		}
 		else{//neeed to invert
 			throw new Exception("Non-scalar division not yet implemented.");
 		}
-		return m;
+		//return res;
 	}
 	
 	/*public static void main(String[] args){

@@ -1,4 +1,4 @@
-// $ANTLR 3.4 /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g 2012-02-20 14:18:19
+// $ANTLR 3.4 /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g 2012-03-22 21:26:55
 
 	package parser;
 
@@ -115,28 +115,108 @@ public class ExprLexer extends Lexer {
     }
     public String getGrammarFileName() { return "/Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g"; }
 
+    // $ANTLR start "WS"
+    public final void mWS() throws RecognitionException {
+        try {
+            int _type = WS;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:271:5: ( ( ' ' | '\\t' | '\\f' )+ )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:271:7: ( ' ' | '\\t' | '\\f' )+
+            {
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:271:7: ( ' ' | '\\t' | '\\f' )+
+            int cnt1=0;
+            loop1:
+            do {
+                int alt1=2;
+                int LA1_0 = input.LA(1);
+
+                if ( (LA1_0=='\t'||LA1_0=='\f'||LA1_0==' ') ) {
+                    alt1=1;
+                }
+
+
+                switch (alt1) {
+            	case 1 :
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:
+            	    {
+            	    if ( input.LA(1)=='\t'||input.LA(1)=='\f'||input.LA(1)==' ' ) {
+            	        input.consume();
+            	    }
+            	    else {
+            	        MismatchedSetException mse = new MismatchedSetException(null,input);
+            	        recover(mse);
+            	        throw mse;
+            	    }
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    if ( cnt1 >= 1 ) break loop1;
+                        EarlyExitException eee =
+                            new EarlyExitException(1, input);
+                        throw eee;
+                }
+                cnt1++;
+            } while (true);
+
+
+            _channel = HIDDEN;
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "WS"
+
     // $ANTLR start "BLOCK_END"
     public final void mBLOCK_END() throws RecognitionException {
         try {
             int _type = BLOCK_END;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:271:11: ( 'end' ( '\\r' )? '\\n' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:271:13: 'end' ( '\\r' )? '\\n'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:272:11: ( 'end' ( WS )? ( '\\r' )? '\\n' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:272:13: 'end' ( WS )? ( '\\r' )? '\\n'
             {
             match("end"); 
 
 
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:271:19: ( '\\r' )?
-            int alt1=2;
-            int LA1_0 = input.LA(1);
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:272:19: ( WS )?
+            int alt2=2;
+            int LA2_0 = input.LA(1);
 
-            if ( (LA1_0=='\r') ) {
-                alt1=1;
+            if ( (LA2_0=='\t'||LA2_0=='\f'||LA2_0==' ') ) {
+                alt2=1;
             }
-            switch (alt1) {
+            switch (alt2) {
                 case 1 :
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:271:19: '\\r'
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:272:19: WS
+                    {
+                    mWS(); 
+
+
+                    }
+                    break;
+
+            }
+
+
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:272:23: ( '\\r' )?
+            int alt3=2;
+            int LA3_0 = input.LA(1);
+
+            if ( (LA3_0=='\r') ) {
+                alt3=1;
+            }
+            switch (alt3) {
+                case 1 :
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:272:23: '\\r'
                     {
                     match('\r'); 
 
@@ -159,15 +239,95 @@ public class ExprLexer extends Lexer {
     }
     // $ANTLR end "BLOCK_END"
 
+    // $ANTLR start "NEWLINE"
+    public final void mNEWLINE() throws RecognitionException {
+        try {
+            int _type = NEWLINE;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:273:9: ( ( '\\r' )? '\\n' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:273:11: ( '\\r' )? '\\n'
+            {
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:273:11: ( '\\r' )?
+            int alt4=2;
+            int LA4_0 = input.LA(1);
+
+            if ( (LA4_0=='\r') ) {
+                alt4=1;
+            }
+            switch (alt4) {
+                case 1 :
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:273:11: '\\r'
+                    {
+                    match('\r'); 
+
+                    }
+                    break;
+
+            }
+
+
+            match('\n'); 
+
+            _channel = HIDDEN;
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "NEWLINE"
+
     // $ANTLR start "EMPTY_VEC"
     public final void mEMPTY_VEC() throws RecognitionException {
         try {
             int _type = EMPTY_VEC;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:272:11: ( '[' ']' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:272:13: '[' ']'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:274:11: ( '[' ( WS | NEWLINE )* ']' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:274:13: '[' ( WS | NEWLINE )* ']'
             {
             match('['); 
+
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:274:17: ( WS | NEWLINE )*
+            loop5:
+            do {
+                int alt5=3;
+                int LA5_0 = input.LA(1);
+
+                if ( (LA5_0=='\t'||LA5_0=='\f'||LA5_0==' ') ) {
+                    alt5=1;
+                }
+                else if ( (LA5_0=='\n'||LA5_0=='\r') ) {
+                    alt5=2;
+                }
+
+
+                switch (alt5) {
+            	case 1 :
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:274:18: WS
+            	    {
+            	    mWS(); 
+
+
+            	    }
+            	    break;
+            	case 2 :
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:274:23: NEWLINE
+            	    {
+            	    mNEWLINE(); 
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop5;
+                }
+            } while (true);
+
 
             match(']'); 
 
@@ -187,10 +347,48 @@ public class ExprLexer extends Lexer {
         try {
             int _type = EMPTY_CELL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:273:12: ( '{' '}' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:273:14: '{' '}'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:275:12: ( '{' ( WS | NEWLINE )* '}' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:275:14: '{' ( WS | NEWLINE )* '}'
             {
             match('{'); 
+
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:275:18: ( WS | NEWLINE )*
+            loop6:
+            do {
+                int alt6=3;
+                int LA6_0 = input.LA(1);
+
+                if ( (LA6_0=='\t'||LA6_0=='\f'||LA6_0==' ') ) {
+                    alt6=1;
+                }
+                else if ( (LA6_0=='\n'||LA6_0=='\r') ) {
+                    alt6=2;
+                }
+
+
+                switch (alt6) {
+            	case 1 :
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:275:19: WS
+            	    {
+            	    mWS(); 
+
+
+            	    }
+            	    break;
+            	case 2 :
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:275:24: NEWLINE
+            	    {
+            	    mNEWLINE(); 
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop6;
+                }
+            } while (true);
+
 
             match('}'); 
 
@@ -210,8 +408,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = SINGLE_QUOTE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:274:14: ( '$' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:274:16: '$'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:276:14: ( '$' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:276:16: '$'
             {
             match('$'); 
 
@@ -231,8 +429,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = BREAK;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:277:8: ( 'break' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:277:10: 'break'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:279:8: ( 'break' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:279:10: 'break'
             {
             match("break"); 
 
@@ -254,8 +452,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = CASE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:278:7: ( 'case' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:278:9: 'case'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:280:7: ( 'case' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:280:9: 'case'
             {
             match("case"); 
 
@@ -277,8 +475,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = CATCH;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:279:8: ( 'catch' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:279:10: 'catch'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:281:8: ( 'catch' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:281:10: 'catch'
             {
             match("catch"); 
 
@@ -300,8 +498,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = CLASSDEF;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:280:10: ( 'classdef' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:280:12: 'classdef'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:282:10: ( 'classdef' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:282:12: 'classdef'
             {
             match("classdef"); 
 
@@ -323,8 +521,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = CONTINUE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:281:10: ( 'continue' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:281:12: 'continue'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:283:10: ( 'continue' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:283:12: 'continue'
             {
             match("continue"); 
 
@@ -346,8 +544,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = ELSE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:282:7: ( 'else' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:282:9: 'else'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:284:7: ( 'else' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:284:9: 'else'
             {
             match("else"); 
 
@@ -369,8 +567,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = ELSEIF;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:283:9: ( 'elseif' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:283:11: 'elseif'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:285:9: ( 'elseif' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:285:11: 'elseif'
             {
             match("elseif"); 
 
@@ -392,8 +590,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = END;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:284:6: ( 'end' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:284:8: 'end'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:286:6: ( 'end' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:286:8: 'end'
             {
             match("end"); 
 
@@ -415,8 +613,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = FALSE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:285:8: ( 'false' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:285:10: 'false'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:287:8: ( 'false' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:287:10: 'false'
             {
             match("false"); 
 
@@ -438,8 +636,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = FOR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:286:6: ( 'for' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:286:8: 'for'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:288:6: ( 'for' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:288:8: 'for'
             {
             match("for"); 
 
@@ -461,8 +659,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = FUNCTION;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:287:10: ( 'function' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:287:12: 'function'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:289:10: ( 'function' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:289:12: 'function'
             {
             match("function"); 
 
@@ -484,8 +682,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = GLOBAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:288:9: ( 'global' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:288:11: 'global'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:290:9: ( 'global' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:290:11: 'global'
             {
             match("global"); 
 
@@ -507,8 +705,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = IF;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:289:5: ( 'if' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:289:7: 'if'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:291:5: ( 'if' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:291:7: 'if'
             {
             match("if"); 
 
@@ -530,8 +728,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = OTHERWISE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:290:11: ( 'otherwise' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:290:13: 'otherwise'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:292:11: ( 'otherwise' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:292:13: 'otherwise'
             {
             match("otherwise"); 
 
@@ -553,8 +751,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = PARFOR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:291:9: ( 'parfor' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:291:11: 'parfor'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:293:9: ( 'parfor' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:293:11: 'parfor'
             {
             match("parfor"); 
 
@@ -576,8 +774,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = PERSISTENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:292:12: ( 'persistent' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:292:14: 'persistent'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:294:12: ( 'persistent' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:294:14: 'persistent'
             {
             match("persistent"); 
 
@@ -599,8 +797,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = RETURN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:293:9: ( 'return' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:293:11: 'return'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:295:9: ( 'return' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:295:11: 'return'
             {
             match("return"); 
 
@@ -622,8 +820,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = SPMD;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:294:7: ( 'spmd' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:294:9: 'spmd'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:296:7: ( 'spmd' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:296:9: 'spmd'
             {
             match("spmd"); 
 
@@ -645,8 +843,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = SWITCH;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:295:9: ( 'switch' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:295:11: 'switch'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:297:9: ( 'switch' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:297:11: 'switch'
             {
             match("switch"); 
 
@@ -668,8 +866,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = TRUE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:296:7: ( 'true' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:296:9: 'true'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:298:7: ( 'true' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:298:9: 'true'
             {
             match("true"); 
 
@@ -691,8 +889,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = TRY;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:297:6: ( 'try' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:297:8: 'try'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:299:6: ( 'try' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:299:8: 'try'
             {
             match("try"); 
 
@@ -714,8 +912,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = WHILE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:298:8: ( 'while' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:298:10: 'while'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:300:8: ( 'while' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:300:10: 'while'
             {
             match("while"); 
 
@@ -737,8 +935,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = AT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:301:5: ( '@' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:301:7: '@'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:303:5: ( '@' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:303:7: '@'
             {
             match('@'); 
 
@@ -758,8 +956,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = BACKSLASH;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:302:11: ( '\\\\' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:302:13: '\\\\'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:304:11: ( '\\\\' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:304:13: '\\\\'
             {
             match('\\'); 
 
@@ -779,8 +977,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = CARET;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:303:8: ( '^' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:303:10: '^'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:305:8: ( '^' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:305:10: '^'
             {
             match('^'); 
 
@@ -800,8 +998,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = CLOSE_BLOCK;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:304:13: ( '%}' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:304:15: '%}'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:306:13: ( '%}' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:306:15: '%}'
             {
             match("%}"); 
 
@@ -823,8 +1021,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = CLOSEB;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:305:9: ( ']' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:305:11: ']'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:307:9: ( ']' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:307:11: ']'
             {
             match(']'); 
 
@@ -844,8 +1042,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = CLOSEC;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:306:9: ( '}' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:306:11: '}'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:308:9: ( '}' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:308:11: '}'
             {
             match('}'); 
 
@@ -865,8 +1063,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = CLOSEP;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:307:9: ( ')' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:307:11: ')'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:309:9: ( ')' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:309:11: ')'
             {
             match(')'); 
 
@@ -886,8 +1084,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = COLON;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:308:8: ( ':' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:308:10: ':'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:310:8: ( ':' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:310:10: ':'
             {
             match(':'); 
 
@@ -907,8 +1105,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = COMMA;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:309:8: ( ',' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:309:10: ','
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:311:8: ( ',' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:311:10: ','
             {
             match(','); 
 
@@ -928,8 +1126,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = DOUBLE_QUOTE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:310:14: ( '\"' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:310:16: '\"'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:312:14: ( '\"' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:312:16: '\"'
             {
             match('\"'); 
 
@@ -949,8 +1147,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = DOT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:311:6: ( '.' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:311:8: '.'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:313:6: ( '.' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:313:8: '.'
             {
             match('.'); 
 
@@ -970,8 +1168,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = DOT_BACKSLASH;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:312:15: ( '.\\\\' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:312:17: '.\\\\'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:314:15: ( '.\\\\' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:314:17: '.\\\\'
             {
             match(".\\"); 
 
@@ -993,8 +1191,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = DOT_CARET;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:313:11: ( '.^' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:313:13: '.^'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:315:11: ( '.^' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:315:13: '.^'
             {
             match(".^"); 
 
@@ -1016,8 +1214,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = DOT_SLASH;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:315:11: ( './' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:315:13: './'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:317:11: ( './' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:317:13: './'
             {
             match("./"); 
 
@@ -1039,8 +1237,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = DOT_STAR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:316:10: ( '.*' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:316:12: '.*'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:318:10: ( '.*' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:318:12: '.*'
             {
             match(".*"); 
 
@@ -1062,8 +1260,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = DOT_TRANSPOSE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:317:15: ( '.\\'' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:317:17: '.\\''
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:319:15: ( '.\\'' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:319:17: '.\\''
             {
             match(".'"); 
 
@@ -1085,8 +1283,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = ELE_AND;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:318:10: ( '&' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:318:12: '&'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:320:10: ( '&' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:320:12: '&'
             {
             match('&'); 
 
@@ -1106,8 +1304,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = ELE_OR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:319:9: ( '|' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:319:11: '|'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:321:9: ( '|' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:321:11: '|'
             {
             match('|'); 
 
@@ -1127,8 +1325,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = EQUALS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:320:9: ( '=' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:320:11: '='
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:322:9: ( '=' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:322:11: '='
             {
             match('='); 
 
@@ -1148,8 +1346,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = EXCLAMATION;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:321:13: ( '!' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:321:15: '!'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:323:13: ( '!' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:323:15: '!'
             {
             match('!'); 
 
@@ -1169,8 +1367,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = GREATER_THAN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:322:14: ( '>' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:322:16: '>'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:324:14: ( '>' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:324:16: '>'
             {
             match('>'); 
 
@@ -1190,8 +1388,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = GREATER_EQUAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:323:15: ( '>=' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:323:17: '>='
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:325:15: ( '>=' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:325:17: '>='
             {
             match(">="); 
 
@@ -1213,8 +1411,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = ISEQUAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:324:10: ( '==' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:324:12: '=='
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:326:10: ( '==' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:326:12: '=='
             {
             match("=="); 
 
@@ -1236,8 +1434,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = LESS_EQUAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:325:12: ( '<=' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:325:14: '<='
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:327:12: ( '<=' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:327:14: '<='
             {
             match("<="); 
 
@@ -1259,8 +1457,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = LESS_THAN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:326:11: ( '<' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:326:13: '<'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:328:11: ( '<' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:328:13: '<'
             {
             match('<'); 
 
@@ -1280,8 +1478,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = MINUS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:327:8: ( '-' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:327:10: '-'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:329:8: ( '-' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:329:10: '-'
             {
             match('-'); 
 
@@ -1301,8 +1499,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = NOT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:328:6: ( '~' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:328:8: '~'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:330:6: ( '~' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:330:8: '~'
             {
             match('~'); 
 
@@ -1322,8 +1520,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = NOT_EQUAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:329:11: ( '~=' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:329:13: '~='
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:331:11: ( '~=' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:331:13: '~='
             {
             match("~="); 
 
@@ -1345,8 +1543,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = OPEN_BLOCK;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:330:12: ( '%{' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:330:14: '%{'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:332:12: ( '%{' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:332:14: '%{'
             {
             match("%{"); 
 
@@ -1368,8 +1566,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = OPENB;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:331:8: ( '[' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:331:10: '['
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:333:8: ( '[' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:333:10: '['
             {
             match('['); 
 
@@ -1389,8 +1587,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = OPENC;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:332:8: ( '{' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:332:10: '{'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:334:8: ( '{' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:334:10: '{'
             {
             match('{'); 
 
@@ -1410,8 +1608,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = OPENP;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:333:8: ( '(' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:333:10: '('
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:335:8: ( '(' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:335:10: '('
             {
             match('('); 
 
@@ -1431,8 +1629,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = PERCENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:334:10: ( '%' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:334:12: '%'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:336:10: ( '%' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:336:12: '%'
             {
             match('%'); 
 
@@ -1452,8 +1650,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = PLUS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:335:7: ( '+' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:335:9: '+'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:337:7: ( '+' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:337:9: '+'
             {
             match('+'); 
 
@@ -1473,8 +1671,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = SC_AND;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:336:9: ( '&&' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:336:11: '&&'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:338:9: ( '&&' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:338:11: '&&'
             {
             match("&&"); 
 
@@ -1496,8 +1694,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = SC_OR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:337:8: ( '||' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:337:10: '||'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:339:8: ( '||' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:339:10: '||'
             {
             match("||"); 
 
@@ -1519,8 +1717,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = SEMI;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:338:7: ( ';' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:338:9: ';'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:340:7: ( ';' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:340:9: ';'
             {
             match(';'); 
 
@@ -1540,8 +1738,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = SLASH;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:340:8: ( '/' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:340:10: '/'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:342:8: ( '/' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:342:10: '/'
             {
             match('/'); 
 
@@ -1561,8 +1759,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = STAR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:341:7: ( '*' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:341:9: '*'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:343:7: ( '*' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:343:9: '*'
             {
             match('*'); 
 
@@ -1580,7 +1778,7 @@ public class ExprLexer extends Lexer {
     // $ANTLR start "DIGIT"
     public final void mDIGIT() throws RecognitionException {
         try {
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:345:17: ( ( '0' .. '9' ) )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:347:17: ( ( '0' .. '9' ) )
             // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:
             {
             if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
@@ -1606,7 +1804,7 @@ public class ExprLexer extends Lexer {
     // $ANTLR start "LETTER"
     public final void mLETTER() throws RecognitionException {
         try {
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:346:18: ( ( 'a' .. 'z' | 'A' .. 'Z' ) )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:348:18: ( ( 'a' .. 'z' | 'A' .. 'Z' ) )
             // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:
             {
             if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
@@ -1632,8 +1830,8 @@ public class ExprLexer extends Lexer {
     // $ANTLR start "UNDERSCORE"
     public final void mUNDERSCORE() throws RecognitionException {
         try {
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:347:21: ( '_' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:347:23: '_'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:349:21: ( '_' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:349:23: '_'
             {
             match('_'); 
 
@@ -1652,22 +1850,22 @@ public class ExprLexer extends Lexer {
         try {
             int _type = INTEGER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:348:9: ( ( DIGIT )+ )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:348:11: ( DIGIT )+
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:350:9: ( ( DIGIT )+ )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:350:11: ( DIGIT )+
             {
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:348:11: ( DIGIT )+
-            int cnt2=0;
-            loop2:
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:350:11: ( DIGIT )+
+            int cnt7=0;
+            loop7:
             do {
-                int alt2=2;
-                int LA2_0 = input.LA(1);
+                int alt7=2;
+                int LA7_0 = input.LA(1);
 
-                if ( ((LA2_0 >= '0' && LA2_0 <= '9')) ) {
-                    alt2=1;
+                if ( ((LA7_0 >= '0' && LA7_0 <= '9')) ) {
+                    alt7=1;
                 }
 
 
-                switch (alt2) {
+                switch (alt7) {
             	case 1 :
             	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:
             	    {
@@ -1685,12 +1883,12 @@ public class ExprLexer extends Lexer {
             	    break;
 
             	default :
-            	    if ( cnt2 >= 1 ) break loop2;
+            	    if ( cnt7 >= 1 ) break loop7;
                         EarlyExitException eee =
-                            new EarlyExitException(2, input);
+                            new EarlyExitException(7, input);
                         throw eee;
                 }
-                cnt2++;
+                cnt7++;
             } while (true);
 
 
@@ -1710,31 +1908,31 @@ public class ExprLexer extends Lexer {
         try {
             int _type = COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:350:9: ( '\\%' ( . )* NEWLINE )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:350:11: '\\%' ( . )* NEWLINE
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:352:9: ( '\\%' ( . )* NEWLINE )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:352:11: '\\%' ( . )* NEWLINE
             {
             match('%'); 
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:350:16: ( . )*
-            loop3:
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:352:16: ( . )*
+            loop8:
             do {
-                int alt3=2;
-                int LA3_0 = input.LA(1);
+                int alt8=2;
+                int LA8_0 = input.LA(1);
 
-                if ( (LA3_0=='\r') ) {
-                    alt3=2;
+                if ( (LA8_0=='\r') ) {
+                    alt8=2;
                 }
-                else if ( (LA3_0=='\n') ) {
-                    alt3=2;
+                else if ( (LA8_0=='\n') ) {
+                    alt8=2;
                 }
-                else if ( ((LA3_0 >= '\u0000' && LA3_0 <= '\t')||(LA3_0 >= '\u000B' && LA3_0 <= '\f')||(LA3_0 >= '\u000E' && LA3_0 <= '\uFFFF')) ) {
-                    alt3=1;
+                else if ( ((LA8_0 >= '\u0000' && LA8_0 <= '\t')||(LA8_0 >= '\u000B' && LA8_0 <= '\f')||(LA8_0 >= '\u000E' && LA8_0 <= '\uFFFF')) ) {
+                    alt8=1;
                 }
 
 
-                switch (alt3) {
+                switch (alt8) {
             	case 1 :
-            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:350:16: .
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:352:16: .
             	    {
             	    matchAny(); 
 
@@ -1742,7 +1940,7 @@ public class ExprLexer extends Lexer {
             	    break;
 
             	default :
-            	    break loop3;
+            	    break loop8;
                 }
             } while (true);
 
@@ -1768,28 +1966,28 @@ public class ExprLexer extends Lexer {
         try {
             int _type = ELLIPSIS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:352:9: ( '...' ( NEWLINE )+ )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:352:11: '...' ( NEWLINE )+
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:354:9: ( '...' ( NEWLINE )+ )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:354:11: '...' ( NEWLINE )+
             {
             match("..."); 
 
 
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:352:17: ( NEWLINE )+
-            int cnt4=0;
-            loop4:
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:354:17: ( NEWLINE )+
+            int cnt9=0;
+            loop9:
             do {
-                int alt4=2;
-                int LA4_0 = input.LA(1);
+                int alt9=2;
+                int LA9_0 = input.LA(1);
 
-                if ( (LA4_0=='\n'||LA4_0=='\r') ) {
-                    alt4=1;
+                if ( (LA9_0=='\n'||LA9_0=='\r') ) {
+                    alt9=1;
                 }
 
 
-                switch (alt4) {
+                switch (alt9) {
             	case 1 :
-            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:352:17: NEWLINE
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:354:17: NEWLINE
             	    {
             	    mNEWLINE(); 
 
@@ -1798,12 +1996,12 @@ public class ExprLexer extends Lexer {
             	    break;
 
             	default :
-            	    if ( cnt4 >= 1 ) break loop4;
+            	    if ( cnt9 >= 1 ) break loop9;
                         EarlyExitException eee =
-                            new EarlyExitException(4, input);
+                            new EarlyExitException(9, input);
                         throw eee;
                 }
-                cnt4++;
+                cnt9++;
             } while (true);
 
 
@@ -1825,8 +2023,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = EXPONENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:353:9: ( ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+ )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:353:11: ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:355:9: ( ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+ )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:355:11: ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+
             {
             if ( input.LA(1)=='E'||input.LA(1)=='e' ) {
                 input.consume();
@@ -1838,14 +2036,14 @@ public class ExprLexer extends Lexer {
             }
 
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:353:23: ( '+' | '-' )?
-            int alt5=2;
-            int LA5_0 = input.LA(1);
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:355:23: ( '+' | '-' )?
+            int alt10=2;
+            int LA10_0 = input.LA(1);
 
-            if ( (LA5_0=='+'||LA5_0=='-') ) {
-                alt5=1;
+            if ( (LA10_0=='+'||LA10_0=='-') ) {
+                alt10=1;
             }
-            switch (alt5) {
+            switch (alt10) {
                 case 1 :
                     // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:
                     {
@@ -1865,19 +2063,19 @@ public class ExprLexer extends Lexer {
             }
 
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:353:36: ( '0' .. '9' )+
-            int cnt6=0;
-            loop6:
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:355:36: ( '0' .. '9' )+
+            int cnt11=0;
+            loop11:
             do {
-                int alt6=2;
-                int LA6_0 = input.LA(1);
+                int alt11=2;
+                int LA11_0 = input.LA(1);
 
-                if ( ((LA6_0 >= '0' && LA6_0 <= '9')) ) {
-                    alt6=1;
+                if ( ((LA11_0 >= '0' && LA11_0 <= '9')) ) {
+                    alt11=1;
                 }
 
 
-                switch (alt6) {
+                switch (alt11) {
             	case 1 :
             	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:
             	    {
@@ -1895,12 +2093,12 @@ public class ExprLexer extends Lexer {
             	    break;
 
             	default :
-            	    if ( cnt6 >= 1 ) break loop6;
+            	    if ( cnt11 >= 1 ) break loop11;
                         EarlyExitException eee =
-                            new EarlyExitException(6, input);
+                            new EarlyExitException(11, input);
                         throw eee;
                 }
-                cnt6++;
+                cnt11++;
             } while (true);
 
 
@@ -1920,24 +2118,24 @@ public class ExprLexer extends Lexer {
         try {
             int _type = ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:354:5: ( LETTER ( LETTER | DIGIT | UNDERSCORE )* )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:354:7: LETTER ( LETTER | DIGIT | UNDERSCORE )*
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:356:5: ( LETTER ( LETTER | DIGIT | UNDERSCORE )* )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:356:7: LETTER ( LETTER | DIGIT | UNDERSCORE )*
             {
             mLETTER(); 
 
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:354:14: ( LETTER | DIGIT | UNDERSCORE )*
-            loop7:
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:356:14: ( LETTER | DIGIT | UNDERSCORE )*
+            loop12:
             do {
-                int alt7=2;
-                int LA7_0 = input.LA(1);
+                int alt12=2;
+                int LA12_0 = input.LA(1);
 
-                if ( ((LA7_0 >= '0' && LA7_0 <= '9')||(LA7_0 >= 'A' && LA7_0 <= 'Z')||LA7_0=='_'||(LA7_0 >= 'a' && LA7_0 <= 'z')) ) {
-                    alt7=1;
+                if ( ((LA12_0 >= '0' && LA12_0 <= '9')||(LA12_0 >= 'A' && LA12_0 <= 'Z')||LA12_0=='_'||(LA12_0 >= 'a' && LA12_0 <= 'z')) ) {
+                    alt12=1;
                 }
 
 
-                switch (alt7) {
+                switch (alt12) {
             	case 1 :
             	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:
             	    {
@@ -1955,7 +2153,7 @@ public class ExprLexer extends Lexer {
             	    break;
 
             	default :
-            	    break loop7;
+            	    break loop12;
                 }
             } while (true);
 
@@ -1971,48 +2169,6 @@ public class ExprLexer extends Lexer {
     }
     // $ANTLR end "ID"
 
-    // $ANTLR start "NEWLINE"
-    public final void mNEWLINE() throws RecognitionException {
-        try {
-            int _type = NEWLINE;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:358:9: ( ( '\\r' )? '\\n' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:358:11: ( '\\r' )? '\\n'
-            {
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:358:11: ( '\\r' )?
-            int alt8=2;
-            int LA8_0 = input.LA(1);
-
-            if ( (LA8_0=='\r') ) {
-                alt8=1;
-            }
-            switch (alt8) {
-                case 1 :
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:358:11: '\\r'
-                    {
-                    match('\r'); 
-
-                    }
-                    break;
-
-            }
-
-
-            match('\n'); 
-
-            _channel = HIDDEN;
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "NEWLINE"
-
     // $ANTLR start "STRING_LITERAL"
     public final void mSTRING_LITERAL() throws RecognitionException {
         try {
@@ -2020,36 +2176,36 @@ public class ExprLexer extends Lexer {
             int _channel = DEFAULT_TOKEN_CHANNEL;
             int c;
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:360:8: ( '\\'' ( '\\'' '\\'' |c=~ ( '\\'' | '\\r' | '\\n' ) )* '\\'' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:360:10: '\\'' ( '\\'' '\\'' |c=~ ( '\\'' | '\\r' | '\\n' ) )* '\\''
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:361:8: ( '\\'' ( '\\'' '\\'' |c=~ ( '\\'' | '\\r' | '\\n' ) )* '\\'' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:361:10: '\\'' ( '\\'' '\\'' |c=~ ( '\\'' | '\\r' | '\\n' ) )* '\\''
             {
             match('\''); 
 
             StringBuilder b = new StringBuilder();
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:362:11: ( '\\'' '\\'' |c=~ ( '\\'' | '\\r' | '\\n' ) )*
-            loop9:
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:363:11: ( '\\'' '\\'' |c=~ ( '\\'' | '\\r' | '\\n' ) )*
+            loop13:
             do {
-                int alt9=3;
-                int LA9_0 = input.LA(1);
+                int alt13=3;
+                int LA13_0 = input.LA(1);
 
-                if ( (LA9_0=='\'') ) {
-                    int LA9_1 = input.LA(2);
+                if ( (LA13_0=='\'') ) {
+                    int LA13_1 = input.LA(2);
 
-                    if ( (LA9_1=='\'') ) {
-                        alt9=1;
+                    if ( (LA13_1=='\'') ) {
+                        alt13=1;
                     }
 
 
                 }
-                else if ( ((LA9_0 >= '\u0000' && LA9_0 <= '\t')||(LA9_0 >= '\u000B' && LA9_0 <= '\f')||(LA9_0 >= '\u000E' && LA9_0 <= '&')||(LA9_0 >= '(' && LA9_0 <= '\uFFFF')) ) {
-                    alt9=2;
+                else if ( ((LA13_0 >= '\u0000' && LA13_0 <= '\t')||(LA13_0 >= '\u000B' && LA13_0 <= '\f')||(LA13_0 >= '\u000E' && LA13_0 <= '&')||(LA13_0 >= '(' && LA13_0 <= '\uFFFF')) ) {
+                    alt13=2;
                 }
 
 
-                switch (alt9) {
+                switch (alt13) {
             	case 1 :
-            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:362:13: '\\'' '\\''
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:363:13: '\\'' '\\''
             	    {
             	    match('\''); 
 
@@ -2060,7 +2216,7 @@ public class ExprLexer extends Lexer {
             	    }
             	    break;
             	case 2 :
-            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:363:13: c=~ ( '\\'' | '\\r' | '\\n' )
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:364:13: c=~ ( '\\'' | '\\r' | '\\n' )
             	    {
             	    c= input.LA(1);
 
@@ -2080,7 +2236,7 @@ public class ExprLexer extends Lexer {
             	    break;
 
             	default :
-            	    break loop9;
+            	    break loop13;
                 }
             } while (true);
 
@@ -2100,728 +2256,670 @@ public class ExprLexer extends Lexer {
     }
     // $ANTLR end "STRING_LITERAL"
 
-    // $ANTLR start "WS"
-    public final void mWS() throws RecognitionException {
-        try {
-            int _type = WS;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:368:5: ( ( ' ' | '\\t' | '\\f' )+ )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:368:7: ( ' ' | '\\t' | '\\f' )+
-            {
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:368:7: ( ' ' | '\\t' | '\\f' )+
-            int cnt10=0;
-            loop10:
-            do {
-                int alt10=2;
-                int LA10_0 = input.LA(1);
-
-                if ( (LA10_0=='\t'||LA10_0=='\f'||LA10_0==' ') ) {
-                    alt10=1;
-                }
-
-
-                switch (alt10) {
-            	case 1 :
-            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:
-            	    {
-            	    if ( input.LA(1)=='\t'||input.LA(1)=='\f'||input.LA(1)==' ' ) {
-            	        input.consume();
-            	    }
-            	    else {
-            	        MismatchedSetException mse = new MismatchedSetException(null,input);
-            	        recover(mse);
-            	        throw mse;
-            	    }
-
-
-            	    }
-            	    break;
-
-            	default :
-            	    if ( cnt10 >= 1 ) break loop10;
-                        EarlyExitException eee =
-                            new EarlyExitException(10, input);
-                        throw eee;
-                }
-                cnt10++;
-            } while (true);
-
-
-            _channel = HIDDEN;
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "WS"
-
     public void mTokens() throws RecognitionException {
-        // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:8: ( BLOCK_END | EMPTY_VEC | EMPTY_CELL | SINGLE_QUOTE | BREAK | CASE | CATCH | CLASSDEF | CONTINUE | ELSE | ELSEIF | END | FALSE | FOR | FUNCTION | GLOBAL | IF | OTHERWISE | PARFOR | PERSISTENT | RETURN | SPMD | SWITCH | TRUE | TRY | WHILE | AT | BACKSLASH | CARET | CLOSE_BLOCK | CLOSEB | CLOSEC | CLOSEP | COLON | COMMA | DOUBLE_QUOTE | DOT | DOT_BACKSLASH | DOT_CARET | DOT_SLASH | DOT_STAR | DOT_TRANSPOSE | ELE_AND | ELE_OR | EQUALS | EXCLAMATION | GREATER_THAN | GREATER_EQUAL | ISEQUAL | LESS_EQUAL | LESS_THAN | MINUS | NOT | NOT_EQUAL | OPEN_BLOCK | OPENB | OPENC | OPENP | PERCENT | PLUS | SC_AND | SC_OR | SEMI | SLASH | STAR | INTEGER | COMMENT | ELLIPSIS | EXPONENT | ID | NEWLINE | STRING_LITERAL | WS )
-        int alt11=73;
-        alt11 = dfa11.predict(input);
-        switch (alt11) {
+        // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:8: ( WS | BLOCK_END | NEWLINE | EMPTY_VEC | EMPTY_CELL | SINGLE_QUOTE | BREAK | CASE | CATCH | CLASSDEF | CONTINUE | ELSE | ELSEIF | END | FALSE | FOR | FUNCTION | GLOBAL | IF | OTHERWISE | PARFOR | PERSISTENT | RETURN | SPMD | SWITCH | TRUE | TRY | WHILE | AT | BACKSLASH | CARET | CLOSE_BLOCK | CLOSEB | CLOSEC | CLOSEP | COLON | COMMA | DOUBLE_QUOTE | DOT | DOT_BACKSLASH | DOT_CARET | DOT_SLASH | DOT_STAR | DOT_TRANSPOSE | ELE_AND | ELE_OR | EQUALS | EXCLAMATION | GREATER_THAN | GREATER_EQUAL | ISEQUAL | LESS_EQUAL | LESS_THAN | MINUS | NOT | NOT_EQUAL | OPEN_BLOCK | OPENB | OPENC | OPENP | PERCENT | PLUS | SC_AND | SC_OR | SEMI | SLASH | STAR | INTEGER | COMMENT | ELLIPSIS | EXPONENT | ID | STRING_LITERAL )
+        int alt14=73;
+        alt14 = dfa14.predict(input);
+        switch (alt14) {
             case 1 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:10: BLOCK_END
-                {
-                mBLOCK_END(); 
-
-
-                }
-                break;
-            case 2 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:20: EMPTY_VEC
-                {
-                mEMPTY_VEC(); 
-
-
-                }
-                break;
-            case 3 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:30: EMPTY_CELL
-                {
-                mEMPTY_CELL(); 
-
-
-                }
-                break;
-            case 4 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:41: SINGLE_QUOTE
-                {
-                mSINGLE_QUOTE(); 
-
-
-                }
-                break;
-            case 5 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:54: BREAK
-                {
-                mBREAK(); 
-
-
-                }
-                break;
-            case 6 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:60: CASE
-                {
-                mCASE(); 
-
-
-                }
-                break;
-            case 7 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:65: CATCH
-                {
-                mCATCH(); 
-
-
-                }
-                break;
-            case 8 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:71: CLASSDEF
-                {
-                mCLASSDEF(); 
-
-
-                }
-                break;
-            case 9 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:80: CONTINUE
-                {
-                mCONTINUE(); 
-
-
-                }
-                break;
-            case 10 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:89: ELSE
-                {
-                mELSE(); 
-
-
-                }
-                break;
-            case 11 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:94: ELSEIF
-                {
-                mELSEIF(); 
-
-
-                }
-                break;
-            case 12 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:101: END
-                {
-                mEND(); 
-
-
-                }
-                break;
-            case 13 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:105: FALSE
-                {
-                mFALSE(); 
-
-
-                }
-                break;
-            case 14 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:111: FOR
-                {
-                mFOR(); 
-
-
-                }
-                break;
-            case 15 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:115: FUNCTION
-                {
-                mFUNCTION(); 
-
-
-                }
-                break;
-            case 16 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:124: GLOBAL
-                {
-                mGLOBAL(); 
-
-
-                }
-                break;
-            case 17 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:131: IF
-                {
-                mIF(); 
-
-
-                }
-                break;
-            case 18 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:134: OTHERWISE
-                {
-                mOTHERWISE(); 
-
-
-                }
-                break;
-            case 19 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:144: PARFOR
-                {
-                mPARFOR(); 
-
-
-                }
-                break;
-            case 20 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:151: PERSISTENT
-                {
-                mPERSISTENT(); 
-
-
-                }
-                break;
-            case 21 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:162: RETURN
-                {
-                mRETURN(); 
-
-
-                }
-                break;
-            case 22 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:169: SPMD
-                {
-                mSPMD(); 
-
-
-                }
-                break;
-            case 23 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:174: SWITCH
-                {
-                mSWITCH(); 
-
-
-                }
-                break;
-            case 24 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:181: TRUE
-                {
-                mTRUE(); 
-
-
-                }
-                break;
-            case 25 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:186: TRY
-                {
-                mTRY(); 
-
-
-                }
-                break;
-            case 26 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:190: WHILE
-                {
-                mWHILE(); 
-
-
-                }
-                break;
-            case 27 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:196: AT
-                {
-                mAT(); 
-
-
-                }
-                break;
-            case 28 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:199: BACKSLASH
-                {
-                mBACKSLASH(); 
-
-
-                }
-                break;
-            case 29 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:209: CARET
-                {
-                mCARET(); 
-
-
-                }
-                break;
-            case 30 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:215: CLOSE_BLOCK
-                {
-                mCLOSE_BLOCK(); 
-
-
-                }
-                break;
-            case 31 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:227: CLOSEB
-                {
-                mCLOSEB(); 
-
-
-                }
-                break;
-            case 32 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:234: CLOSEC
-                {
-                mCLOSEC(); 
-
-
-                }
-                break;
-            case 33 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:241: CLOSEP
-                {
-                mCLOSEP(); 
-
-
-                }
-                break;
-            case 34 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:248: COLON
-                {
-                mCOLON(); 
-
-
-                }
-                break;
-            case 35 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:254: COMMA
-                {
-                mCOMMA(); 
-
-
-                }
-                break;
-            case 36 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:260: DOUBLE_QUOTE
-                {
-                mDOUBLE_QUOTE(); 
-
-
-                }
-                break;
-            case 37 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:273: DOT
-                {
-                mDOT(); 
-
-
-                }
-                break;
-            case 38 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:277: DOT_BACKSLASH
-                {
-                mDOT_BACKSLASH(); 
-
-
-                }
-                break;
-            case 39 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:291: DOT_CARET
-                {
-                mDOT_CARET(); 
-
-
-                }
-                break;
-            case 40 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:301: DOT_SLASH
-                {
-                mDOT_SLASH(); 
-
-
-                }
-                break;
-            case 41 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:311: DOT_STAR
-                {
-                mDOT_STAR(); 
-
-
-                }
-                break;
-            case 42 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:320: DOT_TRANSPOSE
-                {
-                mDOT_TRANSPOSE(); 
-
-
-                }
-                break;
-            case 43 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:334: ELE_AND
-                {
-                mELE_AND(); 
-
-
-                }
-                break;
-            case 44 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:342: ELE_OR
-                {
-                mELE_OR(); 
-
-
-                }
-                break;
-            case 45 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:349: EQUALS
-                {
-                mEQUALS(); 
-
-
-                }
-                break;
-            case 46 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:356: EXCLAMATION
-                {
-                mEXCLAMATION(); 
-
-
-                }
-                break;
-            case 47 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:368: GREATER_THAN
-                {
-                mGREATER_THAN(); 
-
-
-                }
-                break;
-            case 48 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:381: GREATER_EQUAL
-                {
-                mGREATER_EQUAL(); 
-
-
-                }
-                break;
-            case 49 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:395: ISEQUAL
-                {
-                mISEQUAL(); 
-
-
-                }
-                break;
-            case 50 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:403: LESS_EQUAL
-                {
-                mLESS_EQUAL(); 
-
-
-                }
-                break;
-            case 51 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:414: LESS_THAN
-                {
-                mLESS_THAN(); 
-
-
-                }
-                break;
-            case 52 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:424: MINUS
-                {
-                mMINUS(); 
-
-
-                }
-                break;
-            case 53 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:430: NOT
-                {
-                mNOT(); 
-
-
-                }
-                break;
-            case 54 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:434: NOT_EQUAL
-                {
-                mNOT_EQUAL(); 
-
-
-                }
-                break;
-            case 55 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:444: OPEN_BLOCK
-                {
-                mOPEN_BLOCK(); 
-
-
-                }
-                break;
-            case 56 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:455: OPENB
-                {
-                mOPENB(); 
-
-
-                }
-                break;
-            case 57 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:461: OPENC
-                {
-                mOPENC(); 
-
-
-                }
-                break;
-            case 58 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:467: OPENP
-                {
-                mOPENP(); 
-
-
-                }
-                break;
-            case 59 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:473: PERCENT
-                {
-                mPERCENT(); 
-
-
-                }
-                break;
-            case 60 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:481: PLUS
-                {
-                mPLUS(); 
-
-
-                }
-                break;
-            case 61 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:486: SC_AND
-                {
-                mSC_AND(); 
-
-
-                }
-                break;
-            case 62 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:493: SC_OR
-                {
-                mSC_OR(); 
-
-
-                }
-                break;
-            case 63 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:499: SEMI
-                {
-                mSEMI(); 
-
-
-                }
-                break;
-            case 64 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:504: SLASH
-                {
-                mSLASH(); 
-
-
-                }
-                break;
-            case 65 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:510: STAR
-                {
-                mSTAR(); 
-
-
-                }
-                break;
-            case 66 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:515: INTEGER
-                {
-                mINTEGER(); 
-
-
-                }
-                break;
-            case 67 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:523: COMMENT
-                {
-                mCOMMENT(); 
-
-
-                }
-                break;
-            case 68 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:531: ELLIPSIS
-                {
-                mELLIPSIS(); 
-
-
-                }
-                break;
-            case 69 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:540: EXPONENT
-                {
-                mEXPONENT(); 
-
-
-                }
-                break;
-            case 70 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:549: ID
-                {
-                mID(); 
-
-
-                }
-                break;
-            case 71 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:552: NEWLINE
-                {
-                mNEWLINE(); 
-
-
-                }
-                break;
-            case 72 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:560: STRING_LITERAL
-                {
-                mSTRING_LITERAL(); 
-
-
-                }
-                break;
-            case 73 :
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:575: WS
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:10: WS
                 {
                 mWS(); 
 
 
                 }
                 break;
+            case 2 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:13: BLOCK_END
+                {
+                mBLOCK_END(); 
+
+
+                }
+                break;
+            case 3 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:23: NEWLINE
+                {
+                mNEWLINE(); 
+
+
+                }
+                break;
+            case 4 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:31: EMPTY_VEC
+                {
+                mEMPTY_VEC(); 
+
+
+                }
+                break;
+            case 5 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:41: EMPTY_CELL
+                {
+                mEMPTY_CELL(); 
+
+
+                }
+                break;
+            case 6 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:52: SINGLE_QUOTE
+                {
+                mSINGLE_QUOTE(); 
+
+
+                }
+                break;
+            case 7 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:65: BREAK
+                {
+                mBREAK(); 
+
+
+                }
+                break;
+            case 8 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:71: CASE
+                {
+                mCASE(); 
+
+
+                }
+                break;
+            case 9 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:76: CATCH
+                {
+                mCATCH(); 
+
+
+                }
+                break;
+            case 10 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:82: CLASSDEF
+                {
+                mCLASSDEF(); 
+
+
+                }
+                break;
+            case 11 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:91: CONTINUE
+                {
+                mCONTINUE(); 
+
+
+                }
+                break;
+            case 12 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:100: ELSE
+                {
+                mELSE(); 
+
+
+                }
+                break;
+            case 13 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:105: ELSEIF
+                {
+                mELSEIF(); 
+
+
+                }
+                break;
+            case 14 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:112: END
+                {
+                mEND(); 
+
+
+                }
+                break;
+            case 15 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:116: FALSE
+                {
+                mFALSE(); 
+
+
+                }
+                break;
+            case 16 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:122: FOR
+                {
+                mFOR(); 
+
+
+                }
+                break;
+            case 17 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:126: FUNCTION
+                {
+                mFUNCTION(); 
+
+
+                }
+                break;
+            case 18 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:135: GLOBAL
+                {
+                mGLOBAL(); 
+
+
+                }
+                break;
+            case 19 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:142: IF
+                {
+                mIF(); 
+
+
+                }
+                break;
+            case 20 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:145: OTHERWISE
+                {
+                mOTHERWISE(); 
+
+
+                }
+                break;
+            case 21 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:155: PARFOR
+                {
+                mPARFOR(); 
+
+
+                }
+                break;
+            case 22 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:162: PERSISTENT
+                {
+                mPERSISTENT(); 
+
+
+                }
+                break;
+            case 23 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:173: RETURN
+                {
+                mRETURN(); 
+
+
+                }
+                break;
+            case 24 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:180: SPMD
+                {
+                mSPMD(); 
+
+
+                }
+                break;
+            case 25 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:185: SWITCH
+                {
+                mSWITCH(); 
+
+
+                }
+                break;
+            case 26 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:192: TRUE
+                {
+                mTRUE(); 
+
+
+                }
+                break;
+            case 27 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:197: TRY
+                {
+                mTRY(); 
+
+
+                }
+                break;
+            case 28 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:201: WHILE
+                {
+                mWHILE(); 
+
+
+                }
+                break;
+            case 29 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:207: AT
+                {
+                mAT(); 
+
+
+                }
+                break;
+            case 30 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:210: BACKSLASH
+                {
+                mBACKSLASH(); 
+
+
+                }
+                break;
+            case 31 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:220: CARET
+                {
+                mCARET(); 
+
+
+                }
+                break;
+            case 32 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:226: CLOSE_BLOCK
+                {
+                mCLOSE_BLOCK(); 
+
+
+                }
+                break;
+            case 33 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:238: CLOSEB
+                {
+                mCLOSEB(); 
+
+
+                }
+                break;
+            case 34 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:245: CLOSEC
+                {
+                mCLOSEC(); 
+
+
+                }
+                break;
+            case 35 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:252: CLOSEP
+                {
+                mCLOSEP(); 
+
+
+                }
+                break;
+            case 36 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:259: COLON
+                {
+                mCOLON(); 
+
+
+                }
+                break;
+            case 37 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:265: COMMA
+                {
+                mCOMMA(); 
+
+
+                }
+                break;
+            case 38 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:271: DOUBLE_QUOTE
+                {
+                mDOUBLE_QUOTE(); 
+
+
+                }
+                break;
+            case 39 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:284: DOT
+                {
+                mDOT(); 
+
+
+                }
+                break;
+            case 40 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:288: DOT_BACKSLASH
+                {
+                mDOT_BACKSLASH(); 
+
+
+                }
+                break;
+            case 41 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:302: DOT_CARET
+                {
+                mDOT_CARET(); 
+
+
+                }
+                break;
+            case 42 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:312: DOT_SLASH
+                {
+                mDOT_SLASH(); 
+
+
+                }
+                break;
+            case 43 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:322: DOT_STAR
+                {
+                mDOT_STAR(); 
+
+
+                }
+                break;
+            case 44 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:331: DOT_TRANSPOSE
+                {
+                mDOT_TRANSPOSE(); 
+
+
+                }
+                break;
+            case 45 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:345: ELE_AND
+                {
+                mELE_AND(); 
+
+
+                }
+                break;
+            case 46 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:353: ELE_OR
+                {
+                mELE_OR(); 
+
+
+                }
+                break;
+            case 47 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:360: EQUALS
+                {
+                mEQUALS(); 
+
+
+                }
+                break;
+            case 48 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:367: EXCLAMATION
+                {
+                mEXCLAMATION(); 
+
+
+                }
+                break;
+            case 49 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:379: GREATER_THAN
+                {
+                mGREATER_THAN(); 
+
+
+                }
+                break;
+            case 50 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:392: GREATER_EQUAL
+                {
+                mGREATER_EQUAL(); 
+
+
+                }
+                break;
+            case 51 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:406: ISEQUAL
+                {
+                mISEQUAL(); 
+
+
+                }
+                break;
+            case 52 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:414: LESS_EQUAL
+                {
+                mLESS_EQUAL(); 
+
+
+                }
+                break;
+            case 53 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:425: LESS_THAN
+                {
+                mLESS_THAN(); 
+
+
+                }
+                break;
+            case 54 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:435: MINUS
+                {
+                mMINUS(); 
+
+
+                }
+                break;
+            case 55 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:441: NOT
+                {
+                mNOT(); 
+
+
+                }
+                break;
+            case 56 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:445: NOT_EQUAL
+                {
+                mNOT_EQUAL(); 
+
+
+                }
+                break;
+            case 57 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:455: OPEN_BLOCK
+                {
+                mOPEN_BLOCK(); 
+
+
+                }
+                break;
+            case 58 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:466: OPENB
+                {
+                mOPENB(); 
+
+
+                }
+                break;
+            case 59 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:472: OPENC
+                {
+                mOPENC(); 
+
+
+                }
+                break;
+            case 60 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:478: OPENP
+                {
+                mOPENP(); 
+
+
+                }
+                break;
+            case 61 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:484: PERCENT
+                {
+                mPERCENT(); 
+
+
+                }
+                break;
+            case 62 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:492: PLUS
+                {
+                mPLUS(); 
+
+
+                }
+                break;
+            case 63 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:497: SC_AND
+                {
+                mSC_AND(); 
+
+
+                }
+                break;
+            case 64 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:504: SC_OR
+                {
+                mSC_OR(); 
+
+
+                }
+                break;
+            case 65 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:510: SEMI
+                {
+                mSEMI(); 
+
+
+                }
+                break;
+            case 66 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:515: SLASH
+                {
+                mSLASH(); 
+
+
+                }
+                break;
+            case 67 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:521: STAR
+                {
+                mSTAR(); 
+
+
+                }
+                break;
+            case 68 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:526: INTEGER
+                {
+                mINTEGER(); 
+
+
+                }
+                break;
+            case 69 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:534: COMMENT
+                {
+                mCOMMENT(); 
+
+
+                }
+                break;
+            case 70 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:542: ELLIPSIS
+                {
+                mELLIPSIS(); 
+
+
+                }
+                break;
+            case 71 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:551: EXPONENT
+                {
+                mEXPONENT(); 
+
+
+                }
+                break;
+            case 72 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:560: ID
+                {
+                mID(); 
+
+
+                }
+                break;
+            case 73 :
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:1:563: STRING_LITERAL
+                {
+                mSTRING_LITERAL(); 
+
+
+                }
+                break;
 
         }
 
     }
 
 
-    protected DFA11 dfa11 = new DFA11(this);
-    static final String DFA11_eotS =
-        "\1\uffff\1\52\1\63\1\65\1\uffff\13\52\3\uffff\1\111\6\uffff\1\121"+
-        "\1\123\1\125\1\127\1\uffff\1\131\1\133\1\uffff\1\135\6\uffff\1\52"+
-        "\4\uffff\2\52\1\uffff\1\60\4\uffff\10\52\1\151\10\52\1\163\1\164"+
-        "\25\uffff\1\166\7\52\1\176\2\52\1\uffff\7\52\1\u0088\1\52\4\uffff"+
-        "\1\u008b\1\52\1\u008d\4\52\1\uffff\6\52\1\u0098\1\52\1\u009a\1\uffff"+
-        "\2\52\1\uffff\1\u009d\1\uffff\1\u009e\2\52\1\u00a1\6\52\1\uffff"+
-        "\1\52\1\uffff\1\u00a9\1\u00aa\2\uffff\2\52\1\uffff\1\52\1\u00ae"+
-        "\1\52\1\u00b0\1\52\1\u00b2\1\u00b3\2\uffff\3\52\1\uffff\1\52\1\uffff"+
-        "\1\52\2\uffff\1\u00b9\1\u00ba\1\u00bb\2\52\3\uffff\1\u00be\1\52"+
-        "\1\uffff\1\u00c0\1\uffff";
-    static final String DFA11_eofS =
+    protected DFA14 dfa14 = new DFA14(this);
+    static final String DFA14_eotS =
+        "\2\uffff\1\54\1\uffff\1\63\1\65\1\uffff\13\54\3\uffff\1\111\6\uffff"+
+        "\1\121\1\123\1\125\1\127\1\uffff\1\131\1\133\1\uffff\1\135\6\uffff"+
+        "\1\54\2\uffff\2\54\1\uffff\1\60\4\uffff\10\54\1\151\10\54\1\163"+
+        "\1\164\25\uffff\1\166\7\54\1\176\2\54\1\uffff\7\54\1\u0088\1\54"+
+        "\4\uffff\1\u008b\1\54\1\u008d\4\54\1\uffff\6\54\1\u0098\1\54\1\u009a"+
+        "\1\uffff\2\54\1\uffff\1\u009d\1\uffff\1\u009e\2\54\1\u00a1\6\54"+
+        "\1\uffff\1\54\1\uffff\1\u00a9\1\u00aa\2\uffff\2\54\1\uffff\1\54"+
+        "\1\u00ae\1\54\1\u00b0\1\54\1\u00b2\1\u00b3\2\uffff\3\54\1\uffff"+
+        "\1\54\1\uffff\1\54\2\uffff\1\u00b9\1\u00ba\1\u00bb\2\54\3\uffff"+
+        "\1\u00be\1\54\1\uffff\1\u00c0\1\uffff";
+    static final String DFA14_eofS =
         "\u00c1\uffff";
-    static final String DFA11_minS =
-        "\1\11\1\53\1\135\1\175\1\uffff\1\162\2\141\1\154\1\146\1\164\1\141"+
-        "\1\145\1\160\1\162\1\150\3\uffff\1\0\6\uffff\1\47\1\46\1\174\1\75"+
-        "\1\uffff\2\75\1\uffff\1\75\6\uffff\1\53\4\uffff\1\144\1\163\1\uffff"+
-        "\1\60\4\uffff\1\145\1\163\1\141\1\156\1\154\1\162\1\156\1\157\1"+
-        "\60\1\150\2\162\1\164\1\155\1\151\1\165\1\151\2\0\25\uffff\1\12"+
-        "\1\145\1\141\1\145\1\143\1\163\1\164\1\163\1\60\1\143\1\142\1\uffff"+
-        "\1\145\1\146\1\163\1\165\1\144\1\164\1\145\1\60\1\154\4\uffff\1"+
-        "\60\1\153\1\60\1\150\1\163\1\151\1\145\1\uffff\1\164\1\141\1\162"+
-        "\1\157\1\151\1\162\1\60\1\143\1\60\1\uffff\1\145\1\146\1\uffff\1"+
-        "\60\1\uffff\1\60\1\144\1\156\1\60\1\151\1\154\1\167\1\162\1\163"+
-        "\1\156\1\uffff\1\150\1\uffff\2\60\2\uffff\1\145\1\165\1\uffff\1"+
-        "\157\1\60\1\151\1\60\1\164\2\60\2\uffff\1\146\1\145\1\156\1\uffff"+
-        "\1\163\1\uffff\1\145\2\uffff\3\60\1\145\1\156\3\uffff\1\60\1\164"+
-        "\1\uffff\1\60\1\uffff";
-    static final String DFA11_maxS =
-        "\1\176\1\156\1\135\1\175\1\uffff\1\162\1\157\1\165\1\154\1\146\1"+
-        "\164\2\145\1\167\1\162\1\150\3\uffff\1\uffff\6\uffff\1\136\1\46"+
-        "\1\174\1\75\1\uffff\2\75\1\uffff\1\75\6\uffff\1\71\4\uffff\1\144"+
-        "\1\163\1\uffff\1\172\4\uffff\1\145\1\164\1\141\1\156\1\154\1\162"+
-        "\1\156\1\157\1\172\1\150\2\162\1\164\1\155\1\151\1\171\1\151\2\uffff"+
-        "\25\uffff\1\172\1\145\1\141\1\145\1\143\1\163\1\164\1\163\1\172"+
+    static final String DFA14_minS =
+        "\1\11\1\uffff\1\53\1\uffff\2\11\1\uffff\1\162\2\141\1\154\1\146"+
+        "\1\164\1\141\1\145\1\160\1\162\1\150\3\uffff\1\0\6\uffff\1\47\1"+
+        "\46\1\174\1\75\1\uffff\2\75\1\uffff\1\75\6\uffff\1\53\2\uffff\1"+
+        "\144\1\163\1\uffff\1\60\4\uffff\1\145\1\163\1\141\1\156\1\154\1"+
+        "\162\1\156\1\157\1\60\1\150\2\162\1\164\1\155\1\151\1\165\1\151"+
+        "\2\0\25\uffff\1\11\1\145\1\141\1\145\1\143\1\163\1\164\1\163\1\60"+
         "\1\143\1\142\1\uffff\1\145\1\146\1\163\1\165\1\144\1\164\1\145\1"+
-        "\172\1\154\4\uffff\1\172\1\153\1\172\1\150\1\163\1\151\1\145\1\uffff"+
-        "\1\164\1\141\1\162\1\157\1\151\1\162\1\172\1\143\1\172\1\uffff\1"+
-        "\145\1\146\1\uffff\1\172\1\uffff\1\172\1\144\1\156\1\172\1\151\1"+
-        "\154\1\167\1\162\1\163\1\156\1\uffff\1\150\1\uffff\2\172\2\uffff"+
-        "\1\145\1\165\1\uffff\1\157\1\172\1\151\1\172\1\164\2\172\2\uffff"+
-        "\1\146\1\145\1\156\1\uffff\1\163\1\uffff\1\145\2\uffff\3\172\1\145"+
-        "\1\156\3\uffff\1\172\1\164\1\uffff\1\172\1\uffff";
-    static final String DFA11_acceptS =
-        "\4\uffff\1\4\13\uffff\1\33\1\34\1\35\1\uffff\1\37\1\40\1\41\1\42"+
-        "\1\43\1\44\4\uffff\1\56\2\uffff\1\64\1\uffff\1\72\1\74\1\77\1\100"+
-        "\1\101\1\102\1\uffff\1\106\1\107\1\110\1\111\2\uffff\1\105\1\uffff"+
-        "\1\2\1\70\1\3\1\71\23\uffff\1\73\1\103\1\46\1\47\1\50\1\51\1\52"+
-        "\1\104\1\45\1\75\1\53\1\76\1\54\1\61\1\55\1\60\1\57\1\62\1\63\1"+
-        "\66\1\65\13\uffff\1\21\11\uffff\1\36\1\67\1\1\1\14\7\uffff\1\16"+
-        "\11\uffff\1\31\2\uffff\1\12\1\uffff\1\6\12\uffff\1\26\1\uffff\1"+
-        "\30\2\uffff\1\5\1\7\2\uffff\1\15\7\uffff\1\32\1\13\3\uffff\1\20"+
-        "\1\uffff\1\23\1\uffff\1\25\1\27\5\uffff\1\10\1\11\1\17\2\uffff\1"+
-        "\22\1\uffff\1\24";
-    static final String DFA11_specialS =
-        "\23\uffff\1\2\63\uffff\1\0\1\1\170\uffff}>";
-    static final String[] DFA11_transitionS = {
-            "\1\55\1\53\1\uffff\1\55\1\53\22\uffff\1\55\1\36\1\31\1\uffff"+
-            "\1\4\1\23\1\33\1\54\1\43\1\26\1\47\1\44\1\30\1\41\1\32\1\46"+
-            "\12\50\1\27\1\45\1\40\1\35\1\37\1\uffff\1\20\4\52\1\51\25\52"+
-            "\1\2\1\21\1\24\1\22\2\uffff\1\52\1\5\1\6\1\52\1\1\1\7\1\10\1"+
-            "\52\1\11\5\52\1\12\1\13\1\52\1\14\1\15\1\16\2\52\1\17\3\52\1"+
-            "\3\1\34\1\25\1\42",
+        "\60\1\154\4\uffff\1\60\1\153\1\60\1\150\1\163\1\151\1\145\1\uffff"+
+        "\1\164\1\141\1\162\1\157\1\151\1\162\1\60\1\143\1\60\1\uffff\1\145"+
+        "\1\146\1\uffff\1\60\1\uffff\1\60\1\144\1\156\1\60\1\151\1\154\1"+
+        "\167\1\162\1\163\1\156\1\uffff\1\150\1\uffff\2\60\2\uffff\1\145"+
+        "\1\165\1\uffff\1\157\1\60\1\151\1\60\1\164\2\60\2\uffff\1\146\1"+
+        "\145\1\156\1\uffff\1\163\1\uffff\1\145\2\uffff\3\60\1\145\1\156"+
+        "\3\uffff\1\60\1\164\1\uffff\1\60\1\uffff";
+    static final String DFA14_maxS =
+        "\1\176\1\uffff\1\156\1\uffff\1\135\1\175\1\uffff\1\162\1\157\1\165"+
+        "\1\154\1\146\1\164\2\145\1\167\1\162\1\150\3\uffff\1\uffff\6\uffff"+
+        "\1\136\1\46\1\174\1\75\1\uffff\2\75\1\uffff\1\75\6\uffff\1\71\2"+
+        "\uffff\1\144\1\163\1\uffff\1\172\4\uffff\1\145\1\164\1\141\1\156"+
+        "\1\154\1\162\1\156\1\157\1\172\1\150\2\162\1\164\1\155\1\151\1\171"+
+        "\1\151\2\uffff\25\uffff\1\172\1\145\1\141\1\145\1\143\1\163\1\164"+
+        "\1\163\1\172\1\143\1\142\1\uffff\1\145\1\146\1\163\1\165\1\144\1"+
+        "\164\1\145\1\172\1\154\4\uffff\1\172\1\153\1\172\1\150\1\163\1\151"+
+        "\1\145\1\uffff\1\164\1\141\1\162\1\157\1\151\1\162\1\172\1\143\1"+
+        "\172\1\uffff\1\145\1\146\1\uffff\1\172\1\uffff\1\172\1\144\1\156"+
+        "\1\172\1\151\1\154\1\167\1\162\1\163\1\156\1\uffff\1\150\1\uffff"+
+        "\2\172\2\uffff\1\145\1\165\1\uffff\1\157\1\172\1\151\1\172\1\164"+
+        "\2\172\2\uffff\1\146\1\145\1\156\1\uffff\1\163\1\uffff\1\145\2\uffff"+
+        "\3\172\1\145\1\156\3\uffff\1\172\1\164\1\uffff\1\172\1\uffff";
+    static final String DFA14_acceptS =
+        "\1\uffff\1\1\1\uffff\1\3\2\uffff\1\6\13\uffff\1\35\1\36\1\37\1\uffff"+
+        "\1\41\1\42\1\43\1\44\1\45\1\46\4\uffff\1\60\2\uffff\1\66\1\uffff"+
+        "\1\74\1\76\1\101\1\102\1\103\1\104\1\uffff\1\110\1\111\2\uffff\1"+
+        "\107\1\uffff\1\4\1\72\1\5\1\73\23\uffff\1\75\1\105\1\50\1\51\1\52"+
+        "\1\53\1\54\1\106\1\47\1\77\1\55\1\100\1\56\1\63\1\57\1\62\1\61\1"+
+        "\64\1\65\1\70\1\67\13\uffff\1\23\11\uffff\1\40\1\71\1\2\1\16\7\uffff"+
+        "\1\20\11\uffff\1\33\2\uffff\1\14\1\uffff\1\10\12\uffff\1\30\1\uffff"+
+        "\1\32\2\uffff\1\7\1\11\2\uffff\1\17\7\uffff\1\34\1\15\3\uffff\1"+
+        "\22\1\uffff\1\25\1\uffff\1\27\1\31\5\uffff\1\12\1\13\1\21\2\uffff"+
+        "\1\24\1\uffff\1\26";
+    static final String DFA14_specialS =
+        "\25\uffff\1\1\61\uffff\1\0\1\2\170\uffff}>";
+    static final String[] DFA14_transitionS = {
+            "\1\1\1\3\1\uffff\1\1\1\3\22\uffff\1\1\1\40\1\33\1\uffff\1\6"+
+            "\1\25\1\35\1\55\1\45\1\30\1\51\1\46\1\32\1\43\1\34\1\50\12\52"+
+            "\1\31\1\47\1\42\1\37\1\41\1\uffff\1\22\4\54\1\53\25\54\1\4\1"+
+            "\23\1\26\1\24\2\uffff\1\54\1\7\1\10\1\54\1\2\1\11\1\12\1\54"+
+            "\1\13\5\54\1\14\1\15\1\54\1\16\1\17\1\20\2\54\1\21\3\54\1\5"+
+            "\1\36\1\27\1\44",
+            "",
             "\1\60\1\uffff\1\60\2\uffff\12\61\62\uffff\1\57\1\uffff\1\56",
-            "\1\62",
-            "\1\64",
+            "",
+            "\2\62\1\uffff\2\62\22\uffff\1\62\74\uffff\1\62",
+            "\2\64\1\uffff\2\64\22\uffff\1\64\134\uffff\1\64",
             "",
             "\1\66",
             "\1\67\12\uffff\1\70\2\uffff\1\71",
@@ -2863,12 +2961,10 @@ public class ExprLexer extends Lexer {
             "\1\60\1\uffff\1\60\2\uffff\12\61",
             "",
             "",
-            "",
-            "",
             "\1\136",
             "\1\137",
             "",
-            "\12\61\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "\12\61\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
             "",
             "",
             "",
@@ -2881,7 +2977,7 @@ public class ExprLexer extends Lexer {
             "\1\146",
             "\1\147",
             "\1\150",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
             "\1\152",
             "\1\153",
             "\1\154",
@@ -2913,8 +3009,8 @@ public class ExprLexer extends Lexer {
             "",
             "",
             "",
-            "\1\165\2\uffff\1\165\42\uffff\12\52\7\uffff\32\52\4\uffff\1"+
-            "\52\1\uffff\32\52",
+            "\2\165\1\uffff\2\165\22\uffff\1\165\17\uffff\12\54\7\uffff"+
+            "\32\54\4\uffff\1\54\1\uffff\32\54",
             "\1\167",
             "\1\170",
             "\1\171",
@@ -2922,7 +3018,7 @@ public class ExprLexer extends Lexer {
             "\1\173",
             "\1\174",
             "\1\175",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
             "\1\177",
             "\1\u0080",
             "",
@@ -2933,16 +3029,16 @@ public class ExprLexer extends Lexer {
             "\1\u0085",
             "\1\u0086",
             "\1\u0087",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
             "\1\u0089",
             "",
             "",
             "",
             "",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\10\52\1\u008a\21"+
-            "\52",
+            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\10\54\1\u008a\21"+
+            "\54",
             "\1\u008c",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
             "\1\u008e",
             "\1\u008f",
             "\1\u0090",
@@ -2954,19 +3050,19 @@ public class ExprLexer extends Lexer {
             "\1\u0095",
             "\1\u0096",
             "\1\u0097",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
             "\1\u0099",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
             "",
             "\1\u009b",
             "\1\u009c",
             "",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
             "",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
             "\1\u009f",
             "\1\u00a0",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
             "\1\u00a2",
             "\1\u00a3",
             "\1\u00a4",
@@ -2976,20 +3072,20 @@ public class ExprLexer extends Lexer {
             "",
             "\1\u00a8",
             "",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
+            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
             "",
             "",
             "\1\u00ab",
             "\1\u00ac",
             "",
             "\1\u00ad",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
             "\1\u00af",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
             "\1\u00b1",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
+            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
             "",
             "",
             "\1\u00b4",
@@ -3001,62 +3097,62 @@ public class ExprLexer extends Lexer {
             "\1\u00b8",
             "",
             "",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
+            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
+            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
             "\1\u00bc",
             "\1\u00bd",
             "",
             "",
             "",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
             "\1\u00bf",
             "",
-            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "\12\54\7\uffff\32\54\4\uffff\1\54\1\uffff\32\54",
             ""
     };
 
-    static final short[] DFA11_eot = DFA.unpackEncodedString(DFA11_eotS);
-    static final short[] DFA11_eof = DFA.unpackEncodedString(DFA11_eofS);
-    static final char[] DFA11_min = DFA.unpackEncodedStringToUnsignedChars(DFA11_minS);
-    static final char[] DFA11_max = DFA.unpackEncodedStringToUnsignedChars(DFA11_maxS);
-    static final short[] DFA11_accept = DFA.unpackEncodedString(DFA11_acceptS);
-    static final short[] DFA11_special = DFA.unpackEncodedString(DFA11_specialS);
-    static final short[][] DFA11_transition;
+    static final short[] DFA14_eot = DFA.unpackEncodedString(DFA14_eotS);
+    static final short[] DFA14_eof = DFA.unpackEncodedString(DFA14_eofS);
+    static final char[] DFA14_min = DFA.unpackEncodedStringToUnsignedChars(DFA14_minS);
+    static final char[] DFA14_max = DFA.unpackEncodedStringToUnsignedChars(DFA14_maxS);
+    static final short[] DFA14_accept = DFA.unpackEncodedString(DFA14_acceptS);
+    static final short[] DFA14_special = DFA.unpackEncodedString(DFA14_specialS);
+    static final short[][] DFA14_transition;
 
     static {
-        int numStates = DFA11_transitionS.length;
-        DFA11_transition = new short[numStates][];
+        int numStates = DFA14_transitionS.length;
+        DFA14_transition = new short[numStates][];
         for (int i=0; i<numStates; i++) {
-            DFA11_transition[i] = DFA.unpackEncodedString(DFA11_transitionS[i]);
+            DFA14_transition[i] = DFA.unpackEncodedString(DFA14_transitionS[i]);
         }
     }
 
-    class DFA11 extends DFA {
+    class DFA14 extends DFA {
 
-        public DFA11(BaseRecognizer recognizer) {
+        public DFA14(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
-            this.decisionNumber = 11;
-            this.eot = DFA11_eot;
-            this.eof = DFA11_eof;
-            this.min = DFA11_min;
-            this.max = DFA11_max;
-            this.accept = DFA11_accept;
-            this.special = DFA11_special;
-            this.transition = DFA11_transition;
+            this.decisionNumber = 14;
+            this.eot = DFA14_eot;
+            this.eof = DFA14_eof;
+            this.min = DFA14_min;
+            this.max = DFA14_max;
+            this.accept = DFA14_accept;
+            this.special = DFA14_special;
+            this.transition = DFA14_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( BLOCK_END | EMPTY_VEC | EMPTY_CELL | SINGLE_QUOTE | BREAK | CASE | CATCH | CLASSDEF | CONTINUE | ELSE | ELSEIF | END | FALSE | FOR | FUNCTION | GLOBAL | IF | OTHERWISE | PARFOR | PERSISTENT | RETURN | SPMD | SWITCH | TRUE | TRY | WHILE | AT | BACKSLASH | CARET | CLOSE_BLOCK | CLOSEB | CLOSEC | CLOSEP | COLON | COMMA | DOUBLE_QUOTE | DOT | DOT_BACKSLASH | DOT_CARET | DOT_SLASH | DOT_STAR | DOT_TRANSPOSE | ELE_AND | ELE_OR | EQUALS | EXCLAMATION | GREATER_THAN | GREATER_EQUAL | ISEQUAL | LESS_EQUAL | LESS_THAN | MINUS | NOT | NOT_EQUAL | OPEN_BLOCK | OPENB | OPENC | OPENP | PERCENT | PLUS | SC_AND | SC_OR | SEMI | SLASH | STAR | INTEGER | COMMENT | ELLIPSIS | EXPONENT | ID | NEWLINE | STRING_LITERAL | WS );";
+            return "1:1: Tokens : ( WS | BLOCK_END | NEWLINE | EMPTY_VEC | EMPTY_CELL | SINGLE_QUOTE | BREAK | CASE | CATCH | CLASSDEF | CONTINUE | ELSE | ELSEIF | END | FALSE | FOR | FUNCTION | GLOBAL | IF | OTHERWISE | PARFOR | PERSISTENT | RETURN | SPMD | SWITCH | TRUE | TRY | WHILE | AT | BACKSLASH | CARET | CLOSE_BLOCK | CLOSEB | CLOSEC | CLOSEP | COLON | COMMA | DOUBLE_QUOTE | DOT | DOT_BACKSLASH | DOT_CARET | DOT_SLASH | DOT_STAR | DOT_TRANSPOSE | ELE_AND | ELE_OR | EQUALS | EXCLAMATION | GREATER_THAN | GREATER_EQUAL | ISEQUAL | LESS_EQUAL | LESS_THAN | MINUS | NOT | NOT_EQUAL | OPEN_BLOCK | OPENB | OPENC | OPENP | PERCENT | PLUS | SC_AND | SC_OR | SEMI | SLASH | STAR | INTEGER | COMMENT | ELLIPSIS | EXPONENT | ID | STRING_LITERAL );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             IntStream input = _input;
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA11_71 = input.LA(1);
+                        int LA14_71 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA11_71 >= '\u0000' && LA11_71 <= '\uFFFF')) ) {s = 74;}
+                        if ( ((LA14_71 >= '\u0000' && LA14_71 <= '\uFFFF')) ) {s = 74;}
 
                         else s = 115;
 
@@ -3064,33 +3160,33 @@ public class ExprLexer extends Lexer {
                         break;
 
                     case 1 : 
-                        int LA11_72 = input.LA(1);
+                        int LA14_21 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA11_72 >= '\u0000' && LA11_72 <= '\uFFFF')) ) {s = 74;}
+                        if ( (LA14_21=='}') ) {s = 71;}
 
-                        else s = 116;
+                        else if ( (LA14_21=='{') ) {s = 72;}
 
-                        if ( s>=0 ) return s;
-                        break;
-
-                    case 2 : 
-                        int LA11_19 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA11_19=='}') ) {s = 71;}
-
-                        else if ( (LA11_19=='{') ) {s = 72;}
-
-                        else if ( ((LA11_19 >= '\u0000' && LA11_19 <= 'z')||LA11_19=='|'||(LA11_19 >= '~' && LA11_19 <= '\uFFFF')) ) {s = 74;}
+                        else if ( ((LA14_21 >= '\u0000' && LA14_21 <= 'z')||LA14_21=='|'||(LA14_21 >= '~' && LA14_21 <= '\uFFFF')) ) {s = 74;}
 
                         else s = 73;
 
                         if ( s>=0 ) return s;
                         break;
+
+                    case 2 : 
+                        int LA14_72 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA14_72 >= '\u0000' && LA14_72 <= '\uFFFF')) ) {s = 74;}
+
+                        else s = 116;
+
+                        if ( s>=0 ) return s;
+                        break;
             }
             NoViableAltException nvae =
-                new NoViableAltException(getDescription(), 11, _s, input);
+                new NoViableAltException(getDescription(), 14, _s, input);
             error(nvae);
             throw nvae;
         }

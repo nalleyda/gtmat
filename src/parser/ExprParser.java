@@ -1,4 +1,4 @@
-// $ANTLR 3.4 /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g 2012-02-20 14:18:19
+// $ANTLR 3.4 /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g 2012-03-22 21:26:55
 
 	package parser;
 
@@ -4342,7 +4342,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "line"
-    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:213:1: line : ( ( ( term EQUALS )=> ( term EQUALS ^) )? expr ( SEMI !)? ) ;
+    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:213:1: line : ( ( ( term EQUALS )=> ( term EQUALS ^) )? expr ( SEMI ^)? ) ;
     public final ExprParser.line_return line() throws RecognitionException {
         ExprParser.line_return retval = new ExprParser.line_return();
         retval.start = input.LT(1);
@@ -4364,14 +4364,14 @@ public TreeAdaptor getTreeAdaptor() {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 26) ) { return retval; }
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:213:6: ( ( ( ( term EQUALS )=> ( term EQUALS ^) )? expr ( SEMI !)? ) )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:213:28: ( ( ( term EQUALS )=> ( term EQUALS ^) )? expr ( SEMI !)? )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:213:6: ( ( ( ( term EQUALS )=> ( term EQUALS ^) )? expr ( SEMI ^)? ) )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:213:28: ( ( ( term EQUALS )=> ( term EQUALS ^) )? expr ( SEMI ^)? )
             {
             root_0 = (CommonTree)adaptor.nil();
 
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:213:28: ( ( ( term EQUALS )=> ( term EQUALS ^) )? expr ( SEMI !)? )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:213:29: ( ( term EQUALS )=> ( term EQUALS ^) )? expr ( SEMI !)?
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:213:28: ( ( ( term EQUALS )=> ( term EQUALS ^) )? expr ( SEMI ^)? )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:213:29: ( ( term EQUALS )=> ( term EQUALS ^) )? expr ( SEMI ^)?
             {
             // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:213:29: ( ( term EQUALS )=> ( term EQUALS ^) )?
             int alt43=2;
@@ -4533,7 +4533,7 @@ public TreeAdaptor getTreeAdaptor() {
             if (state.failed) return retval;
             if ( state.backtracking==0 ) adaptor.addChild(root_0, expr119.getTree());
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:214:7: ( SEMI !)?
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:214:7: ( SEMI ^)?
             int alt44=2;
             int LA44_0 = input.LA(1);
 
@@ -4542,9 +4542,15 @@ public TreeAdaptor getTreeAdaptor() {
             }
             switch (alt44) {
                 case 1 :
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:214:8: SEMI !
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat1/parser/temp/Expr.g:214:8: SEMI ^
                     {
                     SEMI120=(Token)match(input,SEMI,FOLLOW_SEMI_in_line1060); if (state.failed) return retval;
+                    if ( state.backtracking==0 ) {
+                    SEMI120_tree = 
+                    (CommonTree)adaptor.create(SEMI120)
+                    ;
+                    root_0 = (CommonTree)adaptor.becomeRoot(SEMI120_tree, root_0);
+                    }
 
                     }
                     break;
@@ -4988,7 +4994,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
             // AST REWRITE
-            // elements: elseifPart, ifPart, elsePart
+            // elements: elsePart, ifPart, elseifPart
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -5429,7 +5435,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
             // AST REWRITE
-            // elements: otherwiseBlock, casePart, switchPart
+            // elements: switchPart, otherwiseBlock, casePart
             // token labels: 
             // rule labels: retval
             // token list labels: 
