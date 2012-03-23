@@ -226,10 +226,19 @@ public class TreeWalker<K,V>{
 		case BLOCK:	//Just evaluate everything - no need to store results
 			for (int i = 0; i < tree.getChildCount(); i++){
 				try{
-				MatObject resVal = eval(tree.getChild(i));
-				if (/*convert(tree.getChild(i).getType()) != TYPE.BLOCK &&*/ resVal != null){
-					Interpreter.displayString(resVal.toString() + "\n");
-				}
+					MatObject resVal = null;
+					if (convert(tree.getChild(i).getType()) == TYPE.SEMI){
+						//for (int j = 0; j < tree.getChild(0).getChildCount(); j++){
+							resVal = eval(tree.getChild(i).getChild(0));
+						//}
+					}
+					else{
+						resVal = eval(tree.getChild(i));
+						
+					}
+					if (/*convert(tree.getChild(i).getType()) != TYPE.BLOCK &&*/ resVal != null){
+						Interpreter.displayString(resVal.toString() + "\n");
+					}
 				}catch (Exception e){
 					//System.out.println("eval(tree.getChild("+i+")) threw an exception");
 					//System.err.println(e.);
