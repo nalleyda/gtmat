@@ -9,11 +9,40 @@ public class HorizontalConcatenate {
 	/*public static MatObject horizontalConcatenate(ArrayList<MatObject> args) throws Exception{
 		return (MatObject)HorizontalConcatenate.class.getMethod("horizontalConcatenate", args.getClass()).invoke(null, new Object[] {args});
 	}*/
-	
+
 	public static MatObject horizontalConcatenateCell(MatObject... arr) throws Exception{
-		throw new Exception("Calling a dummy method.");
+		//throw new Exception("Calling a dummy method.");
+		//TODO generalize this method
+		boolean allMat = true;
+		for (MatObject m : arr){
+			if (!(m instanceof Matrix)){
+				allMat = false;
+				break;
+			}
+		}
+		if (allMat){
+			Matrix[] marr = new Matrix[arr.length];
+			for (int i = 0; i < marr.length; i++){
+				marr[i] = (Matrix)arr[i];
+			}
+			return horizontalConcatenate(marr);
+		}
+		else{
+			return hCatCell(arr);
+		}
 	}
-	
+
+	public static CellArray hCatCell(MatObject... arr) throws Exception{
+		boolean allSame = true;
+		CellArray ret = new CellArray();
+		if (arr.length == 0) return ret;
+
+		for (int i = 0; i < arr.length; i++){
+			ret.set(1, i+1, arr[i]);
+		}
+		return ret;
+	}
+
 	public static Matrix horizontalConcatenate(ArrayList<MatObject> mArr){
 		return horizontalConcatenate(mArr.toArray(new Matrix[0]));
 	}
@@ -48,7 +77,7 @@ public class HorizontalConcatenate {
 		}
 		return res;
 	}
-	
+
 	/*public static void main(String[] args) throws Exception{
 		MatObject m1 = new Matrix(1);
 		MatObject m2 = new Matrix(2);

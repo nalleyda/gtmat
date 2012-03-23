@@ -460,6 +460,10 @@ public abstract class MatObject {
 			 break;
 
 		 }
+		 
+		/* if (m instanceof CellArray){
+			 return CellArray.get(m, ind);
+		 }*/
 
 		 throw new RuntimeException("Calling MatObject's get method - undefined behavior");
 	 }

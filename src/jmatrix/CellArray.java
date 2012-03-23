@@ -17,6 +17,7 @@ public class CellArray extends MatObject {
         cell = new MatObject[0];
         n = 0;
         type = Type.CELL;
+        size = new int[] {0, 0};
     }
 
     public MatObject[] getData(){
@@ -123,6 +124,7 @@ public class CellArray extends MatObject {
      * @return
      */
     public MatObject get(int i) {
+    	
         return cell[i - 1];
     }
 
