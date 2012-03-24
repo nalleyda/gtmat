@@ -110,7 +110,7 @@ public class Function {
             else if (args.get(1) instanceof MatString){
                 MatObject[] them = new MatObject[args.length()-1];
                 for (int i = 1; i <= them.length; i++){
-                    them[i] = args.get(i+1);
+                    them[i-1] = args.get(i+1);
                 }
                 ca = FileIO.fprintf((MatString)args.get(1), them);
             }

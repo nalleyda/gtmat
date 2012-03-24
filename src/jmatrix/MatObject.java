@@ -441,6 +441,8 @@ public abstract class MatObject {
 		 switch (m.type) {
 		 case DOUBLE:
 			 return Matrix.get((Matrix) m, (Matrix) ind);
+		 case INTEGER:
+			 return Matrix.get((Matrix) m, (Matrix) ind);
 		 case LOGICAL:
 
 			 break;
