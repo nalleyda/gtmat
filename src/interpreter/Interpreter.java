@@ -1122,8 +1122,11 @@ public class Interpreter extends Thread {
 			ArrayList<String> outputs = null;
 			while (curline != null) {
 				StringTokenizer stk = new StringTokenizer(curline, " ");
-				if (!stk.hasMoreTokens()){
-					return null;
+				while (curline != null && !stk.hasMoreTokens()){
+					curline = br.readLine();
+					if (curline != null){
+						stk = new StringTokenizer(curline, " ");
+					}
 				}
 				String token = stk.nextToken();
 
