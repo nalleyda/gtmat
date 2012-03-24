@@ -375,10 +375,19 @@ public class TreeWalker<K,V>{
 			return HorizontalConcatenate.hCatCell(arrc.toArray(new MatObject[0]));
 		case HCAT_VEC:
 			ArrayList<MatObject> arr = new ArrayList<MatObject>();
+			boolean allMat = true;
 			for (int i = 0; i < tree.getChildCount(); i++){
 				arr.add(eval(tree.getChild(i)));
+				if (!(arr.get(arr.size()-1) instanceof Matrix)){
+					allMat = false;
+				}
 			}
-			return HorizontalConcatenate.horizontalConcatenate(arr);
+			if (allMat){
+				return HorizontalConcatenate.horizontalConcatenate(arr);
+			}
+			else{
+				throw new Exception("hcat not implemented for non-matrix arguments yet.");
+			}
 
 		case ID: //Need to get the value stored in the associated variable, or call the function
 			//TODO indexing out of bounds is broken somewhere? try: x = 1; y = x(400);
