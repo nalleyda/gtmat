@@ -518,8 +518,7 @@ public class TreeWalker<K,V>{
 				arrv.add(eval(tree.getChild(i)));
 			}
 			return VerticalConcatenate.verticalConcatenate(arrv);
-		case WHILE:
-			//TODO this should be WHILE_LOOP - tokens are off by one - also see VCAT_VEC
+		case WHILE_LOOP:
 			while (eval(tree.getChild(0).getChild(0)).conditionalIsTrue()){
 				eval(tree.getChild(1));
 			}

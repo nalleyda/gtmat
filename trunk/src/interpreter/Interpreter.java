@@ -725,7 +725,7 @@ public class Interpreter extends Thread {
 	//@TODO: this kills block comments, and block comments aren't cooperating...
 	public static String removeComments(String s){
 		s = s.replaceAll("[%][{][\\n][^n]*[%][}]", "\n");//block comments
-		s = s.replaceAll("[%][^\\n]*[\\n]", "\n");//normal comments
+		s = s.replaceAll("[%][^(\\n|')]*[\\n]", "\n");//normal comments
 		return s.replaceAll("[\\n][\\n]+", "\n");
 	}
 
@@ -1295,6 +1295,10 @@ public class Interpreter extends Thread {
 				break;
 			}
 		}
+		
+		if (name.equals("pi")){
+			return new Matrix(Math.PI);
+		}
 		return ret;
 	}
 
@@ -1422,7 +1426,7 @@ public class Interpreter extends Thread {
     }
 
 	 */
-	public static void main(String[] args) throws Exception {
+	//public static void main(String[] args) throws Exception {
 		/*File dir = new File(".");
 
         FilenameFilter filter = new FilenameFilter() {
@@ -1462,13 +1466,13 @@ public class Interpreter extends Thread {
 		//s.repl
 		s = s.replaceAll("[%]", "&&&");
 		System.out.println(s);*/
-		Scanner scan = new Scanner(new File("Test_Suite/SyntaxStressTest.m"));
+		/*Scanner scan = new Scanner(new File("Test_Suite/SyntaxStressTest.m"));
 		StringBuilder sb = new StringBuilder();
 		while (scan.hasNext()){
 			sb.append(scan.nextLine() + "\n");
 		}
 		System.out.println(preprocessTranspose(sb.toString()));
 		//System.out.println(preprocessTranspose("'Strings should be removed with second highest priority) (. See?'\n" + ""));
-	}
+	}*/
 
 }
