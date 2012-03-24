@@ -331,7 +331,7 @@ public class TreeWalker<K,V>{
 				if (tree.getChild(0).getChildCount()!=1 || convert(lhsTree.getType()) != TYPE.HCAT_VEC){
 					throw new Exception("Bad LHS assignment.");
 				}
-				for (int i = 0; i <= lhsTree.getChildCount(); i++){
+				for (int i = 0; i < lhsTree.getChildCount(); i++){
 					Interpreter.assign(lhsTree.getChild(i).getText(), rhsRes.get(i+1), true);
 				}
 			}
