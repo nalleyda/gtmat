@@ -1,6 +1,7 @@
 package jmatrix;
 
 import main.*;
+import java.io.Serializable;
 
 /**
  * 
@@ -9,9 +10,13 @@ import main.*;
  */
 //Find a way to cast from primitives to Matrix, to save typing
 //Check whether it is actually faster to use arrays instead of ArrayLists
-public class Structure extends MatObject {
+public class Structure extends MatObject implements java.io.Serializable{
 
-    private String[] fieldNames;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6798816651720795398L;
+	private String[] fieldNames;
     private MatObject[] Data;
 
     public Structure(String fieldname, MatObject data) {
@@ -151,6 +156,15 @@ public class Structure extends MatObject {
         }
         return ret;
     }
+    public String toFormat(){
+    	String ret = "{ ";
+        for (int i = 0; i < Data.length; i++) {
+            ret = ret + fieldNames[i].trim() + ": " + Data[i].toString().trim() + "; ";
+        }
+        ret += "}\n";
+        return ret;
+    	
+    }
 
     /**
      * add rmfield
@@ -162,15 +176,18 @@ public class Structure extends MatObject {
         MatObject[] data = {new Matrix(1), new Matrix(2)};
 
         Structure x = new Structure(fn, data);
-        Structure y = new Structure();
-        x = x.setField("third", new Matrix(3));
-        x = x.setField("second", new Matrix(120));
-        y = x.addField("fourth", new Matrix(4));
-        x = x.addField("third", new Matrix(17));
-        System.out.println(x);
-        System.out.println(y);
-        for (int i = 0; i < y.fieldNames.length; i++) {
-            System.out.println(y.fieldNames[i]);
-        }
+        System.out.println(x.toString());
+        System.out.println(x.toFormat());
+//        Structure y = new Structure();
+//        x = x.setField("third", new Matrix(3));
+//        x = x.setField("second", new Matrix(120));
+//        y = x.addField("fourth", new Matrix(4));
+//        x = x.addField("third", new Matrix(17));
+//        System.out.println(x);
+//        System.out.println(y);
+//        for (int i = 0; i < y.fieldNames.length; i++) {
+//            System.out.println(y.fieldNames[i]);
+//    	
+//        }
     }
 }
