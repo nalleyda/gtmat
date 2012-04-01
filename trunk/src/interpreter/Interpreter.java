@@ -796,6 +796,7 @@ public class Interpreter extends Thread {
 	private static String myFileName = "";
 	public static MatObject[] call(String name, CellArray ca) throws Exception{
 		MatObject[] res = null;
+		Exception ex = null;
 		//System.out.println(name);
 //		System.out.println("\n\nName: " + name + "\nArguments: " + ((MatObject)(ca.getData()[0])).toString() + "\n\n");
 		myFileName = name;
@@ -831,11 +832,16 @@ public class Interpreter extends Thread {
 		if (res == null) {
 
 			//If it's not a helper function, see if it is a user-defined function
-			/*CellArray*/MatObject[] localres = checkLocalFunctions(name, ca);
-			System.out.println("\nResults: " + localres);
-			if (localres != null) {
-				res = localres;
-
+			try{
+				MatObject[] localres = checkLocalFunctions(name, ca);
+				System.out.println("\nResults: " + localres);
+				if (localres != null) {
+					res = localres;
+	
+				}
+			}catch(Exception e){
+				//e.printStackTrace();
+				ex = e;
 			}
 
 		}
@@ -856,7 +862,10 @@ public class Interpreter extends Thread {
 		//If we get to this point, then the RHS is invalid
 		if (res == null) {
 			//System.out.println("exception thrown in Interpreter at: "+System.currentTimeMillis());
-			throw new RuntimeException("Invalid variable name or function call - " + name);
+			if (ex!=null) throw ex;
+			else{
+				throw new RuntimeException("Invalid variable name or function call - " + name);
+			}
 		}
 		return res;
 	}
@@ -979,11 +988,13 @@ public class Interpreter extends Thread {
 		try {
 			ss = new GTStringStream();
 			ss.append(s.toString());
-		} catch (IOException e) {
+			GTParser.process(ss, new Interpreter());
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
+			System.out.println("Exception @ Interpreter.eval()");
 			e.printStackTrace();
 		}
-		GTParser.process(ss, new Interpreter());
+		//GTParser.process(ss, new Interpreter());
 		return new Matrix(1);
 	}
 

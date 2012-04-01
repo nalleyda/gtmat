@@ -48,18 +48,20 @@ public class DataHolder implements Runnable {
     }
 
     public void run(){
-        /*try{
+        try{
             TreeWalker.process(theTree);
         }
         catch (Exception e){
-            Interpreter.displayError(e.getMessage());
+        	System.err.println(e.getMessage()+"(in DataHolder.run())");
             e.printStackTrace();
+            Thread.currentThread().interrupt();
+            return;
         }
-        finally{
-            Main.interactions.appendString(">> ", 0);
-        }*/
-        TreeWalker.process(theTree);
+        
         Main.interactions.appendString(">> ", 0);
+        
+//        TreeWalker.process(theTree);
+//        Main.interactions.appendString(">> ", 0);
     }
     
     public void setTree(CommonTree tr) {
