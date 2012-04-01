@@ -517,6 +517,8 @@ public class Function {
         ht.put("zlabel", new Function("zlabel", "plotting.Figure", 1, MatString.class));
         ht.put("zeros", new Function("zeros", "jmatrix.Matrix", 2,
                 Matrix.class, Matrix.class));
+        //Hopefully I did that correctly..
+        ht.put("struct", new Function("struct", "jmatrix.Structure", 2, String.class, MatObject.class));
         
         //Other functions
         ht.put("cd", new Function("cd", "main.Main", 1, MatString.class));
