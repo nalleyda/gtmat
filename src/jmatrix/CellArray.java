@@ -232,25 +232,29 @@ public class CellArray extends MatObject {
     public String toFormat(){
     	int rows = size[ROW];
         int cols = size[COL];
-        String res="{";
+        String res="{ ";
         MatObject d;
 //        if(rows > 1) res = "{\n   ";
 //        else res = "{";
         for(int r = 1; r <= rows; r++) {
             for(int c = 1; c <= cols; c++) {
                 d = get(r,c);
+                
                 if(d instanceof MatString) {
-                    res += "" + d + "";
+                	String matStr=d.toString().trim();
+                    res += "'" + matStr + "'";
                 } else {
-                    res += "" + d + "";
+                	
+                    res += d ;
                 }
+                res+=" ";
             }
             if((rows > 1) && (r < rows)) res += ";";
         }
         res += " }\n";
         return res;
     }
-/*
+/*{ first: 1; second: 2; }
              if(n == 0) return "[]";
         if (rows > 1) {
             res = "[\n   ";
