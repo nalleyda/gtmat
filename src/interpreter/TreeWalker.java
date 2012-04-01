@@ -240,7 +240,8 @@ public class TreeWalker<K,V>{
 				}catch (Exception e){
 					//System.out.println("eval(tree.getChild("+i+")) threw an exception");
 					//System.err.println(e.);
-					e.printStackTrace();
+					//e.printStackTrace();
+					throw e;
 				}
 			}
 			break; 
@@ -603,23 +604,29 @@ public class TreeWalker<K,V>{
 		return res;
 	}
 
-	public static void process(CommonTree tree) {
+	public static void process(CommonTree tree) throws Exception{
 		//        Main.debug.println(tree.toStringTree());
 		gtmatException.GTMatException.setLineNumber(tree.getLine());
 		try {
 			eval(tree);
 		} catch (Exception e1) {
-			if(e1 instanceof GTMatException)
-				GTMatException.Throw((GTMatException)e1);
-			else 
-				e1.printStackTrace();
+			//e1.printStackTrace();
+			System.out.println("Ceasing execution in TreeWalker.process()");
+			
+			//System.exit(-1);
+			if(e1 instanceof GTMatException){
+				GTMatException.Throw((GTMatException)e1);		
+			}
+			//Thread.currentThread().interrupt();
+			throw e1;
+			
 		}
-		try {
-			// System.out.println("Result = " + process("", tree));
-		} catch (Exception e) {
-			Interpreter.displayError(e.getMessage());
-			e.printStackTrace();
-		}
+//		try {
+//			// System.out.println("Result = " + process("", tree));
+//		} catch (Exception e) {
+//			Interpreter.displayError(e.getMessage());
+//			e.printStackTrace();
+//		}
 	}
 
 	public static TYPE convert(int value){
