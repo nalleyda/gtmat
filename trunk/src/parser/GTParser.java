@@ -82,7 +82,7 @@ public class GTParser {
         doit(new ExprLexer(sstr));
     }
 
-    public static void process(GTStringStream sstr, Interpreter inter){
+    public static void process(GTStringStream sstr, Interpreter inter) throws Exception{
         sstr.append("\n");
         CommonTokenStream tokens = new CommonTokenStream(new ExprLexer(sstr));
         ExprParser g = new ExprParser(tokens);
@@ -95,6 +95,8 @@ public class GTParser {
         catch (Exception e){
             e.printStackTrace();
             System.out.println("process() threw an exception and likely did not complete running the ch script");
+            Thread.currentThread().interrupt();
+			throw e;
         }
         
         //process(sstr);
@@ -122,6 +124,8 @@ public class GTParser {
             it.start();
         } catch (RecognitionException e) {
             e.printStackTrace();
+            System.out.println("exception at doIt");
+            return;
         }
     }
     public static CommonTree makeTree(String str) {
