@@ -64,6 +64,7 @@ end
 output_file = fid;
 output = cell(size(cell_array,1),size(cell_array,2));
 
+fprintf(fid, '{ ');
 %% Evaluate and write input array.
 for i = 1:size(cell_array,1)
 for j = 1:size(cell_array,2)
@@ -102,8 +103,12 @@ for j = 1:size(cell_array,2)
      end
 end;
 % At the end of a row, a newline is written to the output file.
-fprintf(output_file,'; ');
-end;
+if i==size(cell_array, 1)
+    fprintf(output_file, ' }');
+else 
+    fprintf(output_file, '; ');
+end
+end
 fprintf(output_file,'\n');
 %% Close output file.    
 %fclose(output_file);
