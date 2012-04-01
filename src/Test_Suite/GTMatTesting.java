@@ -2,6 +2,7 @@ package Test_Suite;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,6 +34,7 @@ public class GTMatTesting {
 	public static int beginCh;
 	public static DefaultListModel gtMatVars;
 	public static ArrayList<DefaultListModel> chVars = new ArrayList<DefaultListModel>(chs.length);;
+	public static ArrayList<ArrayList<String>> allListings;
 	
 	public static void initTesting(int startCh, int stopCh){
 		//run matlab first, then gtmat
@@ -42,6 +44,8 @@ public class GTMatTesting {
 		System.out.println("chVars is of size: "+chVars.size());
 		endCh = stopCh;
 		beginCh = startCh;
+		//parseScriptNames();
+		//if(allListings!=null)System.out.println(allListings);
 		
 		//execMatlab() working
 		execMatlab();
@@ -108,9 +112,12 @@ public class GTMatTesting {
 				GTParser.process(path);
 					
 			}catch(Exception e){
-				System.out.println(e.toString());
+				e.printStackTrace();
+				System.out.println("Halting execution in execGTMat() at GTParser.process(path)");
+				//System.out.println(e.toString());
 				//System.out.println(path+" threw an exception while being processed");
-				System.out.println(e.getMessage());
+				//System.out.println(e.getMessage());
+				System.exit(-1);
 			}
 			start = System.currentTimeMillis();
 			while(System.currentTimeMillis()-start<3000){
@@ -178,6 +185,7 @@ public class GTMatTesting {
 						String temp = "";
 						try{
 							temp = st.nextToken();
+							
 						}catch(NoSuchElementException e){
 							System.out.println(e.getMessage());
 							System.out.println(e.getStackTrace());
@@ -211,9 +219,18 @@ public class GTMatTesting {
 					}
 					//if(System.out.println("val: "+val);
 					if ((name!=null)&&(val!=null)){
+						if (!st.hasMoreTokens()){
+							//int l = val.lastIndexOf(';', val.length()-5);
+							
+							String temp = val.replace("; }", " }");
+							val = temp;
+							System.out.println(val);
+						}
+						System.out.println(name+ ": "+ val);
 						results.put(name, val);
 						
 					}
+					
 					
 					//sb.append(thisLine);
 				}
@@ -245,18 +262,19 @@ public class GTMatTesting {
 //						System.out.println(varStr+"<< from GTMat");
 //						System.out.println(parseStr.toString()+"<< from MatLab \n");
 						String varStr = v.getVarName()+" = "+toFormatted(v.getData());
-						//implement format() to convert fucked up toString() of gtMat arrays to the form used in the matlab data
+						//implement format() to standardize toString() output of gtMat arrays to the form used in the matlab data
 //						if (MatObject.getClass(v.getData()).equals(MatObject.Type.LOGICAL)){
 //							varStr.replace('t', '1');
 //							varStr.replace('f', '0');
 //						}
 						
 						System.out.println(varStr+"<< toFormatted(), from GTMat");
-						System.out.println(vStr+"<< toString(), from GTMat");
+						
+						//System.out.println(vStr+"<< toString(), from GTMat");
 						//System.out.println(v.workspaceString())
 						System.out.println(parseStr+"<< from MatLab");
 						if (varStr.equals(parseStr)){
-							out.put(v.getVarName(), "name and value equal");
+							out.put(v.getVarName(), "Name and value equal");
 							//System.out.println(v.getVarName()+"== in matlab and gtmat");
 						}
 						else{
@@ -267,7 +285,7 @@ public class GTMatTesting {
 						}
 					}
 					else{// (!results.containsKey(v.getVarName())){
-						out.put(v.getVarName(), "parsed result does not contain Variable v, or the names are formatted incorrectly");
+						out.put(v.getVarName(), "Parsed result does not contain Variable v, or the names are formatted incorrectly");
 						//System.out.println("var names not equal");
 					}
 					System.out.println(out.get(v.getVarName())+"\n");		
@@ -297,6 +315,9 @@ public class GTMatTesting {
 		} 
 		else if (mo instanceof CellArray){
 			newStr = ((CellArray)mo).toFormat();
+		}
+		else if (mo instanceof Structure){
+			newStr = ((Structure)mo).toFormat();
 		}
 		else
 			newStr = mo.toString();
@@ -427,6 +448,53 @@ public class GTMatTesting {
 		} catch(MatlabConnectionException mce){
 			System.out.println("Could not connect to Matlab instance.");
 		}
+	}
+	
+	public static void parseScriptNames() {
+		boolean res=false;
+		FileInputStream fin;
+		ArrayList<ArrayList<String>> listings = new ArrayList<ArrayList<String>>(chs.length);
+		//for (int i = beginCh; i <= endCh; i++){
+			String fname = "allChs"+".m";	
+			try{
+			fin = new FileInputStream(fname);
+			BufferedReader matlabTxt = new BufferedReader(new InputStreamReader(fin));
+			
+			//BufferedReader matlabTxt = new BufferedReader(new InputStreamReader(fin));
+			StringBuilder sb = new StringBuilder();
+			String thisLine;
+			int i = 0;
+			while((thisLine=matlabTxt.readLine()) != null){
+				StringTokenizer st = new StringTokenizer(thisLine);
+//				name = st.nextToken();
+//				if (st.nextToken().equals("=")) st.nextToken();
+				ArrayList<String> sub = new ArrayList<String>();
+				int j = 0;
+				while(st.hasMoreTokens()){
+					String temp = "";
+					try{
+						temp = st.nextToken();
+						sub.add(j, temp);
+					}catch(NoSuchElementException nsee){
+						throw nsee;
+					}
+					j++;
+				}
+				listings.add(i, sub);
+				i++;
+			}
+		//} 
+			
+			allListings = listings;
+			}catch(Exception ioe){
+				ioe.printStackTrace();
+			}
+	}
+	
+	public static boolean dataContentCheck(MatObject mo1, MatObject mo2, int option){
+		
+		
+		return false;
 	}
 	
 	public static void main(String[] args){
