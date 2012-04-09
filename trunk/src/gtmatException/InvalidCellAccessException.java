@@ -7,10 +7,6 @@ package gtmatException;
  */
 
 public class InvalidCellAccessException extends GTMatException {
-
-	public InvalidCellAccessException(String filename) {
-		super(filename);
-	}
 	
 	public String toString() {
 		message = "Error at " + filename + ": " + "line " + lineNumber + "\n" 

@@ -8,10 +8,6 @@ package gtmatException;
 
 public class TooManyInputsException extends GTMatException {
 
-	public TooManyInputsException(String filename) {
-		super(filename);
-	}
-	
 	public String toString() {
 		message = "Error at " + filename + ": " + "line " + lineNumber + "\n" 
 					+ "Too many input arguments";

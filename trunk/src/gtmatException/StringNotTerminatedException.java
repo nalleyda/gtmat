@@ -7,10 +7,6 @@ package gtmatException;
  */
 
 public class StringNotTerminatedException extends GTMatException {
-
-	public StringNotTerminatedException(String filename) {
-		super(filename);
-	}
 	
 	public String toString() {
 		message = "Error at " + filename + ": " + "line " + lineNumber + "\n" 

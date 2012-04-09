@@ -27,7 +27,7 @@ public class VerticalConcatenate {
 		for (int i = 0; i < m.length; i++) {
 			rows += m[i].size[MatObject.ROW];
 			if (m[i].size[MatObject.COL] != cols) {
-				throw(new CustomException("unknown","Array column diminsions must agree"));
+				throw(new CustomException("Array column diminsions must agree"));
 				//throw new RuntimeException("Matrix.vcat bad columns in item " + i);
 			}
 		}

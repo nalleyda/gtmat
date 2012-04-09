@@ -7,10 +7,6 @@ package gtmatException;
  */
 
 public class InvalidSyntaxException extends GTMatException {
-
-	public InvalidSyntaxException(String filename) {
-		super(filename);
-	}
 	
 	public String toString() {
 		message = "Error at " + filename + ": " + "line " + lineNumber + "\n" 

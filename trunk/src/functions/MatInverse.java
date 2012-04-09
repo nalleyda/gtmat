@@ -11,7 +11,7 @@ public class MatInverse {
 	public static Matrix matInverse(Matrix m1) {
 		if (m1.size.length != 2
 				 || (m1.size[MatObject.ROW] != m1.size[MatObject.COL])) {
-			 throw(new MatrixNotSquareException("unknown"));
+			 throw(new MatrixNotSquareException());
 		 }
 		 int n = m1.size[MatObject.ROW];
 		 int bcols = 2 * n;

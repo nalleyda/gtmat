@@ -7,10 +7,6 @@ package gtmatException;
  */
 
 public class IndexOOBException extends GTMatException {
-
-	public IndexOOBException(String filename) {
-		super(filename);
-	}
 	
 	public String toString() {
 		message = "Error at " + filename + ": " + "line " + lineNumber + "\n" 

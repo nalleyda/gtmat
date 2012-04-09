@@ -13,8 +13,12 @@ public abstract class GTMatException extends RuntimeException {
 	protected String message;
 	
 	
-	public GTMatException(String filename) {
-		this.filename = filename;
+	public GTMatException() {
+		try{
+			filename = parser.GTParser.filenameStack.peek();
+		} catch(java.util.EmptyStackException e) {
+			filename="Console";
+		}
 	}
 	
 	public static void Throw(GTMatException e) {

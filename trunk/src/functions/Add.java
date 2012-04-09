@@ -31,7 +31,7 @@ public class Add {
                     res.data[i] = v.data[0] + m.data[i];
                 }
             } else {
-                throw(new MatrixDimensionsException("unknown"));
+                throw(new MatrixDimensionsException());
             }
         } else {
             for (int i = 0; i < m.n; i++) {

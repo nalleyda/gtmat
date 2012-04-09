@@ -7,10 +7,6 @@ package gtmatException;
  */
 
 public class SubscriptedAssignmentDimensionException extends GTMatException {
-
-	public SubscriptedAssignmentDimensionException(String filename) {
-		super(filename);
-	}
 	
 	public String toString() {
 		message = "Error at " + filename + ": " + "line " + lineNumber + "\n" 

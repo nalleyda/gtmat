@@ -534,7 +534,7 @@ public class TreeWalker<K,V>{
 			}
 			return null;
 		default:
-			gtmatException.GTMatException.Throw(new gtmatException.InvalidSyntaxException("unknown"));
+			gtmatException.GTMatException.Throw(new gtmatException.InvalidSyntaxException());
 		}
 		return res;
 	}
@@ -610,6 +610,9 @@ public class TreeWalker<K,V>{
 		try {
 			eval(tree);
 		} catch (Exception e1) {
+			try{
+				parser.GTParser.filenameStack.pop();
+			} catch(java.util.EmptyStackException e) {}
 			//e1.printStackTrace();
 			System.out.println("Ceasing execution in TreeWalker.process()");
 			

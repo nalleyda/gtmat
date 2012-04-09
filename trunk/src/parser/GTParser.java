@@ -10,6 +10,8 @@ import main.*;
 import interpreter.*;
 
 import java.io.*;
+import java.util.Stack;
+
 import javax.swing.text.*;
 import jmatrix.*;
 import workspace.*;
@@ -19,6 +21,7 @@ public class GTParser {
 //    private static Grammar_Name_Lexer lex;
     private static ExprLexer lex;
 //    public static String assignmentTarget = null;
+    public static Stack<String> filenameStack = new Stack<String>();
 
     public static void main(String[] args) throws Exception {
 
@@ -48,13 +51,14 @@ public class GTParser {
     public static void process(String name) {
         // Create an input character stream
         try {
+//        	filenameStack.push(name);
             lex = new ExprLexer(new ANTLRFileStream(name));
         } catch (IOException e) {
-            debug.println("didn't open " + name);
+//            debug.println("didn't open " + name);
         }
         doit(lex);
+        filenameStack.pop();
     }
-
 
     
     public static MatObject processChild(GTStringStream sstr) throws Exception {
