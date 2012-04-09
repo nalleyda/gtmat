@@ -55,7 +55,6 @@ public class DataHolder implements Runnable {
         	System.err.println(e.getMessage()+"(in DataHolder.run())");
             e.printStackTrace();
             Thread.currentThread().interrupt();
-            return;
         }
         
         Main.interactions.appendString(">> ", 0);
