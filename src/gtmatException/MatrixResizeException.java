@@ -7,10 +7,6 @@ package gtmatException;
  */
 
 public class MatrixResizeException extends GTMatException {
-
-	public MatrixResizeException(String filename) {
-		super(filename);
-	}
 	
 	public String toString() {
 		message = "Error at " + filename + ": " + "line " + lineNumber + "\n" 

@@ -21,6 +21,7 @@ import javax.swing.DefaultListModel;
 import java.io.*;
 import java.util.regex.*;
 import java.util.*;
+import gtmatException.*;
 
 /**
  *
@@ -864,7 +865,8 @@ public class Interpreter extends Thread {
 			//System.out.println("exception thrown in Interpreter at: "+System.currentTimeMillis());
 			if (ex!=null) throw ex;
 			else{
-				throw new RuntimeException("Invalid variable name or function call - " + name);
+				throw new UndefinedVariableException();
+				//throw new RuntimeException("Invalid variable name or function call - " + name);
 			}
 		}
 		return res;

@@ -23,7 +23,7 @@ public class GreaterThan {
 			return le1(b.get(1), a);
 		}
 		if (a.n != b.n) {
-			throw(new MatrixDimensionsException("unknown"));
+			throw(new MatrixDimensionsException());
 		}
 		Matrix res = new Matrix(a);
 		for (int i = 0; i < a.n; i++) {

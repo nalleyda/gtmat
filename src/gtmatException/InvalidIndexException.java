@@ -7,10 +7,6 @@ package gtmatException;
  */
 
 public class InvalidIndexException extends GTMatException {
-
-	public InvalidIndexException(String filename) {
-		super(filename);
-	}
 	
 	public String toString() {
 		message = "Error at " + filename + ": " + "line " + lineNumber + "\n" 

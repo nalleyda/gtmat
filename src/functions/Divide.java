@@ -29,7 +29,7 @@ public class Divide {
                     res.data[i] = m.data[i] / v.data[0];
                 }
             } else {
-                throw(new InnerMatrixDimensionsException("unknown"));
+                throw(new InnerMatrixDimensionsException());
             }
         } else {
             for (int i = 0; i < m.n; i++) {

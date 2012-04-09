@@ -27,7 +27,7 @@ public class Subtract {
                     res.data[i] = m.data[i] - v.data[0];
                 }
             } else {
-                throw(new MatrixDimensionsException("unknown"));
+                throw(new MatrixDimensionsException());
             }
         } else {
             for (int i = 0; i < m.n; i++) {

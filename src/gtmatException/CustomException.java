@@ -10,8 +10,7 @@ public class CustomException extends GTMatException {
 
 	private String userMessage;
 	
-	public CustomException(String filename, String userMessage) {
-		super(filename);
+	public CustomException(String userMessage) {
 		this.userMessage = userMessage;
 	}
 	

@@ -7,10 +7,6 @@ package gtmatException;
  */
 
 public class InnerMatrixDimensionsException extends GTMatException {
-
-	public InnerMatrixDimensionsException(String filename) {
-		super(filename);
-	}
 	
 	public String toString() {
 		message = "Error at " + filename + ": " + "line " + lineNumber + "\n" 

@@ -78,7 +78,7 @@ public class Matrix extends MatObject {
 	 */
 	public Matrix(double[] data, int rows, int cols) {
 		if (rows * cols != data.length) {
-			throw(new MatrixDimensionsException("unknown"));
+			throw(new MatrixDimensionsException());
 		}
 
 
@@ -212,7 +212,7 @@ public class Matrix extends MatObject {
 				data[i] = ((UnsignedByte) o).data[i];
 			}
 		} else {
-			throw(new CustomException("unknown","illegal math operation"));
+			throw(new CustomException("illegal math operation"));
 		}
 		type = Type.DOUBLE;
 		size = new int[o.size.length];
@@ -335,11 +335,11 @@ public class Matrix extends MatObject {
 	public static void set(Matrix m, Matrix rndx, Matrix cndx, Matrix vals) {
 		if (rndx.size[ROW] != 1
 				|| cndx.size[ROW] != 1) {
-			throw(new CustomException("unknown","Matrix.set bad row or col vector"));
+			throw(new CustomException("Matrix.set bad row or col vector"));
 		}
 		if (rndx.size[COL] != vals.size[ROW]
 				|| cndx.size[COL] != vals.size[COL]) {
-			throw(new CustomException("unknown","Matrix.set bad row or col vector size"));
+			throw(new CustomException("Matrix.set bad row or col vector size"));
 		}
 		int mxr = (int) ((Matrix) rndx.max().get(1, 1)).get(1);
 		int mxc = (int) ((Matrix) cndx.max().get(1, 2)).get(1);
@@ -416,7 +416,7 @@ public class Matrix extends MatObject {
 			return lt1(b.get(1), a);
 		}
 		if (a.n != b.n) {
-			throw(new MatrixDimensionsException("unknown"));
+			throw(new MatrixDimensionsException());
 		}
 		Matrix res = new Matrix(a);
 		for (int i = 0; i < a.n; i++) {
@@ -440,7 +440,7 @@ public class Matrix extends MatObject {
 			return gt1(b.get(1), a);
 		}
 		if (a.n != b.n) {
-			throw(new MatrixDimensionsException("unknown"));
+			throw(new MatrixDimensionsException());
 		}
 		Matrix res = new Matrix(a);
 		for (int i = 0; i < a.n; i++) {
@@ -464,7 +464,7 @@ public class Matrix extends MatObject {
 			return LessEqual.le1(b.get(1), a);
 		}
 		if (a.n != b.n) {
-			throw(new MatrixDimensionsException("unknown"));
+			throw(new MatrixDimensionsException());
 		}
 		Matrix res = new Matrix(a);
 		for (int i = 0; i < a.n; i++) {
@@ -490,7 +490,7 @@ public class Matrix extends MatObject {
 			return eq1(b.get(1), a);
 		}
 		if (b.n != a.n) {
-			throw(new MatrixDimensionsException("unknown"));
+			throw(new MatrixDimensionsException());
 		}
 		Matrix res = new Matrix(a);
 		for (int i = 0; i < a.n; i++) {
@@ -514,7 +514,7 @@ public class Matrix extends MatObject {
 			return ne1(b.get(1), a);
 		}
 		if (a.n != b.n) {
-			throw(new MatrixDimensionsException("unknown"));
+			throw(new MatrixDimensionsException());
 		}
 		Matrix res = new Matrix(a);
 		for (int i = 0; i < a.n; i++) {
@@ -538,7 +538,7 @@ public class Matrix extends MatObject {
 			return and1(b.get(1), a);
 		}
 		if (a.n != b.n) {
-			throw(new MatrixDimensionsException("unknown"));
+			throw(new MatrixDimensionsException());
 		}
 		Matrix res = new Matrix(a);
 		for (int i = 0; i < a.n; i++) {
@@ -563,7 +563,7 @@ public class Matrix extends MatObject {
 			return or1(b.get(1), a);
 		}
 		if (a.n != b.n) {
-			throw(new MatrixDimensionsException("unknown"));
+			throw(new MatrixDimensionsException());
 		}
 		Matrix res = new Matrix(a);
 		for (int i = 0; i < a.n; i++) {
@@ -650,7 +650,7 @@ public class Matrix extends MatObject {
 			System.out.println("Houston, we have a problem\n");
 		}
 		if(i<1)
-			throw(new InvalidIndexException("unknown"));
+			throw(new InvalidIndexException());
 		return data[i - 1];
 	}
 
@@ -670,7 +670,7 @@ public class Matrix extends MatObject {
 	 */
 	public void set(int i, double val) {
 		if (i > n) {
-			throw(new CustomException("unknown","Matrix:set(i...) i too big"));
+			throw(new CustomException("Matrix:set(i...) i too big"));
 		}
 		;
 		data[i - 1] = val;
@@ -688,15 +688,15 @@ public class Matrix extends MatObject {
 		double[] vals = values.data;
 
 		if (ind.length != vals.length) {
-			throw(new MatrixDimensionsException("unknown"));
+			throw(new MatrixDimensionsException());
 		}
 
 		for (int i = 0; i < ind.length; i++) {
 			if (ind[i] > maxsize) {
-				throw(new IndexOOBException("unknown"));
+				throw(new IndexOOBException());
 			}
 			m.data[i - 1] = vals[i];
-			throw(new IndexOOBException("unknown"));
+			throw(new IndexOOBException());
 		}
 	}
 
@@ -756,7 +756,7 @@ public class Matrix extends MatObject {
 			prod *= i;
 		}
 		if (m.n != prod) {
-			throw(new MatrixResizeException("unknown"));
+			throw(new MatrixResizeException());
 		}
 		return res;
 	}
@@ -831,7 +831,7 @@ public class Matrix extends MatObject {
 	 */
 	public static Matrix sindex(Matrix m, Matrix ri, Matrix ci) {
         if ((ri.size[ROW] != 1) || (ci.size[ROW] != 1)) {
-        	throw(new IndexOOBException("unknown"));
+        	throw(new IndexOOBException());
         }
         Matrix res = new Matrix(ri.n, ci.n);
         for (int r = 1; r <= ri.n; r++) {
@@ -851,7 +851,7 @@ public class Matrix extends MatObject {
 	 */
 	public static Matrix sindex(Matrix m, Matrix ci) {
         if (ci.size[ROW] != 1) {
-        	throw(new IndexOOBException("unknown"));
+        	throw(new IndexOOBException());
         }
         Matrix res = new Matrix(1, ci.n);
         for (int c = 1; c <= ci.n; c++) {
@@ -864,9 +864,9 @@ public class Matrix extends MatObject {
 	public static double get(Matrix m, int r, int c) {
         int it = (c - 1) * m.size[ROW] + (r - 1);
         if(it<1)
-        	throw(new InvalidIndexException("unknown"));
+        	throw(new InvalidIndexException());
         if(it>m.length())
-        	throw(new IndexOOBException("unknown"));
+        	throw(new IndexOOBException());
         return m.data[it];
 	}
 
@@ -912,7 +912,7 @@ public class Matrix extends MatObject {
 					i++;
 				} catch (Exception e) {
 					e.printStackTrace();
-					throw(new IndexOOBException("unknown"));
+					throw(new IndexOOBException());
 				}
 			}
 		}
@@ -935,7 +935,9 @@ public class Matrix extends MatObject {
 			try {
 				newmat[i] = mdata[(int) indices[i] - 1];
 			} catch (Exception e) {
-				throw(new IndexOOBException("unknown"));
+				if(indices[i]%1!=0)
+					throw(new InvalidIndexException());
+				throw(new IndexOOBException());
 				//return null;
 			}
 		}
@@ -1058,7 +1060,7 @@ public class Matrix extends MatObject {
 		if (x.size[ROW] != 1
 				|| y.size[ROW] != 1
 				|| xi.size[ROW] != 1) {
-			throw(new CustomException("unknown","Input must be vectors"));
+			throw(new CustomException("Input must be vectors"));
 		}
 		Matrix res = new Matrix(xi);
 		for (int i = 1; i <= xi.n; i++) {
@@ -1289,7 +1291,7 @@ public class Matrix extends MatObject {
 		double newv;
 
 		if (Math.abs(inc) < 0.0000000000001) {
-			throw(new CustomException("unknown","increment must be greater than zero"));
+			throw(new CustomException("increment must be greater than zero"));
 		}
 		int n = (int) ((to - from) / inc) + 1;
 		if (n > 0) {
@@ -1385,12 +1387,12 @@ public class Matrix extends MatObject {
 	 */
 	public static Matrix magic(Matrix n1) {
 		if (n1.n != 1) {
-			throw(new CustomException("unknown","Magic must be called with an integer, scalar argument"));
+			throw(new CustomException("Magic must be called with an integer, scalar argument"));
 		}
 
 		int n = n1.geti(1);
 		if (n % 2 == 0) {
-			throw(new CustomException("unknown","Matrix.magic must have odd parameters"));
+			throw(new CustomException("Matrix.magic must have odd parameters"));
 		}
 		Matrix m = zeros(n, n);
 		int i, j;
@@ -1463,7 +1465,7 @@ public class Matrix extends MatObject {
 		Matrix res = Matrix.ones(1, xi.n);
 		int np = x.n;
 		if (y.n != np || x.size[ROW] != 1 || y.size[ROW] != 1) {
-			throw(new CustomException("unknown","Matrix.spline bad x or y inputs"));
+			throw(new CustomException("Matrix.spline bad x or y inputs"));
 		}
 		/* 
 		 * we need to solve n-2 equations to determine the curvature values Mi
@@ -1516,7 +1518,7 @@ public class Matrix extends MatObject {
 
 	public static CellArray meshgrid(Matrix x, Matrix y) {
 		if (x.size[ROW] > 1 || y.size[ROW] > 1) {
-			throw(new CustomException("unknown","Matrix.meshgrid must have vector inputs"));
+			throw(new CustomException("Matrix.meshgrid must have vector inputs"));
 		}
 		CellArray res = new CellArray(1, 2);
 		Matrix xx = new Matrix(y.n, x.n);
@@ -1566,7 +1568,7 @@ public class Matrix extends MatObject {
 
 	public static Matrix applyFunction(String fName, Matrix a, Matrix b) {
 		if (a.n != b.n) {
-			throw(new CustomException("unknown","Matrix.applyFunction bad a or b inputs"));
+			throw(new CustomException("Matrix.applyFunction bad a or b inputs"));
 		}
 		Matrix res = new Matrix(a);
 		res.data = applyMathMethodToVector(a.data, fName, b.data);
@@ -1620,7 +1622,7 @@ public class Matrix extends MatObject {
 				} else if (vec2.length == 1) {
 					params[1] = vec2[0];
 				} else {
-					throw(new MatrixDimensionsException("unknown"));
+					throw(new MatrixDimensionsException());
 				}
 
 				newvec[i] = (Double) meth.invoke(Double.class, params);
@@ -1726,7 +1728,7 @@ public class Matrix extends MatObject {
 	 */
 	public Matrix reshape(int rows, int cols) {
 		if (n != rows * cols) {
-			throw(new MatrixResizeException("unknown"));
+			throw(new MatrixResizeException());
 		}
 		Matrix res = new Matrix(this);
 		res.size[ROW] = rows;
@@ -1867,7 +1869,7 @@ public class Matrix extends MatObject {
 					res.set(i, v.get(1) * get(i));
 				}
 			} else {
-				throw(new InnerMatrixDimensionsException("unknown"));
+				throw(new InnerMatrixDimensionsException());
 			}
 		} else {
 			for (int i = 1; i <= n; i++) {
@@ -1888,7 +1890,7 @@ public class Matrix extends MatObject {
 	 */
 	public void multIP(Matrix v) {
 		if (n != v.n) {
-			throw(new InnerMatrixDimensionsException("unknown"));
+			throw(new InnerMatrixDimensionsException());
 		}
 		for (int i = 1; i <= n; i++) {
 			set(i, get(i) * v.get(i));
@@ -1933,7 +1935,7 @@ public class Matrix extends MatObject {
 					res.set(i, Math.pow(v.get(1),  get(i)));
 				}
 			} else {
-				throw(new MatrixNotSquareException("unknown"));
+				throw(new MatrixNotSquareException());
 			}
 		} else {
 			for (int i = 1; i <= n; i++) {
@@ -1952,12 +1954,12 @@ public class Matrix extends MatObject {
 	public Matrix exp(Matrix v) {
 		Matrix res = new Matrix(this);
 		if (v.n > 1) {
-			throw(new CustomException("unknown","exponent must be scalar"));
+			throw(new CustomException("exponent must be scalar"));
 		}
 		if (n == 1) {
 			res = res.mexp(v);
 		} else if (v.get(1) % 1 != 0) {
-			throw(new CustomException("unknown","exponent must not be fractional"));
+			throw(new CustomException("exponent must not be fractional"));
 		} else {
 			int nt = (int) v.get(1);
 			if (nt == 0) {
@@ -2085,7 +2087,7 @@ public class Matrix extends MatObject {
 	  */
 	 public Matrix index(Matrix ri, Matrix ci) {
 		 if ((ri.size[ROW] != 1) || (ci.size[ROW] != 1)) {
-			 throw(new CustomException("unknown","Matrix.index indices must be vectors"));
+			 throw(new CustomException("Matrix.index indices must be vectors"));
 		 }
 		 Matrix res = new Matrix(ri.n, ci.n);
 		 for (int r = 1; r <= ri.n; r++) {
@@ -2105,7 +2107,7 @@ public class Matrix extends MatObject {
 	  */
 	 public Matrix index(Matrix ci) {
 		 if (ci.size[ROW] != 1) {
-			 throw(new CustomException("unknown","Matrix.index index must be a vector"));
+			 throw(new CustomException("Matrix.index index must be a vector"));
 		 }
 		 Matrix res = new Matrix(1, ci.n);
 		 for (int c = 1; c <= ci.n; c++) {
@@ -2269,14 +2271,14 @@ public class Matrix extends MatObject {
 
 		 if (offset > 0) {
 			 if (offset >= m.size[COL]) {
-				 throw(new CustomException("unknown","Matrix.diag offset too big"));
+				 throw(new CustomException("Matrix.diag offset too big"));
 			 }
 			 // remove the firstoffset columns
 			 rowIndex = colon(0, m.size[ROW] - 1);
 			 colIndex = colon(offset, m.size[COL] - 1);
 		 } else {
 			 if (-offset >= m.size[ROW]) {
-				 throw(new CustomException("unknown","Matrix.diag offset too big"));
+				 throw(new CustomException("Matrix.diag offset too big"));
 			 }
 			 rowIndex = colon(-offset, m.size[ROW] - 1);
 			 colIndex = colon(0, m.size[COL] - 1);
@@ -2329,12 +2331,12 @@ public class Matrix extends MatObject {
 
 	 public static Matrix primes(Matrix m) throws Exception{
 		 if (m.data.length > 1){
-			 throw(new CustomException("unknown","Value must be a scalar."));
+			 throw(new CustomException("Value must be a scalar."));
 		 }
 		 int cap = (int)m.get(1);
 		 if (cap == 0) return new Matrix();
 		 if (cap == 1) return new Matrix();
-		 if (cap < 0) throw(new CustomException("unknown","Negative values don't make sense."));
+		 if (cap < 0) throw(new CustomException("Negative values don't make sense."));
 		 int[] arr = new int[(int)m.get(1)+1];
 		 arr[0] = 1;
 		 arr[1] = 1;
@@ -2370,10 +2372,10 @@ public class Matrix extends MatObject {
 		 for (int i = 0; i < m.data.length; i++){
 			 d = m.data[i];
 			 if (d > Integer.MAX_VALUE){
-				 throw(new CustomException("unknown","Maximum allowed value is " + Integer.MAX_VALUE + "."));
+				 throw(new CustomException("Maximum allowed value is " + Integer.MAX_VALUE + "."));
 			 }
 			 else if (d < 0){
-				 throw(new CustomException("unknown","Negative values are not allowed."));
+				 throw(new CustomException("Negative values are not allowed."));
 			 }
 			 vals[i] = isPrime((int)d) ? 1 : 0;//@TODO don't allow non-integer arguments
 		 }

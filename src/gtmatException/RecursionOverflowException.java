@@ -7,10 +7,6 @@ package gtmatException;
  */
 
 public class RecursionOverflowException extends GTMatException {
-
-	public RecursionOverflowException(String filename) {
-		super(filename);
-	}
 	
 	public String toString() {
 		message = "Error at " + filename + ": " + "line " + lineNumber + "\n" 
