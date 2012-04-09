@@ -17,10 +17,10 @@ public class GreaterEqual {
 	 */
 	public static Matrix greaterEqual(Matrix a, Matrix b) {
 		if (a.n == 1) {
-			return ge1(a.get(1), b);
+			return dGEm(a.get(1), b);
 		}
 		if (b.n == 1) {
-			return ge1(b.get(1), a);
+			return mGEd(b.get(1), a);
 		}
 		if (a.n != b.n) {
 			throw(new MatrixDimensionsException());
@@ -33,19 +33,19 @@ public class GreaterEqual {
 		return res;
 	}
 	
-	public static Matrix le1(double v, Matrix m) {
+	public static Matrix dGEm(double v, Matrix m) {
 		Matrix res = new Matrix(m);
 		for (int i = 1; i <= m.n; i++) {
-			res.set(i, (v <= m.get(i)) ? 1 : 0);
+			res.set(i, (v >= m.get(i)) ? 1 : 0);
 		}
 		res.type = Type.LOGICAL;
 		return res;
 	}
 	
-	public static Matrix ge1(double v, Matrix m) {
+	public static Matrix mGEd(double v, Matrix m) {
 		Matrix res = new Matrix(m);
 		for (int i = 1; i <= m.n; i++) {
-			res.set(i, (v >= m.get(i)) ? 1 : 0);
+			res.set(i, (v <= m.get(i)) ? 1 : 0);
 		}
 		res.type = Type.LOGICAL;
 		return res;
