@@ -865,7 +865,7 @@ public class Interpreter extends Thread {
 			//System.out.println("exception thrown in Interpreter at: "+System.currentTimeMillis());
 			if (ex!=null) throw ex;
 			else{
-				throw new UndefinedVariableException();
+				throw new UndefinedVariableException(name);
 				//throw new RuntimeException("Invalid variable name or function call - " + name);
 			}
 		}
