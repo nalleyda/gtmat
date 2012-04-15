@@ -778,8 +778,12 @@ public class Interpreter extends Thread {
 				}
 				i++;
 			}
-
-		return new String(arr);
+		
+		
+		String ret =  new String(arr);
+		ret = ret.replaceAll("\\[(\\s*)\\]", "[]");
+		ret = ret.replaceAll("\\{(\\s*)\\}", "{}");
+		return ret;
 	}
 
 	/*public static String fixTranspose(String s) throws Exception{
