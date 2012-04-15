@@ -136,6 +136,12 @@ public abstract class MatObject {
 		}
 		return ov;
 	}
+	
+	public static Matrix castToLogical(MatObject o) {
+		Matrix ret = new Matrix(o);
+		ret.type = Type.LOGICAL;
+		return ret;
+	}
 
 	public static MatString castToMatString(MatObject o) {
 		MatString ov;
@@ -657,7 +663,10 @@ public abstract class MatObject {
 		}
 		TabbedPane.list.setModel(Main.wstack.peek().getVarList());
 	}
-
+	
+	public Logical logicalCast(MatObject o) {
+		return new Logical(o);
+	}
 
 
 	public String toString() {

@@ -538,7 +538,9 @@ public class Function {
         ht.put("islogical", new Function("islogical", "jmatrix.MatObject", 1, MatObject.class));
         ht.put("ischar", new Function("ischar", "jmatrix.MatObject", 1, MatObject.class));
 
-
+        ht.put("logical", new Function("castToLogical", "jmatrix.MatObject", 1, MatObject.class));
+        ht.put("double", new Function("castToMatrix", "jmatrix.MatObject", 1, MatObject.class));
+        ht.put("char", new Function("castToMatString", "jmatrix.MatObject", 1, MatObject.class));
     }
 
     public static boolean isFunction(String name) {
