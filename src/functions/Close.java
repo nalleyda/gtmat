@@ -2,15 +2,21 @@ package functions;
 
 import jmatrix.MatObject;
 import jmatrix.Matrix;
+import plotting.Figure;
 
 public class Close {
-	
+	/**
+	 * According to MATLAB documentation, argumentless close should only delete the current figure.
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
 	public static MatObject close() throws Exception{
-		return new Matrix(1);
-		/*if (o1 instanceof Matrix && o2 instanceof Matrix)
-			return Add.add((Matrix)o1, (Matrix)o2);*/
-		//throw new Exception("Calling a dummy method.");
-		//return (MatObject)Add.class.getMethod("add", o1.getClass(), o2.getClass()).invoke(null, new Object[] {o1, o2});
+		boolean result = Figure.close();
+		if (result==true) return new Matrix(1);
+		else return new Matrix(0);
+		
+		
 	}
 
 }
