@@ -67,5 +67,17 @@ public class Logical extends MatObject{
 		// TODO Auto-generated method stub
 		
 	}
+	public String toString(){
+		String ret = "";
+		if(data.length>1){
+			ret += "[";
+			for (int i = 0; i < data.length; i++){
+				ret += " " + data[i];
+			}
+			ret += " ]";
+		}
+		if (data.length==1) ret += " " + data[0];
+		return ret;
+	}
 
 }
