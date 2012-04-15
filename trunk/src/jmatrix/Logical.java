@@ -23,10 +23,28 @@ public class Logical extends MatObject{
 		
 	}
 	
+	
 	public boolean get(int i) {
 		return data[i-1];
 	}
+	
+	public void set(boolean val, int i) {
+		if(data.length >= i)
+			data[i-1] = val;
+		else {
+			boolean[] newd = new boolean[i];
+			for(int k = 0; k < data.length; k++) {
+				newd[k] = data[k];
+			}
+			data = newd;
+			data[i-1] = val;
+		}
+	}
 
+	public void set(boolean val, int... ind) {
+		throw new RuntimeException("dummy method");
+	}
+	
 	@Override
 	public MatObject copy() {
 		// TODO Auto-generated method stub
