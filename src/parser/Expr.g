@@ -267,7 +267,7 @@ block	: blockPart+ -> ^(BLOCK blockPart+);
 
 
 //Special High Priority
-//EMPTY_STRING	: '\'\''	;
+//EMPTY_STRING	: '\'\''
 WS 	: (' ' | '\t' | /*'\n' | '\r' |*/ '\f')+ {$channel = HIDDEN;};
 BLOCK_END	: 'end' WS? '\r'? '\n'	;	//We insert an extra newline at the end of every file before processing to avoid last-line problems
 NEWLINE	: '\r'? '\n'	{$channel = HIDDEN;};

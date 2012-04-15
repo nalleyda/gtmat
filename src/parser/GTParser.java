@@ -57,7 +57,7 @@ public class GTParser {
 //            debug.println("didn't open " + name);
         }
         doit(lex);
-        filenameStack.pop();
+      //  filenameStack.pop();
     }
 
     
