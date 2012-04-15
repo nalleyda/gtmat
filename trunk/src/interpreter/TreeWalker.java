@@ -511,9 +511,9 @@ public class TreeWalker<K,V>{
 		case PLUS:
 			return Add.add((Matrix)eval(tree.getChild(0)), (Matrix)eval(tree.getChild(1)));
 		case SC_AND:
-			return ShortCircuitAnd.shortCircuitAnd(eval(tree.getChild(0)), eval(tree.getChild(0)));
+			return ShortCircuitAnd.shortCircuitAnd(eval(tree.getChild(0)), eval(tree.getChild(1)));
 		case SC_OR:
-			return ShortCircuitOr.shortCircuitOr(eval(tree.getChild(0)), eval(tree.getChild(0)));
+			return ShortCircuitOr.shortCircuitOr(eval(tree.getChild(0)), eval(tree.getChild(1)));
 		case SINGLE_QUOTE:
 			return ConjugateTranspose.conjugateTranspose(eval(tree.getChild(0)));
 		case SLASH:
