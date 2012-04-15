@@ -335,7 +335,7 @@ public class TreeWalker<K,V>{
 			return ElementOr.elementOr(eval(tree.getChild(0)), eval(tree.getChild(1)));
 			
 		case EMPTY_CELL:
-			return new CellArray().empty();
+			return new CellArray();
 			
 		case EMPTY_VEC:
 			return new Matrix(1).empty();
