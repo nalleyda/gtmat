@@ -215,6 +215,47 @@ public class TreeWalker<K,V>{
 		}
 		throw new Exception("The use of \"end\" is incorrect here.");
 	}
+	
+	
+	public static Matrix evalEnd(Tree tree, String rhsName) throws Exception{
+		try{
+			Tree curTree = tree;//Used to keep up with which child we are
+			Tree curParent = tree.getParent().getParent();
+			String curCall;// = calls.get(calls.size()-1);
+			for (int i = calls.size()-1; i >= 0; i++){
+				curCall = calls.get(i);
+				if (Main.wstack.peek().getVariable(curCall) != null){//Find the first variable
+					MatObject var = Main.wstack.peek().getVariable(curCall).getData();
+					//Find the proper ancestor
+					while (!(convert(curParent.getType()) == TYPE.ID && curParent.getText().equals(curCall))){
+						curTree = curTree.getParent();//curParent;
+						curParent = curParent.getParent();
+					}
+					Tree faTree = curParent.getChild(0);
+					if (faTree.getChildCount() == 1){
+						return new Matrix(var.n);
+					}
+					else{
+						for (int j = 0; j < faTree.getChildCount(); j++){
+							if (faTree.getChild(j) == curTree){
+								if (var.size.length <= j){//consider x = 1:5; y = x(1,end);
+									return new Matrix(1);
+								}
+								else{
+									return new Matrix(var.size[j]);
+								}
+							}
+						}
+					}
+				}
+				throw new Exception("The use of \"end\" is incorrect here.");
+			}
+		}
+		catch (Exception e){
+			throw new Exception("The use of \"end\" is incorrect here.");
+		}
+		throw new Exception("The use of \"end\" is incorrect here.");
+	}
 
 
 	public static MatObject eval(Tree tree) throws Exception{
@@ -253,6 +294,11 @@ public class TreeWalker<K,V>{
 			//MatObject lhs = curw.getVariable(tree.getParent().getText());
 			//if (curw.getVariable)
 			//TODO use call stack and horrible traversals to find what dimensions colon should use if on lhs and variable doesn't exist yet
+			/*Tree lhsNode = tree.getParent().getParent();
+			Tree rhs = 
+			if (Main.wstack.peek().getVariable(lhsNode.getText()) == null){
+				MatObject 
+			}*/
 			return Matrix.colon(new Matrix(1), evalEnd(tree));
 		case COLON_ARGS:
 			//BE CAREFUL - the rightmost (i.e., last) child is actually the one that belongs first - see ANTLR debugger
@@ -310,15 +356,20 @@ public class TreeWalker<K,V>{
 						calls.add(lhs.getText());
 					}
 					//Evaluate every dimension of indexing
+					MatObject rhsRes = eval(rhs);
 					ArrayList<MatObject> lhsArgs = new ArrayList<MatObject>();
 					for (int i = 0; i < lhs.getChild(0).getChildCount(); i++){
+						if (convert(lhs.getChild(0).getChild(i).getType()) == TYPE.COLON && Main.wstack.peek().getVariable(lhs.getText())==null){
+							Main.wstack.peek().add(new Variable(lhs.getText(), rhsRes.copy().zeroed()));
+						}
+
 						lhsArgs.add(eval(lhs.getChild(0).getChild(i)));
 					}
 					CellArray lhsInd = new CellArray(lhsArgs.toArray(new MatObject[0]));
 					if (lhsType == TYPE.ID){
 						calls.remove(calls.size()-1);
 					}
-					MatObject.index(lhs.getText(), lhsInd, eval(rhs), true);
+					MatObject.index(lhs.getText(), lhsInd, rhsRes, true);
 					if (rhsType == TYPE.ID){
 						calls.remove(calls.size()-1);
 					}
@@ -614,21 +665,21 @@ public class TreeWalker<K,V>{
 			} catch(java.util.EmptyStackException e) {}
 			//e1.printStackTrace();
 			System.out.println("Ceasing execution in TreeWalker.process()");
-			
+
 			//System.exit(-1);
 			if(e1 instanceof GTMatException){
 				GTMatException.Throw((GTMatException)e1);		
 			}
 			//Thread.currentThread().interrupt();
 			throw e1;
-			
+
 		}
-//		try {
-//			// System.out.println("Result = " + process("", tree));
-//		} catch (Exception e) {
-//			Interpreter.displayError(e.getMessage());
-//			e.printStackTrace();
-//		}
+		//		try {
+		//			// System.out.println("Result = " + process("", tree));
+		//		} catch (Exception e) {
+		//			Interpreter.displayError(e.getMessage());
+		//			e.printStackTrace();
+		//		}
 	}
 
 	public static TYPE convert(int value){
