@@ -23,7 +23,6 @@ public class Logical extends MatObject{
 		
 	}
 	
-	
 	public boolean get(int i) {
 		return data[i-1];
 	}
