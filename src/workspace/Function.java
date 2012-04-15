@@ -58,7 +58,11 @@ public class Function {
             
             	}
             	catch(Exception e){
+            		try{
             		res = new MatObject[] {(MatObject)myMethod.invoke(null, (Object[]) arguments)};
+            		} catch(Exception e1) {
+            			res = (MatObject[])myMethod.invoke(null, new Object[]{arguments});
+            		}
             	}
             }
         } catch (Exception e) {
@@ -527,7 +531,7 @@ public class Function {
         ht.put("load", new Function("load", "jmatrix.MatObject", 1, MatString.class));
         ht.put("save", new Function("save", "jmatrix.MatObject", 1, MatString.class));
         ht.put("eval", new Function("eval", "interpreter.Interpreter", 1, MatString.class));
-
+        ht.put("strtok", new Function("strtok", "functions.Strtok", 1, new Class[] {MatObject[].class}));
 
 
     }
