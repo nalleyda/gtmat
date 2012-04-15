@@ -181,7 +181,7 @@ public class Main {
             }
         });
         
-      //  GTMatTesting.initTesting(3,3);
+        //GTMatTesting.initTesting(2,2);
         //GTMatTesting.initTesting(2,2);//*********************************************************************************
         
         /*   System.out.println("Interpreter Tests");

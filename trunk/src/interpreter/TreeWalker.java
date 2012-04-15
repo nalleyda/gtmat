@@ -391,7 +391,6 @@ public class TreeWalker<K,V>{
 			}
 
 		case ID: //Need to get the value stored in the associated variable, or call the function
-			//TODO indexing out of bounds is broken somewhere? try: x = 1; y = x(400);
 			MatObject[] retVal;
 			if (tree.getChildCount() > 0 && convert(tree.getChild(0).getType()) == TYPE.FUNC_ARGS){//function call or indexing
 				CellArray args = (CellArray)eval(tree.getChild(0));
