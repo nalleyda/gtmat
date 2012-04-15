@@ -64,12 +64,53 @@ public class Figure {
         currentSubplot.base_colormap = ColorMap.getMap("jet");
     }
 
-    public static void close(int n) {
-        figures = new ArrayList();
-        currentFig = null;
-        currentSubplot = null;
-        mousedSubplot = null;
-        lastLocation = null;
+    public static boolean close() {
+    	boolean res = true;
+    	if (!figures.isEmpty()){	
+    		getCurrent().closeFig();
+    		Figure oldf = getCurrent();
+    		Figure f = figures.remove(figures.size()-1);
+    		if (figures.size()==0){
+		        currentFig = null;
+		        currentSubplot = null;
+		        mousedSubplot = null;
+		        lastLocation = null;
+    		} else{
+    			currentFig = figures.get(figures.size()-1);
+    			currentSubplot = currentFig.subplots.get(currentFig.subplots.size()-1);
+    			mousedSubplot = currentSubplot;
+    			lastLocation = currentFig.frame.getLocation();
+    		}
+    		if (oldf.figNum!=f.figNum){
+    			//the correct figure was removed
+    			res = false;
+    					System.out.println("old figNum != the figNum of the removed Figure.");
+    		}
+    	return res;
+    	} else return false;
+    	
+    }
+    
+    public void closeFig(){
+    	frame.closeAll();
+    	frame.dispose();
+    	//if (figures.size()==0) return;
+    	frame = null;
+    	//figures = new ArrayList();
+    	if (!figures.isEmpty()){
+    		figures.remove(figures.size()-1);
+    		if (figures.size()==0){
+		        currentFig = null;
+		        currentSubplot = null;
+		        mousedSubplot = null;
+		        lastLocation = null;
+    		} else{
+    			currentFig = figures.get(figures.size()-1);
+    			currentSubplot = currentFig.subplots.get(subplots.size()-1);
+    			mousedSubplot = currentSubplot;
+    		}
+    	} else return;
+    	
     }
     
     public static void setFigure(Figure fig) {
