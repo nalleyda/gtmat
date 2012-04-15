@@ -309,7 +309,7 @@ public class Interpreter extends Thread {
 
 			if (helperRes == null){
 				MatObject[] results = checkLocalFunctions(name, params);
-				System.out.println("\n\n\n\n\n\n\n\n\n\n\n\nRESULTS: " + results);
+				//System.out.println("\n\n\n\n\n\n\n\n\n\n\n\nRESULTS: " + results);
 				if (results == null) {
 					throw new RuntimeException("unknown multi-return function call");
 				}
@@ -865,8 +865,8 @@ public class Interpreter extends Thread {
 			//System.out.println("exception thrown in Interpreter at: "+System.currentTimeMillis());
 			if (ex!=null) throw ex;
 			else{
-				throw new UndefinedVariableException(name);
-				//throw new RuntimeException("Invalid variable name or function call - " + name);
+				//throw new UndefinedVariableException();
+				throw new RuntimeException("Invalid variable name or function call - " + name);
 			}
 		}
 		return res;
