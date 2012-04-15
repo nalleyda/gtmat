@@ -11,6 +11,8 @@ import java.util.StringTokenizer;
 import java.util.Arrays;
 import java.lang.reflect.Method;
 
+import jmatrix.MatObject.Type;
+
 /**
  *
  * @author dsmith
@@ -404,9 +406,77 @@ public class SignedByte extends MatObject {
      * @return
      */
     public String toString() {
-        int rows = size[ROW];
-        int cols = size[COL];
-        String res = "SignedByte of size " + rows + "*" + cols;
-        return res;
+    	 int rows = size[ROW];
+		 int cols = size[COL];
+		 String res = "";
+		 byte d;
+		 
+		 if (n == 0) {
+			 return "[]";
+		 }
+		 if (rows > 1) {
+			 res += "[\n   ";
+		 } else if (cols > 1) {
+			 res += "[";
+		 }
+		 for (int r = 1; r <= rows; r++) {
+			 for (int c = 1; c <= cols; c++) {
+				 d = get(r, c);
+				 res+=" " + Byte.toString(d);
+//					 switch (type) {
+//					 case DOUBLE:
+//						 if (d % 1 == 0) {
+//							 res += " " + (int) d;
+//						 } else {
+//							 res += " " + Format.format(d, 4);
+//						 }
+//						 break;
+//					 case LOGICAL:
+//						 if (d > 0) {
+//							 res += " t";
+//						 } else {
+//							 res += " f";
+//						 }
+//						 break;
+//					 case INTEGER:
+//						 res += " " + (int) d;
+//						 break;
+//					 }
+				 
+			 }
+			 if ((rows > 1) && (r < rows)) {
+				 res += "\n   ";
+			 }
+		 }
+		 if (length() > 1) {
+			 res += " ]";
+		 }
+		 return res;
+	 }
+    public static void main(String[] args){
+    	int rows = 3;
+    	int cols = 3;
+    	byte i = 0;
+    	SignedByte sb = new SignedByte(rows, cols);
+    	for(int r = 1; r<=rows; r++){
+    		for (int c = 1; c<=cols; c++){
+    			sb.set(r, c, i);
+    			i++;
+    			System.out.println("set("+r+", "+c+", "+i+")");
+    		}
+    	}
+    	System.out.println("Now testing sb.toString():");
+
+    	System.out.println(sb.toString());
+    	i = 0;
+    	byte[] ba = new byte[4];
+    	for (int c1 = 0; c1<ba.length; c1++){
+    		ba[c1] = i;
+    		i++;
+    	}
+    	System.out.println("Test 2 using the byte array [0 1 2 3] and num=4");
+    	SignedByte sb1 = new SignedByte(ba, ba.length);
+    	System.out.println(sb1.toString());
+    	
     }
 }
