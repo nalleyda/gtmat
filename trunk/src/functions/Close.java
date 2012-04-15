@@ -12,10 +12,13 @@ public class Close {
 	 * @throws Exception
 	 */
 	public static MatObject close() throws Exception{
-		boolean result = Figure.close();
-		if (result==true) return new Matrix(1);
-		else return new Matrix(0);
+		boolean result = Figure.close(1);
+		//System.out.println("boolean result = "+result);
+		Matrix output;
+		if (result==true) output = new Matrix(1);
+		else output = new Matrix(0);
 		
+		return output;
 		
 	}
 
