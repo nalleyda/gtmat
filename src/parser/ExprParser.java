@@ -1,4 +1,4 @@
-// $ANTLR 3.4 /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g 2012-03-24 19:50:16
+// $ANTLR 3.4 /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g 2012-04-15 00:27:29
 
 	package parser;
 
@@ -5011,7 +5011,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
             // AST REWRITE
-            // elements: ifPart, elsePart, elseifPart
+            // elements: elsePart, elseifPart, ifPart
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -5452,7 +5452,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
             // AST REWRITE
-            // elements: casePart, switchPart, otherwiseBlock
+            // elements: switchPart, casePart, otherwiseBlock
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -5688,7 +5688,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
             // AST REWRITE
-            // elements: forPart, block
+            // elements: block, forPart
             // token labels: 
             // rule labels: retval
             // token list labels: 

@@ -333,6 +333,12 @@ public class TreeWalker<K,V>{
 			return ElementAnd.elementAnd(eval(tree.getChild(0)), eval(tree.getChild(1)));
 		case ELE_OR:
 			return ElementOr.elementOr(eval(tree.getChild(0)), eval(tree.getChild(1)));
+			
+		case EMPTY_CELL:
+			return new CellArray().empty();
+			
+		case EMPTY_VEC:
+			return new Matrix(1).empty();
 
 		case END:
 			return evalEnd(tree);
