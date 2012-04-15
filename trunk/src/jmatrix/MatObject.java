@@ -17,12 +17,12 @@ import workspace.*;
  * @author dsmith
  */
 public abstract class MatObject {
-	
+
 	//returns true iff this would cause an if statement to execute in Matlab
 	public boolean conditionalIsTrue() throws Exception{
 		throw new Exception("Calling a dummy method. This should be implemented in the child classes.");
 	}
-	
+
 	/** 
 	 * Enum to represent the type of an object.
 	 * @author taylorhope
@@ -139,7 +139,7 @@ public abstract class MatObject {
 	 * @param v matrix to add
 	 * @return
 	 */
-	 public MatObject add(MatObject o) {
+	public MatObject add(MatObject o) {
 		MatObject res = null;
 		if(o instanceof Matrix) {
 			res = new Matrix(this);
@@ -158,407 +158,407 @@ public abstract class MatObject {
 	 * @param v matrix to add
 	 * @return
 	 */
-	 public MatObject sub(MatObject o) {
-		 MatObject res = null;
-		 if(o instanceof Matrix) {
-			 res = new Matrix(this);
-			 Matrix ov = castToMatrix(o);
-			 res = ((Matrix) res).sub(ov);
-		 } else if(o instanceof MatComplex) {
-			 res = castToComplex(this);
-			 MatComplex cv = (MatComplex) o;
-			 res = ((MatComplex) res).sub(cv);
-		 } 
-		 return res;
-	 }
+	public MatObject sub(MatObject o) {
+		MatObject res = null;
+		if(o instanceof Matrix) {
+			res = new Matrix(this);
+			Matrix ov = castToMatrix(o);
+			res = ((Matrix) res).sub(ov);
+		} else if(o instanceof MatComplex) {
+			res = castToComplex(this);
+			MatComplex cv = (MatComplex) o;
+			res = ((MatComplex) res).sub(cv);
+		} 
+		return res;
+	}
 
-	 /**
-	  * mult a matrix
-	  * @param v matrix to add
-	  * @return
-	  */
-	 public Matrix mult(MatObject o) {
-		 Matrix res = new Matrix(this);
-		 Matrix ov = castToMatrix(o);
-		 return MatMult.matMult(res,ov);
-	 }
+	/**
+	 * mult a matrix
+	 * @param v matrix to add
+	 * @return
+	 */
+	public Matrix mult(MatObject o) {
+		Matrix res = new Matrix(this);
+		Matrix ov = castToMatrix(o);
+		return MatMult.matMult(res,ov);
+	}
 
-	 /**
-	  * div a matrix
-	  * @param v matrix to add
-	  * @return
-	  */
-	 public Matrix div(MatObject o) {
-		 Matrix res = new Matrix(this);
-		 Matrix ov = castToMatrix(o);
-		 try {
+	/**
+	 * div a matrix
+	 * @param v matrix to add
+	 * @return
+	 */
+	public Matrix div(MatObject o) {
+		Matrix res = new Matrix(this);
+		Matrix ov = castToMatrix(o);
+		try {
 			return (Matrix) MatDivide.matDivide(res, ov);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
-	 }
+	}
 
 
-	 /**
-	  * dot mult a matrix
-	  * @param v matrix to add
-	  * @return
-	  */
-	 public MatObject dotmult(MatObject o) {
-		 MatObject res = null;
-		 if(o instanceof Matrix) {
-			 res = new Matrix(this);
-			 Matrix ov = castToMatrix(o);
-			 res = ((Matrix) res).mult(ov);
-		 } else if(o instanceof MatComplex) {
-			 res = castToComplex(this);
-			 MatComplex cv = (MatComplex) o;
-			 res = ((MatComplex) res).mult(cv);
-		 } 
-		 return res;
-	 }
+	/**
+	 * dot mult a matrix
+	 * @param v matrix to add
+	 * @return
+	 */
+	public MatObject dotmult(MatObject o) {
+		MatObject res = null;
+		if(o instanceof Matrix) {
+			res = new Matrix(this);
+			Matrix ov = castToMatrix(o);
+			res = ((Matrix) res).mult(ov);
+		} else if(o instanceof MatComplex) {
+			res = castToComplex(this);
+			MatComplex cv = (MatComplex) o;
+			res = ((MatComplex) res).mult(cv);
+		} 
+		return res;
+	}
 
-	 /**
-	  * ./ a matrix
-	  * @param v matrix to add
-	  * @return
-	  */
-	 public MatObject dotdiv(MatObject o) {
-		 MatObject res = null;
-		 if(o instanceof Matrix) {
-			 res = new Matrix(this);
-			 Matrix ov = castToMatrix(o);
-			 res = ((Matrix) res).div(ov);
-		 } else if(o instanceof MatComplex) {
-			 res = castToComplex(this);
-			 MatComplex cv = (MatComplex) o;
-			 res = ((MatComplex) res).div(cv);
-		 } 
-		 return res;
-	 }
+	/**
+	 * ./ a matrix
+	 * @param v matrix to add
+	 * @return
+	 */
+	public MatObject dotdiv(MatObject o) {
+		MatObject res = null;
+		if(o instanceof Matrix) {
+			res = new Matrix(this);
+			Matrix ov = castToMatrix(o);
+			res = ((Matrix) res).div(ov);
+		} else if(o instanceof MatComplex) {
+			res = castToComplex(this);
+			MatComplex cv = (MatComplex) o;
+			res = ((MatComplex) res).div(cv);
+		} 
+		return res;
+	}
 
-	 /**
-	  * ^ a matrix
-	  * @param v matrix to add
-	  * @return
-	  */
-	 public Matrix caret(MatObject o) {
-		 Matrix res = new Matrix(this);
-		 Matrix ov = castToMatrix(o);
-		 return res.exp(ov);
-	 }
+	/**
+	 * ^ a matrix
+	 * @param v matrix to add
+	 * @return
+	 */
+	public Matrix caret(MatObject o) {
+		Matrix res = new Matrix(this);
+		Matrix ov = castToMatrix(o);
+		return res.exp(ov);
+	}
 
-	 /**
-	  * ./ a matrix
-	  * @param v matrix to add
-	  * @return
-	  */
-	 public Matrix dotcaret(MatObject o) {
-		 Matrix res = new Matrix(this);
-		 Matrix ov = castToMatrix(o);
-		 return Power.power(res, ov);//Matrix.mexp(res, ov);
-	 }
+	/**
+	 * ./ a matrix
+	 * @param v matrix to add
+	 * @return
+	 */
+	public Matrix dotcaret(MatObject o) {
+		Matrix res = new Matrix(this);
+		Matrix ov = castToMatrix(o);
+		return Power.power(res, ov);//Matrix.mexp(res, ov);
+	}
 
-	 /**
-	  * negate a matrix
-	  * @param v matrix to add
-	  * @return
-	  */
-	 public Matrix negate() {
-		 Matrix res = new Matrix(this);
-		 return res.negate();
-	 }
+	/**
+	 * negate a matrix
+	 * @param v matrix to add
+	 * @return
+	 */
+	public Matrix negate() {
+		Matrix res = new Matrix(this);
+		return res.negate();
+	}
 
-	 /**
-	  * > a matrix
-	  * @param v matrix to add
-	  * @return
-	  */
-	 public Matrix gt(MatObject o) {
-		 Matrix res = new Matrix(this);
-		 Matrix ov = castToMatrix(o);
-		 return Matrix.gt(res, ov);
-	 }
+	/**
+	 * > a matrix
+	 * @param v matrix to add
+	 * @return
+	 */
+	public Matrix gt(MatObject o) {
+		Matrix res = new Matrix(this);
+		Matrix ov = castToMatrix(o);
+		return Matrix.gt(res, ov);
+	}
 
-	 /**
-	  * < a matrix
-	  * @param v matrix to add
-	  * @return
-	  */
-	 public Matrix lt(MatObject o) {
-		 Matrix res = new Matrix(this);
-		 Matrix ov = castToMatrix(o);
-		 return Matrix.lt(res, ov);
-	 }
+	/**
+	 * < a matrix
+	 * @param v matrix to add
+	 * @return
+	 */
+	public Matrix lt(MatObject o) {
+		Matrix res = new Matrix(this);
+		Matrix ov = castToMatrix(o);
+		return Matrix.lt(res, ov);
+	}
 
-	 /**
-	  * >= a matrix
-	  * @param v matrix to add
-	  * @return
-	  */
-	 public Matrix ge(MatObject o) {
-		 Matrix res = new Matrix(this);
-		 Matrix ov = castToMatrix(o);
-		 return Matrix.ge(res, ov);
-	 }
+	/**
+	 * >= a matrix
+	 * @param v matrix to add
+	 * @return
+	 */
+	public Matrix ge(MatObject o) {
+		Matrix res = new Matrix(this);
+		Matrix ov = castToMatrix(o);
+		return Matrix.ge(res, ov);
+	}
 
-	 /**
-	  * <= a matrix
-	  * @param v matrix to add
-	  * @return
-	  */
-	 public Matrix le(MatObject o) {
-		 Matrix res = new Matrix(this);
-		 Matrix ov = castToMatrix(o);
-		 return LessEqual.lessEqual(res, ov);
-	 }
+	/**
+	 * <= a matrix
+	 * @param v matrix to add
+	 * @return
+	 */
+	public Matrix le(MatObject o) {
+		Matrix res = new Matrix(this);
+		Matrix ov = castToMatrix(o);
+		return LessEqual.lessEqual(res, ov);
+	}
 
-	 /**
-	  * == a matrix
-	  * @param v matrix to add
-	  * @return
-	  */
-	 public Matrix eq(MatObject o) {
-		 Matrix res = new Matrix(this);
-		 if(o instanceof Matrix) {
-			 Matrix ov = castToMatrix(o);
-			 res =  Matrix.eq(res, ov);
-		 } else if(o instanceof MatString) {
-			 MatString mst = (MatString) o;
-			 res = mst.eq(this);
-		 }
-		 return res;
-	 }
+	/**
+	 * == a matrix
+	 * @param v matrix to add
+	 * @return
+	 */
+	public Matrix eq(MatObject o) {
+		Matrix res = new Matrix(this);
+		if(o instanceof Matrix) {
+			Matrix ov = castToMatrix(o);
+			res =  Matrix.eq(res, ov);
+		} else if(o instanceof MatString) {
+			MatString mst = (MatString) o;
+			res = mst.eq(this);
+		}
+		return res;
+	}
 
-	 /**
-	  * ~= a matrix
-	  * @param v matrix to add
-	  * @return
-	  */
-	 public Matrix ne(MatObject o) {
-		 Matrix res = new Matrix(this);
-		 Matrix ov = castToMatrix(o);
-		 return Matrix.ne(res, ov);
-	 }
+	/**
+	 * ~= a matrix
+	 * @param v matrix to add
+	 * @return
+	 */
+	public Matrix ne(MatObject o) {
+		Matrix res = new Matrix(this);
+		Matrix ov = castToMatrix(o);
+		return Matrix.ne(res, ov);
+	}
 
-	 /**
-	  * and a matrix
-	  * @param v matrix to add
-	  * @return
-	  */
-	 public Matrix and(MatObject o) {
-		 Matrix res = new Matrix(this);
-		 Matrix ov = castToMatrix(o);
-		 return Matrix.ne(res, ov);
-	 }
+	/**
+	 * and a matrix
+	 * @param v matrix to add
+	 * @return
+	 */
+	public Matrix and(MatObject o) {
+		Matrix res = new Matrix(this);
+		Matrix ov = castToMatrix(o);
+		return Matrix.ne(res, ov);
+	}
 
-	 /**
-	  * or a matrix
-	  * @param v matrix to add
-	  * @return
-	  */
-	 public Matrix or(MatObject o) {
-		 Matrix res = new Matrix(this);
-		 Matrix ov = castToMatrix(o);
-		 return Matrix.ne(res, ov);
-	 }
+	/**
+	 * or a matrix
+	 * @param v matrix to add
+	 * @return
+	 */
+	public Matrix or(MatObject o) {
+		Matrix res = new Matrix(this);
+		Matrix ov = castToMatrix(o);
+		return Matrix.ne(res, ov);
+	}
 
-	 public static MatString charCast(MatObject o) {
-		 return castToMatString(o);
-	 }
+	public static MatString charCast(MatObject o) {
+		return castToMatString(o);
+	}
 
-	 public static Matrix doubleCast(MatObject o) {
-		 return castToMatrix(o);
-	 }
+	public static Matrix doubleCast(MatObject o) {
+		return castToMatrix(o);
+	}
 
-	 public static String getClass(MatObject o) {
-		 return o.type.toString();
-	 }
+	public static String getClass(MatObject o) {
+		return o.type.toString();
+	}
 
-	 public static boolean isChar(MatObject o) {
-		 return o.type == Type.CHAR;
-	 }
+	public static boolean isChar(MatObject o) {
+		return o.type == Type.CHAR;
+	}
 
-	 public double[] size() {
-		 double res[] = new double[size.length];
-		 for (int i = 0; i < size.length; i++) {
-			 res[i] = size[i];
-		 }
-		 return res;
-	 }
+	public double[] size() {
+		double res[] = new double[size.length];
+		for (int i = 0; i < size.length; i++) {
+			res[i] = size[i];
+		}
+		return res;
+	}
 
-	 public int rows() {
-		 return size[ROW];
-	 }
+	public int rows() {
+		return size[ROW];
+	}
 
-	 public int cols() {
-		 return size[COL];
-	 }
+	public int cols() {
+		return size[COL];
+	}
 
-	 public int clrs() {
-		 return size[CLR];
-	 }
+	public int clrs() {
+		return size[CLR];
+	}
 
-	 public int length() {
-		 if (n == 0) {
-			 return 0;
-		 }
-		 int mx = size[0];
-		 for (int i = 1; i < size.length; i++) {
-			 if (size[i] > mx) {
-				 mx = size[i];
-			 }
-		 }
-		 return mx;
-	 }
+	public int length() {
+		if (n == 0) {
+			return 0;
+		}
+		int mx = size[0];
+		for (int i = 1; i < size.length; i++) {
+			if (size[i] > mx) {
+				mx = size[i];
+			}
+		}
+		return mx;
+	}
 
-	 public String workspaceString() {
-		 return null;
-	 }
+	public String workspaceString() {
+		return null;
+	}
 
-	 public MatObject hcat(MatObject o) {
-		 return null;
-	 }
+	public MatObject hcat(MatObject o) {
+		return null;
+	}
 
-	 public String info() {
-		 String res = type + "[";
-		 for (int i = 0; i < size.length; i++) {
-			 res += " " + size[i];
-			 if (i < (size.length - 1)) {
-				 res += " x";
-			 }
-		 }
-		 res += " ] -- " + getClass().getName();
-		 return res;
-	 }
+	public String info() {
+		String res = type + "[";
+		for (int i = 0; i < size.length; i++) {
+			res += " " + size[i];
+			if (i < (size.length - 1)) {
+				res += " x";
+			}
+		}
+		res += " ] -- " + getClass().getName();
+		return res;
+	}
 
-	 public static MatObject get(MatObject m, Matrix ind) throws Exception {
-		 if(ind.type == Type.LOGICAL) {
-			 ind = Matrix.find(ind);
-		 }
-		 switch (m.type) {
-		 case DOUBLE:
-			 return Matrix.get((Matrix) m, (Matrix) ind);
-		 case INTEGER:
-			 return Matrix.get((Matrix) m, (Matrix) ind);
-		 case LOGICAL:
+	public static MatObject get(MatObject m, Matrix ind) throws Exception {
+		if(ind.type == Type.LOGICAL) {
+			ind = Matrix.find(ind);
+		}
+		switch (m.type) {
+		case DOUBLE:
+			return Matrix.get((Matrix) m, (Matrix) ind);
+		case INTEGER:
+			return Matrix.get((Matrix) m, (Matrix) ind);
+		case LOGICAL:
 
-			 break;
-		 case CHAR:
-			 return MatString.get((MatString) m, (Matrix) ind);
-		 case CELL:
+			break;
+		case CHAR:
+			return MatString.get((MatString) m, (Matrix) ind);
+		case CELL:
 
-			 break;
-		 case STRUCT:
-			 return ((StructArray) m).get((int) ind.get(1));
+			break;
+		case STRUCT:
+			return ((StructArray) m).get((int) ind.get(1));
 
-		 case BYTE:
+		case BYTE:
 
-			 break;
-		 case COMPLEX:
+			break;
+		case COMPLEX:
 
-			 break;
+			break;
 
-		 }
-		 
+		}
+
 		/* if (m instanceof CellArray){
 			 return CellArray.get(m, ind);
 		 }*/
 
-		 throw new RuntimeException("Calling MatObject's get method - undefined behavior");
-	 }
+		throw new RuntimeException("Calling MatObject's get method - undefined behavior");
+	}
 
-	 public static MatObject get(MatObject m, Matrix ri, Matrix ci) throws Exception {
-		 switch (m.type) {
-		 case DOUBLE:
-			 return Matrix.get((Matrix) m, (Matrix) ri, (Matrix) ci);
-		 case LOGICAL:
+	public static MatObject get(MatObject m, Matrix ri, Matrix ci) throws Exception {
+		switch (m.type) {
+		case DOUBLE:
+			return Matrix.get((Matrix) m, (Matrix) ri, (Matrix) ci);
+		case LOGICAL:
 
-			 break;
-		 case CHAR:
+			break;
+		case CHAR:
 
-			 break;
-		 case CELL:
+			break;
+		case CELL:
 
-			 break;
-		 case STRUCT:
+			break;
+		case STRUCT:
 
-			 break;
-		 case BYTE:
+			break;
+		case BYTE:
 
-			 break;
-		 case COMPLEX:
+			break;
+		case COMPLEX:
 
-			 break;
-		 case UINT8:
-			 return Uint8.get((Matrix) m, (Matrix) ri, (Matrix) ci);
-		 }
-		 throw new RuntimeException("Calling MatObject's get method - undefined behavior");
-	 }
+			break;
+		case UINT8:
+			return Uint8.get((Matrix) m, (Matrix) ri, (Matrix) ci);
+		}
+		throw new RuntimeException("Calling MatObject's get method - undefined behavior");
+	}
 
-	 public static MatObject get(MatObject m, Matrix ri, Matrix ci, Matrix clri) {
-		 switch (m.type) {
-		 case DOUBLE:
-			 return Matrix.get((Matrix) m, ri, ci, clri);
-		 case LOGICAL:
+	public static MatObject get(MatObject m, Matrix ri, Matrix ci, Matrix clri) {
+		switch (m.type) {
+		case DOUBLE:
+			return Matrix.get((Matrix) m, ri, ci, clri);
+		case LOGICAL:
 
-			 break;
-		 case CHAR:
+			break;
+		case CHAR:
 
-			 break;
-		 case CELL:
+			break;
+		case CELL:
 
-			 break;
-		 case STRUCT:
+			break;
+		case STRUCT:
 
-			 break;
-		 case BYTE:
+			break;
+		case BYTE:
 
-			 break;
-		 case COMPLEX:
+			break;
+		case COMPLEX:
 
-			 break;
-		 case UINT8:
-			 return Uint8.get((Uint8) m, ri, ci,  clri);
-		 }
-		 throw new RuntimeException("Calling MatObject's get method - undefined behavior");
-	 }
+			break;
+		case UINT8:
+			return Uint8.get((Uint8) m, ri, ci,  clri);
+		}
+		throw new RuntimeException("Calling MatObject's get method - undefined behavior");
+	}
 
 
-	 private static boolean isIn(int k, Matrix m) {
-		 boolean res = false;
-		 for(int i = 1; i <= m.n; i++) {
-			 if(k == m.geti(i)) {
-				 res = true;
-				 break;
-			 }
-		 }
-		 return res;
-	 }
+	private static boolean isIn(int k, Matrix m) {
+		boolean res = false;
+		for(int i = 1; i <= m.n; i++) {
+			if(k == m.geti(i)) {
+				res = true;
+				break;
+			}
+		}
+		return res;
+	}
 
-	 public static void index(String name, CellArray ca, MatObject expr, boolean showIt) throws Exception{
-		 /* 
-		  * How this is supposed to work:
-		  * - we are dealing with a matlab line like: B([1 3 5], [2 7]) = something.
-		  * - the value of expr is the RHS
-		  * - the cell array index contains the multiple dimensions of indexing for B
-		  * - with everything else going on, the user might decide to put an empty vector
-		  * - into parts of B (sigh!)
-		  * We will deal with the multiple dimensions by linearizing the array
-		  * B might not exist, in which case we make an empty copy of the rhs array
-		  * So in the example above, we fetch the [1 3 5] from the cell array
-		  * if there were no other dimensions, this would be the data values at
-		  * 1, 3 and 5.  But there is another dimension.  
-		  * When we fetch the [2 7] the actual access becomes:
-		  * [[1 3 5] + rows*(2-1), [1 3 5] + rows*(7-1)] 
-		  *      - a nice feature: individual dimensions could be logical - need to
-		  *      - run find on them
-		  * 
-		  */
-		 
-		 /*if (expr instanceof Matrix && expr.type == Type.LOGICAL){//check for logical indexing
+	public static void index(String name, CellArray ca, MatObject expr, boolean showIt) throws Exception{
+		/* 
+		 * How this is supposed to work:
+		 * - we are dealing with a matlab line like: B([1 3 5], [2 7]) = something.
+		 * - the value of expr is the RHS
+		 * - the cell array index contains the multiple dimensions of indexing for B
+		 * - with everything else going on, the user might decide to put an empty vector
+		 * - into parts of B (sigh!)
+		 * We will deal with the multiple dimensions by linearizing the array
+		 * B might not exist, in which case we make an empty copy of the rhs array
+		 * So in the example above, we fetch the [1 3 5] from the cell array
+		 * if there were no other dimensions, this would be the data values at
+		 * 1, 3 and 5.  But there is another dimension.  
+		 * When we fetch the [2 7] the actual access becomes:
+		 * [[1 3 5] + rows*(2-1), [1 3 5] + rows*(7-1)] 
+		 *      - a nice feature: individual dimensions could be logical - need to
+		 *      - run find on them
+		 * 
+		 */
+
+		/*if (expr instanceof Matrix && expr.type == Type.LOGICAL){//check for logical indexing
 			 Matrix expr2 = (Matrix)expr;
 			 int count = 0;
 			 ArrayList<Integer> ind = new ArrayList<Integer>();
@@ -569,81 +569,81 @@ public abstract class MatObject {
 			 }
 			 expr2 = new Matrix(1, ind.size());//create a column of indices
 		 }*/
-		 
-		 Workspace curW = Interpreter.getWorkspace();
-		 MatObject val = Interpreter.getValue(name)[0];
-		 if(val == null) {//didn't exist previously
-			 
-			 if (expr.n == 1){//assigning a scalar value
-				 
-				 int[] dim = new int[ca.n];//one dimension per comma
-				 for (int i = 0; i < dim.length; i++){
-					 Matrix indices = (Matrix)ca.get(i+1);
-					 double max = indices.get(1);
-					 for (int j = 2; j <= indices.n; j++){
-						 max = Math.max(indices.get(j), max);
-					 }
-					 dim[i] = (int)max;
-				 }
-				 if (expr instanceof Matrix){
-					 val = new Matrix(dim);
-				 }
-				 else{//TODO other data types
-					 throw new RuntimeException("Define indexing with scalars for non-matrices, now!");
-				 }
-				 
-			 }
-			 val = expr.zeroed();//TODO not entirely sure why things work with this line present...
-		 }
-		 int en = expr.n;
-		 Matrix offset = null;
-		 Matrix lastOne = null;
-		 int dim = 1;
-		 int oi = 0;
-		 for(int i = 1; i <= ca.n; i++) {
-			 Matrix index = (Matrix) ca.get(1, i);
-			 if(index.type == Type.LOGICAL) {//if any are logical, assume all are logical
-				 index = Matrix.find((Matrix) index);
-			 }
-			 if(i == 1) {
-				 offset = new Matrix(index);
-				 lastOne = new Matrix(index);
-			 } else {
-				 dim = dim * val.size[i-2];
-				 for(int ni = 0; ni < index.n; ni++) {
-					 for(int li = 0; li < lastOne.n; li++) {
-						 offset.set(1, ++oi, 
-								 lastOne.data[li] + dim*(index.data[ni]-1));
-					 }
-				 }
-				 lastOne = new Matrix(offset);
-			 }
-		 }
-		 if (en > 1 && en != offset.n) {
-			 throw new RuntimeException("assignment dimension mismatch");
-		 }
-		 if(en == 0) { // putting empty vector in
-			 Matrix keeps = ((Matrix)val).empty();
-		 for(int i = 1; i <= val.n; i++) {
-			 if(!isIn(i, offset)) {
-				 keeps.set(1, keeps.n+1, i);
-			 }
-		 }
-		 val = get(val, keeps);
-		 } else {
-			 val.copyValues(offset, expr);
-		 }
-		 curW.add(new Variable(name, val));
-		 if (showIt) {
-			 Interpreter.displayString(name + " = " + val + "\n");
-		 }
-		 TabbedPane.list.setModel(Main.wstack.peek().getVarList());
-	 }
+
+		Workspace curW = Interpreter.getWorkspace();
+		MatObject val = Interpreter.getValue(name)[0];
+		if(val == null) {//didn't exist previously
+
+			if (expr.n == 1){//assigning a scalar value
+
+				int[] dim = new int[ca.n];//one dimension per comma
+				for (int i = 0; i < dim.length; i++){
+					Matrix indices = (Matrix)ca.get(i+1);
+					double max = indices.get(1);
+					for (int j = 2; j <= indices.n; j++){
+						max = Math.max(indices.get(j), max);
+					}
+					dim[i] = (int)max;
+				}
+				if (expr instanceof Matrix){
+					val = new Matrix(dim);
+				}
+				else{//TODO other data types
+					throw new RuntimeException("Define indexing with scalars for non-matrices, now!");
+				}
+
+			}
+			val = expr.zeroed();//TODO not entirely sure why things work with this line present...
+		}
+		int en = expr.n;
+		Matrix offset = null;
+		Matrix lastOne = null;
+		int dim = 1;
+		int oi = 0;
+		for(int i = 1; i <= ca.n; i++) {
+			Matrix index = (Matrix) ca.get(1, i);
+			if(index.type == Type.LOGICAL) {//if any are logical, assume all are logical
+				index = Matrix.find((Matrix) index);
+			}
+			if(i == 1) {
+				offset = new Matrix(index);
+				lastOne = new Matrix(index);
+			} else {
+				dim = dim * val.size[i-2];
+				for(int ni = 0; ni < index.n; ni++) {
+					for(int li = 0; li < lastOne.n; li++) {
+						offset.set(1, ++oi, 
+								lastOne.data[li] + dim*(index.data[ni]-1));
+					}
+				}
+				lastOne = new Matrix(offset);
+			}
+		}
+		if (en > 1 && en != offset.n) {
+			throw new RuntimeException("assignment dimension mismatch");
+		}
+		if(en == 0 && offset.n > 0) { // putting empty vector in
+			Matrix keeps = ((Matrix)val).empty();
+			for(int i = 1; i <= val.n; i++) {
+				if(!isIn(i, offset)) {
+					keeps.set(1, keeps.n+1, i);
+				}
+			}
+			val = get(val, keeps);
+		} else {
+			val.copyValues(offset, expr);
+		}
+		curW.add(new Variable(name, val));
+		if (showIt) {
+			Interpreter.displayString(name + " = " + val + "\n");
+		}
+		TabbedPane.list.setModel(Main.wstack.peek().getVarList());
+	}
 
 
 
-	 public String toString() {
-		 String res = "MatObject of type " + type + "; sized " + size[ROW] + "x" + size[COL];
-		 return res;
-	 }
+	public String toString() {
+		String res = "MatObject of type " + type + "; sized " + size[ROW] + "x" + size[COL];
+		return res;
+	}
 }
