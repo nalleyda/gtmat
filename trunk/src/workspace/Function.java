@@ -532,6 +532,8 @@ public class Function {
         ht.put("save", new Function("save", "jmatrix.MatObject", 1, MatString.class));
         ht.put("eval", new Function("eval", "interpreter.Interpreter", 1, MatString.class));
         ht.put("strtok", new Function("strtok", "functions.Strtok", 1, new Class[] {MatObject[].class}));
+        ht.put("str2num", new Function("str2num", "jmatrix.MatString", 1, MatString.class));
+        ht.put("num2str", new Function("num2str", "jmatrix.MatString", 1, Matrix.class));
 
 
     }
@@ -544,7 +546,7 @@ public class Function {
         return "Function " + name + " with " + numArgs + " arguments";
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         createFunctionTable();
         System.out.println(ht.containsKey("matMult"));
         try {
@@ -556,13 +558,13 @@ public class Function {
             System.out.println(test);
             
             System.out.println((Math.class).equals(Class.forName("java.lang.Math")));
-             */
+             
             /* Function f = getFunction("cos");
             Class myClass = Class.forName(f.getFullPackage());
             Method myMethod = myClass.getMethod(f.getName(), f.getParamTypes());
             Object[] params = {(double)3};
             double x = (Double)myMethod.invoke(null, (double)2);
-             */
+             
             double[] vec = {1, 2, 3, 4};
             String methodName = "sqrt";
             double[] vec2 = vec2 = Matrix.applyMathMethodToVector(vec, methodName);
@@ -598,5 +600,5 @@ public class Function {
         System.out.println(s);
 
 
-    }
+    }*/
 }
