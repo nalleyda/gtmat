@@ -541,6 +541,7 @@ public class Function {
         ht.put("logical", new Function("castToLogical", "jmatrix.MatObject", 1, MatObject.class));
         ht.put("double", new Function("castToMatrix", "jmatrix.MatObject", 1, MatObject.class));
         ht.put("char", new Function("castToMatString", "jmatrix.MatObject", 1, MatObject.class));
+        ht.put("ctranspose", new Function("conjugateTranspose", "functions.ConjugateTranspose", 1, MatComplex.class));
     }
 
     public static boolean isFunction(String name) {
