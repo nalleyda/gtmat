@@ -955,14 +955,14 @@ public class Matrix extends MatObject {
 	 * @param b a 1x3 vector
 	 * @return a cross b
 	 */
-	public static Matrix cross(Matrix a, Matrix b) {
+	public static MatObject cross(Matrix a, Matrix b) {
 		Matrix res = new Matrix(3);
 		double ax = a.get(1);
 		double bx = b.get(1);
 		double ay = a.get(2);
 		double by = b.get(2);
 		double az = a.get(3);
-		double bz = b.get(4);
+		double bz = b.get(3);
 		res.set(1, 1, ay * bz - az * by);
 		res.set(1, 2, az * bx - ax * bz);
 		res.set(1, 3, ax * by - ay * bx);
