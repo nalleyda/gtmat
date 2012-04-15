@@ -22,6 +22,24 @@ public abstract class MatObject {
 	public boolean conditionalIsTrue() throws Exception{
 		throw new Exception("Calling a dummy method. This should be implemented in the child classes.");
 	}
+	
+	public static Matrix islogical(MatObject m){
+		Matrix ret = m.type == MatObject.Type.LOGICAL ? new Matrix(1) : new Matrix(0);
+		ret.type = MatObject.Type.LOGICAL;
+		return ret;
+	}
+	
+	public static Matrix ischar(MatObject m){
+		Matrix ret = m instanceof MatString ? new Matrix(1) : new Matrix(0);
+		ret.type = MatObject.Type.LOGICAL;
+		return ret;
+	}
+	
+	public static Matrix isnumeric(MatObject m){
+		Matrix ret = m.type == MatObject.Type.DOUBLE || m.type == MatObject.Type.INTEGER ? new Matrix(1) : new Matrix(0);
+		ret.type = MatObject.Type.LOGICAL;
+		return ret;
+	}
 
 	/** 
 	 * Enum to represent the type of an object.

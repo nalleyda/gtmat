@@ -534,6 +534,9 @@ public class Function {
         ht.put("strtok", new Function("strtok", "functions.Strtok", 1, new Class[] {MatObject[].class}));
         ht.put("str2num", new Function("str2num", "jmatrix.MatString", 1, MatString.class));
         ht.put("num2str", new Function("num2str", "jmatrix.MatString", 1, Matrix.class));
+        ht.put("isnumeric", new Function("isnumeric", "jmatrix.MatObject", 1, MatObject.class));
+        ht.put("islogical", new Function("islogical", "jmatrix.MatObject", 1, MatObject.class));
+        ht.put("ischar", new Function("ischar", "jmatrix.MatObject", 1, MatObject.class));
 
 
     }
