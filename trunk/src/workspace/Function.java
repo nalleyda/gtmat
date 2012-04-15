@@ -405,6 +405,7 @@ public class Function {
                 Matrix.class, Matrix.class));
         ht.put("eq", new Function("eq", "jmatrix.Matrix", 2,
                 Matrix.class, Matrix.class));
+        //ht.put("isEqual", new Function("isEqual", "functions.IsEqual", 2, Matrix.class, Matrix.class));
         ht.put("find", new Function("find", "jmatrix.Matrix", 1, Matrix.class));
         ht.put("fix", new Function("fix", "jmatrix.Matrix", 1, Matrix.class));
         ht.put("floor", new Function("floor", "jmatrix.Matrix", 1, Matrix.class));
@@ -459,6 +460,7 @@ public class Function {
                 Matrix.class, Matrix.class));
         ht.put("ne", new Function("ne", "jmatrix.Matrix", 2,
                 Matrix.class, Matrix.class));
+        //ht.put("notEqual", new Function("notEqual", "functions.NotEqual", 2, Matrix.class, Matrix.class));
         ht.put("ones", new Function("ones", "jmatrix.Matrix", 3,
                 Matrix.class, double.class, double.class));
         ht.put("polyfit", new Function("polyfit", "jmatrix.Matrix", 3,
@@ -513,7 +515,8 @@ public class Function {
                  Matrix.class, Matrix.class, Matrix.class));
         ht.put("sum", new Function("sum", "jmatrix.Matrix", 1, Matrix.class));
         ht.put("title", new Function("title", "plotting.Figure", 1, MatString.class));
-        ht.put("transpose", new Function("transpose", "jmatrix.Matrix", 1, Matrix.class));
+        //ht.put("transpose", new Function("transpose", "jmatrix.Matrix", 1, Matrix.class));
+        ht.put("transpose", new Function("transpose", "functions.Transpose", 1, Matrix.class));
         ht.put("vcat", new Function("vcat", "jmatrix.Matrix", 1, Matrix.class));
         ht.put("view", new Function("view", "plotting.Plots", 2, 
                 Matrix.class, Matrix.class));
@@ -542,6 +545,7 @@ public class Function {
         ht.put("double", new Function("castToMatrix", "jmatrix.MatObject", 1, MatObject.class));
         ht.put("char", new Function("castToMatString", "jmatrix.MatObject", 1, MatObject.class));
         ht.put("ctranspose", new Function("conjugateTranspose", "functions.ConjugateTranspose", 1, MatComplex.class));
+        
     }
 
     public static boolean isFunction(String name) {
