@@ -435,7 +435,7 @@ public class Function {
                 Matrix.class, Matrix.class, double.class));
         ht.put("interp1", new Function("interp1", "jmatrix.Matrix", 3,
                 Matrix.class, Matrix.class, Matrix.class));
-        ht.put("inv", new Function("inv", "jmatrix.Matrix", 1, Matrix.class));
+        ht.put("inv", new Function("inv", "functions.MatInverse", 1, MatObject.class));
         ht.put("isprime", new Function("isprime", "jmatrix.Matrix", 1, Matrix.class));
         ht.put("le", new Function("le", "jmatrix.Matrix", 2,
                 Matrix.class, Matrix.class));

@@ -4,7 +4,7 @@ import jmatrix.*;
 import gtmatException.*;
 
 public class MatInverse {
-	public static MatObject matInverse(MatObject o) throws Exception{
+	public static MatObject inv(MatObject o) throws Exception {
 		return (MatObject)MatInverse.class.getMethod("matInverse", o.getClass()).invoke(null, new Object[] {o});
 	}
 	
