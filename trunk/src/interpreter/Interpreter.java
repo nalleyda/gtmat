@@ -36,6 +36,8 @@ public class Interpreter extends Thread {
 	public static Matrix inf;
 	public static Matrix mtrue;
 	public static Matrix mfalse;
+	public static Matrix e;
+	public static Matrix i;
 	public static boolean waitForInput = false;
 	private static BufferedReader br = null;
 	public boolean done;
@@ -54,6 +56,8 @@ public class Interpreter extends Thread {
 		mtrue.type = Type.LOGICAL;
 		mfalse = new Matrix(0);
 		mfalse.type = Type.LOGICAL;
+		e = new Matrix(Math.E);
+		i = new Matrix(Math.pow((-1),.5));
 	}
 	/*
 	 * this is a tacky way for a rule to distinguish
@@ -648,6 +652,12 @@ public class Interpreter extends Thread {
 		}
 		if (name.equals("false")) {
 			return new MatObject[]{mfalse};
+		}
+		if (name.equals("e")) {
+			return new MatObject[]{e};
+		}
+		if (name.equals("i")) {
+			return new MatObject[]{i};
 		}
 
 		Workspace curW = getWorkspace();
@@ -1314,6 +1324,27 @@ public class Interpreter extends Thread {
 		
 		if (name.equals("pi")){
 			return new Matrix(Math.PI);
+		}
+		if (name.equals("eps")){
+			return eps;
+		}
+		if (name.equals("NaN")) {
+			return new Matrix(Double.NaN);
+		}
+		if (name.equals("inf")) {
+			return inf;
+		}
+		if (name.equals("true")) {
+			return mtrue;
+		}
+		if (name.equals("false")) {
+			return mfalse;
+		}
+		if (name.equals("e")) {
+			return e;
+		}
+		if (name.equals("i")) {
+			return i;
 		}
 		return ret;
 	}
