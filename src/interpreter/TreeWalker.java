@@ -448,6 +448,13 @@ public class TreeWalker<K,V>{
 			}
 
 		case ID: //Need to get the value stored in the associated variable, or call the function
+			//TODO this is a hacky fix to make "close all" work - kill it with fire.
+			if (aboutToCloseAll(tree)){
+				return Close.close(new MatString("all"));
+			}
+			else if (justDidCloseAll(tree)){
+				return new Matrix(1);
+			}
 			MatObject[] retVal;
 			if (tree.getChildCount() > 0 && convert(tree.getChild(0).getType()) == TYPE.FUNC_ARGS){//function call or indexing
 				CellArray args = (CellArray)eval(tree.getChild(0));
@@ -593,6 +600,24 @@ public class TreeWalker<K,V>{
 			gtmatException.GTMatException.Throw(new gtmatException.InvalidSyntaxException());
 		}
 		return res;
+	}
+	
+	private static boolean aboutToCloseAll(Tree tree){
+		Tree parent = tree.getParent();
+		if (parent.getChildCount() > tree.getChildIndex()+1 && tree.getText().equals("close") && parent.getChild(tree.getChildIndex()+1).getText().equals("all")){
+			//parent.deleteChild(tree.getChildIndex()+1);
+			return true;
+		}
+		return false;
+	}
+	
+	private static boolean justDidCloseAll(Tree tree){
+		Tree parent = tree.getParent();
+		if (tree.getChildIndex() > 0 && tree.getText().equals("all") && parent.getChild(tree.getChildIndex()-1).getText().equals("close")){
+			//parent.deleteChild(tree.getChildIndex()+1);
+			return true;
+		}
+		return false;
 	}
 
 

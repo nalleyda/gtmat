@@ -31,9 +31,11 @@ public class File_I_O {
     	Scanner scan = new Scanner(new File(name));
     	String curline;
     	GTStringStream ss = new GTStringStream(""); 
+    	StringBuilder sb = new StringBuilder();
     	while (scan.hasNext()){
-    		ss.append(scan.nextLine() + "\n");
+    		sb.append(scan.nextLine() + "\n");
     	}
+    	ss.append(sb.toString());
     	GTParser.process(ss, new Interpreter());
     	return;
     	
