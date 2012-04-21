@@ -739,6 +739,114 @@ public class Interpreter extends Thread {
 		s = s.replaceAll("[%][^(\\n|')]*[\\n]", "\n");//normal comments
 		return s.replaceAll("[\\n][\\n]+", "\n");
 	}
+	
+	public static void main(String[] args) throws Exception{
+		System.out.println(preprocessCommas(preprocessTranspose("area = [1  1  1   1   1  1   1   1   1  1 .3   0  0   0  0  0 0  0 \n" + 
+				" 1  1  1   1   1  1   1   1   1  1  .7   0  0   0  0  0 0  0 \n" + 
+				" 1  1  1   1   1  1   1   1   1  1   1  .8  .4  0  0  0 0  0 \n" + 
+				" 1  1  1   1   1  1   1   1   1  1   1   1  1  .8 .3  0 0  0 \n" + 
+				" 1  1  1   1   1  1   1   1   1  1   1   1  1   1   .7 .2 0  0 %%%%%\n" + 
+				" 1  1  1   1   1  1   1   1   1  1   1   1  1   1  1  .6 0  0 \n" + 
+				" 0  0  0  .7   1  1   1   1   1  1   1   1  1   1  1  .8 0  0 \n" + 
+				" 0  0  0  .7   1  1   1   1   1  1   1   1  1   1  1  .7 0  0 \n" + 
+				" 0  0  0  .4   1  1   1   1   1  1   1   1  1   1  1  .6 0  0 \n" + 
+				" 0  0  0  .1  .8  1   1   1   1  1   1   1  1   1  1  1  .4  0 \n" + 
+				" 0  0  0   0  .2  .7  1   1   1  1   1   1  1   1  1  1  .9 .1 \n" + 
+				" 0  0  0   0   0  0  .4  .8  .9  1   1   1  1   1  1  1   1  .6] "))); //"[1  + 2-2  -2\n3 4 1 .2]\n {1 . 2}")) 
+	}
+
+	/**
+	 * It's VERY important that this method is called after preprocessTranspose.
+	 * The presence of single quotes that don't indicate strings can break this method.
+	 * 
+	 * This method is used to account for problems like [3 - 2] --> [1] and [3 -2] --> [3, -2]
+	 * Additionally, it allows for the use of newlines 
+	 * @param s
+	 * @return
+	 */
+	public static String preprocessCommas(String s){
+		if (s == null || s.length() == 0) return s;
+		//s = s.replaceAll(",", " ");
+		char[] arr = s.toCharArray();
+		int i = 0, brackets = 0, parens = 0, cells = 0, quotes = 0;
+		
+		//check the very first character
+		if (arr[i] == '[') brackets++;
+		else if (arr[i] == ']') brackets--;
+		else if (arr[i] == '(') parens++;
+		else if (arr[i] == ')') parens--;
+		else if (arr[i] == '{') cells++;
+		else if (arr[i] == '}') cells--;
+		else if (arr[i] == '\'') quotes = 1-quotes;
+		
+		
+		for (i = 1; i < arr.length-1; i++){
+			if (quotes == 0){//we only care if we're not inside a string
+				if (arr[i] == '[') brackets++;
+				else if (arr[i] == ']') brackets--;
+				else if (arr[i] == '(') parens++;
+				else if (arr[i] == ')') parens--;
+				else if (arr[i] == '{') cells++;
+				else if (arr[i] == '}') cells--;
+				else if (arr[i] == '\'') quotes = 1-quotes;
+				else if ((arr[i] == '+' || arr[i] == '-' || arr[i] == '.') && (brackets > 0 || cells > 0)){
+					if (arr[i-1] == '\n'){//using newline in place of semicolon
+						/*//trace back to the last non-whitespace to make sure we don't add another semicolon
+						int j = i-1;
+						while (j >= 0 && s.substring(j, j+1).matches("\\s")){
+							j--;
+						}
+						if (j < 0) continue;
+						if (arr[j] == ',' || arr[j] == '[' || arr[j] == '{' || arr[j] == ';'){//we just had extra whitespace, no comma
+							
+						}
+						else{//we're concatenating something
+							arr[i-1] = ';';
+						}*/
+					}
+					else if (s.substring(i-1, i).matches("\\s")){//we have whitespace that's not a newline before a plus or minus sign, inside brackets or cells
+						if (s.substring(i+1, i+2).matches("\\s")){//something like [3 + 2], with whitespace on either side
+							//arr[i-1] = ',';
+						}
+						else{//we have something like [3 -2] or [3, -2]
+							//trace back to the last non-whitespace to make sure we don't add another comma
+							int j = i-1;
+							while (j >= 0 && s.substring(j, j+1).matches("\\s")){
+								j--;
+							}
+							if (j < 0) continue;
+							if (arr[j] == ',' || arr[j] == '[' || arr[j] == '{' || arr[j] == ';'){//we just had extra whitespace, no comma
+								
+							}
+							else{//we're concatenating something
+								arr[i-1] = ',';
+							}
+						}
+					}
+				}
+				else if (arr[i] == '\n'){//check for using newline in place of semi-colon
+					if (brackets > 0 || cells > 0){
+						//trace back to the last non-whitespace to make sure we don't add another semicolon
+						int j = i;
+						while (j >= 0 && s.substring(j, j+1).matches("\\s")){
+							j--;
+						}
+						if (j < 0) continue;
+						if (arr[j] == ',' || arr[j] == '[' || arr[j] == '{' || arr[j] == ';'){//we just had extra whitespace, no comma
+							
+						}
+						else{//we're concatenating something
+							arr[i] = ';';
+						}
+					}
+				}
+			}
+			else{
+				if (arr[i] == '\'') quotes = 1-quotes;
+			}
+		}
+		return new String(arr);
+	}
 
 	public static String preprocessTranspose(String s) throws Exception{
 		if (s == null || s.length() == 0) return s;
@@ -778,11 +886,14 @@ public class Interpreter extends Thread {
 				}
 				i++;
 			}
-		
-		
+
+
 		String ret =  new String(arr);
 		ret = ret.replaceAll("\\[(\\s*)\\]", "[]");
 		ret = ret.replaceAll("\\{(\\s*)\\}", "{}");
+		
+		
+		ret = preprocessCommas(ret);
 		return ret;
 	}
 
@@ -813,7 +924,7 @@ public class Interpreter extends Thread {
 		MatObject[] res = null;
 		Exception ex = null;
 		//System.out.println(name);
-//		System.out.println("\n\nName: " + name + "\nArguments: " + ((MatObject)(ca.getData()[0])).toString() + "\n\n");
+		//		System.out.println("\n\nName: " + name + "\nArguments: " + ((MatObject)(ca.getData()[0])).toString() + "\n\n");
 		myFileName = name;
 		boolean allMat = true;
 		for (int i = 0; i < ca.length(); i++) {
@@ -852,7 +963,7 @@ public class Interpreter extends Thread {
 				System.out.println("\nResults: " + localres);
 				if (localres != null) {
 					res = localres;
-	
+
 				}
 			}catch(Exception e){
 				//e.printStackTrace();
@@ -1045,10 +1156,12 @@ public class Interpreter extends Thread {
 							br = new BufferedReader(new FileReader(fileName));
 							ss = new GTStringStream("");
 							String str = br.readLine();
+							StringBuilder sb = new StringBuilder();
 							while (str != null) {
-								ss.append(str + '\n');/*itshere*/
+								sb.append(str + '\n');/*itshere*/
 								str = br.readLine();
 							}
+							ss.append(sb.toString());
 							System.out.println("ss, the contents of the file:"+ss.toString());
 							GTParser.process(ss, new Interpreter());
 						}
@@ -1325,7 +1438,7 @@ public class Interpreter extends Thread {
 				break;
 			}
 		}
-		
+
 		if (name.equals("pi")){
 			return new Matrix(Math.PI);
 		}
@@ -1478,7 +1591,7 @@ public class Interpreter extends Thread {
 
 	 */
 	//public static void main(String[] args) throws Exception {
-		/*File dir = new File(".");
+	/*File dir = new File(".");
 
         FilenameFilter filter = new FilenameFilter() {
 
@@ -1508,16 +1621,16 @@ public class Interpreter extends Thread {
             System.out.println("DIED");
         }*/
 
-		// displayHelp(new MatString("max"));
-		/*System.out.println(preprocessTranspose("[(a)'']\n" + 
+	// displayHelp(new MatString("max"));
+	/*System.out.println(preprocessTranspose("[(a)'']\n" + 
     			"\n" + 
     			"x = [a '']"));*/
-		/*String s = "This %commented!''oihwefoihewf\nshould result in %asdfsdfs\n%oihwefohwef\na coherent%\nsentence.";
+	/*String s = "This %commented!''oihwefoihewf\nshould result in %asdfsdfs\n%oihwefohwef\na coherent%\nsentence.";
 		System.out.println(removeComments(s));
 		//s.repl
 		s = s.replaceAll("[%]", "&&&");
 		System.out.println(s);*/
-		/*Scanner scan = new Scanner(new File("Test_Suite/SyntaxStressTest.m"));
+	/*Scanner scan = new Scanner(new File("Test_Suite/SyntaxStressTest.m"));
 		StringBuilder sb = new StringBuilder();
 		while (scan.hasNext()){
 			sb.append(scan.nextLine() + "\n");
