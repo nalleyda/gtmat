@@ -14,8 +14,9 @@ public class LessEqual {
 	 * @param a 
 	 * @param b
 	 * @return A matrix of logicals true at i iff a(i) <= b(i)
+	 * @throws Exception 
 	 */
-	public static Matrix lessEqual(Matrix a, Matrix b) {
+	public static Matrix lessEqual(Matrix a, Matrix b) throws Exception {
 		if (a.n == 1) {
 			return le1(a.get(1), b);
 		}
@@ -33,10 +34,10 @@ public class LessEqual {
 		return res;
 	}
 	
-	public static Matrix le1(double v, Matrix m) {
+	public static Matrix le1(double v, Matrix m) throws Exception {
 		Matrix res = new Matrix(m);
 		for (int i = 1; i <= m.n; i++) {
-			res.set(i, (v <= m.get(i)) ? 1 : 0);
+			res = Set.set(res, i, (v <= m.get(i)) ? 1 : 0);
 		}
 		res.type = Type.LOGICAL;
 		return res;
@@ -45,7 +46,7 @@ public class LessEqual {
 	public static Matrix ge1(double v, Matrix m) {
 		Matrix res = new Matrix(m);
 		for (int i = 1; i <= m.n; i++) {
-			res.set(i, (v >= m.get(i)) ? 1 : 0);
+			res = Set.set(res, i, (v >= m.get(i)) ? 1 : 0);
 		}
 		res.type = Type.LOGICAL;
 		return res;

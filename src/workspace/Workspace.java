@@ -23,7 +23,7 @@ public class Workspace {
     private DataHolder dataHolder;
 
     public Workspace() {
-        this("Base", new DefaultListModel());
+        this("Console", new DefaultListModel());
     }
 
     //Creates an empty workspace which will know the name of the function it works for

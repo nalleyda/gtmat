@@ -10,15 +10,16 @@ public class VerticalConcatenate {
 		throw new Exception("Calling a dummy method.");
 	}*/
 	
-	public static Matrix verticalConcatenate(ArrayList<MatObject> mArr){
+	public static Matrix verticalConcatenate(ArrayList<MatObject> mArr) throws Exception{
 		return verticalConcatenate(mArr.toArray(new Matrix[0]));
 	}
 	/**
 	 * vertical concatenation (an array of matrices)
 	 * @param m
 	 * @return
+	 * @throws Exception 
 	 */
-	public static Matrix verticalConcatenate(Matrix... m) {
+	public static Matrix verticalConcatenate(Matrix... m) throws Exception {
 		Matrix res;
 		int rows = 0;
 		int cols = m[0].size[MatObject.COL];
@@ -37,7 +38,7 @@ public class VerticalConcatenate {
 			Matrix it = m[i];
 			for (int c = 1; c <= cols; c++) {
 				for (int r = 1; r <= it.size[MatObject.ROW]; r++) {
-					res.set(r + row, c, it.get(r, c));
+					res = Set.set(res, r + row, c, it.get(r, c));
 				}
 			}
 			row += it.size[MatObject.ROW];

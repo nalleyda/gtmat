@@ -27,7 +27,7 @@ public class FileIO {
     private static char emptyToken = (char) 0XFE;
     private static double value = Double.NaN;
 
-    public static CellArray csvread(String name) {
+    public static CellArray csvread(String name) throws Exception {
         CellArray res = null;
         BufferedReader in = null;
         boolean seenNum = false;
@@ -103,7 +103,7 @@ public class FileIO {
                         } else {
                             value = Double.NaN;
                         }
-                        nums.set(row, col, value);
+                        nums = functions.Set.set(nums, row, col, value);
                     }
                 }
             } catch (IOException e) {

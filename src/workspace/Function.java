@@ -480,13 +480,13 @@ public class Function {
         ht.put("reshape", new Function("reshape", "jmatrix.Matrix", 3,
                 Matrix.class, Integer.class, Integer.class));
         //ht.put("round", new Function("round","jmatrix.Matrix", 1, Matrix.class));
-        ht.put("set2d", new Function("set", "jmatrix.Matrix", 4,
-                Matrix.class, Integer.class, Integer.class, double.class));
-        ht.put("set1d", new Function("set", "jmatrix.Matrix", 3,
-                Matrix.class, Integer.class, double.class));
-        ht.put("set1", new Function("set", "jmatrix.Matrix", 4,
+        ht.put("set2d", new Function("set", "functions.Set", 4,
+                Matrix.class, int.class, int.class, double.class));
+        ht.put("set1d", new Function("set", "functions.Set", 3,
+                Matrix.class, int.class, double.class));
+        ht.put("set1", new Function("set", "functions.Set", 3,
                 Matrix.class, Matrix.class, Matrix.class));
-        ht.put("set2", new Function("set", "jmatrix.Matrix", 4,
+        ht.put("set2", new Function("set", "functions.Set", 4,
                 Matrix.class, Matrix.class, Matrix.class, Matrix.class));
         ht.put("sindex1", new Function("sindex", "jmatrix.Matrix", 2,
                 Matrix.class, Matrix.class));

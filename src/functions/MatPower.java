@@ -40,7 +40,7 @@ public class MatPower {
 		else{//scalar to any non-integer power
 			power -= eps;//we skewed the power
 			for (int i = 1; i <= m1.n; i++){
-				res.set(i, Math.pow(m1.get(i), power));
+				res = Set.set(res, i, Math.pow(m1.get(i), power));
 			}
 			return res;
 		}

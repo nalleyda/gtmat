@@ -13,8 +13,9 @@ public class MatMult {
 	 * @param m a matrix
 	 * @param a another matrix
 	 * @return m * a
+	 * @throws Exception 
 	 */
-	public static Matrix matMult(Matrix m, Matrix a) {
+	public static Matrix matMult(Matrix m, Matrix a) throws Exception {
         if(m.n == 1 || a.n == 1) {
             return Mult.mult(m, a);
         }
@@ -31,7 +32,7 @@ public class MatMult {
                     double v2 = a.get(it, c);
                     sum += v1 * v2;
                 }
-                res.set(r, c, sum);
+                res = Set.set(res, r, c, sum);
             }
         }
         return res;

@@ -234,8 +234,9 @@ public class SignedByte extends MatObject {
      * @param rndx - target rows
      * @param cndx - target columns
      * @param vals -  source data
+     * @throws Exception 
      */
-    public void set(Matrix rndx, Matrix cndx, SignedByte vals) {
+    public void set(Matrix rndx, Matrix cndx, SignedByte vals) throws Exception {
 //        Main.debug.println("set " + this + " at rows " + rndx
 //                + " at cols " + cndx + " to " + vals);
         if (rndx.size[ROW] != 1

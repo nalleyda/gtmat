@@ -180,8 +180,8 @@ public class Main {
                 interactions.getTextPane().requestFocusInWindow();
             }
         });
+
         
-        //GTMatTesting.initTesting(2,2);
         //GTMatTesting.initTesting(2,2);//*********************************************************************************
         
         /*   System.out.println("Interpreter Tests");
