@@ -42,7 +42,7 @@ public class NotEqual {
 	private static Matrix ne1(double v, Matrix m) {
 		Matrix res = new Matrix(m);
 		for (int i = 1; i <= m.n; i++) {
-			res.set(i, (Math.abs(v - m.get(i)) >= Math.ulp(v)) ? 1 : 0);
+			Set.set(res, i, (Math.abs(v - m.get(i)) >= Math.ulp(v)) ? 1 : 0);
 		}
 		res.type = Type.LOGICAL;
 		return res;

@@ -14,8 +14,9 @@ public class GreaterEqual {
 	 * @param a 
 	 * @param b
 	 * @return A matrix of logicals true at i iff a(i) >= b(i)
+	 * @throws Exception 
 	 */
-	public static Matrix greaterEqual(Matrix a, Matrix b) {
+	public static Matrix greaterEqual(Matrix a, Matrix b) throws Exception {
 		if (a.n == 1) {
 			return dGEm(a.get(1), b);
 		}
@@ -33,19 +34,19 @@ public class GreaterEqual {
 		return res;
 	}
 	
-	public static Matrix dGEm(double v, Matrix m) {
+	public static Matrix dGEm(double v, Matrix m) throws Exception {
 		Matrix res = new Matrix(m);
 		for (int i = 1; i <= m.n; i++) {
-			res.set(i, (v >= m.get(i)) ? 1 : 0);
+			res = Set.set(res, i, (v >= m.get(i)) ? 1 : 0);
 		}
 		res.type = Type.LOGICAL;
 		return res;
 	}
 	
-	public static Matrix mGEd(double v, Matrix m) {
+	public static Matrix mGEd(double v, Matrix m) throws Exception {
 		Matrix res = new Matrix(m);
 		for (int i = 1; i <= m.n; i++) {
-			res.set(i, (v <= m.get(i)) ? 1 : 0);
+			res = Set.set(res, i, (v <= m.get(i)) ? 1 : 0);
 		}
 		res.type = Type.LOGICAL;
 		return res;

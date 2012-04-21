@@ -15,7 +15,7 @@ public class BoolNegate {
 			Logical l1 = new Logical(o);
 			
 			for (int i = 1; i<=o.n; i++){
-				out.set(i, l1.get(i) == false ? 1 : 0);
+				Set.set(out, i, l1.get(i) == false ? 1 : 0);
 			}
 			
 			out.type = MatObject.Type.LOGICAL;

@@ -8,7 +8,7 @@ public class MatInverse {
 		return (MatObject)MatInverse.class.getMethod("matInverse", o.getClass()).invoke(null, new Object[] {o});
 	}
 	
-	public static Matrix matInverse(Matrix m1) {
+	public static Matrix matInverse(Matrix m1) throws Exception {
 		if (m1.size.length != 2
 				 || (m1.size[MatObject.ROW] != m1.size[MatObject.COL])) {
 			 throw(new MatrixNotSquareException());
@@ -38,8 +38,8 @@ public class MatInverse {
 					 for (int c = 1; c <= bcols; c++) {
 						 double temp = m.get(col, c);
 						 double it = m.get(at, c);
-						 m.set(col, c, it);
-						 m.set(at, c, temp);
+						 m = Set.set(m, col, c, it);
+						 m = Set.set(m, at, c, temp);
 					 }
 				 }
 			 }
@@ -51,7 +51,7 @@ public class MatInverse {
 			 }
 			 for (int c = 1; c <= bcols; c++) {
 				 double it = m.get(col, c) / val;
-				 m.set(col, c, it);
+				 m = Set.set(m, col, c, it);
 			 }
 			 //            Main.debug.println("diag one " + col + " -> " + m);
 			 // subtract row (col) from each row except (col) scaled by its first val
@@ -60,7 +60,7 @@ public class MatInverse {
 					 double factor = m.get(r, col);
 					 for (int c = 1; c <= bcols; c++) {
 						 double it = m.get(r, c) - m.get(col, c) * factor;
-						 m.set(r, c, it);
+						 m = Set.set(m, r, c, it);
 					 }
 				 }
 				 //                Main.debug.println("zero off diag " + col + " " + r + " -> " + m);

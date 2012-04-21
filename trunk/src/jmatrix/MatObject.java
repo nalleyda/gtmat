@@ -200,8 +200,9 @@ public abstract class MatObject {
 	 * mult a matrix
 	 * @param v matrix to add
 	 * @return
+	 * @throws Exception 
 	 */
-	public Matrix mult(MatObject o) {
+	public Matrix mult(MatObject o) throws Exception {
 		Matrix res = new Matrix(this);
 		Matrix ov = castToMatrix(o);
 		return MatMult.matMult(res,ov);
@@ -267,8 +268,9 @@ public abstract class MatObject {
 	 * ^ a matrix
 	 * @param v matrix to add
 	 * @return
+	 * @throws Exception 
 	 */
-	public Matrix caret(MatObject o) {
+	public Matrix caret(MatObject o) throws Exception {
 		Matrix res = new Matrix(this);
 		Matrix ov = castToMatrix(o);
 		return res.exp(ov);
@@ -289,8 +291,9 @@ public abstract class MatObject {
 	 * negate a matrix
 	 * @param v matrix to add
 	 * @return
+	 * @throws Exception 
 	 */
-	public Matrix negate() {
+	public Matrix negate() throws Exception {
 		Matrix res = new Matrix(this);
 		return res.negate();
 	}
@@ -321,8 +324,9 @@ public abstract class MatObject {
 	 * >= a matrix
 	 * @param v matrix to add
 	 * @return
+	 * @throws Exception 
 	 */
-	public Matrix ge(MatObject o) {
+	public Matrix ge(MatObject o) throws Exception {
 		Matrix res = new Matrix(this);
 		Matrix ov = castToMatrix(o);
 		return Matrix.ge(res, ov);
@@ -332,8 +336,9 @@ public abstract class MatObject {
 	 * <= a matrix
 	 * @param v matrix to add
 	 * @return
+	 * @throws Exception 
 	 */
-	public Matrix le(MatObject o) {
+	public Matrix le(MatObject o) throws Exception {
 		Matrix res = new Matrix(this);
 		Matrix ov = castToMatrix(o);
 		return LessEqual.lessEqual(res, ov);
@@ -636,8 +641,7 @@ public abstract class MatObject {
 				dim = dim * val.size[i-2];
 				for(int ni = 0; ni < index.n; ni++) {
 					for(int li = 0; li < lastOne.n; li++) {
-						offset.set(1, ++oi, 
-								lastOne.data[li] + dim*(index.data[ni]-1));
+						offset = Set.set(offset, 1, ++oi, lastOne.data[li] + dim*(index.data[ni]-1));
 					}
 				}
 				lastOne = new Matrix(offset);
@@ -650,7 +654,7 @@ public abstract class MatObject {
 			Matrix keeps = ((Matrix)val).empty();
 			for(int i = 1; i <= val.n; i++) {
 				if(!isIn(i, offset)) {
-					keeps.set(1, keeps.n+1, i);
+					keeps = Set.set(keeps, 1, keeps.n+1, i);
 				}
 			}
 			val = get(val, keeps);

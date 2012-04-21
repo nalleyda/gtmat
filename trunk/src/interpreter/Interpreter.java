@@ -149,7 +149,7 @@ public class Interpreter extends Thread {
 		}
 	}
 
-	public static MatObject back(MatObject a, MatObject b) {
+	public static MatObject back(MatObject a, MatObject b) throws Exception {
 		MatObject res = null;
 		if(!(a instanceof Matrix) || !(b instanceof Matrix)) {
 			throw new RuntimeException("Back divide a or b not arrays");
@@ -396,7 +396,7 @@ public class Interpreter extends Thread {
 			} else {
 				value = m.get(1);
 			}
-			res.set(1, i, value);
+			res = functions.Set.set(res, 1, i, value);
 		}
 		return res;
 	}
@@ -990,8 +990,8 @@ public class Interpreter extends Thread {
 			//System.out.println("exception thrown in Interpreter at: "+System.currentTimeMillis());
 			if (ex!=null) throw ex;
 			else{
-				//throw new UndefinedVariableException();
-				throw new RuntimeException("Invalid variable name or function call - " + name);
+				throw new UndefinedVariableException(name);
+				
 			}
 		}
 		return res;

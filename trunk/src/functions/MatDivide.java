@@ -31,7 +31,7 @@ public class MatDivide {
 			Matrix res = m.copy();
 			double divisor = v.get(1);
 			for (int i = 1; i <= m.n; i++){
-				res.set(i, m.get(i)/divisor);
+				res = Set.set(res, i, m.get(i)/divisor);
 			}
 			return res;
 		}

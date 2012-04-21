@@ -2,6 +2,7 @@ package functions;
 
 import java.util.ArrayList;
 import gtmatException.*;
+import functions.*;
 
 import jmatrix.*;
 
@@ -43,15 +44,16 @@ public class HorizontalConcatenate {
 		return ret;
 	}
 
-	public static Matrix horizontalConcatenate(ArrayList<MatObject> mArr){
+	public static Matrix horizontalConcatenate(ArrayList<MatObject> mArr) throws Exception{
 		return horizontalConcatenate(mArr.toArray(new Matrix[0]));
 	}
 	/**
 	 * horizontal concatenation (an array of matrices)
 	 * @param m
 	 * @return
+	 * @throws Exception 
 	 */
-	public static Matrix horizontalConcatenate(Matrix... m) {
+	public static Matrix horizontalConcatenate(Matrix... m) throws Exception {
 		Matrix res;
 		int cols = 0;
 		int rows = m[0].size[MatObject.ROW];
@@ -70,7 +72,7 @@ public class HorizontalConcatenate {
 			Matrix it = m[i];
 			for (int c = 1; c <= it.size[MatObject.COL]; c++) {
 				for (int r = 1; r <= rows; r++) {
-					res.set(r, c + col, it.get(r, c));
+					res = Set.set(res, r, c + col, it.get(r, c));
 				}
 			}
 			col += it.size[MatObject.COL];

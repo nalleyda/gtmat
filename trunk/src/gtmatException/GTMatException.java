@@ -14,11 +14,7 @@ public abstract class GTMatException extends RuntimeException {
 	
 	
 	public GTMatException() {
-		try{
-			filename = parser.GTParser.filenameStack.peek();
-		} catch(java.util.EmptyStackException e) {
-			filename="Console";
-		}
+			filename = main.Main.wstack.peek().getFunctionName();
 	}
 	
 	public static void Throw(GTMatException e) {

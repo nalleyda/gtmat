@@ -450,7 +450,8 @@ public class TreeWalker<K,V>{
 		case ID: //Need to get the value stored in the associated variable, or call the function
 			//TODO this is a hacky fix to make "close all" work - kill it with fire.
 			if (aboutToCloseAll(tree)){
-				return Close.close(new MatString("all"));
+				//return Close.close(new MatString("all"));
+				return Close.close();
 			}
 			else if (justDidCloseAll(tree)){
 				return new Matrix(1);
@@ -691,11 +692,8 @@ public class TreeWalker<K,V>{
 		try {
 			eval(tree);
 		} catch (Exception e1) {
-			try{
-				parser.GTParser.filenameStack.pop();
-			} catch(java.util.EmptyStackException e) {}
-			//e1.printStackTrace();
 			System.out.println("Ceasing execution in TreeWalker.process()");
+
 
 			//System.exit(-1);
 			if(e1 instanceof GTMatException){

@@ -49,7 +49,7 @@ public class WorkspaceStack{
             curWorkspace.add(new Variable(name, data));
         }
 
-        public void assign(String name, MatObject rhs, MatObject... indices){
+        public void assign(String name, MatObject rhs, MatObject... indices) throws Exception{
             Workspace curWorkspace = wstack.peek();
             DefaultListModel varList = curWorkspace.getVarList();
             Variable rhsvar = new Variable(name, rhs);
@@ -79,10 +79,10 @@ public class WorkspaceStack{
             switch (type){
                 case DOUBLE:
                     if (indices.length == 1){
-                        Matrix.set((Matrix)lhs, (Matrix)indices[0], (Matrix)rhs);
+                        lhs = functions.Set.set((Matrix)lhs, (Matrix)indices[0], (Matrix)rhs);
                     }
                     else if (indices.length == 2){
-                        Matrix.set((Matrix)lhs, (Matrix)indices[0], (Matrix)indices[1], (Matrix)rhs);
+                        lhs = functions.Set.set((Matrix)lhs, (Matrix)indices[0], (Matrix)indices[1], (Matrix)rhs);
                     }
 
             }
