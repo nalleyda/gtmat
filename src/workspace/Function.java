@@ -508,7 +508,7 @@ public class Function {
                 Matrix.class, Matrix.class));
         ht.put("subIPd", new Function("sub", "jmatrix.Matrix", 2,
                 Matrix.class, double.class));
-        ht.put("close", new Function("close", "functions.Close", 0));
+        ht.put("close", new Function("close", "functions.Close", 1, MatObject.class));
         ht.put("subIP", new Function("sub", "jmatrix.Matrix", 2,
                 Matrix.class, Matrix.class));
         ht.put("subplot", new Function("subplot", "plotting.Figure", 3,
