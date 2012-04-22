@@ -332,10 +332,71 @@ public class Matrix extends MatObject {
 		}
 	}
 
-	
 
-	public static Matrix index(Matrix m, Matrix ri, Matrix ci) throws Exception {
-		return m.index(ri, ci);
+
+	public void set(double val, int... index) {
+		boolean extend = false;
+		//Find the total number of elements, as well as the new size of the array
+		int newn = 1;
+		int newsize[] = new int[index.length];
+		for(int i = 0; i < index.length; i++) {
+			if(i >= size.length || index[i] > size[i]) {
+				extend = true;
+				newsize[i] = index[i];
+			} else 
+				newsize[i] = size[i];
+			newn *= newsize[i];
+		}
+		//If we need to extend the array, say so here
+		if(size.length < newsize.length)
+			extend = true;
+		
+		
+		//Now we transform the array indices of the old values into the linear indices for the new array
+		int linind = 0;
+		int trueind = 0;
+		int vecind[] = new int[size.length];
+		//vecind represents the array indices
+		for(int i = 0; i < size.length; i++) 
+			vecind[i] = 1;
+		
+		//offsetvec[i] tells you how much you need to multiply by for index i to go from array indices to linear indices
+		int offsetvec[] = new int[newsize.length];
+		//Need 1 for the next row, row for the next column, row*column for the next layer...
+		offsetvec[0] = 1;
+		for(int i = 1; i < newsize.length; i++) {
+			offsetvec[i] = offsetvec[i-1] * newsize[i-1];
+		}
+		//Now, let's extend if needed
+		if(extend) {
+			double newdata[] = new double[newn];
+			//For each index of our old array...
+			while(vecind[size.length-1] <= size[size.length-1]) {
+				//Put in the current value
+				newdata[linind] = data[trueind++];
+				//Calculate the new linear index, and update the array indices
+				linind = 0;
+				for(int i = 0; i < size.length; i++) {
+					vecind[i]++;
+					if(i != size.length-1 && vecind[i] > size[i])	
+						vecind[i] = 1;
+					else {
+						break;
+					}
+				}
+				for(int i = 0; i < size.length; i++) {
+					linind += (vecind[i]-1) * offsetvec[i];
+				}
+			}
+			data = newdata;
+			size = newsize;
+			n = newn;
+		} 
+		int ind = 0;
+		for(int i = 0; i < index.length; i++) {
+			ind += (index[i]-1) * offsetvec[i];
+		}
+		data[ind] = val;
 	}
 
 	public static double max(Matrix ma[], int ndx) {
