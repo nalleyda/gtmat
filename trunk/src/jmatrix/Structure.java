@@ -138,6 +138,7 @@ public class Structure extends MatObject implements java.io.Serializable{
     }
 
     private int findFieldInd(String fieldname) {
+    	if (fieldNames == null) fieldNames = new String[0];
         int ind = -1;
         for (int i = 0; i < fieldNames.length; i++) {
             if (fieldNames[i].equals(fieldname)) {

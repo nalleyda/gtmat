@@ -1438,6 +1438,7 @@ public class Interpreter extends Thread {
 				break;
 			}
 		}
+		if (ret != null) return ret;
 
 		if (name.equals("pi")){
 			return new Matrix(Math.PI);

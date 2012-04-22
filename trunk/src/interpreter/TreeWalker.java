@@ -256,6 +256,8 @@ public class TreeWalker<K,V>{
 		}
 		throw new Exception("The use of \"end\" is incorrect here.");
 	}
+	
+	private static boolean printing = false;
 
 
 	public static MatObject eval(Tree tree) throws Exception{
@@ -269,19 +271,21 @@ public class TreeWalker<K,V>{
 				try{
 					MatObject resVal = null;
 					if (convert(tree.getChild(i).getType()) == TYPE.SEMI){
+						printing = false;
 						resVal = eval(tree.getChild(i).getChild(0));
 					}
 					else{
+						printing = true;
 						resVal = eval(tree.getChild(i));
 
 					}
-					if (/*convert(tree.getChild(i).getType()) != TYPE.BLOCK &&*/ resVal != null){
+					if (/*convert(tree.getChild(i).getType()) != TYPE.BLOCK &&*/ resVal != null && printing){
 						Interpreter.displayString(resVal.toString() + "\n");
 					}
 				}catch (Exception e){
 					//System.out.println("eval(tree.getChild("+i+")) threw an exception");
 					//System.err.println(e.);
-					//e.printStackTrace();
+					e.printStackTrace();
 					throw e;
 				}
 			}
@@ -312,7 +316,7 @@ public class TreeWalker<K,V>{
 		case INTEGER:
 			return new Matrix(Double.parseDouble(tree.getText()));
 		case DOT:
-			if (convert(tree.getChild(0).getType()) == TYPE.INTEGER){
+			if (convert(tree.getChild(0).getType()) == TYPE.INTEGER){//decimal places
 				if (tree.getChildCount() == 1){
 					return new Matrix(Double.parseDouble("." + tree.getChild(0).getText()));
 				}
@@ -320,6 +324,31 @@ public class TreeWalker<K,V>{
 					return new Matrix(Double.parseDouble(tree.getChild(0).getText() + "." + tree.getChild(1).getText()));
 				}
 			}
+			else{//structure call, and it's not being assigned anything
+				MatObject rhs = eval(tree.getChild(0));//this should be the structure
+				if (rhs == null || !(rhs instanceof StructArray)){//it doesn't exist yet, or it's not a struct[]
+					throw new Exception("Invalid structure reference");
+				}
+				else{//it's already a structure
+					StructArray sa = (StructArray)rhs;
+					String fieldName = null;
+					if (tree.getChild(1).getText().equals("(")){//indirect naming, like s.(x)
+						MatObject index = eval(tree.getChild(2));
+						if (index == null || !(index instanceof MatString)){
+							throw new Exception("Incorrect indirect indexing.");
+						}
+						else{
+							fieldName = ((MatString)index).toString();
+						}
+					}
+					else{
+						fieldName = tree.getChild(1).getText();
+					}
+					return sa.getField(fieldName);
+				}
+				//throw new Exception("Structure calls not yet working");
+			}
+			return null;
 		case DOT_CARET:
 			return Power.power(eval(tree.getChild(0)), eval(tree.getChild(1)));
 		case DOT_SLASH:
@@ -352,7 +381,7 @@ public class TreeWalker<K,V>{
 
 			if (lhsType == TYPE.ID){//single output
 				if (lhs.getChildCount() == 0){//no lhs indexing
-					Interpreter.assign(tree.getChild(0).getText(), eval(tree.getChild(1)), true);
+					Interpreter.assign(tree.getChild(0).getText(), eval(tree.getChild(1)), printing);
 				}
 				else{
 					if (rhsType == TYPE.ID){
@@ -375,7 +404,7 @@ public class TreeWalker<K,V>{
 					if (lhsType == TYPE.ID){
 						calls.remove(calls.size()-1);
 					}
-					MatObject.index(lhs.getText(), lhsInd, rhsRes, true);
+					MatObject.index(lhs.getText(), lhsInd, rhsRes, printing);
 					if (rhsType == TYPE.ID){
 						calls.remove(calls.size()-1);
 					}
@@ -392,6 +421,33 @@ public class TreeWalker<K,V>{
 				for (int i = 0; i < lhsTree.getChildCount(); i++){
 					Interpreter.assign(lhsTree.getChild(i).getText(), rhsRes.get(i+1), true);
 				}
+			}
+			else if (lhsType == TYPE.DOT){//assignment to structure array
+				
+				//TODO we currently assume no indexing (such as s(2).x = 3)
+				StructArray s = null;
+				if (Main.wstack.peek().getVariable(lhs.getChild(0).getText()) == null){//it didn't exist yet
+					s = new StructArray(new Structure());
+				}
+				else{
+					s = (StructArray)eval(lhs.getChild(0));
+				}
+				String fieldName = null;
+				if (lhs.getChild(1).getText().equals("(")){//indirect naming, like s.(x)
+					MatObject index = eval(lhs.getChild(2));
+					if (index == null || !(index instanceof MatString)){
+						throw new Exception("Incorrect indirect indexing.");
+					}
+					else{
+						fieldName = ((MatString)index).toString();
+					}
+				}
+				else{
+					fieldName = lhs.getChild(1).getText();
+				}
+				s.setField(fieldName, eval(rhs));
+				Interpreter.assign(lhs.getChild(0).getText(), s, printing);
+				return s;
 			}
 			else{
 				throw new Exception("Something is wrong with your assignment...");
@@ -450,8 +506,8 @@ public class TreeWalker<K,V>{
 		case ID: //Need to get the value stored in the associated variable, or call the function
 			//TODO this is a hacky fix to make "close all" work - kill it with fire.
 			if (aboutToCloseAll(tree)){
-				//return Close.close(new MatString("all"));
-				return Close.close();
+				return Close.close(new MatString("all"));
+				//return Close.close();
 			}
 			else if (justDidCloseAll(tree)){
 				return new Matrix(1);
