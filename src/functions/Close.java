@@ -11,7 +11,7 @@ public class Close {
 	 * @return
 	 * @throws Exception
 	 */
-	public static MatObject close() throws Exception{
+	public static MatObject close(MatObject arg) throws Exception{
 		boolean result = Figure.close(1);
 		//System.out.println("boolean result = "+result);
 		Matrix output;
