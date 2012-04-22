@@ -741,18 +741,7 @@ public class Interpreter extends Thread {
 	}
 	
 	public static void main(String[] args) throws Exception{
-		System.out.println(preprocessCommas(preprocessTranspose("area = [1  1  1   1   1  1   1   1   1  1 .3   0  0   0  0  0 0  0 \n" + 
-				" 1  1  1   1   1  1   1   1   1  1  .7   0  0   0  0  0 0  0 \n" + 
-				" 1  1  1   1   1  1   1   1   1  1   1  .8  .4  0  0  0 0  0 \n" + 
-				" 1  1  1   1   1  1   1   1   1  1   1   1  1  .8 .3  0 0  0 \n" + 
-				" 1  1  1   1   1  1   1   1   1  1   1   1  1   1   .7 .2 0  0 %%%%%\n" + 
-				" 1  1  1   1   1  1   1   1   1  1   1   1  1   1  1  .6 0  0 \n" + 
-				" 0  0  0  .7   1  1   1   1   1  1   1   1  1   1  1  .8 0  0 \n" + 
-				" 0  0  0  .7   1  1   1   1   1  1   1   1  1   1  1  .7 0  0 \n" + 
-				" 0  0  0  .4   1  1   1   1   1  1   1   1  1   1  1  .6 0  0 \n" + 
-				" 0  0  0  .1  .8  1   1   1   1  1   1   1  1   1  1  1  .4  0 \n" + 
-				" 0  0  0   0  .2  .7  1   1   1  1   1   1  1   1  1  1  .9 .1 \n" + 
-				" 0  0  0   0   0  0  .4  .8  .9  1   1   1  1   1  1  1   1  .6] "))); //"[1  + 2-2  -2\n3 4 1 .2]\n {1 . 2}")) 
+		System.out.println(preprocessCommas(preprocessTranspose("'a''b'")));
 	}
 
 	/**
@@ -871,6 +860,12 @@ public class Interpreter extends Thread {
 						while (true){//hacky goto - curse you, Java!
 							while (i < arr.length && arr[i] != '\'' && arr[i] != '\n'){//go until we hit a close quote
 								i++;
+								if (i+1 < arr.length && arr[i] == '\'' && arr[i+1] == '\''){//double quotes
+									i+=2;
+									/*i++;
+									s = s.substring(0, i) + s.substring(i+1, s.length());
+									arr = s.toCharArray();*/
+								}
 							}
 							if (i == arr.length) break out;
 							else if(arr[i] == '\n') throw new Exception("Unbalanced string! Someone should probably put a line number here...");

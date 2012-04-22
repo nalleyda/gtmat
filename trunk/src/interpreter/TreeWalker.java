@@ -257,7 +257,7 @@ public class TreeWalker<K,V>{
 		throw new Exception("The use of \"end\" is incorrect here.");
 	}
 	
-	private static boolean printing = false;
+	public static boolean printing = false;
 
 
 	public static MatObject eval(Tree tree) throws Exception{

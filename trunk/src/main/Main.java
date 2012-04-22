@@ -59,8 +59,9 @@ public class Main {
     }
     
     public static MatObject disp(MatString mstr) {
-        interactions.appendString(mstr.toString() + "\n", 0);
-        return new Matrix(mstr.n);
+        //interactions.appendString(mstr.toString() + "\n", 0);
+        TreeWalker.printing = true;
+        return mstr;//new Matrix(mstr.n);
     }
 
     public static void init(){
