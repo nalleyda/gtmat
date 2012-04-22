@@ -633,7 +633,7 @@ public abstract class MatObject {
 		
 		int[] indvec = new int[ca.n];
 		int eleind = 1;
-		while(ind[ca.n-1] <= ca.get(1).n) {
+		while(ind[ca.n-1] <= ca.get(ca.n).n) {
 			for(int i = 0; i < indvec.length; i++) {
 				indvec[i] = ((Matrix)ca.get(i+1)).geti(ind[i]);
 			}
