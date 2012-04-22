@@ -624,11 +624,32 @@ public abstract class MatObject {
 			}
 			val = expr.zeroed();//TODO not entirely sure why things work with this line present...
 		}
-		int en = expr.n;
-		Matrix offset = null;
-		Matrix lastOne = null;
-		int dim = 1;
 		int oi = 0;
+		Matrix outvals = new Matrix(val);
+		int[] ind = new int[ca.n];
+		for(int i = 0; i < ind.length; i++) {
+			ind[i] = 1;
+		}
+		
+		int[] indvec = new int[ca.n];
+		int eleind = 1;
+		while(ind[ca.n-1] <= ca.get(1).n) {
+			for(int i = 0; i < indvec.length; i++) {
+				indvec[i] = ((Matrix)ca.get(i+1)).geti(ind[i]);
+			}
+			
+			outvals.set( ((Matrix)expr).get( expr.n == 1 ? 1 : eleind++), indvec);
+			for(int i = 1; i <= ind.length; i++) {
+				ind[i-1]++;
+				if(i != ind.length && ind[i-1] > ca.get(i).n) {
+					ind[i-1] = 1;
+				} else
+					break;
+			}
+			
+		}
+		
+		/*
 		for(int i = 1; i <= ca.n; i++) {
 			Matrix index = (Matrix) ca.get(1, i);
 			if(index.type == Type.LOGICAL) {//if any are logical, assume all are logical
@@ -641,7 +662,13 @@ public abstract class MatObject {
 				dim = dim * val.size[i-2];
 				for(int ni = 0; ni < index.n; ni++) {
 					for(int li = 0; li < lastOne.n; li++) {
+<<<<<<< .mine
+						
+						offset.set(1, ++oi, 
+								lastOne.data[li] + dim*(index.data[ni]-1));
+=======
 						offset = Set.set(offset, 1, ++oi, lastOne.data[li] + dim*(index.data[ni]-1));
+>>>>>>> .r150
 					}
 				}
 				lastOne = new Matrix(offset);
@@ -661,9 +688,10 @@ public abstract class MatObject {
 		} else {
 			val.copyValues(offset, expr);
 		}
-		curW.add(new Variable(name, val));
+		*/
+		curW.add(new Variable(name, outvals));
 		if (showIt) {
-			Interpreter.displayString(name + " = " + val + "\n");
+			Interpreter.displayString(name + " = " + outvals + "\n");
 		}
 		TabbedPane.list.setModel(Main.wstack.peek().getVarList());
 	}
