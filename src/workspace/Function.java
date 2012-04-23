@@ -378,6 +378,8 @@ public class Function {
                 Matrix.class, Matrix.class));
         ht.put("addIP", new Function("add", "jmatrix.Matrix", 2,
                 Matrix.class, Matrix.class));
+        ht.put("all", new Function("all", "functions.All", 1, Matrix.class));
+        ht.put("any", new Function("any", "functions.Any", 1, new Class[] {MatObject[].class}));
         ht.put("char", new Function("charCast", "jmatrix.MatObject", 1, MatObject.class));
         ht.put("camax", new Function("max", "jmatrix.Matrix", 1, Matrix.class));
         ht.put("camin", new Function("min", "jmatrix.Matrix", 1, Matrix.class));
