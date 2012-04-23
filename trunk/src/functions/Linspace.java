@@ -13,10 +13,10 @@ public class Linspace {
 			dv = (to.get(0) - from.get(0)) / (n.get(0) - 1);
 		}
 		res = new Matrix(1, n.get(0));
-		res.set(1, from.get(0));
+		Set.set(res, 1, from.get(0));
 		res.n = n.length();
 		for (int i = 2; i <= n.get(0); i++) {
-			res.set(i, res.get(i-1) + dv);
+			Set.set(res, i, res.get(i-1) + dv);
 		}
 		return res;
 	}
