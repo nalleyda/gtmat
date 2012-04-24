@@ -15,6 +15,7 @@ import javax.swing.JFileChooser;
 import jmatrix.*;
 import main.*;
 import functions.*;
+import gtmatException.CustomException;
 
 public class FileIO {
 
@@ -253,7 +254,7 @@ public class FileIO {
                 p = new PrintStream(out);
                 handles.add(p);
             } else {
-                throw new RuntimeException("fopen must say r or w");
+                throw new CustomException("fopen must say r or w");
             }
             return handles.size();
         }

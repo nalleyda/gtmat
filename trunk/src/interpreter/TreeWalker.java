@@ -566,14 +566,14 @@ public class TreeWalker<K,V>{
 				return Negate.negate(eval(tree.getChild(0)));
 			}
 			else if (tree.getChildCount() == 2){
-				return Subtract.subtract((Matrix)eval(tree.getChild(0)), (Matrix)eval(tree.getChild(1)));
+				return Subtract.subtract(eval(tree.getChild(0)), eval(tree.getChild(1)));
 			}
 		case NOT:
 			return BoolNegate.boolNegate(eval(tree.getChild(0)));
 		case NOT_EQUAL:
 			return NotEqual.notEqual(eval(tree.getChild(0)), eval(tree.getChild(1)));
 		case PLUS:
-			return Add.add((Matrix)eval(tree.getChild(0)), (Matrix)eval(tree.getChild(1)));
+			return Add.add(eval(tree.getChild(0)), eval(tree.getChild(1)));
 		case SC_AND:
 			return ShortCircuitAnd.shortCircuitAnd(eval(tree.getChild(0)), eval(tree.getChild(1)));
 		case SC_OR:

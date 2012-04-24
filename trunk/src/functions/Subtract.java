@@ -36,4 +36,23 @@ public class Subtract {
         }
         return res;
 	}
+	
+	public static Matrix subtract(MatString s, Matrix m) {
+		Matrix res = new Matrix(s);
+		res=Subtract.subtract(res, m);
+		return res;
+	}
+	
+	public static Matrix subtract(Matrix m, MatString s) {
+		Matrix res = new Matrix(s);
+		res = Subtract.subtract(m,res);
+		return res;
+	}
+	
+	public static Matrix subtract(MatString s, MatString t) {
+		Matrix sMat = new Matrix(s);
+		Matrix tMat = new Matrix(t);
+		Matrix res = Subtract.subtract(sMat,tMat);
+		return res;
+	}
 }
