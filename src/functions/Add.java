@@ -41,6 +41,25 @@ public class Add {
         return res;
 	}
 	
+	public static Matrix add(MatString s, Matrix m) {
+		Matrix res = new Matrix(s);
+		res=Add.add(res, m);
+		return res;
+	}
+	
+	public static Matrix add(Matrix m, MatString s) {
+		Matrix res = new Matrix(s);
+		res = Add.add(m,res);
+		return res;
+	}
+	
+	public static Matrix add(MatString s, MatString t) {
+		Matrix sMat = new Matrix(s);
+		Matrix tMat = new Matrix(t);
+		Matrix res = Add.add(sMat,tMat);
+		return res;
+	}
+	
 	public static void main(String[] args) throws Exception{
 		MatObject a = new Matrix(3);
 		MatObject b = new Matrix(4);
