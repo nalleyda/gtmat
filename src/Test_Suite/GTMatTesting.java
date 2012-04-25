@@ -252,6 +252,7 @@ public class GTMatTesting {
 					//System.out.println(v.toString()+"<< from GTMat");
 					System.out.println(v.getVarName()+"'s type: "+MatObject.getClass(v.getData()));
 					if (results.containsKey(v.getVarName()) && (v.getVarName()!=null)){
+					
 						//the results map contains a key == to the variable's name
 						//System.out.println("results contains the key/var "+v.getVarName());
 						String vStr = v.toString();
@@ -273,7 +274,8 @@ public class GTMatTesting {
 						//System.out.println(vStr+"<< toString(), from GTMat");
 						//System.out.println(v.workspaceString())
 						System.out.println(parseStr+"<< from MatLab");
-						if (varStr.equals(parseStr)){
+						//if (varStr.equals(parseStr)){
+						if (match(varStr, parseStr)){
 							out.put(v.getVarName(), "Name and value equal");
 							//System.out.println(v.getVarName()+"== in matlab and gtmat");
 						}
@@ -301,6 +303,33 @@ public class GTMatTesting {
 		return out;
 		
 		
+	}
+	
+	public static boolean match(String vstr, String pstr){
+		boolean result = true;
+		String dlms = ",;[]{} ";
+		int i1 = vstr.indexOf("=");
+		int i2 = pstr.indexOf("=");
+		if ((i1>0) && (i2>0)){
+			StringTokenizer vst = new StringTokenizer(vstr.substring(i1+1), dlms);
+			StringTokenizer pst = new StringTokenizer(pstr.substring(i2+1), dlms);
+			while (vst.hasMoreTokens() && pst.hasMoreTokens()){
+				//StringTokenizer pst = new StringTokenizer(pstr.substring(i2+1), dlms);
+				String t1 = vst.nextToken();
+				String t2 = pst.nextToken();
+				if(t1.contains(t2) || t2.contains(t1)){
+					result = true;
+				}else{
+					result = false;
+					return result;
+				}
+				
+			}
+			
+		}
+		
+		
+		return result;
 	}
 	
 	public static String toFormatted(MatObject mo){
