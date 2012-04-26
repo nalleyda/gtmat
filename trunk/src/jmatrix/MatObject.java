@@ -580,12 +580,18 @@ public abstract class MatObject {
 			int k = 1;
 			if(temp.type == Type.LOGICAL) {
 				newval = new Matrix();
-				for(int j = 0; j < temp.n; j++) {
-					if(temp.get(i) != 0)
-						newval.set(i, k++);
+				for(int j = 1; j <= temp.n; j++) {
+					if(temp.get(j) != 0)
+						newval.set(j, k++);
 				}
+				arr.set(newval, arr.n);
 			}
+			
+			
 		}
+		
+		if(arr.n != 0)
+			ca = arr;
 		
 		int s = val.size.length > ca.n ? val.size.length : ca.n;
 		int newsize[] = new int[s];

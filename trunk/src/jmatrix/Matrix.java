@@ -994,6 +994,16 @@ public class Matrix extends MatObject {
 		double[] mdata = m.data;
 		double[] indices = ind.data;
 		double[] newmat = new double[indices.length];
+		if(ind.type == Type.LOGICAL) {
+			Matrix temp = new Matrix(ind);
+			for(int i = 0; i < ind.rows(); i++)
+				for(int j = 0; j < ind.cols(); j++) {
+					if(ind.get(i, j) != 0)
+						temp.set(i + j * ind.size[ROW] + 1, i + j * ind.size[ROW] + 1);
+				}
+			ind = temp;
+			
+		}
 		for (int i = 0; i < indices.length; i++) {
 			try {
 				newmat[i] = mdata[(int) indices[i] - 1];
