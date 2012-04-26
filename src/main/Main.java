@@ -165,7 +165,7 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+     public static void main(String[] args) {
         init();
         //Schedule a job for the event dispatch thread:
         //creating and showing this application's GUI.

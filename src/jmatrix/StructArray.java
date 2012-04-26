@@ -12,22 +12,26 @@ import main.*;
  * @author dsmith
  */
 public class StructArray extends MatObject {
-    private Structure theArray[];
+    private Structure data[];
 
     public StructArray() {
         type = Type.STRUCT;
-        theArray = new Structure[0];
+        data = new Structure[0];
+    }
+    
+    public StructArray(int... dims) {
+    	super(dims);
     }
 
     public StructArray(Structure s) {
         this(1,1);
-        theArray[0] = s;
+        data[0] = s;
     }
 
     
-    public StructArray(int rows, int cols, Structure... data){
+    public StructArray(int rows, int cols, Structure... s){
         super(rows, cols);
-        copyData(data);
+        copyData(s);
         type = Type.STRUCT;
         checkFields();
     }
@@ -35,9 +39,9 @@ public class StructArray extends MatObject {
     public StructArray(int rows, int cols){
         super(rows, cols);
         if(n > 0) {
-            theArray = new Structure[n];
+            data = new Structure[n];
         } else {
-            theArray = null;
+            data = null;
         }
         type = Type.STRUCT;
     }
@@ -45,13 +49,13 @@ public class StructArray extends MatObject {
     @Override
     public StructArray clone() {
         StructArray res = new StructArray(size[ROW], size[COL]);
-        res.copyData(theArray);
+        res.copyData(data);
         return res;
     }
 
     public StructArray copy() {
         StructArray res = new StructArray(size[ROW], size[COL]);
-        res.copyData(theArray);
+        res.copyData(data);
         return res;
     }
 
@@ -83,15 +87,15 @@ public class StructArray extends MatObject {
         }
     }
 
-    public void copyData(Structure[] data) {
+    public void copyData(Structure[] s) {
         for(int i = 0; i < n; i++) {
-            theArray[i] = data[i].clone();
+            data[i] = s[i].clone();
         }
     }
     
     public void nullData() {
         for(int i = 0; i < n; i++) {
-            theArray[i] = null;
+            data[i] = null;
         }
     }
     
@@ -109,7 +113,7 @@ public class StructArray extends MatObject {
     }
     
     private void check(int ndx) {
-        String itsName[] = theArray[ndx].fieldNames();
+        String itsName[] = data[ndx].fieldNames();
         if(itsName.length != name.length) {
             throw new RuntimeException("bad number of fields");
         }
@@ -122,7 +126,7 @@ public class StructArray extends MatObject {
 
     private void checkFields() {
         if(n > 1) {
-            name = theArray[0].fieldNames();
+            name = data[0].fieldNames();
             for(int i = 1; i < n; i++) {
                 check(i);
             }
@@ -130,18 +134,18 @@ public class StructArray extends MatObject {
     }
     
     public MatObject getField(String fld) {
-        if(n == 1) return theArray[0].getField(fld);
+        if(n == 1) return data[0].getField(fld);
         else throw new RuntimeException("can't extract from arrays yet");
     }
     
     public void setField(String fld, MatObject o) {
         for(int i = 0; i < n; i++) {
-            theArray[i] = theArray[i].setField(fld, o);
+            data[i] = data[i].setField(fld, o);
         }
     }
     
     public void setField(int ndx, String fld, MatObject o) {
-        theArray[ndx-1] = theArray[ndx-1].setField(fld, o);
+        data[ndx-1] = data[ndx-1].setField(fld, o);
     }
     
     
@@ -158,31 +162,25 @@ public class StructArray extends MatObject {
      * @param i - the index (offset 1)
      * @return
      */
-    public Structure get(int i) throws Exception {
-        try{
-       return theArray[i - 1];
-        }
-        catch (Exception e){
-            throw new Exception("??? Index out of Bounds");
-        }
-        
+    public Structure get(int i) {
+       return data[i - 1];
     }
     
 
     
     public Structure get(int r, int c) {
-        return theArray[(c-1) * size[ROW] + (r-1)];
+        return data[(c-1) * size[ROW] + (r-1)];
     }
 
     public String[] fieldNames() {
         String res[] = new String[0];
-        if(n > 0) res = theArray[0].fieldNames();
+        if(n > 0) res = data[0].fieldNames();
         return res;
     }
     
     public boolean isField(String fld) {
         boolean res = false;
-        if(n > 0) res = theArray[0].isField(fld);
+        if(n > 0) res = data[0].isField(fld);
         return res;
     }
     
@@ -199,7 +197,7 @@ public class StructArray extends MatObject {
                     nd[(c - 1) * rm + (r - 1)] = d;
                 }
             }
-            theArray = nd;
+            data = nd;
             n = rm * cm;
             size[ROW] = rm;
             size[COL] = cm;
@@ -213,7 +211,7 @@ public class StructArray extends MatObject {
         if (c > size[COL]) {
             extend(size[ROW], c);
         }
-        theArray[(c-1) * size[ROW] + (r-1)] = s;
+        data[(c-1) * size[ROW] + (r-1)] = s;
     }
 
     public void set(int i, Structure s) {
@@ -221,7 +219,7 @@ public class StructArray extends MatObject {
             throw new RuntimeException("StructArray:set(i...) i too big");
         }
         ;
-        theArray[i - 1] = s;
+        data[i - 1] = s;
     }
 
     public StructArray hcat(Structure s) {
@@ -291,10 +289,10 @@ public class StructArray extends MatObject {
     @Override
     public String toString() {
         String ret = "";
-        if(n == 1) ret = theArray[0].toString();
+        if(n == 1) ret = data[0].toString();
         else {
             ret = "" + size[ROW] + "x" + size[COL] + " Structure with fields:\n";
-            String fn[] = theArray[0].fieldNames();
+            String fn[] = data[0].fieldNames();
             for (int i = 0; i < fn.length; i++) {
                 ret = ret + fn[i] + "\n";
             }
@@ -321,4 +319,89 @@ public class StructArray extends MatObject {
         sa = sa.hcat(bad);
         System.out.println(sa + "\n" + sa.get(5));
     }
+
+	@Override
+	public void set(MatObject m, int... index) {
+		boolean extend = false;
+		Structure val = ((StructArray)m.get(1)).get(0);
+		//Find the total number of elements, as well as the new size of the array
+		int newn = 1;
+		int newsize[] = new int[index.length];
+		for(int i = 0; i < index.length; i++) {
+			if(i >= size.length || index[i] > size[i]) {
+				extend = true;
+				newsize[i] = index[i];
+			} else 
+				newsize[i] = size[i];
+			newn *= newsize[i];
+		}
+		//If we need to extend the array, say so here
+		if(size.length < newsize.length)
+			extend = true;
+		
+		
+		//Now we transform the array indices of the old values into the linear indices for the new array
+		int linind = 0;
+		int trueind = 0;
+		int vecind[] = new int[size.length];
+		//vecind represents the array indices
+		for(int i = 0; i < size.length; i++) 
+			vecind[i] = 1;
+		
+		//offsetvec[i] tells you how much you need to multiply by for index i to go from array indices to linear indices
+		int offsetvec[] = new int[newsize.length];
+		//Need 1 for the next row, row for the next column, row*column for the next layer...
+		offsetvec[0] = 1;
+		for(int i = 1; i < newsize.length; i++) {
+			offsetvec[i] = offsetvec[i-1] * newsize[i-1];
+		}
+		//Now, let's extend if needed
+		if(extend) {
+			Structure newdata[] = new Structure[newn];
+			//For each index of our old array...
+			while(vecind[size.length-1] <= size[size.length-1]) {
+				//Put in the current value
+				newdata[linind] = data[trueind++];
+				//Calculate the new linear index, and update the array indices
+				linind = 0;
+				for(int i = 0; i < size.length; i++) {
+					vecind[i]++;
+					if(i != size.length-1 && vecind[i] > size[i])	
+						vecind[i] = 1;
+					else {
+						break;
+					}
+				}
+				for(int i = 0; i < size.length; i++) {
+					linind += (vecind[i]-1) * offsetvec[i];
+				}
+			}
+			data = newdata;
+			size = newsize;
+			n = newn;
+		} 
+		int ind = 0;
+		for(int i = 0; i < index.length; i++) {
+			ind += (index[i]-1) * offsetvec[i];
+		}
+		data[ind] = val;
+		
+	}
+
+	@Override
+	public MatObject get(int... indices) {
+		//offsetvec[i] tells you how much you need to multiply by for index i to go from array indices to linear indices
+		int offsetvec[] = new int[size.length];
+		//Need 1 for the next row, row for the next column, row*column for the next layer...
+		offsetvec[0] = 1;
+		for(int i = 1; i < size.length; i++) {
+			offsetvec[i] = offsetvec[i-1] * size[i-1];
+		}
+		int k = 0;
+		for(int i = 0; i < indices.length; i++) {
+			k += (indices[i]-1) * offsetvec[i];
+		}
+		
+		return data[k];
+	}
 }

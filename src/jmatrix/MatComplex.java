@@ -323,4 +323,16 @@ public class MatComplex extends MatObject {
         MatComplex iy = MatComplex.ifft(y);
         Main.debug.println("The inverse fft of " + y + "\n  is " + iy);
     }
+
+	@Override
+	public void set(MatObject m, int... indices) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public MatObject get(int... indices) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

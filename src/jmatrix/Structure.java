@@ -191,4 +191,16 @@ public class Structure extends MatObject implements java.io.Serializable{
 //    	
 //        }
     }
+
+	@Override
+	public void set(MatObject m, int... indices) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public MatObject get(int... indices) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

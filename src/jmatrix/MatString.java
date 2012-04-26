@@ -5,10 +5,11 @@
 
 package jmatrix;
 
+import jmatrix.MatObject.Type;
+
 import gtmatException.IndexOOBException;
 
 import java.util.ArrayList;
-
 /**
  *
  * @author dsmith
@@ -17,6 +18,10 @@ public class MatString extends UnsignedByte {
 	public MatString(String s) {
 		super(s.getBytes());
 		type = Type.CHAR;
+	}
+	
+	public MatString(int[] dims){
+		super(dims);
 	}
 
 	public static Matrix str2num(MatString ms){
