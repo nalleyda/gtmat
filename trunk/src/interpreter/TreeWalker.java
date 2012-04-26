@@ -434,7 +434,12 @@ public class TreeWalker<K,V>{
 						}
 					}
 					Workspace curwasdf = Main.wstack.peek();
-					MatObject.index(lhs.getText(), indexCell, rhsRes, printing);
+					if (lastOne){
+						//MatObject.index(lhs.getText(), indexCell, rhsRes, printing, lastOne);
+					}
+					else{
+						MatObject.index(lhs.getText(), indexCell, rhsRes, printing);
+					}
 					if (rhsType == TYPE.ID){
 						calls.remove(calls.size()-1);
 					}
@@ -487,7 +492,7 @@ public class TreeWalker<K,V>{
 				}
 				s.setField(fieldName, eval(rhs));
 				//MatObject.index(s, indices, field, stuff, etc.);
-				
+
 				Interpreter.assign(lhs.getChild(0).getText(), s, printing);
 				return s;
 			}
@@ -743,7 +748,7 @@ public class TreeWalker<K,V>{
 				return VerticalConcatenate.vCatStr(arrv);
 			else
 				return VerticalConcatenate.verticalConcatenate(arrv);
-			
+
 		case WHILE_LOOP:
 			while (eval(tree.getChild(0).getChild(0)).conditionalIsTrue()){
 				eval(tree.getChild(1));

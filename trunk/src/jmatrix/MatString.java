@@ -20,6 +20,11 @@ public class MatString extends UnsignedByte {
 		type = Type.CHAR;
 	}
 	
+	@Override
+	public MatString copy(){
+		return new MatString(this.toString());
+	}
+	
 	public MatString(int[] dims){
 		super(dims);
 	}
