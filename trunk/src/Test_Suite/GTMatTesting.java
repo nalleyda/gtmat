@@ -1,8 +1,8 @@
 package Test_Suite;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -64,6 +64,18 @@ public class GTMatTesting {
 	}
 	
 	public static void execMatlab(){
+		boolean havefiles = true;
+		int j = beginCh;
+			while(havefiles && (j<=endCh)){
+			
+				String fn = chs[j]+ ".txt";
+				File findFile = new File(fn);
+				System.out.println("File found?: "+findFile.isFile());	
+				j++;
+				if (!findFile.isFile()) havefiles=false;
+			}
+		if (havefiles) return;
+		else{
 		try{
 			MatlabProxyFactory factory = new MatlabProxyFactory();
 			MatlabProxy proxy = factory.getProxy();
@@ -72,26 +84,29 @@ public class GTMatTesting {
 				for (int i = beginCh; i <= endCh; i++){
 					String path = dirB + chs[i]+".m";
 					String fname = chs[i] + ".txt";
-					try{
-						//exec. the script, retrieve workspace var names, then write to .txt w/ outputWsVars(w, fname)
-//						proxy.eval("clear");
-						proxy.eval(chs[i]);
-						proxy.eval("w=who;");
-						proxy.eval("outputWsVars(w, '"+fname+"')");
-						if (i!=endCh) proxy.eval("clear");
+									
+						try{
+							//exec. the script, retrieve workspace var names, then write to .txt w/ outputWsVars(w, fname)
+	//						proxy.eval("clear");
+							proxy.eval(chs[i]);
+							proxy.eval("w=who;");
+							proxy.eval("outputWsVars(w, '"+fname+"')");
+							if (i!=endCh) proxy.eval("clear");
+							
+						}catch(MatlabInvocationException mie){
+							System.err.println("Matlab invocation exception.");
+	//						System.out.println("Exception msg:"+mie.getMessage());
+	//						System.out.println("StackTrace:"+mie.getStackTrace());
+							mie.printStackTrace();
+						}
+						//proxy.eval("")
 						
-					}catch(MatlabInvocationException mie){
-						System.err.println("Matlab invocation exception.");
-//						System.out.println("Exception msg:"+mie.getMessage());
-//						System.out.println("StackTrace:"+mie.getStackTrace());
-						mie.printStackTrace();
-					}
-					//proxy.eval("")
 				}
 				
 				proxy.disconnect();
 		}catch(MatlabConnectionException mce){
 			System.out.println("Could not connect to Matlab instance.");
+		}
 		}
 	}
 	
@@ -113,7 +128,7 @@ public class GTMatTesting {
 					
 			}catch(Exception e){
 				e.printStackTrace();
-				System.out.println("Halting execution in execGTMat() at GTParser.process(path)");
+				System.out.println(e.getMessage());
 				//System.out.println(e.toString());
 				//System.out.println(path+" threw an exception while being processed");
 				//System.out.println(e.getMessage());
@@ -125,7 +140,7 @@ public class GTMatTesting {
 			}
 			gtMatVars = Main.wstack.peek().getVarList();
 			chVars.add(i, gtMatVars);
-			System.out.println(gtMatVars.size()+" vars from "+chs[i]+"s workspace varList appended to chVars");
+			//System.out.println(gtMatVars.size()+" vars from "+chs[i]+"s workspace varList appended to chVars");
 			if(i!=endCh){
 				try{
 					if(i!=endCh){
@@ -149,28 +164,55 @@ public class GTMatTesting {
 	}
 	
 	public static void checkResults(){
-		ArrayList<HashMap<String, String>> allRes = new ArrayList<HashMap<String, String>>(chs.length);
+		int count = 0;
+		int fail = 0;
+		int success = 0;
+		ArrayList<HashMap<String, VarResult>> allRes = new ArrayList<HashMap<String, VarResult>>(chs.length);
 		for (int i = beginCh;i<=endCh;i++){
-			System.out.println("Chapter "+i+" results: \n");
-			HashMap<String, String> chOut = compareResults(i);
+			//System.out.println("Chapter "+i+" results: \n");
+			HashMap<String, VarResult> chOut = compareResults(i);
+			//chOut.put("Chapter", i+"");
 			allRes.add(chOut);
-			if (chOut.size()>0) System.out.println("chOut.toString(): "+chOut.toString());
-			else System.out.println("empty");
+//			if (chOut.size()>0) System.out.println("chOut.toString(): "+chOut.toString());
+//			else System.out.println("empty");
 			
 		}
+		
+		Iterator<HashMap<String,VarResult>> it = allRes.iterator();
+		while(it.hasNext()){
+			HashMap<String,VarResult> map = it.next();
+			Iterator inneriter = map.keySet().iterator();
+			while(inneriter.hasNext()){
+				String key = (String) inneriter.next();
+				VarResult tinner = map.get(key);
+				if (tinner.getOutcome()) success++;
+				else fail++;
+				System.out.println(tinner);
+			}
+			
+			
+		}
+		
+		System.out.println("# of successful validations: "+success+".");
+		System.out.println("# of unsuccessful validations: "+fail+".");
 	}
 	
-	public static HashMap<String, String> compareResults(int i) {
-		
+	public static HashMap<String, VarResult> compareResults(int i) {
+//			String gtmat = "_gtmat";
+//			String matlab = "_matlab";
+//			String state = "_state";
+			//String default = "default";
 			String fname = chs[i]+".txt";
-			HashMap<String, String> out = new HashMap<String, String>();
+			HashMap<String, VarResult> out = new HashMap<String, VarResult>();
 			try{
 				FileInputStream fin = new FileInputStream(fname);
 				BufferedReader matlabTxt = new BufferedReader(new InputStreamReader(fin));
-				StringBuilder sb = new StringBuilder();
+				
 				String thisLine;
+				//store MATLAB parsed data in results map
 				HashMap<String, String> results = new HashMap<String, String>();
-				ArrayList<Variable> resAl = new ArrayList<Variable>();
+				
+				//ArrayList<Variable> resAl = new ArrayList<Variable>();
 				while((thisLine=matlabTxt.readLine()) != null){
 					
 					String name ="";
@@ -180,16 +222,17 @@ public class GTMatTesting {
 					//String[] str = thisLine.split(" ");
 					StringTokenizer st = new StringTokenizer(thisLine);
 //					name = st.nextToken();
-//					if (st.nextToken().equals("=")) st.nextToken();
+//					parse the variable/data from this line
 					while(st.hasMoreTokens()){
 						String temp = "";
 						try{
 							temp = st.nextToken();
 							
 						}catch(NoSuchElementException e){
-							System.out.println(e.getMessage());
-							System.out.println(e.getStackTrace());
-							System.out.println("error in st.nextToken()");
+//							System.out.println(e.getMessage());
+//							System.out.println(e.getStackTrace());
+//							System.out.println("error in st.nextToken()");
+							e.printStackTrace();
 						}
 						if (temp!=null){
 						if (name.equals("")){
@@ -210,7 +253,7 @@ public class GTMatTesting {
 //						}
 						} 
 						else{
-							System.out.println("temp is null");
+							//System.out.println("temp is null");
 							temp = "null";
 							if ((!name.equals("")) && (name!=null)){
 								System.out.println("temp is null");
@@ -224,9 +267,9 @@ public class GTMatTesting {
 							
 							String temp = val.replace("; }", " }");
 							val = temp;
-							System.out.println(val);
+							//System.out.println(val);
 						}
-						System.out.println(name+ ": "+ val);
+						//System.out.println(name+ ": "+ val);
 						results.put(name, val);
 						
 					}
@@ -234,7 +277,7 @@ public class GTMatTesting {
 					
 					//sb.append(thisLine);
 				}
-				System.out.println("hashmap:"+results.toString());
+				System.out.println("Parsed results from matlab:"+results.toString());
 				//get gtMat WS list<variable> gtmVs 
 				DefaultListModel gtmVs = (DefaultListModel)chVars.get(i);
 				//Iterator it = parsed vars from txt file
@@ -242,63 +285,74 @@ public class GTMatTesting {
 				//out==final results
 				//HashMap<String, String> out = new HashMap<String, String>();
 				Iterator it = results.keySet().iterator();
-				while(it.hasNext()){
-					String key = (String) it.next();
-					out.put(key, "Variable from Matlab workspace not found in GTMat workspace. Incomplete execution of ch"+i+".m");
-				}
+//				while(it.hasNext()){
+//					
+//					String key = (String) it.next();
+//					VarResult vr = new VarResult(key);
+//					out.put(key, vr);
+////					out.put(key+state, "default");
+////					out.put(key+gtmat, "default");
+////					out.put(key+matlab, "default");
+//				}
 				
 				for (int j = 0; j<gtmVs.size();j++){
 					Variable v = (Variable)gtmVs.getElementAt(j);
 					//System.out.println(v.toString()+"<< from GTMat");
-					System.out.println(v.getVarName()+"'s type: "+MatObject.getClass(v.getData()));
+					//System.out.println(v.getVarName()+"'s type: "+MatObject.getClass(v.getData()));
+					VarResult ti = new VarResult(v.getVarName());
+					ti.setChNum(i);
+					//out.put(v.getVarName(), ti);
 					if (results.containsKey(v.getVarName()) && (v.getVarName()!=null)){
 					
 						//the results map contains a key == to the variable's name
 						//System.out.println("results contains the key/var "+v.getVarName());
 						String vStr = v.toString();
 						///varStr.replaceFirst("  ", "");
-						
-						String parseStr = v.getVarName() +" = "+results.get(v.getVarName());
+						String parsed = results.get(v.getVarName());
+						String parseStr = v.getVarName() +" = "+parsed;//results.get(v.getVarName());
 						//System.out.println(varStr.toString()+"<< from GTMat");
 //						System.out.println(varStr+"<< from GTMat");
 //						System.out.println(parseStr.toString()+"<< from MatLab \n");
-						String varStr = v.getVarName()+" = "+toFormatted(v.getData());
-						//implement format() to standardize toString() output of gtMat arrays to the form used in the matlab data
-//						if (MatObject.getClass(v.getData()).equals(MatObject.Type.LOGICAL)){
-//							varStr.replace('t', '1');
-//							varStr.replace('f', '0');
-//						}
+						String formatted = toFormatted(v.getData());
+						String varStr = v.getVarName()+" = "+formatted; //toFormatted(v.getData());
 						
-						System.out.println(varStr+"<< toFormatted(), from GTMat");
+						
+						//System.out.println(varStr+"<< toFormatted(), from GTMat");
 						
 						//System.out.println(vStr+"<< toString(), from GTMat");
 						//System.out.println(v.workspaceString())
-						System.out.println(parseStr+"<< from MatLab");
-						//if (varStr.equals(parseStr)){
+						//System.out.println(parseStr+"<< from MatLab");
+						
+//						out.put(v.getVarName()+gtmat, formatted);
+//						out.put(v.getVarName()+matlab, parsed);
+						ti.setGtmatRes(formatted);
+						ti.setMatlabRes(parsed);
+						
 						if (match(varStr, parseStr)){
-							out.put(v.getVarName(), "Name and value equal");
-							//System.out.println(v.getVarName()+"== in matlab and gtmat");
+							ti.setState("MatlabVar == GTMatVar");
+							
 						}
 						else{
 							//System.out.println("both workspaces contain vars with equal names, but different values");
 							
-							
-							out.put(v.getVarName(), "name equal but values not");
+							ti.setState("Var names equal, values not.");
+							//out.put(v.getVarName()+state, "Var names equal, values not.");
 						}
 					}
 					else{// (!results.containsKey(v.getVarName())){
-						out.put(v.getVarName(), "Parsed result does not contain Variable v, or the names are formatted incorrectly");
+						ti.setState("GTMat variable not found in Matlab results");
+						//out.put(v.getVarName()+state, "GTMat variable not found in Matlab results");
 						//System.out.println("var names not equal");
 					}
-					System.out.println(out.get(v.getVarName())+"\n");		
-				}
-				//System.out.println("Final output for the ch: "+out.toString());		
+					//System.out.println(out.get(v.getVarName())+"\n");	
+					out.put(ti.getName(), ti);
+				}//end for loop
+					
 				
 				
 			}catch(Exception e){
-				System.out.println(e.getMessage());
-				System.out.println(e.getStackTrace());
-				System.out.println("error in compareResults");
+				e.printStackTrace();
+				
 			}
 		return out;
 		
@@ -353,7 +407,7 @@ public class GTMatTesting {
 		
 		//MatObject.getClass(v.getData())
 		if ((mo.type).equals(MatObject.Type.LOGICAL) || (mo.type==MatObject.Type.LOGICAL)){
-			System.out.println("replacing t and f w/ 1 and 0");
+			//System.out.println("replacing t and f w/ 1 and 0");
 			
 			newStr = newStr.replace('t', '1');
 			newStr = newStr.replace('f', '0');
@@ -530,7 +584,42 @@ public class GTMatTesting {
 		
 		initTesting(2,2);
 	}
-	
+//	public class VarResult{
+//		private String gtmatRes;
+//		private String matlabRes;
+//		private String state;
+//		private String name;
+//		private String chNum;
+//		
+//		public VarResult(String name){
+//			gtmatRes = "default";
+//			matlabRes = "default";
+//			state = "default";
+//			this.name = name;
+//		}
+//		
+//		public void setGtmatRes(String res){
+//			this.gtmatRes = res;
+//		}
+//		public void setMatlabRes(String res){
+//			this.matlabRes = res;
+//		}
+//		public void setState(String s){
+//			this.state = s;
+//		}
+//		public String getGtmatRes(){
+//			return this.gtmatRes;
+//		}
+//		public String getMatlabRes(){
+//			return this.matlabRes;
+//		}
+//		public String getState(){
+//			return this.state;
+//		}
+//		public String getName(){
+//			return this.name;
+//		}
+//	}
 //	public static void main(String[] args){
 //		int[] arr = {1, 2, 3};
 //		double[] dArr = {1.0, 2.0, 3.0};
