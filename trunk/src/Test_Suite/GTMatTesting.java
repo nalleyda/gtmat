@@ -66,16 +66,16 @@ public class GTMatTesting {
 	public static void execMatlab(){
 		boolean havefiles = true;
 		int j = beginCh;
-			while(havefiles && (j<=endCh)){
-			
-				String fn = chs[j]+ ".txt";
-				File findFile = new File(fn);
-				System.out.println("File found?: "+findFile.isFile());	
-				j++;
-				if (!findFile.isFile()) havefiles=false;
-			}
-		if (havefiles) return;
-		else{
+//			while(havefiles && (j<=endCh)){
+//			
+//				String fn = chs[j]+ ".txt";
+//				File findFile = new File(fn);
+//				System.out.println("File found?: "+findFile.isFile());	
+//				j++;
+//				if (!findFile.isFile()) havefiles=false;
+//			}
+//		if (havefiles) return;
+//		else{
 		try{
 			MatlabProxyFactory factory = new MatlabProxyFactory();
 			MatlabProxy proxy = factory.getProxy();
@@ -107,7 +107,7 @@ public class GTMatTesting {
 		}catch(MatlabConnectionException mce){
 			System.out.println("Could not connect to Matlab instance.");
 		}
-		}
+		
 	}
 	
 	public static void execGTMat(){
@@ -192,9 +192,12 @@ public class GTMatTesting {
 			
 			
 		}
-		
-		System.out.println("# of successful validations: "+success+".");
-		System.out.println("# of unsuccessful validations: "+fail+".");
+		if ((success==0)&&(fail==0)){
+			System.out.println("An error likely occurred before completion of the first chapter listing");
+		}else{
+			System.out.println("# of successful validations: "+success+".");
+			System.out.println("# of unsuccessful validations: "+fail+".");
+		}
 	}
 	
 	public static HashMap<String, VarResult> compareResults(int i) {
@@ -317,11 +320,11 @@ public class GTMatTesting {
 						String varStr = v.getVarName()+" = "+formatted; //toFormatted(v.getData());
 						
 						
-						//System.out.println(varStr+"<< toFormatted(), from GTMat");
+						System.out.println(varStr+"<< toFormatted(), from GTMat");
 						
-						//System.out.println(vStr+"<< toString(), from GTMat");
+						//System.out.println(vStr+"<< toSformatted from GTMat");
 						//System.out.println(v.workspaceString())
-						//System.out.println(parseStr+"<< from MatLab");
+						System.out.println(parseStr+"<< parsed from Matlab");
 						
 //						out.put(v.getVarName()+gtmat, formatted);
 //						out.put(v.getVarName()+matlab, parsed);
