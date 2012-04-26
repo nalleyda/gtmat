@@ -115,6 +115,7 @@ public class HorizontalConcatenate {
 			}
 		}
 		res = new Matrix(rows, cols);
+		res.type = m[0].type;
 		// copy all matrices into res
 		for (int i = 0; i < m.length; i++) {
 			Matrix it = m[i];
