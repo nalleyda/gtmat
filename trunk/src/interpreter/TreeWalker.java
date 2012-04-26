@@ -407,6 +407,7 @@ public class TreeWalker<K,V>{
 						}
 						for (int i = 0; i < curTree.getChildCount(); i++){
 							if (convert(lhs.getChild(0).getChild(i).getType()) == TYPE.COLON && Main.wstack.peek().getVariable(lhs.getText())==null){
+								MatObject asdfasdf = rhsRes.copy().zeroed();
 								Main.wstack.peek().add(new Variable(lhs.getText(), rhsRes.copy().zeroed()));
 							}
 
