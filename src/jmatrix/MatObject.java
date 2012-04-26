@@ -608,7 +608,7 @@ public abstract class MatObject {
 	}
 	
 	public static MatObject index(String name, CellArray ca, MatObject expr) throws Exception{
-		if (expr.n == 0){
+		if (expr == TreeWalker.emptyVec){
 			return delete(name, ca);
 		}
 		Workspace curW = Interpreter.getWorkspace();

@@ -175,6 +175,8 @@ public class TreeWalker<K,V>{
 			System.out.println(s);
 		}
 	}
+	
+	public static Matrix emptyVec = new Matrix(1).empty();
 
 	public static Matrix evalEnd(Tree tree) throws Exception{
 		try{
@@ -270,16 +272,19 @@ public class TreeWalker<K,V>{
 			for (int i = 0; i < tree.getChildCount(); i++){
 				try{
 					MatObject resVal = null;
+					boolean printNow;
 					if (convert(tree.getChild(i).getType()) == TYPE.SEMI){
 						printing = false;
+						printNow = false;
 						resVal = eval(tree.getChild(i).getChild(0));
 					}
 					else{
 						printing = true;
+						printNow = true;
 						resVal = eval(tree.getChild(i));
 
 					}
-					if (/*convert(tree.getChild(i).getType()) != TYPE.BLOCK &&*/ resVal != null && printing){
+					if (/*convert(tree.getChild(i).getType()) != TYPE.BLOCK &&*/ resVal != null && printNow){
 						Interpreter.displayString(resVal.toString() + "\n");
 					}
 				}catch (Exception e){
@@ -367,7 +372,7 @@ public class TreeWalker<K,V>{
 			return new CellArray();
 
 		case EMPTY_VEC:
-			return new Matrix(1).empty();
+			return emptyVec;
 
 		case END:
 			return evalEnd(tree);
@@ -381,7 +386,11 @@ public class TreeWalker<K,V>{
 
 			if (lhsType == TYPE.ID){//single output
 				if (lhs.getChildCount() == 0){//no lhs indexing
-					Interpreter.assign(tree.getChild(0).getText(), eval(tree.getChild(1)), printing);
+					boolean oldPrinting = printing;
+					MatObject result = eval(tree.getChild(1));
+					printing = oldPrinting;
+					Interpreter.assign(tree.getChild(0).getText(), result, printing);
+					
 				}
 				else{//we have lhs indexing
 					if (rhsType == TYPE.ID){
@@ -515,7 +524,7 @@ public class TreeWalker<K,V>{
 			MatObject loopOver = eval(tree.getChild(0).getChild(2));
 			String loopVar = tree.getChild(0).getChild(0).getText();
 			for (int i = 0; i < loopOver.n; i++){
-				Interpreter.assign(loopVar, MatObject.get(loopOver, new Matrix(i+1)), false);
+				Interpreter.assign(loopVar, MatObject.get(loopOver, new Matrix(i+1)), printing);
 				eval(tree.getChild(1));
 			}
 			return null;
