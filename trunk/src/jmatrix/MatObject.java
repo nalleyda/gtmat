@@ -693,7 +693,8 @@ public abstract class MatObject {
 			if(expr.n==1)
 				k = 1;
 			for(int i = 0; i < ca.n; i++) {
-				a[i] = (int)((Matrix)((Matrix)ca.get(i+1)).get(new int[]{newindices[i]})).data[i];
+				Matrix mat = ((Matrix)((Matrix)ca.get(i+1)).get(new int[]{newindices[i]}));
+				a[i] = (int)((Matrix)((Matrix)ca.get(i+1)).get(new int[]{newindices[i]})).data[0];
 			}
 			
 			
