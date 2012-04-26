@@ -554,7 +554,22 @@ public abstract class MatObject {
 		throw new RuntimeException("Calling MatObject's get method - undefined behavior");
 	}
 
-	public static void index(String name, CellArray ca, MatObject expr, boolean showIt) throws Exception{
+	public static void index(String name, CellArray ca, MatObject expr, boolean showIt) throws Exception {
+		MatObject ret = null;
+		
+		for(int i = 0; i < ca.n; i++) {
+			ret = index(name, (CellArray)ca.get(i+1), expr);
+		}
+		
+		Interpreter.getWorkspace().add(new Variable(name, ret));
+		if (showIt) {
+			Interpreter.displayString(name + " = " + ret + "\n");
+		}
+		TabbedPane.list.setModel(Main.wstack.peek().getVarList());
+		
+	}
+	
+	public static MatObject index(String name, CellArray ca, MatObject expr) throws Exception{
 		Workspace curW = Interpreter.getWorkspace();
 		MatObject val = Interpreter.getValue(name)[0];
 		if(val == null) {//didn't exist previously
@@ -695,11 +710,7 @@ public abstract class MatObject {
 			}
 		}
 		
-		curW.add(new Variable(name, outval));
-		if (showIt) {
-			Interpreter.displayString(name + " = " + outval + "\n");
-		}
-		TabbedPane.list.setModel(Main.wstack.peek().getVarList());
+		return outval;
 		
 	
 	}
