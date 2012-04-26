@@ -159,7 +159,7 @@ public class Matrix extends MatObject {
 	}
 	
 	public Matrix(int[] dims){
-		int n = 1;
+		n = 1;
 		for (int x : dims) n *= x;
 		if (n > 0){
 			data = new double[n];
