@@ -1,4 +1,4 @@
-// $ANTLR 3.4 /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g 2012-04-26 04:59:14
+// $ANTLR 3.4 /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g 2012-04-25 21:13:00
 
 	package parser;
 
@@ -120,10 +120,10 @@ public class ExprLexer extends Lexer {
         try {
             int _type = WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:205:5: ( ( ' ' | '\\t' | '\\f' )+ )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:205:7: ( ' ' | '\\t' | '\\f' )+
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:278:5: ( ( ' ' | '\\t' | '\\f' )+ )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:278:7: ( ' ' | '\\t' | '\\f' )+
             {
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:205:7: ( ' ' | '\\t' | '\\f' )+
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:278:7: ( ' ' | '\\t' | '\\f' )+
             int cnt1=0;
             loop1:
             do {
@@ -180,14 +180,14 @@ public class ExprLexer extends Lexer {
         try {
             int _type = BLOCK_END;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:206:11: ( 'end' ( WS )? ( '\\r' )? '\\n' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:206:13: 'end' ( WS )? ( '\\r' )? '\\n'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:279:11: ( 'end' ( WS )? ( '\\r' )? '\\n' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:279:13: 'end' ( WS )? ( '\\r' )? '\\n'
             {
             match("end"); 
 
 
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:206:19: ( WS )?
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:279:19: ( WS )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -196,7 +196,7 @@ public class ExprLexer extends Lexer {
             }
             switch (alt2) {
                 case 1 :
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:206:19: WS
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:279:19: WS
                     {
                     mWS(); 
 
@@ -207,7 +207,7 @@ public class ExprLexer extends Lexer {
             }
 
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:206:23: ( '\\r' )?
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:279:23: ( '\\r' )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -216,7 +216,7 @@ public class ExprLexer extends Lexer {
             }
             switch (alt3) {
                 case 1 :
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:206:23: '\\r'
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:279:23: '\\r'
                     {
                     match('\r'); 
 
@@ -244,10 +244,10 @@ public class ExprLexer extends Lexer {
         try {
             int _type = NEWLINE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:207:9: ( ( '\\r' )? '\\n' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:207:11: ( '\\r' )? '\\n'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:280:9: ( ( '\\r' )? '\\n' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:280:11: ( '\\r' )? '\\n'
             {
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:207:11: ( '\\r' )?
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:280:11: ( '\\r' )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -256,7 +256,7 @@ public class ExprLexer extends Lexer {
             }
             switch (alt4) {
                 case 1 :
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:207:11: '\\r'
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:280:11: '\\r'
                     {
                     match('\r'); 
 
@@ -286,8 +286,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = SINGLE_QUOTE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:208:14: ( '$' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:208:16: '$'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:281:14: ( '$' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:281:16: '$'
             {
             match('$'); 
 
@@ -307,8 +307,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = BREAK;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:211:8: ( 'break' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:211:10: 'break'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:284:8: ( 'break' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:284:10: 'break'
             {
             match("break"); 
 
@@ -330,8 +330,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = CASE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:212:7: ( 'case' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:212:9: 'case'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:285:7: ( 'case' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:285:9: 'case'
             {
             match("case"); 
 
@@ -353,8 +353,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = CATCH;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:213:8: ( 'catch' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:213:10: 'catch'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:286:8: ( 'catch' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:286:10: 'catch'
             {
             match("catch"); 
 
@@ -376,8 +376,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = CLASSDEF;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:214:10: ( 'classdef' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:214:12: 'classdef'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:287:10: ( 'classdef' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:287:12: 'classdef'
             {
             match("classdef"); 
 
@@ -399,8 +399,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = CONTINUE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:215:10: ( 'continue' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:215:12: 'continue'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:288:10: ( 'continue' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:288:12: 'continue'
             {
             match("continue"); 
 
@@ -422,8 +422,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = ELSE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:216:7: ( 'else' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:216:9: 'else'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:289:7: ( 'else' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:289:9: 'else'
             {
             match("else"); 
 
@@ -445,8 +445,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = ELSEIF;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:217:9: ( 'elseif' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:217:11: 'elseif'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:290:9: ( 'elseif' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:290:11: 'elseif'
             {
             match("elseif"); 
 
@@ -468,8 +468,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = END;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:218:6: ( 'end' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:218:8: 'end'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:291:6: ( 'end' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:291:8: 'end'
             {
             match("end"); 
 
@@ -491,8 +491,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = FALSE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:219:8: ( 'false' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:219:10: 'false'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:292:8: ( 'false' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:292:10: 'false'
             {
             match("false"); 
 
@@ -514,8 +514,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = FOR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:220:6: ( 'for' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:220:8: 'for'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:293:6: ( 'for' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:293:8: 'for'
             {
             match("for"); 
 
@@ -537,8 +537,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = FUNCTION;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:221:10: ( 'function' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:221:12: 'function'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:294:10: ( 'function' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:294:12: 'function'
             {
             match("function"); 
 
@@ -560,8 +560,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = GLOBAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:222:9: ( 'global' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:222:11: 'global'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:295:9: ( 'global' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:295:11: 'global'
             {
             match("global"); 
 
@@ -583,8 +583,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = IF;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:223:5: ( 'if' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:223:7: 'if'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:296:5: ( 'if' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:296:7: 'if'
             {
             match("if"); 
 
@@ -606,8 +606,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = OTHERWISE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:224:11: ( 'otherwise' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:224:13: 'otherwise'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:297:11: ( 'otherwise' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:297:13: 'otherwise'
             {
             match("otherwise"); 
 
@@ -629,8 +629,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = PARFOR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:225:9: ( 'parfor' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:225:11: 'parfor'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:298:9: ( 'parfor' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:298:11: 'parfor'
             {
             match("parfor"); 
 
@@ -652,8 +652,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = PERSISTENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:226:12: ( 'persistent' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:226:14: 'persistent'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:299:12: ( 'persistent' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:299:14: 'persistent'
             {
             match("persistent"); 
 
@@ -675,8 +675,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = RETURN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:227:9: ( 'return' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:227:11: 'return'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:300:9: ( 'return' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:300:11: 'return'
             {
             match("return"); 
 
@@ -698,8 +698,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = SPMD;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:228:7: ( 'spmd' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:228:9: 'spmd'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:301:7: ( 'spmd' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:301:9: 'spmd'
             {
             match("spmd"); 
 
@@ -721,8 +721,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = SWITCH;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:229:9: ( 'switch' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:229:11: 'switch'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:302:9: ( 'switch' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:302:11: 'switch'
             {
             match("switch"); 
 
@@ -744,8 +744,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = TRUE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:230:7: ( 'true' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:230:9: 'true'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:303:7: ( 'true' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:303:9: 'true'
             {
             match("true"); 
 
@@ -767,8 +767,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = TRY;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:231:6: ( 'try' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:231:8: 'try'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:304:6: ( 'try' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:304:8: 'try'
             {
             match("try"); 
 
@@ -790,8 +790,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = WHILE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:232:8: ( 'while' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:232:10: 'while'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:305:8: ( 'while' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:305:10: 'while'
             {
             match("while"); 
 
@@ -813,8 +813,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = AT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:235:5: ( '@' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:235:7: '@'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:308:5: ( '@' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:308:7: '@'
             {
             match('@'); 
 
@@ -834,8 +834,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = BACKSLASH;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:236:11: ( '\\\\' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:236:13: '\\\\'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:309:11: ( '\\\\' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:309:13: '\\\\'
             {
             match('\\'); 
 
@@ -855,8 +855,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = CARET;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:237:8: ( '^' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:237:10: '^'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:310:8: ( '^' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:310:10: '^'
             {
             match('^'); 
 
@@ -876,8 +876,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = CLOSE_BLOCK;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:238:13: ( '%}' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:238:15: '%}'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:311:13: ( '%}' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:311:15: '%}'
             {
             match("%}"); 
 
@@ -899,8 +899,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = CLOSEB;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:239:9: ( ']' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:239:11: ']'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:312:9: ( ']' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:312:11: ']'
             {
             match(']'); 
 
@@ -920,8 +920,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = CLOSEC;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:240:9: ( '}' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:240:11: '}'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:313:9: ( '}' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:313:11: '}'
             {
             match('}'); 
 
@@ -941,8 +941,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = CLOSEP;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:241:9: ( ')' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:241:11: ')'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:314:9: ( ')' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:314:11: ')'
             {
             match(')'); 
 
@@ -962,8 +962,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = COLON;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:242:8: ( ':' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:242:10: ':'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:315:8: ( ':' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:315:10: ':'
             {
             match(':'); 
 
@@ -983,8 +983,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = COMMA;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:243:8: ( ',' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:243:10: ','
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:316:8: ( ',' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:316:10: ','
             {
             match(','); 
 
@@ -1004,8 +1004,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = DOUBLE_QUOTE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:244:14: ( '\"' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:244:16: '\"'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:317:14: ( '\"' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:317:16: '\"'
             {
             match('\"'); 
 
@@ -1025,8 +1025,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = DOT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:245:6: ( '.' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:245:8: '.'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:318:6: ( '.' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:318:8: '.'
             {
             match('.'); 
 
@@ -1046,8 +1046,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = DOT_BACKSLASH;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:246:15: ( '.\\\\' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:246:17: '.\\\\'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:319:15: ( '.\\\\' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:319:17: '.\\\\'
             {
             match(".\\"); 
 
@@ -1069,8 +1069,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = DOT_CARET;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:247:11: ( '.^' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:247:13: '.^'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:320:11: ( '.^' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:320:13: '.^'
             {
             match(".^"); 
 
@@ -1092,8 +1092,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = DOT_SLASH;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:248:11: ( './' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:248:13: './'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:322:11: ( './' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:322:13: './'
             {
             match("./"); 
 
@@ -1115,8 +1115,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = DOT_STAR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:249:10: ( '.*' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:249:12: '.*'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:323:10: ( '.*' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:323:12: '.*'
             {
             match(".*"); 
 
@@ -1138,8 +1138,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = DOT_TRANSPOSE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:250:15: ( '.\\'' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:250:17: '.\\''
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:324:15: ( '.\\'' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:324:17: '.\\''
             {
             match(".'"); 
 
@@ -1161,8 +1161,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = ELE_AND;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:251:10: ( '&' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:251:12: '&'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:325:10: ( '&' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:325:12: '&'
             {
             match('&'); 
 
@@ -1182,8 +1182,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = ELE_OR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:252:9: ( '|' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:252:11: '|'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:326:9: ( '|' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:326:11: '|'
             {
             match('|'); 
 
@@ -1203,8 +1203,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = EQUALS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:253:9: ( '=' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:253:11: '='
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:327:9: ( '=' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:327:11: '='
             {
             match('='); 
 
@@ -1224,8 +1224,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = EXCLAMATION;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:254:13: ( '!' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:254:15: '!'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:328:13: ( '!' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:328:15: '!'
             {
             match('!'); 
 
@@ -1245,8 +1245,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = GREATER_THAN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:255:14: ( '>' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:255:16: '>'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:329:14: ( '>' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:329:16: '>'
             {
             match('>'); 
 
@@ -1266,8 +1266,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = GREATER_EQUAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:256:15: ( '>=' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:256:17: '>='
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:330:15: ( '>=' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:330:17: '>='
             {
             match(">="); 
 
@@ -1289,8 +1289,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = ISEQUAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:257:10: ( '==' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:257:12: '=='
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:331:10: ( '==' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:331:12: '=='
             {
             match("=="); 
 
@@ -1312,8 +1312,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = LESS_EQUAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:258:12: ( '<=' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:258:14: '<='
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:332:12: ( '<=' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:332:14: '<='
             {
             match("<="); 
 
@@ -1335,8 +1335,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = LESS_THAN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:259:11: ( '<' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:259:13: '<'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:333:11: ( '<' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:333:13: '<'
             {
             match('<'); 
 
@@ -1356,8 +1356,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = MINUS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:260:8: ( '-' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:260:10: '-'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:334:8: ( '-' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:334:10: '-'
             {
             match('-'); 
 
@@ -1377,8 +1377,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = NOT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:261:6: ( '~' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:261:8: '~'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:335:6: ( '~' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:335:8: '~'
             {
             match('~'); 
 
@@ -1398,8 +1398,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = NOT_EQUAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:262:11: ( '~=' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:262:13: '~='
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:336:11: ( '~=' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:336:13: '~='
             {
             match("~="); 
 
@@ -1421,8 +1421,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = OPEN_BLOCK;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:263:12: ( '%{' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:263:14: '%{'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:337:12: ( '%{' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:337:14: '%{'
             {
             match("%{"); 
 
@@ -1444,8 +1444,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = OPENB;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:264:8: ( '[' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:264:10: '['
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:338:8: ( '[' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:338:10: '['
             {
             match('['); 
 
@@ -1465,8 +1465,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = OPENC;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:265:8: ( '{' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:265:10: '{'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:339:8: ( '{' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:339:10: '{'
             {
             match('{'); 
 
@@ -1486,8 +1486,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = OPENP;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:266:8: ( '(' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:266:10: '('
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:340:8: ( '(' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:340:10: '('
             {
             match('('); 
 
@@ -1507,8 +1507,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = PERCENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:267:10: ( '%' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:267:12: '%'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:341:10: ( '%' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:341:12: '%'
             {
             match('%'); 
 
@@ -1528,8 +1528,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = PLUS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:268:7: ( '+' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:268:9: '+'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:342:7: ( '+' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:342:9: '+'
             {
             match('+'); 
 
@@ -1549,8 +1549,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = SC_AND;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:269:9: ( '&&' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:269:11: '&&'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:343:9: ( '&&' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:343:11: '&&'
             {
             match("&&"); 
 
@@ -1572,8 +1572,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = SC_OR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:270:8: ( '||' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:270:10: '||'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:344:8: ( '||' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:344:10: '||'
             {
             match("||"); 
 
@@ -1595,8 +1595,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = SEMI;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:271:7: ( ';' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:271:9: ';'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:345:7: ( ';' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:345:9: ';'
             {
             match(';'); 
 
@@ -1616,8 +1616,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = SLASH;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:272:8: ( '/' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:272:10: '/'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:347:8: ( '/' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:347:10: '/'
             {
             match('/'); 
 
@@ -1637,8 +1637,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = STAR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:273:7: ( '*' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:273:9: '*'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:348:7: ( '*' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:348:9: '*'
             {
             match('*'); 
 
@@ -1656,7 +1656,7 @@ public class ExprLexer extends Lexer {
     // $ANTLR start "DIGIT"
     public final void mDIGIT() throws RecognitionException {
         try {
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:277:17: ( ( '0' .. '9' ) )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:352:17: ( ( '0' .. '9' ) )
             // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:
             {
             if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
@@ -1682,7 +1682,7 @@ public class ExprLexer extends Lexer {
     // $ANTLR start "LETTER"
     public final void mLETTER() throws RecognitionException {
         try {
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:278:18: ( ( 'a' .. 'z' | 'A' .. 'Z' ) )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:353:18: ( ( 'a' .. 'z' | 'A' .. 'Z' ) )
             // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:
             {
             if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
@@ -1708,8 +1708,8 @@ public class ExprLexer extends Lexer {
     // $ANTLR start "UNDERSCORE"
     public final void mUNDERSCORE() throws RecognitionException {
         try {
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:279:21: ( '_' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:279:23: '_'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:354:21: ( '_' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:354:23: '_'
             {
             match('_'); 
 
@@ -1728,10 +1728,10 @@ public class ExprLexer extends Lexer {
         try {
             int _type = INTEGER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:280:9: ( ( DIGIT )+ )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:280:11: ( DIGIT )+
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:355:9: ( ( DIGIT )+ )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:355:11: ( DIGIT )+
             {
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:280:11: ( DIGIT )+
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:355:11: ( DIGIT )+
             int cnt5=0;
             loop5:
             do {
@@ -1786,12 +1786,12 @@ public class ExprLexer extends Lexer {
         try {
             int _type = COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:282:9: ( '\\%' ( . )* NEWLINE )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:282:11: '\\%' ( . )* NEWLINE
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:357:9: ( '\\%' ( . )* NEWLINE )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:357:11: '\\%' ( . )* NEWLINE
             {
             match('%'); 
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:282:16: ( . )*
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:357:16: ( . )*
             loop6:
             do {
                 int alt6=2;
@@ -1810,7 +1810,7 @@ public class ExprLexer extends Lexer {
 
                 switch (alt6) {
             	case 1 :
-            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:282:16: .
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:357:16: .
             	    {
             	    matchAny(); 
 
@@ -1844,14 +1844,14 @@ public class ExprLexer extends Lexer {
         try {
             int _type = ELLIPSIS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:284:9: ( '...' ( NEWLINE )+ )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:284:11: '...' ( NEWLINE )+
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:359:9: ( '...' ( NEWLINE )+ )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:359:11: '...' ( NEWLINE )+
             {
             match("..."); 
 
 
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:284:17: ( NEWLINE )+
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:359:17: ( NEWLINE )+
             int cnt7=0;
             loop7:
             do {
@@ -1865,7 +1865,7 @@ public class ExprLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:284:17: NEWLINE
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:359:17: NEWLINE
             	    {
             	    mNEWLINE(); 
 
@@ -1901,8 +1901,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = EXPONENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:285:9: ( ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+ )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:285:11: ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:360:9: ( ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+ )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:360:11: ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+
             {
             if ( input.LA(1)=='E'||input.LA(1)=='e' ) {
                 input.consume();
@@ -1914,7 +1914,7 @@ public class ExprLexer extends Lexer {
             }
 
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:285:23: ( '+' | '-' )?
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:360:23: ( '+' | '-' )?
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -1941,7 +1941,7 @@ public class ExprLexer extends Lexer {
             }
 
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:285:36: ( '0' .. '9' )+
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:360:36: ( '0' .. '9' )+
             int cnt9=0;
             loop9:
             do {
@@ -1996,13 +1996,13 @@ public class ExprLexer extends Lexer {
         try {
             int _type = ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:286:5: ( LETTER ( LETTER | DIGIT | UNDERSCORE )* )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:286:7: LETTER ( LETTER | DIGIT | UNDERSCORE )*
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:361:5: ( LETTER ( LETTER | DIGIT | UNDERSCORE )* )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:361:7: LETTER ( LETTER | DIGIT | UNDERSCORE )*
             {
             mLETTER(); 
 
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:286:14: ( LETTER | DIGIT | UNDERSCORE )*
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:361:14: ( LETTER | DIGIT | UNDERSCORE )*
             loop10:
             do {
                 int alt10=2;
@@ -2054,14 +2054,14 @@ public class ExprLexer extends Lexer {
             int _channel = DEFAULT_TOKEN_CHANNEL;
             int c;
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:289:8: ( '\\'' ( '\\'' '\\'' |c=~ ( '\\'' | '\\r' | '\\n' ) )* '\\'' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:289:10: '\\'' ( '\\'' '\\'' |c=~ ( '\\'' | '\\r' | '\\n' ) )* '\\''
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:366:8: ( '\\'' ( '\\'' '\\'' |c=~ ( '\\'' | '\\r' | '\\n' ) )* '\\'' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:366:10: '\\'' ( '\\'' '\\'' |c=~ ( '\\'' | '\\r' | '\\n' ) )* '\\''
             {
             match('\''); 
 
             StringBuilder b = new StringBuilder();
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:291:11: ( '\\'' '\\'' |c=~ ( '\\'' | '\\r' | '\\n' ) )*
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:368:11: ( '\\'' '\\'' |c=~ ( '\\'' | '\\r' | '\\n' ) )*
             loop11:
             do {
                 int alt11=3;
@@ -2083,7 +2083,7 @@ public class ExprLexer extends Lexer {
 
                 switch (alt11) {
             	case 1 :
-            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:291:13: '\\'' '\\''
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:368:13: '\\'' '\\''
             	    {
             	    match('\''); 
 
@@ -2094,7 +2094,7 @@ public class ExprLexer extends Lexer {
             	    }
             	    break;
             	case 2 :
-            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:292:13: c=~ ( '\\'' | '\\r' | '\\n' )
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:369:13: c=~ ( '\\'' | '\\r' | '\\n' )
             	    {
             	    c= input.LA(1);
 
@@ -2139,8 +2139,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = EMPTY_VEC;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:300:11: ( '[' ']' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:300:13: '[' ']'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:377:11: ( '[' ']' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:377:13: '[' ']'
             {
             match('['); 
 
@@ -2162,8 +2162,8 @@ public class ExprLexer extends Lexer {
         try {
             int _type = EMPTY_CELL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:301:12: ( '{' '}' )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:301:14: '{' '}'
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:378:12: ( '{' '}' )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:378:14: '{' '}'
             {
             match('{'); 
 
