@@ -22,6 +22,9 @@ public class MatPower {
 		if (m1.rows() != m1.cols()){
 			throw new Exception("Can't raise a non-square matrix to a scalar power.");
 		}
+		if(m1.n==1){
+			return new Matrix(Math.pow(m1.data[0],m2.data[0]));
+		}
 
 		int power = (int)m2.get(1);
 		if (Math.abs(power - m2.get(1)) > .0000000000000001){
