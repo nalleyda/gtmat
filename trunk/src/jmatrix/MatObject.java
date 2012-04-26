@@ -568,7 +568,49 @@ public abstract class MatObject {
 		
 	}
 	
+	public static MatObject delete(String name, CellArray ca) throws Exception{
+		Variable v = Main.wstack.peek().getVariable(name);
+		if (v == null) throw new Exception("Invalid variable name");
+		MatObject m = v.getData();//new MatObject(v.getData());
+		if (m instanceof Matrix){
+			m = new Matrix(v.getData());
+			if (ca.length() == 1){
+				Matrix ind = (Matrix)ca.get(1);
+				//Matrix ret = new Matrix();
+				ArrayList<Double> res = new ArrayList<Double>();
+				Matrix temp = new Matrix();
+				Matrix realM = (Matrix)m;
+				for (int i = 1; i <= ind.n; i++){
+					realM.data[(int)ind.get(i)-1] = Double.NEGATIVE_INFINITY;
+					//realM.set(Double.NEGATIVE_INFINITY, (int)ind.get(i));
+					//realM.data[i-1] = Double.NEGATIVE_INFINITY;
+					//m.set(temp, new int[]{(int)ind.get(i)});
+				}
+				for (int i = 0; i < realM.n; i++){
+					if (realM.data[i] != Double.NEGATIVE_INFINITY){
+						res.add(realM.data[i]);
+					}
+					/*Matrix cur = (Matrix)m.get(new int[]{i});
+					if (cur != temp){
+						res.add(cur.data[0]);
+					}*/
+				}
+				Matrix ret = new Matrix(new double[res.size()]);
+				for (int i = 1; i <= ret.n; i++){
+					((Matrix)ret).data[i-1] = res.get(i-1);
+					//ret.set(res.get(i), i);
+				}
+				return ret;
+			}
+			
+		}
+		throw new Exception("failed"); 
+	}
+	
 	public static MatObject index(String name, CellArray ca, MatObject expr) throws Exception{
+		if (expr.n == 0){
+			return delete(name, ca);
+		}
 		Workspace curW = Interpreter.getWorkspace();
 		MatObject val = Interpreter.getValue(name)[0];
 		if(val == null)
