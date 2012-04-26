@@ -755,6 +755,11 @@ public class Interpreter extends Thread {
 	 * @return
 	 */
 	public static String preprocessCommas(String s){
+		System.out.println("*****************************************************");
+		System.out.println("Starting with:");
+		System.out.println(s);
+		System.out.println("*****************************************************");
+
 		if (s == null || s.length() == 0) return s;
 		//s = s.replaceAll(",", " ");
 		char[] arr = s.toCharArray();
@@ -818,11 +823,11 @@ public class Interpreter extends Thread {
 					if (brackets > 0 || cells > 0){
 						//trace back to the last non-whitespace to make sure we don't add another semicolon
 						int j = i;
-						while (j >= 0 && s.substring(j, j+1).matches("\\s")){
+						while (j >= 0 && s.substring(j, j+1).matches("(\\s)")){
 							j--;
 						}
 						if (j < 0) continue;
-						if (arr[j] == ',' || arr[j] == '[' || arr[j] == '{' || arr[j] == ';'){//we just had extra whitespace, no comma
+						if (arr[j] == ',' || arr[j] == '[' || arr[j] == '{' || arr[j] == ';' || arr[j] == '.'){//we just had extra whitespace, no comma
 							
 						}
 						else{//we're concatenating something
@@ -835,6 +840,10 @@ public class Interpreter extends Thread {
 				if (arr[i] == '\'') quotes = 1-quotes;
 			}
 		}
+		System.out.println("*****************************************************");
+		System.out.println("Ending with:");
+		System.out.println(new String(arr));
+		System.out.println("*****************************************************");
 		return new String(arr);
 	}
 

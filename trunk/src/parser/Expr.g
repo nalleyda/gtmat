@@ -74,35 +74,15 @@ BLOCK;
  
 start	: prog EOF!;
  
-prog		: block+ | (functionHeader! block* (BLOCK_END!)?);//(block | NEWLINE)+;//block ((NEWLINE*)! block)*;
- 
-//index		: OPENP (expr (COMMA expr)*)? CLOSEP ;
-
-//structAccess	: DOT (OPENP expr CLOSEP | ID) ;
-
-//exprList	: expr (COMMA! expr)*	;
-
-//idRule		: ID	;
-
-//funcArgs	: (expr (COMMA! expr)*)?;
+prog		: block+ | (functionHeader! block* (BLOCK_END!)?);
 
 functionArgs	:  expr (COMMA expr)* -> ^(FUNC_ARGS expr*);
 
-functionCall 	: ((ID (OPENP|OPENC)) => (ID^ (
-	/*(OPENP) => */((OPENP!) functionArgs? (CLOSEP!))* (OPENC functionArgs? CLOSEC)?//functionArgs? CLOSEP)
-	//| ( )
-	)))	
+functionCall 	: ((ID (OPENP|OPENC)) => (ID^ (((OPENC) functionArgs? (CLOSEC))* (OPENP! functionArgs? CLOSEP!)?)))	
 	;
-	
-cellIndex
-	:	((ID OPENC) => (ID^ (
-	/*(OPENP) => */(OPENC! functionArgs? CLOSEC!)?//functionArgs? CLOSEP)
-	//| ( )
-	)));
 
-//functionCall	: functionLeft;
 
-functionCallOrStructure	: functionCall (DOT^ (OPENP expr CLOSEP | functionCall))?;//ID /*| functionCall*/))?;//structAccess?;//((functionCall DOT) => functionCall DOT structAccess) | functionCall;
+functionCallOrStructure	: functionCall (DOT^ (OPENP expr CLOSEP | functionCall))?;
 
 
 functionHeader	: FUNCTION 
@@ -119,13 +99,6 @@ functionHeader	: FUNCTION
 term	: EMPTY_VEC 
 	| EMPTY_CELL
 	| OPENP! expr CLOSEP!
-	//| cellArray		//OPENC! exprList CLOSEC!
-	//| vector		//OPENB! exprList CLOSEB!
-	//| DOUBLE
-	//| idRule
-	//| functionCall
-	//| structure
-	//| cellIndex
 	| STRING_LITERAL
 	| END
 	| vector
@@ -133,30 +106,19 @@ term	: EMPTY_VEC
 	| COLON
 	| TRUE
 	| FALSE
-	//| /*(INTEGER? DOT) =>*/ (INTEGER? DOT INTEGER)
 	| INTEGER (DOT^ INTEGER)?
 	| DOT^ INTEGER
-	| functionCallOrStructure //(DOT (OPENP | ID) => DOT structAccess)
-
-	//| 
-	//| TRANS_ID
-	//| EMPTY_STRING
-	//| functionCallOrStructure
+	| functionCallOrStructure
 	;
 	
-transponent	/*: term ;/*(
-		  	  (((EMPTY_STRING) => (EMPTY_STRING | SINGLE_QUOTE | DOT_TRANSPOSE)+) | SINGLE_QUOTE)
-		  	| ( ((DOT_CARET | CARET) term)* | (SINGLE_QUOTE | DOT_TRANSPOSE)*)
-		  	)
-		  	
-		  ;*/
+transponent
 		: (term (
 		( (DOT_CARET^ | CARET^) term)*
-		| (SINGLE_QUOTE^ | DOT_TRANSPOSE^ /*| EMPTY_STRING*/)*)
+		| (SINGLE_QUOTE^ | DOT_TRANSPOSE^)*)
 		)
 		;
 	
-unary	: (PLUS! | MINUS^ | NOT^)* transponent;/// -> ((MINUS | NOT)* transponent);
+unary	: (PLUS! | MINUS^ | NOT^)* transponent;
 
 mult	: unary ( (DOT_STAR^ | DOT_SLASH^ | DOT_BACKSLASH^ | STAR^ | SLASH^ | BACKSLASH^) unary )* ;
 
@@ -164,16 +126,7 @@ add	: mult ( (PLUS^ | MINUS^) mult)*	;
 
 colonEnd:	(COLON add)+ -> ^(COLON_ARGS add+);
 
-colon	: add (colonEnd^)?;//(COLON add)* -> ^(COLON_ARGS add+);//{boolean multipleArgs = false;} 
-	//add (/*(COLON add)?*/ COLON add)* -> ^(COLON add*)
-	//a1=add ((COLON a2=add ((COLON a3=add) |() /*-> ^(COLON add*)*/) | ()) //-> (COLON_ARGS $a1 $a2 $a3) | ())//-> ^(
-	//{if (multipleArgs) -> COLON;}
-	//;// -> ;//add (COLON^ add)*;//  -> ^(COLON_ARGS add*);
-	/*add | 
-	(add (COLON add)+ -> ^(COLON_ARGS add*));*/
-	//-> ^(COLON add+)
-	//;
-	//expr (COMMA expr)* -> ^(FUNC_ARGS expr*);
+colon	: add (colonEnd^)?;
 
 logical	: colon ( (LESS_THAN^ | GREATER_THAN^ | LESS_EQUAL^ | GREATER_EQUAL^ | ISEQUAL^ | NOT_EQUAL^) colon )* ;
 
@@ -185,21 +138,10 @@ scAnd	: eleOr (SC_AND^ eleOr)* ;
 
 scOr	: scAnd (SC_OR^ scAnd)* ;
 
-//hCatArgList : (COMMA (expr | vCatCell))+ ;
 
-//hCatVec	: ( (COMMA vecArg)* )? CLOSEB) | scOr ;
+hCatVec	: expr ((COMMA)? expr)* -> ^(HCAT_VEC expr+);
 
-//vCatVec : ( (SEMI vecArg)* )? CLOSEB) | hCatVec ;
-
-//hCatVec : openB ;
-
-//scOr_or_vec	: scOr | vector;
-
-//scOr_or_cell	: scOr | cellArray;
-
-hCatVec	: expr ((COMMA)? expr)* -> ^(HCAT_VEC expr+);// -> ^(HCAT_VEC expr+);
-
-vCatVec	: hCatVec ((SEMI) hCatVec)* -> ^(VCAT_VEC hCatVec+);// -> ^(VCAT_VEC expr+);
+vCatVec	: hCatVec ((SEMI) hCatVec)* -> ^(VCAT_VEC hCatVec+);
 
 vector	: OPENB! vCatVec CLOSEB!;
 
@@ -209,33 +151,21 @@ vCatCell: hCatCell ((SEMI)! hCatCell)* -> ^(VCAT_CELL hCatCell+);
 
 cellArray	: OPENC! vCatCell? CLOSEC! ;	
 
-expr	: /*vector | cellArray |*/ scOr;// -> ^(ELSEIF_ROOT );// | unary;
-	/*| OPENB vCatVec CLOSEB
-	| OPENC*/
+expr	: scOr;
 	
-//lhs	: (functionCallOrStructure EQUALS) => (functionCallOrStructure EQUALS);
-
-//getsLine:	(functionCallOrStructure EQUALS) => (functionCallOrStructure EQUALS expr SEMI?);
-	
-line	: /*getsLine | expr;*/(((term EQUALS) => (term EQUALS^))?// | ( )) 
- expr (SEMI^)?);// -> ^(ELSEIF_ROOT (functionCallOrStructure EQUALS)) | ( ))  expr SEMI?);*/
- 
-/*ifBlock	: IF expr NEWLINE block 
-	  (((ELSEIF) => (ELSEIF expr NEWLINE block)+) | ())
-	  ELSE NEWLINE block
-	  NEWLINE+ END ;*/
+line	: (((term EQUALS) => (term EQUALS^))?
+ expr (SEMI^)?);
 	  
 ifPart	: IF^ expr block?;
 elseifPart	: (ELSEIF^ e2=expr b2=block?);
 elsePart	:(ELSE^ b3=block?);
 ifBlock : 
-	ifPart// -> ^(IF expr block?))
-        elseifPart*// -> ^(ELSEIF expr block?))
+	ifPart
+        elseifPart*
         elsePart?
-        BLOCK_END //NEWLINE
+        BLOCK_END
         -> ^(IF_STAT ifPart elseifPart* elsePart?)
-       // -> FUNC_ARGS
-        //-> ^(IF $e1 $b1? (ELSEIF $e2 $b2?)* ELSE $b3?)
+        
     	;
     
 switchPart	: SWITCH^ expr;
@@ -268,14 +198,11 @@ whileBlock :
 blockPart	:(ifBlock | switchBlock | forBlock | whileBlock | line);
 block	: blockPart+ -> ^(BLOCK blockPart+);
 	 
-//expr	: 'a'+;
-
 
 
 
 //Special High Priority
-//EMPTY_STRING	: '\'\''
-WS 	: (' ' | '\t' | /*'\n' | '\r' |*/ '\f')+ {$channel = HIDDEN;};
+WS 	: (' ' | '\t' | '\f')+ {$channel = HIDDEN;};
 BLOCK_END	: 'end' WS? '\r'? '\n'	;	//We insert an extra newline at the end of every file before processing to avoid last-line problems
 NEWLINE	: '\r'? '\n'	{$channel = HIDDEN;};
 SINGLE_QUOTE	: '$';//'\''	;
@@ -318,7 +245,6 @@ DOUBLE_QUOTE	: '"'		;
 DOT		: '.'		;
 DOT_BACKSLASH	: '.\\'		;
 DOT_CARET	: '.^'		;
-//DOT_OPENP	: '.('		;	//might need high priority
 DOT_SLASH	: './'		;
 DOT_STAR	: '.*'		;
 DOT_TRANSPOSE	: '.\''		;
@@ -343,7 +269,6 @@ PLUS		: '+'		;
 SC_AND		: '&&'		;
 SC_OR		: '||'		;
 SEMI		: ';'		;
-//SINGLE_QUOTE	: '\''		;
 SLASH		: '/'		;
 STAR		: '*'		;
 
@@ -360,8 +285,6 @@ ELLIPSIS: '...'	NEWLINE+ {$channel = HIDDEN;}	;
 EXPONENT: ('e' | 'E') ('+' | '-')? ('0'..'9')+  ;
 ID 	: LETTER (LETTER | DIGIT | UNDERSCORE)*	;
 
-//TRANS_ID	: ID (SINGLE_QUOTE)*		;
-
 STRING_LITERAL
       	: '\'' 
           {StringBuilder b = new StringBuilder();}
@@ -374,8 +297,8 @@ STRING_LITERAL
 
 
 
-EMPTY_VEC	: '[' /*(WS | NEWLINE)**/ ']' 	;
-EMPTY_CELL	: '{' /*(WS | NEWLINE)**/ '}'	;
+EMPTY_VEC	: '['']' 	;
+EMPTY_CELL	: '{''}'	;
 
 
 
