@@ -369,6 +369,16 @@ public class CellArray extends MatObject {
 		
 	}
 
+	public CellArray get(Matrix r, Matrix c) {
+		CellArray ret = new CellArray();
+		for(int i = 0; i < r.n; i++)
+			for(int j = 0; j < c.n; j++) {
+				ret.set(data[r.geti(i) + c.geti(j)*size[COL]], i+j*size[COL]);
+			}
+		return ret;
+		
+	}
+	
 	@Override
 	public MatObject get(int... indices) {
 		//offsetvec[i] tells you how much you need to multiply by for index i to go from array indices to linear indices
