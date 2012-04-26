@@ -5,6 +5,8 @@
 
 package jmatrix;
 
+import jmatrix.MatObject.Type;
+
 /**
  *
  * @author dsmith

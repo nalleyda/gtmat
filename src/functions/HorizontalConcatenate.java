@@ -1,5 +1,6 @@
 package functions;
 
+import java.awt.Dialog.ModalityType;
 import java.util.ArrayList;
 import gtmatException.*;
 import functions.*;
@@ -126,6 +127,7 @@ public class HorizontalConcatenate {
 			}
 			col += it.size[MatObject.COL];
 		}
+		res.type = m[0].type;
 		return res;
 	}
 
