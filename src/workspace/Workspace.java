@@ -53,6 +53,10 @@ public class Workspace {
     public String getFunctionName() {
         return fName;
     }
+    
+    public void setVarList(DefaultListModel dlm){
+    	this.varList = dlm;
+    }
 
     public void add(Variable var) {
         this.varList = insertInOrder(var);
