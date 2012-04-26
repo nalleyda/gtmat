@@ -478,8 +478,7 @@ public abstract class MatObject {
 		case CHAR:
 			return MatString.get((MatString) m, (Matrix) ind);
 		case CELL:
-			
-			break;
+			return ((CellArray)m).get((Matrix)ind, new Matrix(1));
 		case STRUCT:
 			return ((StructArray) m).get((int) ind.get(1));
 
@@ -574,29 +573,6 @@ public abstract class MatObject {
 		MatObject val = Interpreter.getValue(name)[0];
 		if(val == null)
 			val = new Matrix();
-		/*if(val == null) {//didn't exist previously
-
-			if (expr.n == 1){//assigning a scalar value
-
-				int[] dim = new int[ca.n];//one dimension per comma
-				for (int i = 0; i < dim.length; i++){
-					Matrix indices = (Matrix)ca.get(i+1);
-					double max = indices.get(1);
-					for (int j = 2; j <= indices.n; j++){
-						max = Math.max(indices.get(j), max);
-					}
-					dim[i] = (int)max;
-				}
-				if (expr instanceof Matrix){
-					val = new Matrix(dim);
-				}
-				else{//TODO other data types
-					throw new RuntimeException("Define indexing with scalars for non-matrices, now!");
-				}
-
-			}
-			//val = expr.zeroed();//TODO not entirely sure why things work with this line present...
-		}*/
 		Matrix temp, newval;
 		CellArray arr = new CellArray();
 		for(int i = 0; i < ca.n; i++) {
@@ -626,9 +602,11 @@ public abstract class MatObject {
 			outval = new MatString(newsize);
 		else if(val instanceof UnsignedByte)
 			outval = new UnsignedByte(newsize);
-		else if(val instanceof CellArray)
+		else if(val instanceof CellArray) {
 			outval = new CellArray(newsize);
-		else if(val instanceof StructArray) 
+			outval = outval.get(new int[]{1});
+			
+		} else if(val instanceof StructArray) 
 			outval = new StructArray(newsize);
 		else
 			outval = new Matrix(newsize);
@@ -679,7 +657,7 @@ public abstract class MatObject {
 			}
 			
 			
-			outval.set(new Matrix(((Matrix)expr).get(k++)), a);
+			outval.set(expr.get(new int[]{k++}), a);//new Matrix(((Matrix)expr).get(k++)), a);
 			for(int i = 0; i < newindices.length; i++) {
 				newindices[i]++;
 				if(i < newindices.length-1 && newindices[i] > ca.get(i+1).n ) {
