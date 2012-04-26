@@ -725,7 +725,7 @@ public class TreeWalker<K,V>{
 					anyStrV = true;
 				}
 			}
-			if(anyStrV)
+			if(anyStrV) 
 				return VerticalConcatenate.vCatStr(arrv);
 			else
 				return VerticalConcatenate.verticalConcatenate(arrv);
