@@ -215,8 +215,8 @@ public class TreeWalker<K,V>{
 		}
 		throw new Exception("The use of \"end\" is incorrect here.");
 	}
-	
-	
+
+
 	public static Matrix evalEnd(Tree tree, String rhsName) throws Exception{
 		try{
 			Tree curTree = tree;//Used to keep up with which child we are
@@ -256,7 +256,7 @@ public class TreeWalker<K,V>{
 		}
 		throw new Exception("The use of \"end\" is incorrect here.");
 	}
-	
+
 	public static boolean printing = false;
 
 
@@ -362,10 +362,10 @@ public class TreeWalker<K,V>{
 			return ElementAnd.elementAnd(eval(tree.getChild(0)), eval(tree.getChild(1)));
 		case ELE_OR:
 			return ElementOr.elementOr(eval(tree.getChild(0)), eval(tree.getChild(1)));
-			
+
 		case EMPTY_CELL:
 			return new CellArray();
-			
+
 		case EMPTY_VEC:
 			return new Matrix(1).empty();
 
@@ -383,7 +383,7 @@ public class TreeWalker<K,V>{
 				if (lhs.getChildCount() == 0){//no lhs indexing
 					Interpreter.assign(tree.getChild(0).getText(), eval(tree.getChild(1)), printing);
 				}
-				else{
+				else{//we have lhs indexing
 					if (rhsType == TYPE.ID){
 						calls.add(rhs.getText());
 					}
@@ -392,22 +392,38 @@ public class TreeWalker<K,V>{
 					}
 					//Evaluate every dimension of indexing
 					MatObject rhsRes = eval(rhs);
-					ArrayList<MatObject> lhsArgs = new ArrayList<MatObject>();
-					for (int i = 0; i < lhs.getChild(0).getChildCount(); i++){
-						if (convert(lhs.getChild(0).getChild(i).getType()) == TYPE.COLON && Main.wstack.peek().getVariable(lhs.getText())==null){
-							Main.wstack.peek().add(new Variable(lhs.getText(), rhsRes.copy().zeroed()));
+					ArrayList<CellArray> lhsCellArgs =new ArrayList<CellArray>();
+					boolean lastOne = false;
+					for (int childInd = 0; childInd < lhs.getChildCount() && !lastOne; childInd++){
+						ArrayList<MatObject> lhsArgs = new ArrayList<MatObject>();
+						CellArray lhsInd = null;
+						Tree curTree = lhs.getChild(childInd);
+						if (convert(curTree.getType()) == TYPE.OPENC){
+							if (lhs.getChildCount() != childInd+3){
+								throw new Exception("Can only using curly brace indexing once.");
+							}
+							lastOne = true;
+							curTree = lhs.getChild(childInd+1);
 						}
+						for (int i = 0; i < curTree.getChildCount(); i++){
+							if (convert(lhs.getChild(0).getChild(i).getType()) == TYPE.COLON && Main.wstack.peek().getVariable(lhs.getText())==null){
+								Main.wstack.peek().add(new Variable(lhs.getText(), rhsRes.copy().zeroed()));
+							}
 
-						lhsArgs.add(eval(lhs.getChild(0).getChild(i)));
+							lhsArgs.add(eval(curTree.getChild(i)));
+						}
+						lhsInd = new CellArray(lhsArgs.toArray(new MatObject[0]));
+						lhsCellArgs.add(lhsInd);
 					}
-					CellArray lhsInd = new CellArray(lhsArgs.toArray(new MatObject[0]));
+					CellArray indexCell = new CellArray(lhsCellArgs.toArray(new CellArray[0]));
 					if (lhsType == TYPE.ID){
 						calls.remove(calls.size()-1);
 					}
-					MatObject.index(lhs.getText(), lhsInd, rhsRes, printing);
+					MatObject.index(lhs.getText(), indexCell, rhsRes, printing);
 					if (rhsType == TYPE.ID){
 						calls.remove(calls.size()-1);
 					}
+
 					//return null;
 				}
 			}
@@ -423,15 +439,24 @@ public class TreeWalker<K,V>{
 				}
 			}
 			else if (lhsType == TYPE.DOT){//assignment to structure array
-				
+
 				//TODO we currently assume no indexing (such as s(2).x = 3)
-				StructArray s = null;
-				if (Main.wstack.peek().getVariable(lhs.getChild(0).getText()) == null){//it didn't exist yet
-					s = new StructArray(new Structure());
+				Variable svar = Main.wstack.peek().getVariable(lhs.getChild(0).getText());
+				StructArray s;
+				if (svar == null){
+					s = new StructArray(new Structure());//should have size 1
 				}
 				else{
-					s = (StructArray)eval(lhs.getChild(0));
+					s = (StructArray)svar.getData();
 				}
+
+				MatObject indices = null;
+				if (lhs.getChild(0).getChildCount()>0){
+					indices = eval(lhs.getChild(0).getChild(0));
+					//throw new Exception("indexing for structs not yet working");
+				}
+
+
 				String fieldName = null;
 				if (lhs.getChild(1).getText().equals("(")){//indirect naming, like s.(x)
 					MatObject index = eval(lhs.getChild(2));
@@ -446,6 +471,8 @@ public class TreeWalker<K,V>{
 					fieldName = lhs.getChild(1).getText();
 				}
 				s.setField(fieldName, eval(rhs));
+				//MatObject.index(s, indices, field, stuff, etc.);
+				
 				Interpreter.assign(lhs.getChild(0).getText(), s, printing);
 				return s;
 			}
@@ -513,9 +540,45 @@ public class TreeWalker<K,V>{
 				return new Matrix(1);
 			}
 			MatObject[] retVal;
-			if (tree.getChildCount() > 0 && convert(tree.getChild(0).getType()) == TYPE.FUNC_ARGS){//function call or indexing
+			if (tree.getChildCount() == 1 && convert(tree.getChild(0).getType()) == TYPE.FUNC_ARGS){//function call or indexing
 				CellArray args = (CellArray)eval(tree.getChild(0));
 				retVal = Interpreter.call(tree.getText(), args);
+			}
+			else if (tree.getChildCount() > 0){//indexing into cell arrays, x(2)(1) or x{3} or x(1){3}
+				Variable toIndex = Main.wstack.peek().getVariable(tree.getText());
+				if (toIndex == null){
+					throw new Exception("Variable didn't exist");
+				}
+
+				ArrayList<CellArray> cellArgs =new ArrayList<CellArray>();
+				boolean lastOne = false;
+				for (int childInd = 0; childInd < tree.getChildCount() && !lastOne; childInd++){
+					ArrayList<MatObject> args = new ArrayList<MatObject>();
+					CellArray ind = null;
+					Tree curTree = tree.getChild(childInd);
+					if (convert(curTree.getType()) == TYPE.OPENC){
+						if (tree.getChildCount() != childInd+3){
+							throw new Exception("Can only using curly brace indexing once.");
+						}
+						lastOne = true;
+						curTree = tree.getChild(childInd+1);
+					}
+					for (int i = 0; i < curTree.getChildCount(); i++){
+						args.add(eval(curTree.getChild(i)));
+					}
+					ind = new CellArray(args.toArray(new MatObject[0]));
+					cellArgs.add(ind);
+				}
+				CellArray indexCell = new CellArray(cellArgs.toArray(new CellArray[0]));
+				/*if (lhsType == TYPE.ID){
+					calls.remove(calls.size()-1);
+				}
+				MatObject.get//TODO need a useful get() method
+				MatObject.get(lhs.getText(), indexCell, rhsRes, printing);
+				if (rhsType == TYPE.ID){
+					calls.remove(calls.size()-1);
+				}*/
+				throw new Exception("rhs cell indexing not yet working");
 			}
 			else{
 				retVal = Interpreter.call(tree.getText(), new CellArray());
@@ -658,7 +721,7 @@ public class TreeWalker<K,V>{
 		}
 		return res;
 	}
-	
+
 	private static boolean aboutToCloseAll(Tree tree){
 		Tree parent = tree.getParent();
 		if (parent.getChildCount() > tree.getChildIndex()+1 && tree.getText().equals("close") && parent.getChild(tree.getChildIndex()+1).getText().equals("all")){
@@ -667,7 +730,7 @@ public class TreeWalker<K,V>{
 		}
 		return false;
 	}
-	
+
 	private static boolean justDidCloseAll(Tree tree){
 		Tree parent = tree.getParent();
 		if (tree.getChildIndex() > 0 && tree.getText().equals("all") && parent.getChild(tree.getChildIndex()-1).getText().equals("close")){
