@@ -635,9 +635,9 @@ public abstract class MatObject {
 		if(ca.n == 1) 
 			newsize = val.size;
 		else
-		for(int i = 0; i < s; i++) {
-			newsize[i] = i >= ca.n || val.size[i] > ((Matrix)ca.get(i+1)).getMax() ? val.size[i] : (int)((Matrix)ca.get(i+1)).getMax();
-		}
+			for(int i = 0; i < s; i++) 
+				newsize[i] = i >= ca.n || val.size[i] > ((Matrix)ca.get(i+1)).getMax() ? val.size[i] : (int)((Matrix)ca.get(i+1)).getMax();
+			
 		MatObject outval;
 		if(val instanceof Matrix)
 			outval = new Matrix(newsize);
@@ -664,14 +664,13 @@ public abstract class MatObject {
 		for(int i = 0; i < indices.length; i++) {
 			indices[i] = 1;
 		}
-		double v = 0;
 		
 		while(indices[indices.length-1] <= val.size[val.size.length-1]) {
 			outval.set(val.get(indices), indices);
 			k++;
 			for(int i = 0; i < indices.length; i++) {
 				indices[i]++;
-				if(i < indices.length-1 && indices[i] > val.size[i] ) {
+				if((i < indices.length-1) && indices[i] > val.size[i] ) {
 					indices[i] = 1;
 				} else {
 					break;

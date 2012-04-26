@@ -333,7 +333,10 @@ public class Matrix extends MatObject {
 	}
 
 	
-	public void set(MatObject m, int... index) {
+	public void set(MatObject m, int... tempInd) {
+		int[] index = new int[tempInd.length];
+		for(int i = 0; i < tempInd.length; i++)
+			index[i] = tempInd[i];
 		boolean extend = false;
 		if(index.length == 1) {
 			int arrind[] = new int[size.length];
@@ -722,8 +725,9 @@ public class Matrix extends MatObject {
 	 */
 	public double get(int r, int c) {
 		int it = (c - 1) * size[ROW] + (r - 1);
-		if(it == 25) {
-			it = 25;
+		if(size.length == 1) {
+			it = r > c ? r : c;
+			it--;
 		}
 		return data[it];
 	}
