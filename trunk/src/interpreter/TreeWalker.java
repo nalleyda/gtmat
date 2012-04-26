@@ -513,7 +513,7 @@ public class TreeWalker<K,V>{
 			for (int i = 0; i < tree.getChildCount(); i++){
 				arrc.add(eval(tree.getChild(i)));
 			}
-			return HorizontalConcatenate.hCatCell(arrc.toArray(new MatObject[0]));
+			return HorizontalConcatenate.horizontalConcatenateCell(arrc.toArray(new MatObject[0]));
 		case HCAT_VEC:
 			ArrayList<MatObject> arr = new ArrayList<MatObject>();
 			boolean allMat = true;

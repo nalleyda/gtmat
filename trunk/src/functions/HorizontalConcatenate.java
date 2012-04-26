@@ -12,7 +12,15 @@ public class HorizontalConcatenate {
 	}*/
 
 	public static MatObject horizontalConcatenateCell(MatObject... arr) throws Exception{
-		//throw new Exception("Calling a dummy method.");
+		CellArray ret = new CellArray(1, arr.length);
+		if (arr.length == 0) return ret;
+
+		for (int i = 0; i < arr.length; i++){
+			ret.set(1, i+1, arr[i]);
+		}
+		return ret;
+		
+		/*//throw new Exception("Calling a dummy method.");
 		//TODO generalize this method
 		boolean allMat = true;
 		for (MatObject m : arr){
@@ -21,7 +29,7 @@ public class HorizontalConcatenate {
 				break;
 			}
 		}
-		if (allMat){
+		if (false){//allMat){
 			Matrix[] marr = new Matrix[arr.length];
 			for (int i = 0; i < marr.length; i++){
 				marr[i] = (Matrix)arr[i];
@@ -30,19 +38,18 @@ public class HorizontalConcatenate {
 		}
 		else{
 			return hCatCell(arr);
-		}
+		}*/
 	}
 
-	public static CellArray hCatCell(MatObject... arr) throws Exception{
-		boolean allSame = true;
-		CellArray ret = new CellArray();
+	/*public static CellArray hCatCell(MatObject... arr) throws Exception{
+		CellArray ret = new CellArray(1, arr.length);
 		if (arr.length == 0) return ret;
 
 		for (int i = 0; i < arr.length; i++){
 			ret.set(1, i+1, arr[i]);
 		}
 		return ret;
-	}
+	}*/
 	
 	public static MatString hCatStr(ArrayList<MatObject> arr) throws Exception{
 		try{

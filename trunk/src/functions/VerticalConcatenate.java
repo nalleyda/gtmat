@@ -90,6 +90,21 @@ public class VerticalConcatenate {
 	}
 	
 	public static MatObject verticalConcatenateCell(MatObject... arr) throws Exception{
-		throw new Exception("Calling a dummy method.");
+		if (arr.length < 1) return new Matrix();
+		/*int cols = MatObject.COL;
+		int rows = MatObject.ROW;
+		int numcols = arr[0].size[cols];
+		for (int i = 0; i < arr.length; i++){
+			if (arr[i].cols() != numcols){
+				throw new Exception("dimensions must match");
+			}
+		}*/
+		CellArray ret = new CellArray(arr.length, 1);
+		for (int i = 0; i < arr.length; i++){
+			ret.set(i+1, 1, arr[i]);
+		}
+		return ret;
+		
+		
 	}
 }
