@@ -392,4 +392,16 @@ public class Uint8 extends MatObject {
         String res = "Uint8 w*h = " + cols + "*" + rows;
         return res;
     }
+
+	@Override
+	public void set(MatObject m, int... indices) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public MatObject get(int... indices) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

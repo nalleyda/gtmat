@@ -554,50 +554,7 @@ public abstract class MatObject {
 		throw new RuntimeException("Calling MatObject's get method - undefined behavior");
 	}
 
-
-	private static boolean isIn(int k, Matrix m) {
-		boolean res = false;
-		for(int i = 1; i <= m.n; i++) {
-			if(k == m.geti(i)) {
-				res = true;
-				break;
-			}
-		}
-		return res;
-	}
-
 	public static void index(String name, CellArray ca, MatObject expr, boolean showIt) throws Exception{
-		/* 
-		 * How this is supposed to work:
-		 * - we are dealing with a matlab line like: B([1 3 5], [2 7]) = something.
-		 * - the value of expr is the RHS
-		 * - the cell array index contains the multiple dimensions of indexing for B
-		 * - with everything else going on, the user might decide to put an empty vector
-		 * - into parts of B (sigh!)
-		 * We will deal with the multiple dimensions by linearizing the array
-		 * B might not exist, in which case we make an empty copy of the rhs array
-		 * So in the example above, we fetch the [1 3 5] from the cell array
-		 * if there were no other dimensions, this would be the data values at
-		 * 1, 3 and 5.  But there is another dimension.  
-		 * When we fetch the [2 7] the actual access becomes:
-		 * [[1 3 5] + rows*(2-1), [1 3 5] + rows*(7-1)] 
-		 *      - a nice feature: individual dimensions could be logical - need to
-		 *      - run find on them
-		 * 
-		 */
-
-		/*if (expr instanceof Matrix && expr.type == Type.LOGICAL){//check for logical indexing
-			 Matrix expr2 = (Matrix)expr;
-			 int count = 0;
-			 ArrayList<Integer> ind = new ArrayList<Integer>();
-			 for (int i = 0; i < expr.n; i++){
-				 if (expr2.data[i] > Matrix.EPSILON || expr2.data[i] < -Matrix.EPSILON){
-					 ind.add(i);
-				 }
-			 }
-			 expr2 = new Matrix(1, ind.size());//create a column of indices
-		 }*/
-
 		Workspace curW = Interpreter.getWorkspace();
 		MatObject val = Interpreter.getValue(name)[0];
 		if(val == null) {//didn't exist previously
@@ -621,79 +578,162 @@ public abstract class MatObject {
 				}
 
 			}
-			val = expr.zeroed();//TODO not entirely sure why things work with this line present...
+			//val = expr.zeroed();//TODO not entirely sure why things work with this line present...
 		}
-		int oi = 0;
-		Matrix outvals = new Matrix(val);
-		int[] ind = new int[ca.n];
-		for(int i = 0; i < ind.length; i++) {
-			ind[i] = 1;
-		}
-		
-		int[] indvec = new int[ca.n];
-		int eleind = 1;
-		while(ind[ca.n-1] <= ca.get(ca.n).n) {
-			for(int i = 0; i < indvec.length; i++) {
-				indvec[i] = ((Matrix)ca.get(i+1)).geti(ind[i]);
-			}
-			
-			outvals.set( ((Matrix)expr).get( expr.n == 1 ? 1 : eleind++), indvec);
-			for(int i = 1; i <= ind.length; i++) {
-				ind[i-1]++;
-				if(i != ind.length && ind[i-1] > ca.get(i).n) {
-					ind[i-1] = 1;
-				} else
-					break;
-			}
-			
-		}
-		
 		/*
-		for(int i = 1; i <= ca.n; i++) {
-			Matrix index = (Matrix) ca.get(1, i);
-			if(index.type == Type.LOGICAL) {//if any are logical, assume all are logical
-				index = Matrix.find((Matrix) index);
-			}
-			if(i == 1) {
-				offset = new Matrix(index);
-				lastOne = new Matrix(index);
-			} else {
-				dim = dim * val.size[i-2];
-				for(int ni = 0; ni < index.n; ni++) {
-					for(int li = 0; li < lastOne.n; li++) {
-<<<<<<< .mine
-						
-						offset.set(1, ++oi, 
-								lastOne.data[li] + dim*(index.data[ni]-1));
-=======
-						offset = Set.set(offset, 1, ++oi, lastOne.data[li] + dim*(index.data[ni]-1));
->>>>>>> .r150
-					}
-				}
-				lastOne = new Matrix(offset);
-			}
-		}
-		if (en > 1 && en != offset.n) {
-			throw new RuntimeException("assignment dimension mismatch");
-		}
-		if(en == 0 && offset.n > 0) { // putting empty vector in
-			Matrix keeps = ((Matrix)val).empty();
+		if(ca.n == 1) {
+			MatObject ret;
+			int sz[] = new int[] {1, (int)((Matrix)ca.get(1)).getMax()};
+			if(sz[1] < val.n)
+				sz[1] = val.n;
+			Matrix m = (Matrix) ca.get(1);
+			if(val instanceof Matrix)
+				ret = new Matrix(sz);
+			else if(val instanceof MatString)
+				ret = new MatString(sz);
+			else if(val instanceof UnsignedByte)
+				ret = new UnsignedByte(sz);
+			else if(val instanceof CellArray)
+				ret = new CellArray(sz);
+			else if(val instanceof StructArray) 
+				ret = new StructArray(sz);
+			else
+				ret = new Matrix(sz);
+			
 			for(int i = 1; i <= val.n; i++) {
-				if(!isIn(i, offset)) {
-					keeps = Set.set(keeps, 1, keeps.n+1, i);
-				}
+				ret.set(val.get(new int[]{1, i}), new int[]{1, i});
 			}
-			val = get(val, keeps);
-		} else {
-			val.copyValues(offset, expr);
+			for(int i = 1; i <= m.n; i++) {
+				ret.set(expr.get(new int[]{1, i}), new int[] {1, (int)m.get(i)});
+			}
+			
+			curW.add(new Variable(name, ret));
+			if (showIt) {
+				Interpreter.displayString(name + " = " + ret + "\n");
+			}
+			TabbedPane.list.setModel(Main.wstack.peek().getVarList());
+			return;
+		}*/
+		
+		int s = val.size.length > ca.n ? val.size.length : ca.n;
+		int newsize[] = new int[s];
+		if(ca.n == 1) 
+			newsize = val.size;
+		else
+		for(int i = 0; i < s; i++) {
+			newsize[i] = i >= ca.n || val.size[i] > ((Matrix)ca.get(i+1)).getMax() ? val.size[i] : (int)((Matrix)ca.get(i+1)).getMax();
 		}
-		*/
-		curW.add(new Variable(name, outvals));
+		MatObject outval;
+		if(val instanceof Matrix)
+			outval = new Matrix(newsize);
+		else if(val instanceof MatString)
+			outval = new MatString(newsize);
+		else if(val instanceof UnsignedByte)
+			outval = new UnsignedByte(newsize);
+		else if(val instanceof CellArray)
+			outval = new CellArray(newsize);
+		else if(val instanceof StructArray) 
+			outval = new StructArray(newsize);
+		else
+			outval = new Matrix(newsize);
+		
+		int offsetvec[] = new int[newsize.length];
+		//Need 1 for the next row, row for the next column, row*column for the next layer...
+		offsetvec[0] = 1;
+		for(int i = 1; i < newsize.length; i++) {
+			offsetvec[i] = offsetvec[i-1] * newsize[i-1];
+		}
+		
+		int k = 1;
+		int indices[] = new int[val.size.length];
+		for(int i = 0; i < indices.length; i++) {
+			indices[i] = 1;
+		}
+		double v = 0;
+		
+		while(indices[indices.length-1] <= val.size[val.size.length-1]) {
+			outval.set(val.get(indices), indices);
+			k++;
+			for(int i = 0; i < indices.length; i++) {
+				indices[i]++;
+				if(i < indices.length-1 && indices[i] > val.size[i] ) {
+					indices[i] = 1;
+				} else {
+					break;
+				}
+					
+			}
+		}
+		
+		
+		int newindices[] = new int[ca.n];
+		for(int i = 0; i < ca.n; i++) {
+			newindices[i] = 1;
+		}
+		
+		int[] a = new int[ca.n];
+		int ind;
+		k = 1;
+		while(newindices[newindices.length-1] <= ((Matrix)ca.get(ca.n)).n) {
+			ind = 0;
+			if(expr.n==1)
+				k = 1;
+			for(int i = 0; i < ca.n; i++) {
+				a[i] = (int)((Matrix)((Matrix)ca.get(i+1)).get(new int[]{newindices[i]})).data[i];
+			}
+			
+			
+			outval.set(new Matrix(((Matrix)expr).get(k++)), a);
+			for(int i = 0; i < newindices.length; i++) {
+				newindices[i]++;
+				if(i < newindices.length-1 && newindices[i] > ca.get(i+1).n ) {
+					newindices[i] = 1;
+				} else {
+					break;
+				}
+					
+			}
+		}
+		
+		curW.add(new Variable(name, outval));
 		if (showIt) {
-			Interpreter.displayString(name + " = " + outvals + "\n");
+			Interpreter.displayString(name + " = " + outval + "\n");
 		}
 		TabbedPane.list.setModel(Main.wstack.peek().getVarList());
+		
+	
 	}
+	
+	public abstract void set(MatObject m, int indices[]);
+	public abstract MatObject get(int indices[]);
+	
+	public static int arr2lin(int size[], int ...ind) {
+		int offsetvec[] = new int[size.length];
+		//Need 1 for the next row, row for the next column, row*column for the next layer...
+		offsetvec[0] = 1;
+		for(int i = 1; i < size.length; i++) {
+			offsetvec[i] = offsetvec[i-1] * size[i-1];
+		}
+		int k = 1;
+		for(int i = 0; i < ind.length; i++) {
+			k += (ind[i]-1) * offsetvec[i];
+		}
+		return k;
+	}
+	
+	
+	private static boolean isIn(int k, Matrix m) {
+		boolean res = false;
+		for(int i = 1; i <= m.n; i++) {
+			if(k == m.geti(i)) {
+				res = true;
+				break;
+			}
+		}
+		return res;
+	}
+
+	
 	
 	public Logical logicalCast(MatObject o) {
 		return new Logical(o);

@@ -10,42 +10,46 @@ package jmatrix;
  * @author dsmith
  */
 public class CellArray extends MatObject {
-    private MatObject cell[];
+    private MatObject data[];
 
     public CellArray() {
         super();
-        cell = new MatObject[0];
+        data = new MatObject[0];
         n = 0;
         type = Type.CELL;
         size = new int[] {0, 0};
     }
 
+    public CellArray(int[] dims){
+    	super(dims);
+    }
+    
     public MatObject[] getData(){
-        return cell;
+        return data;
     }
 
-    public void setData(MatObject[] data){
-        this.cell = data;
+    public void setData(MatObject[] cell){
+        this.data = cell;
     }
 
-    public CellArray(MatObject[] data){
-        this(1, data.length);
-        cell = data;
+    public CellArray(MatObject[] c){
+        this(1, c.length);
+        data = c;
     }
     
     
     
     public CellArray(MatObject o) {
         this(1,1);
-        cell[0] = o;
+        data[0] = o;
     }
 
     
-    public CellArray(int rows, int cols, MatObject... data){
+    public CellArray(int rows, int cols, MatObject... d){
         this(rows, cols);
-        cell = new MatObject[n];
+        data = new MatObject[n];
         for(int i = 0; i < n; i++) {
-            cell[i] = data[i];
+            data[i] = d[i];
         }
     }
 
@@ -53,9 +57,9 @@ public class CellArray extends MatObject {
     public CellArray(int rows, int cols){
         super(rows, cols);
         if(n > 0) {
-            cell = new MatObject[n];
+            data = new MatObject[n];
         } else {
-            cell = null;
+            data = null;
         }
         type = Type.CELL;
     }
@@ -77,7 +81,7 @@ public class CellArray extends MatObject {
                     nd[(c - 1) * rm + (r - 1)] = o;
                 }
             }
-            cell = nd;
+            data = nd;
             n = rm * cm;
             size[ROW] = rm;
             size[COL] = cm;
@@ -125,12 +129,12 @@ public class CellArray extends MatObject {
      */
     public MatObject get(int i) {
     	
-        return cell[i - 1];
+        return data[i - 1];
     }
 
     
     public MatObject get(int r, int c) {
-        return cell[(c-1) * size[ROW] + (r-1)];
+        return data[(c-1) * size[ROW] + (r-1)];
     }
 
     public void set(int r, int c, MatObject m) {
@@ -140,7 +144,7 @@ public class CellArray extends MatObject {
         if (c > size[COL]) {
             extend(size[ROW], c);
         }
-        cell[(c-1) * size[ROW] + (r-1)] = m;
+        data[(c-1) * size[ROW] + (r-1)] = m;
     }
 
     public CellArray hcat(MatObject o) {
@@ -297,4 +301,88 @@ public class CellArray extends MatObject {
         System.out.println(ca.toFormat());
         
     }
+
+	@Override
+	public void set(MatObject m, int... index) {
+		boolean extend = false;
+		//Find the total number of elements, as well as the new size of the array
+		int newn = 1;
+		int newsize[] = new int[index.length];
+		for(int i = 0; i < index.length; i++) {
+			if(i >= size.length || index[i] > size[i]) {
+				extend = true;
+				newsize[i] = index[i];
+			} else 
+				newsize[i] = size[i];
+			newn *= newsize[i];
+		}
+		//If we need to extend the array, say so here
+		if(size.length < newsize.length)
+			extend = true;
+		
+		
+		//Now we transform the array indices of the old values into the linear indices for the new array
+		int linind = 0;
+		int trueind = 0;
+		int vecind[] = new int[size.length];
+		//vecind represents the array indices
+		for(int i = 0; i < size.length; i++) 
+			vecind[i] = 1;
+		
+		//offsetvec[i] tells you how much you need to multiply by for index i to go from array indices to linear indices
+		int offsetvec[] = new int[newsize.length];
+		//Need 1 for the next row, row for the next column, row*column for the next layer...
+		offsetvec[0] = 1;
+		for(int i = 1; i < newsize.length; i++) {
+			offsetvec[i] = offsetvec[i-1] * newsize[i-1];
+		}
+		//Now, let's extend if needed
+		if(extend) {
+			MatObject newdata[] = new MatObject[newn];
+			//For each index of our old array...
+			while(vecind[size.length-1] <= size[size.length-1]) {
+				//Put in the current value
+				newdata[linind] = data[trueind++];
+				//Calculate the new linear index, and update the array indices
+				linind = 0;
+				for(int i = 0; i < size.length; i++) {
+					vecind[i]++;
+					if(i != size.length-1 && vecind[i] > size[i])	
+						vecind[i] = 1;
+					else {
+						break;
+					}
+				}
+				for(int i = 0; i < size.length; i++) {
+					linind += (vecind[i]-1) * offsetvec[i];
+				}
+			}
+			data = newdata;
+			size = newsize;
+			n = newn;
+		} 
+		int ind = 0;
+		for(int i = 0; i < index.length; i++) {
+			ind += (index[i]-1) * offsetvec[i];
+		}
+		data[ind] = m;
+		
+	}
+
+	@Override
+	public MatObject get(int... indices) {
+		//offsetvec[i] tells you how much you need to multiply by for index i to go from array indices to linear indices
+		int offsetvec[] = new int[size.length];
+		//Need 1 for the next row, row for the next column, row*column for the next layer...
+		offsetvec[0] = 1;
+		for(int i = 1; i < size.length; i++) {
+			offsetvec[i] = offsetvec[i-1] * size[i-1];
+		}
+		int k = 0;
+		for(int i = 0; i < indices.length; i++) {
+			k += (indices[i]-1) * offsetvec[i];
+		}
+		
+		return data[k];
+	}
 }

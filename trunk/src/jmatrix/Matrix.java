@@ -332,10 +332,119 @@ public class Matrix extends MatObject {
 		}
 	}
 
+	
+	public void set(MatObject m, int... index) {
+		boolean extend = false;
+		if(index.length == 1) {
+			int arrind[] = new int[size.length];
+			index[0]--;
+			int []ov = new int[size.length];
+			ov[0] = 1;
+			arrind[0] = 1;
+			for(int i = 1; i < size.length; i++) {
+				ov[i] = ov[i-1] * size[i-1];
+				arrind[i] = 1;
+			}
+			
+			int div;
+			
+			for(int i = ov.length-1; i >= 0; i--) {
+				arrind[i] += index[0]/ov[i];
+				index[0] %= ov[i];
+				if(ov[i] == 1)
+					break;
+			}
+			index = arrind;
+		}
+		double val = ((Matrix)m).get(1);
+		//Find the total number of elements, as well as the new size of the array
+		int newn = 1;
+		int newsize[] = new int[index.length == 1 ? size.length : index.length];
+		for(int i = 0; i < (index.length > size.length ? index.length : size.length); i++) {
+			if(i >= size.length || (i < index.length && index[i] > size[i])) {
+				extend = true;
+				newsize[i] = index[i];
+			} else 
+				newsize[i] = size[i];
+			newn *= newsize[i];
+		}
+		//If we need to extend the array, say so here
+		if(size.length < newsize.length)
+			extend = true;
+		
+		
+		//Now we transform the array indices of the old values into the linear indices for the new array
+		int linind = 0;
+		int trueind = 0;
+		int vecind[] = new int[size.length];
+		//vecind represents the array indices
+		for(int i = 0; i < size.length; i++) 
+			vecind[i] = 1;
+		
+		//offsetvec[i] tells you how much you need to multiply by for index i to go from array indices to linear indices
+		int offsetvec[] = new int[newsize.length];
+		//Need 1 for the next row, row for the next column, row*column for the next layer...
+		offsetvec[0] = 1;
+		for(int i = 1; i < newsize.length; i++) {
+			offsetvec[i] = offsetvec[i-1] * newsize[i-1];
+		}
+		//Now, let's extend if needed
+		if(extend) {
+			double newdata[] = new double[newn];
+			//For each index of our old array...
+			while(vecind[size.length-1] <= size[size.length-1]) {
+				//Put in the current value
+				newdata[linind] = data[trueind++];
+				//Calculate the new linear index, and update the array indices
+				linind = 0;
+				for(int i = 0; i < size.length; i++) {
+					vecind[i]++;
+					if(i != size.length-1 && vecind[i] > size[i])	
+						vecind[i] = 1;
+					else {
+						break;
+					}
+				}
+				for(int i = 0; i < size.length; i++) {
+					linind += (vecind[i]-1) * offsetvec[i];
+				}
+			}
+			data = newdata;
+			size = newsize;
+			n = newn;
+		} 
+		int ind = 0;
+		for(int i = 0; i < index.length; i++) {
+			ind += (index[i]-1) * offsetvec[i];
+		}
+		data[ind] = val;
+	}
+
+	
 
 
 	public void set(double val, int... index) {
 		boolean extend = false;
+
+		if(index.length == 1) {
+			int arrind[] = new int[size.length];
+			
+			int []ov = new int[size.length];
+			ov[0] = 1;
+			for(int i = 1; i < size.length; i++) {
+				ov[i] = ov[i-1] * ov[i-1];
+				arrind[i] = 1;
+			}
+			
+			int div;
+			
+			for(int i = ov.length-1; i >= 0; i--) {
+				arrind[ov.length-i-1] += index[0]/ov[i];
+				index[0] %= ov[i];
+			}
+			index = arrind;
+		}
+		
 		//Find the total number of elements, as well as the new size of the array
 		int newn = 1;
 		int newsize[] = new int[index.length];
@@ -2372,8 +2481,14 @@ public class Matrix extends MatObject {
 	  * @return
 	  */
 	 public String toString() {
-		 int rows = size[ROW];
-		 int cols = size[COL];
+		 int rows, cols;
+		 if(size.length > 1) {
+			 rows = size[ROW];
+			 cols = size[COL];
+		 } else {
+			 rows = 1;
+		     cols = size[0];
+		 }
 		 String res = "";
 		 double d;
 		 if (type == Type.END) {
@@ -2518,4 +2633,24 @@ public class Matrix extends MatObject {
 			 order = i;
 		 }
 	 }
+
+	@Override
+	public MatObject get(int... indices) {
+		if(indices.length == 1)
+			return new Matrix(data[indices[0]-1]);
+		
+		//offsetvec[i] tells you how much you need to multiply by for index i to go from array indices to linear indices
+		int offsetvec[] = new int[size.length];
+		//Need 1 for the next row, row for the next column, row*column for the next layer...
+		offsetvec[0] = 1;
+		for(int i = 1; i < size.length; i++) {
+			offsetvec[i] = offsetvec[i-1] * size[i-1];
+		}
+		int k = 1;
+		for(int i = 0; i < indices.length; i++) {
+			k += (indices[i]-1) * offsetvec[i];
+		}
+		
+		return new Matrix(data[k-1]);
+	}
 }
