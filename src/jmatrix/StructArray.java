@@ -323,7 +323,7 @@ public class StructArray extends MatObject {
 	@Override
 	public void set(MatObject m, int... index) {
 		boolean extend = false;
-		Structure val = ((StructArray)m.get(1)).get(0);
+		Structure val = ((StructArray)m.get(new int[]{1})).get(0);
 		//Find the total number of elements, as well as the new size of the array
 		int newn = 1;
 		int newsize[] = new int[index.length];
