@@ -14,9 +14,17 @@ for cr=1:numRows
         fprintf(fid, '%s = ', w{cr, 1});
         dlmcell2(fname,fid, var, '-a');
     elseif isstruct(var)
-        c = struct2cell(var);
+        %c = struct2cell(var);
+        [r c] = size(fieldnames(var));
+        vec = 1:r;
+        [str cellstr so] = struct2str(var, 0, vec);
+        t = strrep(cellstr{end}, '; }', ' }');
+        cellstr{end} = t;
+        C = strtrim(cellstr);
+        %testing this w/ dlmcell
+        
         fprintf(fid, '%s = ', w{cr, 1});
-        dlmcell2(fname,fid, c, '-a');
+        dlmcell2(fname,fid, C, '-a');
     else
         %fid = fopen(fname, 'a');
         if ischar(var)
