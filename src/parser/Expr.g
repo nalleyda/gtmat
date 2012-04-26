@@ -88,15 +88,21 @@ prog		: block+ | (functionHeader! block* (BLOCK_END!)?);//(block | NEWLINE)+;//b
 
 functionArgs	:  expr (COMMA expr)* -> ^(FUNC_ARGS expr*);
 
-functionCall 	: (ID OPENP) => (ID^ (
-	/*(OPENP) => */(OPENP! functionArgs? CLOSEP!)?//functionArgs? CLOSEP)
+functionCall 	: ((ID (OPENP|OPENC)) => (ID^ (
+	/*(OPENP) => */((OPENP!) functionArgs? (CLOSEP!))* (OPENC functionArgs? CLOSEC)?//functionArgs? CLOSEP)
 	//| ( )
-	))
+	)))	
 	;
+	
+cellIndex
+	:	((ID OPENC) => (ID^ (
+	/*(OPENP) => */(OPENC! functionArgs? CLOSEC!)?//functionArgs? CLOSEP)
+	//| ( )
+	)));
 
 //functionCall	: functionLeft;
 
-functionCallOrStructure	: functionCall (DOT^ (OPENP! expr CLOSEP! | functionCall))?;//ID /*| functionCall*/))?;//structAccess?;//((functionCall DOT) => functionCall DOT structAccess) | functionCall;
+functionCallOrStructure	: functionCall (DOT^ (OPENP expr CLOSEP | functionCall))?;//ID /*| functionCall*/))?;//structAccess?;//((functionCall DOT) => functionCall DOT structAccess) | functionCall;
 
 
 functionHeader	: FUNCTION 
@@ -115,12 +121,12 @@ term	: EMPTY_VEC
 	| OPENP! expr CLOSEP!
 	//| cellArray		//OPENC! exprList CLOSEC!
 	//| vector		//OPENB! exprList CLOSEB!
-	| STRING_LITERAL
 	//| DOUBLE
 	//| idRule
 	//| functionCall
 	//| structure
-	| functionCallOrStructure //(DOT (OPENP | ID) => DOT structAccess)
+	//| cellIndex
+	| STRING_LITERAL
 	| END
 	| vector
 	| cellArray
@@ -130,7 +136,8 @@ term	: EMPTY_VEC
 	//| /*(INTEGER? DOT) =>*/ (INTEGER? DOT INTEGER)
 	| INTEGER (DOT^ INTEGER)?
 	| DOT^ INTEGER
-	
+	| functionCallOrStructure //(DOT (OPENP | ID) => DOT structAccess)
+
 	//| 
 	//| TRANS_ID
 	//| EMPTY_STRING
