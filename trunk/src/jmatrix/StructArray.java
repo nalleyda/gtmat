@@ -5,6 +5,7 @@
 
 package jmatrix;
 
+import jmatrix.MatObject.Type;
 import main.*;
 
 /**
@@ -21,6 +22,11 @@ public class StructArray extends MatObject {
     
     public StructArray(int... dims) {
     	super(dims);
+    	type = type.STRUCT;
+    	int k = 1;
+    	for(int i = 0; i < dims.length; i++)
+    		k *= dims[i];
+    	data = new Structure[k];
     }
 
     public StructArray(Structure s) {
@@ -142,6 +148,37 @@ public class StructArray extends MatObject {
         for(int i = 0; i < n; i++) {
             data[i] = data[i].setField(fld, o);
         }
+    }
+    
+    public void setField(String fld, MatObject o, CellArray ind) {
+    	Matrix r, c;
+    	if(ind.n > 1) {
+    		r = (Matrix) ind.get(1);
+    		c = (Matrix) ind.get(2);
+    	} else {
+    		r = new Matrix(1);
+    		c = (Matrix) ind.get(1);
+    	}
+    	int maxval = (int)((int) r.getMax()*c.getMax());
+    	if(maxval > data.length) {
+    		Structure newdata[] = new Structure[maxval];
+    		for(int i = 0; i < data.length; i++)
+    			newdata[i] = data[i];
+    		data = newdata;
+    	}
+    	
+    	
+		for(int i = 0; i < r.n; i++)
+			for(int j = 0; j < c.n; j++) {
+				if(data[r.geti(i+1)-1 + (c.geti(j+1)-1)*size[COL]] == null)
+					data[r.geti(i+1)-1 + (c.geti(j+1)-1)*size[COL]] = new Structure();
+				data[r.geti(i+1)-1 + (c.geti(j+1)-1)*size[COL]] = data[r.geti(i+1)-1 + (c.geti(j+1)-1)*size[COL]].setField(fld, o);
+			}
+		
+		for(int i = 0; i < data.length; i++) {
+			if(!data[i].isField(fld))
+				data[i] = data[i].setField(fld, new Matrix());
+		}
     }
     
     public void setField(int ndx, String fld, MatObject o) {
@@ -300,25 +337,7 @@ public class StructArray extends MatObject {
         return ret;
     }
     
-    
-    public static void main(String[] args) throws Exception{
-        String names[] = {"a","b","c"};
-        MatObject avals[] = {new Matrix(1), new Matrix(2), new MatString("abc")};
-        MatObject bvals[] = {new Matrix(4), new Matrix(5), new MatString("def")};
-        MatObject cvals[] = {new Matrix(7), new Matrix(8), new MatString("ghijk")};
-        Structure str[] = {new Structure(names, avals),
-                           new Structure(names, bvals),
-                           new Structure(names, cvals)};
-        StructArray sa = new StructArray(1, 3, str);
-        System.out.println(sa);
-        System.out.println(sa.get(1));
-        sa = sa.hcat(str[1]);
-        System.out.println(sa);
-        names[1] = "xx";
-        Structure bad = new Structure(names, cvals);
-        sa = sa.hcat(bad);
-        System.out.println(sa + "\n" + sa.get(5));
-    }
+
 
 	@Override
 	public void set(MatObject m, int... index) {
@@ -386,6 +405,30 @@ public class StructArray extends MatObject {
 		}
 		data[ind] = val;
 		
+	}
+	
+	public StructArray index(CellArray ca) {
+		int s = ca.n == 1 ? size.length : ca.n;
+		int[] newsize = new int[s];
+		if(ca.n == 1)
+			newsize = size;
+		else
+			for(int i = 0; i < s; i++) 
+				newsize[i] = ca.get(i+1).n;
+		Matrix r, c;
+		if(ca.n == 1) {
+			r = new Matrix(1);
+			c = (Matrix) ca.get(1);
+		} else {
+			r = (Matrix)ca.get(1);
+			c = (Matrix)ca.get(2);
+		}
+		StructArray outval = new StructArray(newsize);
+		for(int i = 0; i < r.n; i++)
+			for(int j = 0; j < c.n; j++) {
+				outval.set(data[r.geti(i+1)-1 + (c.geti(j+1)-1)*newsize[COL]], i+j*newsize[COL]+1);
+			}
+		return outval;
 	}
 
 	@Override

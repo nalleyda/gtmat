@@ -326,7 +326,7 @@ public class TreeWalker<K,V>{
 			}
 			else{//structure call, and it's not being assigned anything
 				MatObject rhs = eval(tree.getChild(0));//this should be the structure
-				if (rhs == null || !(rhs instanceof StructArray)){//it doesn't exist yet, or it's not a struct[]
+				if (rhs == null || (false &&!(rhs instanceof StructArray))){//it doesn't exist yet, or it's not a struct[]
 					throw new Exception("Invalid structure reference");
 				}
 				else{//it's already a structure
@@ -490,9 +490,14 @@ public class TreeWalker<K,V>{
 				else{
 					fieldName = lhs.getChild(1).getText();
 				}
-				s.setField(fieldName, eval(rhs));
-				//MatObject.index(s, indices, field, stuff, etc.);
-
+				MatObject stuff = eval(rhs);
+				//s.setField(fieldName, eval(rhs));
+				if(indices != null) {
+					s.setField(fieldName, stuff, (CellArray)indices);
+				}
+				else
+					s.setField(fieldName, stuff);
+				
 				Interpreter.assign(lhs.getChild(0).getText(), s, printing);
 				return s;
 			}
