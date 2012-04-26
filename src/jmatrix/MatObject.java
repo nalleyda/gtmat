@@ -480,7 +480,7 @@ public abstract class MatObject {
 		case CELL:
 			return ((CellArray)m).get((Matrix)ind, new Matrix(1));
 		case STRUCT:
-			return ((StructArray) m).get((int) ind.get(1));
+			return new StructArray(((StructArray) m).get((int) ind.get(1)));
 
 		case BYTE:
 
