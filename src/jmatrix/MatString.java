@@ -4,6 +4,11 @@
  */
 
 package jmatrix;
+
+import gtmatException.IndexOOBException;
+
+import java.util.ArrayList;
+
 /**
  *
  * @author dsmith
@@ -71,9 +76,33 @@ public class MatString extends UnsignedByte {
 		this.data = data;
 		n = rows * cols;
 		size = new int[2];
-		type = Type.DOUBLE;
+		type = Type.CHAR;
 		size[COL] = cols;
 		size[ROW] = rows;
+	}
+	
+	public static MatString get(MatString m, Matrix ri, Matrix ci){
+		double[] rows = ri.data;
+		double[] cols = ci.data;
+		int i = 0;
+		double[] mdata = m.data;
+		int rowsize = m.size[ROW];
+		int colsize = m.size[COL];
+		double[] newmat = new double[rows.length * cols.length];
+		for (int c = 0; c < cols.length; c++) {
+			for (int r = 0; r < rows.length; r++) {
+				try {
+					int cind = (int) cols[c] - 1;
+					int rind = (int) rows[r] - 1;
+					newmat[i] = mdata[cind * rowsize + rind];
+					i++;
+				} catch (Exception e) {
+					e.printStackTrace();
+					throw(new IndexOOBException());
+				}
+			}
+		}
+		return new MatString(newmat, rows.length, cols.length);
 	}
 
 	public Matrix eq(MatObject o) {
@@ -126,11 +155,16 @@ public class MatString extends UnsignedByte {
 
 	@Override
 	public String toString() {
-		int i = 0;
+		String out = "";
 		byte ar[] = new byte[cols()];
-		for(;i < cols(); i++) {
-			ar[i] = (byte) data[i];
+		for(int r=0;r<rows();r++) {
+			for(int c=0; c<cols(); c++){
+				ar[c]=(byte)data[c*rows()+r];
+			}
+			out = out.concat("\n");
+			out = out.concat(new String(ar));
 		}
-		return new String(ar);
+		return out;
+
 	}
 }

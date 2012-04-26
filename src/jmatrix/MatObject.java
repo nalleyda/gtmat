@@ -507,8 +507,7 @@ public abstract class MatObject {
 
 			break;
 		case CHAR:
-
-			break;
+			return MatString.get((MatString)m, (Matrix) ri, (Matrix) ci);
 		case CELL:
 
 			break;

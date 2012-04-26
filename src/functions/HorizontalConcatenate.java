@@ -43,6 +43,47 @@ public class HorizontalConcatenate {
 		}
 		return ret;
 	}
+	
+	public static MatString hCatStr(ArrayList<MatObject> arr) throws Exception{
+		try{
+		double [] data;
+		int n=0;
+		int cols=0;
+		for(MatObject o: arr){
+			if(o instanceof MatString){
+				n+=((MatString)o).n;
+				cols+=((MatString)o).size[MatObject.COL];
+			}
+			else{
+				if(((Matrix)o).type==MatObject.Type.LOGICAL)
+					throw new CustomException("Converting from logical to char is impossible");
+				n+=((Matrix)o).n;
+				cols+=((Matrix)o).size[MatObject.COL];
+			}
+		}
+		data = new double[n];
+		int i = 0;
+		for(MatObject o: arr){
+			if(o instanceof MatString) {
+				for(int ind=1; ind<=((MatString)o).n; ind++){
+					data[i++]=((MatString)o).get(ind);
+				}
+			}
+			else{
+				for(int ind=1; ind<=o.n; ind++){
+					data[i++]=((Matrix)o).get(ind);
+				}
+			}
+		}
+		MatString out = new MatString(data, ((MatString)arr.get(0)).size[MatObject.ROW],cols);
+		return out;
+		}
+		catch (Exception e){
+			if(e instanceof GTMatException)
+				throw e;
+			throw new CustomException("Dimension mismatch in HCAT for type Char");
+		}
+	}
 
 	public static Matrix horizontalConcatenate(ArrayList<MatObject> mArr) throws Exception{
 		return horizontalConcatenate(mArr.toArray(new Matrix[0]));
