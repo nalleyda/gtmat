@@ -478,7 +478,8 @@ public abstract class MatObject {
 		case CHAR:
 			return MatString.get((MatString) m, (Matrix) ind);
 		case CELL:
-			return m.get(ind, new Matrix(1));
+			
+			break;
 		case STRUCT:
 			return ((StructArray) m).get((int) ind.get(1));
 
@@ -615,13 +616,9 @@ public abstract class MatObject {
 		if(ca.n == 1) 
 			newsize = val.size;
 		else
-			for(int i = 0; i < s; i++) {
-				int caSize = i+1 > ca.n ? -1 : (int)((Matrix)ca.get(i+1)).getMax();
-				if(i < val.size.length)
-					newsize[i] = caSize > val.size[i] ? caSize : val.size[i];
-				else
-					newsize[i] = caSize;
-			}
+			for(int i = 0; i < s; i++) 
+				newsize[i] = i >= ca.n || val.size[i] > ((Matrix)ca.get(i+1)).getMax() ? val.size[i] : (int)((Matrix)ca.get(i+1)).getMax();
+			
 		MatObject outval;
 		if(val instanceof Matrix)
 			outval = new Matrix(newsize);
