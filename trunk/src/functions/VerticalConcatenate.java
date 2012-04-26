@@ -46,6 +46,49 @@ public class VerticalConcatenate {
 		return res;
 	}
 	
+	public static MatString vCatStr(ArrayList<MatObject> arr) throws Exception{
+		try{
+		double [] data;
+		int n=0;
+		int rows=0;
+		for(MatObject o: arr){
+			if(o instanceof MatString){
+				n+=((MatString)o).n;
+				rows+=((MatString)o).size[MatObject.ROW];
+			}
+			else{
+				n+=((Matrix)o).n;
+				rows+=((Matrix)o).size[MatObject.ROW];
+			}
+		}
+		data = new double[n];
+		int i = 0;
+		for(MatObject o: arr){
+			if(o instanceof MatString){
+				for(int c=0; c<((MatString)o).size[MatObject.COL]; c++) {
+					data[c*rows+i]=((MatString)o).get(c+1);
+				}
+			}
+			else{
+				if(((Matrix)o).type==MatObject.Type.LOGICAL)
+					throw new CustomException("Converting from logical to char is impossible");
+				for(int c=0; c<((Matrix)o).size[MatObject.COL]; c++) {
+					data[c*rows+i]=((Matrix)o).get(c+1);
+				}
+			}
+			i++;
+		}
+		MatString out = new MatString(data, rows ,((MatString)arr.get(0)).size[MatObject.COL]);
+		return out;
+		}
+		catch(Exception e) {
+			if(e instanceof gtmatException.GTMatException)
+				throw e;
+			else
+				throw new CustomException("Dimension missmatch in VCAT for Char");
+		}
+	}
+	
 	public static MatObject verticalConcatenateCell(MatObject... arr) throws Exception{
 		throw new Exception("Calling a dummy method.");
 	}

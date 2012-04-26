@@ -517,14 +517,21 @@ public class TreeWalker<K,V>{
 		case HCAT_VEC:
 			ArrayList<MatObject> arr = new ArrayList<MatObject>();
 			boolean allMat = true;
+			boolean anyStr = false;
 			for (int i = 0; i < tree.getChildCount(); i++){
 				arr.add(eval(tree.getChild(i)));
 				if (!(arr.get(arr.size()-1) instanceof Matrix)){
 					allMat = false;
 				}
+				if ((arr.get(arr.size()-1) instanceof MatString)){
+					anyStr = true;
+				}
 			}
 			if (allMat){
 				return HorizontalConcatenate.horizontalConcatenate(arr);
+			}
+			else if(anyStr){
+				return HorizontalConcatenate.hCatStr(arr);
 			}
 			else{
 				throw new Exception("hcat not implemented for non-matrix arguments yet.");
@@ -705,12 +712,23 @@ public class TreeWalker<K,V>{
 			return VerticalConcatenate.verticalConcatenateCell(arrcv.toArray(new MatObject[0]));
 		case VCAT_VEC:
 			if (tree.getChildCount() == 1) return eval(tree.getChild(0));
-
+			boolean allMatV = true;
+			boolean anyStrV = false;
 			ArrayList<MatObject> arrv = new ArrayList<MatObject>();
 			for (int i = 0; i < tree.getChildCount(); i++){
 				arrv.add(eval(tree.getChild(i)));
+				if (!(arrv.get(arrv.size()-1) instanceof Matrix)){
+					allMatV = false;
+				}
+				if ((arrv.get(arrv.size()-1) instanceof MatString)){
+					anyStrV = true;
+				}
 			}
-			return VerticalConcatenate.verticalConcatenate(arrv);
+			if(anyStrV)
+				return VerticalConcatenate.vCatStr(arrv);
+			else
+				return VerticalConcatenate.verticalConcatenate(arrv);
+			
 		case WHILE_LOOP:
 			while (eval(tree.getChild(0).getChild(0)).conditionalIsTrue()){
 				eval(tree.getChild(1));
