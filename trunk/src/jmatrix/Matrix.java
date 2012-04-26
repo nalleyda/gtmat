@@ -352,6 +352,8 @@ public class Matrix extends MatObject {
 			int div;
 			
 			for(int i = ov.length-1; i >= 0; i--) {
+				if(ov[i] == 0)
+					break;
 				arrind[i] += index[0]/ov[i];
 				index[0] %= ov[i];
 				if(ov[i] == 1)

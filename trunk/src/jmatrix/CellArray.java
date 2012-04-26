@@ -22,6 +22,10 @@ public class CellArray extends MatObject {
 
     public CellArray(int[] dims){
     	super(dims);
+    	int k = 1;
+    	for(int i = 0; i < dims.length; i++)
+    		k *= dims[i];
+    	data = new MatObject[k];
     }
     
     public MatObject[] getData(){
@@ -96,13 +100,14 @@ public class CellArray extends MatObject {
         return new CellArray(this);
     }
 
+    /*
     public static MatObject get(CellArray m, int r, int c) {
         return m.get(r,c);
     }
 
     public static MatObject get(CellArray m, int i) {
         return m.get(i);
-    }
+    }*/
 
     public void copyValues(Matrix ndx, MatObject src) {
         int in = ndx.length();
@@ -213,8 +218,14 @@ public class CellArray extends MatObject {
     }
 
     public String toString() {
-        int rows = size[ROW];
-        int cols = size[COL];
+    	int rows, cols;
+    	if(size.length != 1) {
+        rows = size[ROW];
+        cols = size[COL];
+    	} else {
+    		rows = size[ROW];
+    		cols = 1;
+    	}
         String res;
         MatObject d;
         if(rows > 1) res = "{\n   ";
@@ -296,20 +307,40 @@ public class CellArray extends MatObject {
             res += " ]";
         }
  */
-    public static void main(String[] args){
-        CellArray ca = new CellArray(2, 2, new Matrix(1), new Matrix(2), new Matrix(3), new Matrix(4));
-        System.out.println(ca.toFormat());
-        
-    }
-
 	@Override
-	public void set(MatObject m, int... index) {
+	public void set(MatObject m, int... tempInd) {
+		int[] index = new int[tempInd.length];
+		for(int i = 0; i < tempInd.length; i++)
+			index[i] = tempInd[i];
 		boolean extend = false;
+		if(index.length == 1) {
+			int arrind[] = new int[size.length];
+			index[0]--;
+			int []ov = new int[size.length];
+			ov[0] = 1;
+			arrind[0] = 1;
+			for(int i = 1; i < size.length; i++) {
+				ov[i] = ov[i-1] * size[i-1];
+				arrind[i] = 1;
+			}
+			
+			int div;
+			
+			for(int i = ov.length-1; i >= 0; i--) {
+				if(ov[i] == 0)
+					break;
+				arrind[i] += index[0]/ov[i];
+				index[0] %= ov[i];
+				if(ov[i] == 1)
+					break;
+			}
+			index = arrind;
+		}
 		//Find the total number of elements, as well as the new size of the array
 		int newn = 1;
-		int newsize[] = new int[index.length];
-		for(int i = 0; i < index.length; i++) {
-			if(i >= size.length || index[i] > size[i]) {
+		int newsize[] = new int[index.length == 1 ? size.length : index.length];
+		for(int i = 0; i < (index.length > size.length ? index.length : size.length); i++) {
+			if(i >= size.length || (i < index.length && index[i] > size[i])) {
 				extend = true;
 				newsize[i] = index[i];
 			} else 
@@ -366,14 +397,13 @@ public class CellArray extends MatObject {
 			ind += (index[i]-1) * offsetvec[i];
 		}
 		data[ind] = m;
-		
 	}
 
 	public CellArray get(Matrix r, Matrix c) {
 		CellArray ret = new CellArray();
 		for(int i = 0; i < r.n; i++)
 			for(int j = 0; j < c.n; j++) {
-				ret.set(data[r.geti(i) + c.geti(j)*size[COL]], i+j*size[COL]);
+				ret.set(data[r.geti(i+1)-1 + (c.geti(j+1)-1)*size[COL]], i+j*size[COL]+1);
 			}
 		return ret;
 		
@@ -381,6 +411,9 @@ public class CellArray extends MatObject {
 	
 	@Override
 	public MatObject get(int... indices) {
+		if(indices.length == 1)
+			return new CellArray(data[indices[0]-1]);
+		
 		//offsetvec[i] tells you how much you need to multiply by for index i to go from array indices to linear indices
 		int offsetvec[] = new int[size.length];
 		//Need 1 for the next row, row for the next column, row*column for the next layer...
@@ -388,11 +421,11 @@ public class CellArray extends MatObject {
 		for(int i = 1; i < size.length; i++) {
 			offsetvec[i] = offsetvec[i-1] * size[i-1];
 		}
-		int k = 0;
+		int k = 1;
 		for(int i = 0; i < indices.length; i++) {
 			k += (indices[i]-1) * offsetvec[i];
 		}
 		
-		return data[k];
+		return new CellArray(data[k-1]);
 	}
 }
