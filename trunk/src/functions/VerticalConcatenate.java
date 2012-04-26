@@ -43,6 +43,7 @@ public class VerticalConcatenate {
 			}
 			row += it.size[MatObject.ROW];
 		}
+		res.type = m[0].type;
 		return res;
 	}
 	
