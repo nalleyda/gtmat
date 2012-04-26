@@ -1,4 +1,4 @@
-// $ANTLR 3.4 /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g 2012-04-26 04:59:14
+// $ANTLR 3.4 /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g 2012-04-25 21:12:56
 
 	package parser;
 
@@ -21,7 +21,7 @@ public class ExprParser extends Parser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "AT", "BACKSLASH", "BLOCK", "BLOCK_END", "BREAK", "CARET", "CASE", "CATCH", "CLASSDEF", "CLOSEB", "CLOSEC", "CLOSEP", "CLOSE_BLOCK", "COLON", "COLON_ARGS", "COMMA", "COMMENT", "CONTINUE", "DIGIT", "DOT", "DOT_BACKSLASH", "DOT_CARET", "DOT_SLASH", "DOT_STAR", "DOT_TRANSPOSE", "DOUBLE_QUOTE", "ELE_AND", "ELE_OR", "ELLIPSIS", "ELSE", "ELSEIF", "EMPTY_CELL", "EMPTY_VEC", "END", "EQUALS", "EXCLAMATION", "EXPONENT", "FALSE", "FOR", "FOR_LOOP", "FUNCTION", "FUNC_ARGS", "GLOBAL", "GREATER_EQUAL", "GREATER_EQUL", "GREATER_THAN", "HCAT_CELL", "HCAT_VEC", "ID", "IF", "IF_STAT", "INTEGER", "ISEQUAL", "LESS_EQUAL", "LESS_THAN", "LETTER", "MINUS", "NEWLINE", "NOT", "NOT_EQUAL", "OPENB", "OPENC", "OPENP", "OPEN_BLOCK", "OTHERWISE", "PARFOR", "PERCENT", "PERSISTENT", "PLUS", "RETURN", "SC_AND", "SC_OR", "SEMI", "SINGLE_QUOTE", "SLASH", "SPMD", "STAR", "STRING_LITERAL", "SWITCH", "SWITCH_STAT", "TRUE", "TRY", "UNDERSCORE", "VCAT_CELL", "VCAT_VEC", "WHILE", "WHILE_LOOP", "WS"
     };
-
+//x
     public static final int EOF=-1;
     public static final int AT=4;
     public static final int BACKSLASH=5;
@@ -125,7 +125,7 @@ public class ExprParser extends Parser {
     }
     public ExprParser(TokenStream input, RecognizerSharedState state) {
         super(input, state);
-        this.state.ruleMemo = new HashMap[42+1];
+        this.state.ruleMemo = new HashMap[44+1];
          
 
     }
@@ -408,7 +408,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "functionArgs"
-    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:79:1: functionArgs : expr ( COMMA expr )* -> ^( FUNC_ARGS ( expr )* ) ;
+    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:89:1: functionArgs : expr ( COMMA expr )* -> ^( FUNC_ARGS ( expr )* ) ;
     public final ExprParser.functionArgs_return functionArgs() throws RecognitionException {
         ExprParser.functionArgs_return retval = new ExprParser.functionArgs_return();
         retval.start = input.LT(1);
@@ -429,17 +429,17 @@ public TreeAdaptor getTreeAdaptor() {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 3) ) { return retval; }
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:79:14: ( expr ( COMMA expr )* -> ^( FUNC_ARGS ( expr )* ) )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:79:17: expr ( COMMA expr )*
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:89:14: ( expr ( COMMA expr )* -> ^( FUNC_ARGS ( expr )* ) )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:89:17: expr ( COMMA expr )*
             {
-            pushFollow(FOLLOW_expr_in_functionArgs243);
+            pushFollow(FOLLOW_expr_in_functionArgs254);
             expr7=expr();
 
             state._fsp--;
             if (state.failed) return retval;
             if ( state.backtracking==0 ) stream_expr.add(expr7.getTree());
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:79:22: ( COMMA expr )*
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:89:22: ( COMMA expr )*
             loop5:
             do {
                 int alt5=2;
@@ -452,13 +452,13 @@ public TreeAdaptor getTreeAdaptor() {
 
                 switch (alt5) {
             	case 1 :
-            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:79:23: COMMA expr
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:89:23: COMMA expr
             	    {
-            	    COMMA8=(Token)match(input,COMMA,FOLLOW_COMMA_in_functionArgs246); if (state.failed) return retval; 
+            	    COMMA8=(Token)match(input,COMMA,FOLLOW_COMMA_in_functionArgs257); if (state.failed) return retval; 
             	    if ( state.backtracking==0 ) stream_COMMA.add(COMMA8);
 
 
-            	    pushFollow(FOLLOW_expr_in_functionArgs248);
+            	    pushFollow(FOLLOW_expr_in_functionArgs259);
             	    expr9=expr();
 
             	    state._fsp--;
@@ -487,16 +487,16 @@ public TreeAdaptor getTreeAdaptor() {
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
             root_0 = (CommonTree)adaptor.nil();
-            // 79:36: -> ^( FUNC_ARGS ( expr )* )
+            // 89:36: -> ^( FUNC_ARGS ( expr )* )
             {
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:79:39: ^( FUNC_ARGS ( expr )* )
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:89:39: ^( FUNC_ARGS ( expr )* )
                 {
                 CommonTree root_1 = (CommonTree)adaptor.nil();
                 root_1 = (CommonTree)adaptor.becomeRoot(
                 (CommonTree)adaptor.create(FUNC_ARGS, "FUNC_ARGS")
                 , root_1);
 
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:79:51: ( expr )*
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:89:51: ( expr )*
                 while ( stream_expr.hasNext() ) {
                     adaptor.addChild(root_1, stream_expr.nextTree());
 
@@ -547,7 +547,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "functionCall"
-    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:81:1: functionCall : ( ( ID ( OPENP | OPENC ) )=> ( ID ^ ( ( ( OPENC !) ( functionArgs )? ( CLOSEC !) )* ( OPENP ( functionArgs )? CLOSEP )? ) ) ) ;
+    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:91:1: functionCall : ( ( ID ( OPENP | OPENC ) )=> ( ID ^ ( ( ( OPENP !) ( functionArgs )? ( CLOSEP !) )* ( OPENC ( functionArgs )? CLOSEC )? ) ) ) ;
     public final ExprParser.functionCall_return functionCall() throws RecognitionException {
         ExprParser.functionCall_return retval = new ExprParser.functionCall_return();
         retval.start = input.LT(1);
@@ -557,37 +557,37 @@ public TreeAdaptor getTreeAdaptor() {
         CommonTree root_0 = null;
 
         Token ID10=null;
-        Token OPENC11=null;
-        Token CLOSEC13=null;
-        Token OPENP14=null;
-        Token CLOSEP16=null;
+        Token OPENP11=null;
+        Token CLOSEP13=null;
+        Token OPENC14=null;
+        Token CLOSEC16=null;
         ExprParser.functionArgs_return functionArgs12 =null;
 
         ExprParser.functionArgs_return functionArgs15 =null;
 
 
         CommonTree ID10_tree=null;
-        CommonTree OPENC11_tree=null;
-        CommonTree CLOSEC13_tree=null;
-        CommonTree OPENP14_tree=null;
-        CommonTree CLOSEP16_tree=null;
+        CommonTree OPENP11_tree=null;
+        CommonTree CLOSEP13_tree=null;
+        CommonTree OPENC14_tree=null;
+        CommonTree CLOSEC16_tree=null;
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 4) ) { return retval; }
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:81:15: ( ( ( ID ( OPENP | OPENC ) )=> ( ID ^ ( ( ( OPENC !) ( functionArgs )? ( CLOSEC !) )* ( OPENP ( functionArgs )? CLOSEP )? ) ) ) )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:81:17: ( ( ID ( OPENP | OPENC ) )=> ( ID ^ ( ( ( OPENC !) ( functionArgs )? ( CLOSEC !) )* ( OPENP ( functionArgs )? CLOSEP )? ) ) )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:91:15: ( ( ( ID ( OPENP | OPENC ) )=> ( ID ^ ( ( ( OPENP !) ( functionArgs )? ( CLOSEP !) )* ( OPENC ( functionArgs )? CLOSEC )? ) ) ) )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:91:17: ( ( ID ( OPENP | OPENC ) )=> ( ID ^ ( ( ( OPENP !) ( functionArgs )? ( CLOSEP !) )* ( OPENC ( functionArgs )? CLOSEC )? ) ) )
             {
             root_0 = (CommonTree)adaptor.nil();
 
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:81:17: ( ( ID ( OPENP | OPENC ) )=> ( ID ^ ( ( ( OPENC !) ( functionArgs )? ( CLOSEC !) )* ( OPENP ( functionArgs )? CLOSEP )? ) ) )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:81:18: ( ID ( OPENP | OPENC ) )=> ( ID ^ ( ( ( OPENC !) ( functionArgs )? ( CLOSEC !) )* ( OPENP ( functionArgs )? CLOSEP )? ) )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:91:17: ( ( ID ( OPENP | OPENC ) )=> ( ID ^ ( ( ( OPENP !) ( functionArgs )? ( CLOSEP !) )* ( OPENC ( functionArgs )? CLOSEC )? ) ) )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:91:18: ( ID ( OPENP | OPENC ) )=> ( ID ^ ( ( ( OPENP !) ( functionArgs )? ( CLOSEP !) )* ( OPENC ( functionArgs )? CLOSEC )? ) )
             {
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:81:40: ( ID ^ ( ( ( OPENC !) ( functionArgs )? ( CLOSEC !) )* ( OPENP ( functionArgs )? CLOSEP )? ) )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:81:41: ID ^ ( ( ( OPENC !) ( functionArgs )? ( CLOSEC !) )* ( OPENP ( functionArgs )? CLOSEP )? )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:91:40: ( ID ^ ( ( ( OPENP !) ( functionArgs )? ( CLOSEP !) )* ( OPENC ( functionArgs )? CLOSEC )? ) )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:91:41: ID ^ ( ( ( OPENP !) ( functionArgs )? ( CLOSEP !) )* ( OPENC ( functionArgs )? CLOSEC )? )
             {
-            ID10=(Token)match(input,ID,FOLLOW_ID_in_functionCall282); if (state.failed) return retval;
+            ID10=(Token)match(input,ID,FOLLOW_ID_in_functionCall293); if (state.failed) return retval;
             if ( state.backtracking==0 ) {
             ID10_tree = 
             (CommonTree)adaptor.create(ID10)
@@ -595,33 +595,33 @@ public TreeAdaptor getTreeAdaptor() {
             root_0 = (CommonTree)adaptor.becomeRoot(ID10_tree, root_0);
             }
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:81:45: ( ( ( OPENC !) ( functionArgs )? ( CLOSEC !) )* ( OPENP ( functionArgs )? CLOSEP )? )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:81:46: ( ( OPENC !) ( functionArgs )? ( CLOSEC !) )* ( OPENP ( functionArgs )? CLOSEP )?
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:91:45: ( ( ( OPENP !) ( functionArgs )? ( CLOSEP !) )* ( OPENC ( functionArgs )? CLOSEC )? )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:92:17: ( ( OPENP !) ( functionArgs )? ( CLOSEP !) )* ( OPENC ( functionArgs )? CLOSEC )?
             {
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:81:46: ( ( OPENC !) ( functionArgs )? ( CLOSEC !) )*
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:92:17: ( ( OPENP !) ( functionArgs )? ( CLOSEP !) )*
             loop7:
             do {
                 int alt7=2;
                 int LA7_0 = input.LA(1);
 
-                if ( (LA7_0==OPENC) ) {
+                if ( (LA7_0==OPENP) ) {
                     alt7=1;
                 }
 
 
                 switch (alt7) {
             	case 1 :
-            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:81:47: ( OPENC !) ( functionArgs )? ( CLOSEC !)
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:92:18: ( OPENP !) ( functionArgs )? ( CLOSEP !)
             	    {
-            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:81:47: ( OPENC !)
-            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:81:48: OPENC !
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:92:18: ( OPENP !)
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:92:19: OPENP !
             	    {
-            	    OPENC11=(Token)match(input,OPENC,FOLLOW_OPENC_in_functionCall288); if (state.failed) return retval;
+            	    OPENP11=(Token)match(input,OPENP,FOLLOW_OPENP_in_functionCall302); if (state.failed) return retval;
 
             	    }
 
 
-            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:81:56: ( functionArgs )?
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:92:27: ( functionArgs )?
             	    int alt6=2;
             	    int LA6_0 = input.LA(1);
 
@@ -630,9 +630,9 @@ public TreeAdaptor getTreeAdaptor() {
             	    }
             	    switch (alt6) {
             	        case 1 :
-            	            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:81:56: functionArgs
+            	            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:92:27: functionArgs
             	            {
-            	            pushFollow(FOLLOW_functionArgs_in_functionCall292);
+            	            pushFollow(FOLLOW_functionArgs_in_functionCall306);
             	            functionArgs12=functionArgs();
 
             	            state._fsp--;
@@ -645,10 +645,10 @@ public TreeAdaptor getTreeAdaptor() {
             	    }
 
 
-            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:81:70: ( CLOSEC !)
-            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:81:71: CLOSEC !
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:92:41: ( CLOSEP !)
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:92:42: CLOSEP !
             	    {
-            	    CLOSEC13=(Token)match(input,CLOSEC,FOLLOW_CLOSEC_in_functionCall296); if (state.failed) return retval;
+            	    CLOSEP13=(Token)match(input,CLOSEP,FOLLOW_CLOSEP_in_functionCall310); if (state.failed) return retval;
 
             	    }
 
@@ -662,26 +662,26 @@ public TreeAdaptor getTreeAdaptor() {
             } while (true);
 
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:81:82: ( OPENP ( functionArgs )? CLOSEP )?
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:92:53: ( OPENC ( functionArgs )? CLOSEC )?
             int alt9=2;
             int LA9_0 = input.LA(1);
 
-            if ( (LA9_0==OPENP) ) {
+            if ( (LA9_0==OPENC) ) {
                 alt9=1;
             }
             switch (alt9) {
                 case 1 :
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:81:83: OPENP ( functionArgs )? CLOSEP
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:92:54: OPENC ( functionArgs )? CLOSEC
                     {
-                    OPENP14=(Token)match(input,OPENP,FOLLOW_OPENP_in_functionCall303); if (state.failed) return retval;
+                    OPENC14=(Token)match(input,OPENC,FOLLOW_OPENC_in_functionCall317); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
-                    OPENP14_tree = 
-                    (CommonTree)adaptor.create(OPENP14)
+                    OPENC14_tree = 
+                    (CommonTree)adaptor.create(OPENC14)
                     ;
-                    adaptor.addChild(root_0, OPENP14_tree);
+                    adaptor.addChild(root_0, OPENC14_tree);
                     }
 
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:81:89: ( functionArgs )?
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:92:60: ( functionArgs )?
                     int alt8=2;
                     int LA8_0 = input.LA(1);
 
@@ -690,9 +690,9 @@ public TreeAdaptor getTreeAdaptor() {
                     }
                     switch (alt8) {
                         case 1 :
-                            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:81:89: functionArgs
+                            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:92:60: functionArgs
                             {
-                            pushFollow(FOLLOW_functionArgs_in_functionCall305);
+                            pushFollow(FOLLOW_functionArgs_in_functionCall319);
                             functionArgs15=functionArgs();
 
                             state._fsp--;
@@ -705,12 +705,12 @@ public TreeAdaptor getTreeAdaptor() {
                     }
 
 
-                    CLOSEP16=(Token)match(input,CLOSEP,FOLLOW_CLOSEP_in_functionCall308); if (state.failed) return retval;
+                    CLOSEC16=(Token)match(input,CLOSEC,FOLLOW_CLOSEC_in_functionCall322); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
-                    CLOSEP16_tree = 
-                    (CommonTree)adaptor.create(CLOSEP16)
+                    CLOSEC16_tree = 
+                    (CommonTree)adaptor.create(CLOSEC16)
                     ;
-                    adaptor.addChild(root_0, CLOSEP16_tree);
+                    adaptor.addChild(root_0, CLOSEC16_tree);
                     }
 
                     }
@@ -756,6 +756,140 @@ public TreeAdaptor getTreeAdaptor() {
     // $ANTLR end "functionCall"
 
 
+    public static class cellIndex_return extends ParserRuleReturnScope {
+        CommonTree tree;
+        public Object getTree() { return tree; }
+    };
+
+
+    // $ANTLR start "cellIndex"
+    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:97:1: cellIndex : ( ( ID OPENC )=> ( ID ^ ( ( OPENC ! ( functionArgs )? CLOSEC !)? ) ) ) ;
+    public final ExprParser.cellIndex_return cellIndex() throws RecognitionException {
+        ExprParser.cellIndex_return retval = new ExprParser.cellIndex_return();
+        retval.start = input.LT(1);
+
+        int cellIndex_StartIndex = input.index();
+
+        CommonTree root_0 = null;
+
+        Token ID17=null;
+        Token OPENC18=null;
+        Token CLOSEC20=null;
+        ExprParser.functionArgs_return functionArgs19 =null;
+
+
+        CommonTree ID17_tree=null;
+        CommonTree OPENC18_tree=null;
+        CommonTree CLOSEC20_tree=null;
+
+        try {
+            if ( state.backtracking>0 && alreadyParsedRule(input, 5) ) { return retval; }
+
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:98:2: ( ( ( ID OPENC )=> ( ID ^ ( ( OPENC ! ( functionArgs )? CLOSEC !)? ) ) ) )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:98:4: ( ( ID OPENC )=> ( ID ^ ( ( OPENC ! ( functionArgs )? CLOSEC !)? ) ) )
+            {
+            root_0 = (CommonTree)adaptor.nil();
+
+
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:98:4: ( ( ID OPENC )=> ( ID ^ ( ( OPENC ! ( functionArgs )? CLOSEC !)? ) ) )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:98:5: ( ID OPENC )=> ( ID ^ ( ( OPENC ! ( functionArgs )? CLOSEC !)? ) )
+            {
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:98:19: ( ID ^ ( ( OPENC ! ( functionArgs )? CLOSEC !)? ) )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:98:20: ID ^ ( ( OPENC ! ( functionArgs )? CLOSEC !)? )
+            {
+            ID17=(Token)match(input,ID,FOLLOW_ID_in_cellIndex354); if (state.failed) return retval;
+            if ( state.backtracking==0 ) {
+            ID17_tree = 
+            (CommonTree)adaptor.create(ID17)
+            ;
+            root_0 = (CommonTree)adaptor.becomeRoot(ID17_tree, root_0);
+            }
+
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:98:24: ( ( OPENC ! ( functionArgs )? CLOSEC !)? )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:99:17: ( OPENC ! ( functionArgs )? CLOSEC !)?
+            {
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:99:17: ( OPENC ! ( functionArgs )? CLOSEC !)?
+            int alt11=2;
+            int LA11_0 = input.LA(1);
+
+            if ( (LA11_0==OPENC) ) {
+                alt11=1;
+            }
+            switch (alt11) {
+                case 1 :
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:99:18: OPENC ! ( functionArgs )? CLOSEC !
+                    {
+                    OPENC18=(Token)match(input,OPENC,FOLLOW_OPENC_in_cellIndex362); if (state.failed) return retval;
+
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:99:25: ( functionArgs )?
+                    int alt10=2;
+                    int LA10_0 = input.LA(1);
+
+                    if ( (LA10_0==COLON||LA10_0==DOT||(LA10_0 >= EMPTY_CELL && LA10_0 <= END)||LA10_0==FALSE||LA10_0==ID||LA10_0==INTEGER||LA10_0==MINUS||LA10_0==NOT||(LA10_0 >= OPENB && LA10_0 <= OPENP)||LA10_0==PLUS||LA10_0==STRING_LITERAL||LA10_0==TRUE) ) {
+                        alt10=1;
+                    }
+                    switch (alt10) {
+                        case 1 :
+                            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:99:25: functionArgs
+                            {
+                            pushFollow(FOLLOW_functionArgs_in_cellIndex365);
+                            functionArgs19=functionArgs();
+
+                            state._fsp--;
+                            if (state.failed) return retval;
+                            if ( state.backtracking==0 ) adaptor.addChild(root_0, functionArgs19.getTree());
+
+                            }
+                            break;
+
+                    }
+
+
+                    CLOSEC20=(Token)match(input,CLOSEC,FOLLOW_CLOSEC_in_cellIndex368); if (state.failed) return retval;
+
+                    }
+                    break;
+
+            }
+
+
+            }
+
+
+            }
+
+
+            }
+
+
+            }
+
+            retval.stop = input.LT(-1);
+
+
+            if ( state.backtracking==0 ) {
+
+            retval.tree = (CommonTree)adaptor.rulePostProcessing(root_0);
+            adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
+            }
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+    	retval.tree = (CommonTree)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+
+        }
+
+        finally {
+        	// do for sure before leaving
+            if ( state.backtracking>0 ) { memoize(input, 5, cellIndex_StartIndex); }
+
+        }
+        return retval;
+    }
+    // $ANTLR end "cellIndex"
+
+
     public static class functionCallOrStructure_return extends ParserRuleReturnScope {
         CommonTree tree;
         public Object getTree() { return tree; }
@@ -763,7 +897,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "functionCallOrStructure"
-    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:85:1: functionCallOrStructure : functionCall ( DOT ^ ( OPENP expr CLOSEP | functionCall ) )? ;
+    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:105:1: functionCallOrStructure : functionCall ( DOT ^ ( OPENP expr CLOSEP | functionCall ) )? ;
     public final ExprParser.functionCallOrStructure_return functionCallOrStructure() throws RecognitionException {
         ExprParser.functionCallOrStructure_return retval = new ExprParser.functionCallOrStructure_return();
         retval.start = input.LT(1);
@@ -772,115 +906,115 @@ public TreeAdaptor getTreeAdaptor() {
 
         CommonTree root_0 = null;
 
-        Token DOT18=null;
-        Token OPENP19=null;
-        Token CLOSEP21=null;
-        ExprParser.functionCall_return functionCall17 =null;
+        Token DOT22=null;
+        Token OPENP23=null;
+        Token CLOSEP25=null;
+        ExprParser.functionCall_return functionCall21 =null;
 
-        ExprParser.expr_return expr20 =null;
+        ExprParser.expr_return expr24 =null;
 
-        ExprParser.functionCall_return functionCall22 =null;
+        ExprParser.functionCall_return functionCall26 =null;
 
 
-        CommonTree DOT18_tree=null;
-        CommonTree OPENP19_tree=null;
-        CommonTree CLOSEP21_tree=null;
+        CommonTree DOT22_tree=null;
+        CommonTree OPENP23_tree=null;
+        CommonTree CLOSEP25_tree=null;
 
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 5) ) { return retval; }
+            if ( state.backtracking>0 && alreadyParsedRule(input, 6) ) { return retval; }
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:85:25: ( functionCall ( DOT ^ ( OPENP expr CLOSEP | functionCall ) )? )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:85:27: functionCall ( DOT ^ ( OPENP expr CLOSEP | functionCall ) )?
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:105:25: ( functionCall ( DOT ^ ( OPENP expr CLOSEP | functionCall ) )? )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:105:27: functionCall ( DOT ^ ( OPENP expr CLOSEP | functionCall ) )?
             {
             root_0 = (CommonTree)adaptor.nil();
 
 
-            pushFollow(FOLLOW_functionCall_in_functionCallOrStructure325);
-            functionCall17=functionCall();
+            pushFollow(FOLLOW_functionCall_in_functionCallOrStructure388);
+            functionCall21=functionCall();
 
             state._fsp--;
             if (state.failed) return retval;
-            if ( state.backtracking==0 ) adaptor.addChild(root_0, functionCall17.getTree());
+            if ( state.backtracking==0 ) adaptor.addChild(root_0, functionCall21.getTree());
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:85:40: ( DOT ^ ( OPENP expr CLOSEP | functionCall ) )?
-            int alt11=2;
-            int LA11_0 = input.LA(1);
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:105:40: ( DOT ^ ( OPENP expr CLOSEP | functionCall ) )?
+            int alt13=2;
+            int LA13_0 = input.LA(1);
 
-            if ( (LA11_0==DOT) ) {
-                int LA11_1 = input.LA(2);
+            if ( (LA13_0==DOT) ) {
+                int LA13_1 = input.LA(2);
 
-                if ( (LA11_1==ID||LA11_1==OPENP) ) {
-                    alt11=1;
+                if ( (LA13_1==ID||LA13_1==OPENP) ) {
+                    alt13=1;
                 }
             }
-            switch (alt11) {
+            switch (alt13) {
                 case 1 :
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:85:41: DOT ^ ( OPENP expr CLOSEP | functionCall )
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:105:41: DOT ^ ( OPENP expr CLOSEP | functionCall )
                     {
-                    DOT18=(Token)match(input,DOT,FOLLOW_DOT_in_functionCallOrStructure328); if (state.failed) return retval;
+                    DOT22=(Token)match(input,DOT,FOLLOW_DOT_in_functionCallOrStructure391); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
-                    DOT18_tree = 
-                    (CommonTree)adaptor.create(DOT18)
+                    DOT22_tree = 
+                    (CommonTree)adaptor.create(DOT22)
                     ;
-                    root_0 = (CommonTree)adaptor.becomeRoot(DOT18_tree, root_0);
+                    root_0 = (CommonTree)adaptor.becomeRoot(DOT22_tree, root_0);
                     }
 
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:85:46: ( OPENP expr CLOSEP | functionCall )
-                    int alt10=2;
-                    int LA10_0 = input.LA(1);
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:105:46: ( OPENP expr CLOSEP | functionCall )
+                    int alt12=2;
+                    int LA12_0 = input.LA(1);
 
-                    if ( (LA10_0==OPENP) ) {
-                        alt10=1;
+                    if ( (LA12_0==OPENP) ) {
+                        alt12=1;
                     }
-                    else if ( (LA10_0==ID) ) {
-                        alt10=2;
+                    else if ( (LA12_0==ID) ) {
+                        alt12=2;
                     }
                     else {
                         if (state.backtracking>0) {state.failed=true; return retval;}
                         NoViableAltException nvae =
-                            new NoViableAltException("", 10, 0, input);
+                            new NoViableAltException("", 12, 0, input);
 
                         throw nvae;
 
                     }
-                    switch (alt10) {
+                    switch (alt12) {
                         case 1 :
-                            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:85:47: OPENP expr CLOSEP
+                            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:105:47: OPENP expr CLOSEP
                             {
-                            OPENP19=(Token)match(input,OPENP,FOLLOW_OPENP_in_functionCallOrStructure332); if (state.failed) return retval;
+                            OPENP23=(Token)match(input,OPENP,FOLLOW_OPENP_in_functionCallOrStructure395); if (state.failed) return retval;
                             if ( state.backtracking==0 ) {
-                            OPENP19_tree = 
-                            (CommonTree)adaptor.create(OPENP19)
+                            OPENP23_tree = 
+                            (CommonTree)adaptor.create(OPENP23)
                             ;
-                            adaptor.addChild(root_0, OPENP19_tree);
+                            adaptor.addChild(root_0, OPENP23_tree);
                             }
 
-                            pushFollow(FOLLOW_expr_in_functionCallOrStructure334);
-                            expr20=expr();
+                            pushFollow(FOLLOW_expr_in_functionCallOrStructure397);
+                            expr24=expr();
 
                             state._fsp--;
                             if (state.failed) return retval;
-                            if ( state.backtracking==0 ) adaptor.addChild(root_0, expr20.getTree());
+                            if ( state.backtracking==0 ) adaptor.addChild(root_0, expr24.getTree());
 
-                            CLOSEP21=(Token)match(input,CLOSEP,FOLLOW_CLOSEP_in_functionCallOrStructure336); if (state.failed) return retval;
+                            CLOSEP25=(Token)match(input,CLOSEP,FOLLOW_CLOSEP_in_functionCallOrStructure399); if (state.failed) return retval;
                             if ( state.backtracking==0 ) {
-                            CLOSEP21_tree = 
-                            (CommonTree)adaptor.create(CLOSEP21)
+                            CLOSEP25_tree = 
+                            (CommonTree)adaptor.create(CLOSEP25)
                             ;
-                            adaptor.addChild(root_0, CLOSEP21_tree);
+                            adaptor.addChild(root_0, CLOSEP25_tree);
                             }
 
                             }
                             break;
                         case 2 :
-                            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:85:67: functionCall
+                            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:105:67: functionCall
                             {
-                            pushFollow(FOLLOW_functionCall_in_functionCallOrStructure340);
-                            functionCall22=functionCall();
+                            pushFollow(FOLLOW_functionCall_in_functionCallOrStructure403);
+                            functionCall26=functionCall();
 
                             state._fsp--;
                             if (state.failed) return retval;
-                            if ( state.backtracking==0 ) adaptor.addChild(root_0, functionCall22.getTree());
+                            if ( state.backtracking==0 ) adaptor.addChild(root_0, functionCall26.getTree());
 
                             }
                             break;
@@ -914,7 +1048,7 @@ public TreeAdaptor getTreeAdaptor() {
 
         finally {
         	// do for sure before leaving
-            if ( state.backtracking>0 ) { memoize(input, 5, functionCallOrStructure_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 6, functionCallOrStructure_StartIndex); }
 
         }
         return retval;
@@ -929,7 +1063,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "functionHeader"
-    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:88:1: functionHeader : FUNCTION ( ( ( ( OPENB ( ID ( ( COMMA )? ID )* )? CLOSEB ) | ID )? EQUALS )? ) ID ( OPENP ( ID ( COMMA ID )* )? CLOSEP )? ;
+    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:108:1: functionHeader : FUNCTION ( ( ( ( OPENB ( ID ( ( COMMA )? ID )* )? CLOSEB ) | ID )? EQUALS )? ) ID ( OPENP ( ID ( COMMA ID )* )? CLOSEP )? ;
     public final ExprParser.functionHeader_return functionHeader() throws RecognitionException {
         ExprParser.functionHeader_return retval = new ExprParser.functionHeader_return();
         retval.start = input.LT(1);
@@ -938,150 +1072,150 @@ public TreeAdaptor getTreeAdaptor() {
 
         CommonTree root_0 = null;
 
-        Token FUNCTION23=null;
-        Token OPENB24=null;
-        Token ID25=null;
-        Token COMMA26=null;
-        Token ID27=null;
-        Token CLOSEB28=null;
+        Token FUNCTION27=null;
+        Token OPENB28=null;
         Token ID29=null;
-        Token EQUALS30=null;
+        Token COMMA30=null;
         Token ID31=null;
-        Token OPENP32=null;
+        Token CLOSEB32=null;
         Token ID33=null;
-        Token COMMA34=null;
+        Token EQUALS34=null;
         Token ID35=null;
-        Token CLOSEP36=null;
+        Token OPENP36=null;
+        Token ID37=null;
+        Token COMMA38=null;
+        Token ID39=null;
+        Token CLOSEP40=null;
 
-        CommonTree FUNCTION23_tree=null;
-        CommonTree OPENB24_tree=null;
-        CommonTree ID25_tree=null;
-        CommonTree COMMA26_tree=null;
-        CommonTree ID27_tree=null;
-        CommonTree CLOSEB28_tree=null;
+        CommonTree FUNCTION27_tree=null;
+        CommonTree OPENB28_tree=null;
         CommonTree ID29_tree=null;
-        CommonTree EQUALS30_tree=null;
+        CommonTree COMMA30_tree=null;
         CommonTree ID31_tree=null;
-        CommonTree OPENP32_tree=null;
+        CommonTree CLOSEB32_tree=null;
         CommonTree ID33_tree=null;
-        CommonTree COMMA34_tree=null;
+        CommonTree EQUALS34_tree=null;
         CommonTree ID35_tree=null;
-        CommonTree CLOSEP36_tree=null;
+        CommonTree OPENP36_tree=null;
+        CommonTree ID37_tree=null;
+        CommonTree COMMA38_tree=null;
+        CommonTree ID39_tree=null;
+        CommonTree CLOSEP40_tree=null;
 
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 6) ) { return retval; }
+            if ( state.backtracking>0 && alreadyParsedRule(input, 7) ) { return retval; }
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:88:16: ( FUNCTION ( ( ( ( OPENB ( ID ( ( COMMA )? ID )* )? CLOSEB ) | ID )? EQUALS )? ) ID ( OPENP ( ID ( COMMA ID )* )? CLOSEP )? )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:88:18: FUNCTION ( ( ( ( OPENB ( ID ( ( COMMA )? ID )* )? CLOSEB ) | ID )? EQUALS )? ) ID ( OPENP ( ID ( COMMA ID )* )? CLOSEP )?
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:108:16: ( FUNCTION ( ( ( ( OPENB ( ID ( ( COMMA )? ID )* )? CLOSEB ) | ID )? EQUALS )? ) ID ( OPENP ( ID ( COMMA ID )* )? CLOSEP )? )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:108:18: FUNCTION ( ( ( ( OPENB ( ID ( ( COMMA )? ID )* )? CLOSEB ) | ID )? EQUALS )? ) ID ( OPENP ( ID ( COMMA ID )* )? CLOSEP )?
             {
             root_0 = (CommonTree)adaptor.nil();
 
 
-            FUNCTION23=(Token)match(input,FUNCTION,FOLLOW_FUNCTION_in_functionHeader352); if (state.failed) return retval;
+            FUNCTION27=(Token)match(input,FUNCTION,FOLLOW_FUNCTION_in_functionHeader415); if (state.failed) return retval;
             if ( state.backtracking==0 ) {
-            FUNCTION23_tree = 
-            (CommonTree)adaptor.create(FUNCTION23)
+            FUNCTION27_tree = 
+            (CommonTree)adaptor.create(FUNCTION27)
             ;
-            adaptor.addChild(root_0, FUNCTION23_tree);
+            adaptor.addChild(root_0, FUNCTION27_tree);
             }
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:89:3: ( ( ( ( OPENB ( ID ( ( COMMA )? ID )* )? CLOSEB ) | ID )? EQUALS )? )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:90:3: ( ( ( OPENB ( ID ( ( COMMA )? ID )* )? CLOSEB ) | ID )? EQUALS )?
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:109:3: ( ( ( ( OPENB ( ID ( ( COMMA )? ID )* )? CLOSEB ) | ID )? EQUALS )? )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:110:3: ( ( ( OPENB ( ID ( ( COMMA )? ID )* )? CLOSEB ) | ID )? EQUALS )?
             {
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:90:3: ( ( ( OPENB ( ID ( ( COMMA )? ID )* )? CLOSEB ) | ID )? EQUALS )?
-            int alt16=2;
-            int LA16_0 = input.LA(1);
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:110:3: ( ( ( OPENB ( ID ( ( COMMA )? ID )* )? CLOSEB ) | ID )? EQUALS )?
+            int alt18=2;
+            int LA18_0 = input.LA(1);
 
-            if ( (LA16_0==EQUALS||LA16_0==OPENB) ) {
-                alt16=1;
+            if ( (LA18_0==EQUALS||LA18_0==OPENB) ) {
+                alt18=1;
             }
-            else if ( (LA16_0==ID) ) {
-                int LA16_2 = input.LA(2);
+            else if ( (LA18_0==ID) ) {
+                int LA18_2 = input.LA(2);
 
-                if ( (LA16_2==EQUALS) ) {
-                    alt16=1;
+                if ( (LA18_2==EQUALS) ) {
+                    alt18=1;
                 }
             }
-            switch (alt16) {
+            switch (alt18) {
                 case 1 :
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:90:4: ( ( OPENB ( ID ( ( COMMA )? ID )* )? CLOSEB ) | ID )? EQUALS
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:110:4: ( ( OPENB ( ID ( ( COMMA )? ID )* )? CLOSEB ) | ID )? EQUALS
                     {
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:90:4: ( ( OPENB ( ID ( ( COMMA )? ID )* )? CLOSEB ) | ID )?
-                    int alt15=3;
-                    int LA15_0 = input.LA(1);
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:110:4: ( ( OPENB ( ID ( ( COMMA )? ID )* )? CLOSEB ) | ID )?
+                    int alt17=3;
+                    int LA17_0 = input.LA(1);
 
-                    if ( (LA15_0==OPENB) ) {
-                        alt15=1;
+                    if ( (LA17_0==OPENB) ) {
+                        alt17=1;
                     }
-                    else if ( (LA15_0==ID) ) {
-                        alt15=2;
+                    else if ( (LA17_0==ID) ) {
+                        alt17=2;
                     }
-                    switch (alt15) {
+                    switch (alt17) {
                         case 1 :
-                            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:90:5: ( OPENB ( ID ( ( COMMA )? ID )* )? CLOSEB )
+                            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:110:5: ( OPENB ( ID ( ( COMMA )? ID )* )? CLOSEB )
                             {
-                            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:90:5: ( OPENB ( ID ( ( COMMA )? ID )* )? CLOSEB )
-                            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:90:6: OPENB ( ID ( ( COMMA )? ID )* )? CLOSEB
+                            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:110:5: ( OPENB ( ID ( ( COMMA )? ID )* )? CLOSEB )
+                            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:110:6: OPENB ( ID ( ( COMMA )? ID )* )? CLOSEB
                             {
-                            OPENB24=(Token)match(input,OPENB,FOLLOW_OPENB_in_functionHeader364); if (state.failed) return retval;
+                            OPENB28=(Token)match(input,OPENB,FOLLOW_OPENB_in_functionHeader427); if (state.failed) return retval;
                             if ( state.backtracking==0 ) {
-                            OPENB24_tree = 
-                            (CommonTree)adaptor.create(OPENB24)
+                            OPENB28_tree = 
+                            (CommonTree)adaptor.create(OPENB28)
                             ;
-                            adaptor.addChild(root_0, OPENB24_tree);
+                            adaptor.addChild(root_0, OPENB28_tree);
                             }
 
-                            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:90:12: ( ID ( ( COMMA )? ID )* )?
-                            int alt14=2;
-                            int LA14_0 = input.LA(1);
+                            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:110:12: ( ID ( ( COMMA )? ID )* )?
+                            int alt16=2;
+                            int LA16_0 = input.LA(1);
 
-                            if ( (LA14_0==ID) ) {
-                                alt14=1;
+                            if ( (LA16_0==ID) ) {
+                                alt16=1;
                             }
-                            switch (alt14) {
+                            switch (alt16) {
                                 case 1 :
-                                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:90:13: ID ( ( COMMA )? ID )*
+                                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:110:13: ID ( ( COMMA )? ID )*
                                     {
-                                    ID25=(Token)match(input,ID,FOLLOW_ID_in_functionHeader367); if (state.failed) return retval;
+                                    ID29=(Token)match(input,ID,FOLLOW_ID_in_functionHeader430); if (state.failed) return retval;
                                     if ( state.backtracking==0 ) {
-                                    ID25_tree = 
-                                    (CommonTree)adaptor.create(ID25)
+                                    ID29_tree = 
+                                    (CommonTree)adaptor.create(ID29)
                                     ;
-                                    adaptor.addChild(root_0, ID25_tree);
+                                    adaptor.addChild(root_0, ID29_tree);
                                     }
 
-                                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:90:16: ( ( COMMA )? ID )*
-                                    loop13:
+                                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:110:16: ( ( COMMA )? ID )*
+                                    loop15:
                                     do {
-                                        int alt13=2;
-                                        int LA13_0 = input.LA(1);
+                                        int alt15=2;
+                                        int LA15_0 = input.LA(1);
 
-                                        if ( (LA13_0==COMMA||LA13_0==ID) ) {
-                                            alt13=1;
+                                        if ( (LA15_0==COMMA||LA15_0==ID) ) {
+                                            alt15=1;
                                         }
 
 
-                                        switch (alt13) {
+                                        switch (alt15) {
                                     	case 1 :
-                                    	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:90:17: ( COMMA )? ID
+                                    	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:110:17: ( COMMA )? ID
                                     	    {
-                                    	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:90:17: ( COMMA )?
-                                    	    int alt12=2;
-                                    	    int LA12_0 = input.LA(1);
+                                    	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:110:17: ( COMMA )?
+                                    	    int alt14=2;
+                                    	    int LA14_0 = input.LA(1);
 
-                                    	    if ( (LA12_0==COMMA) ) {
-                                    	        alt12=1;
+                                    	    if ( (LA14_0==COMMA) ) {
+                                    	        alt14=1;
                                     	    }
-                                    	    switch (alt12) {
+                                    	    switch (alt14) {
                                     	        case 1 :
-                                    	            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:90:17: COMMA
+                                    	            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:110:17: COMMA
                                     	            {
-                                    	            COMMA26=(Token)match(input,COMMA,FOLLOW_COMMA_in_functionHeader370); if (state.failed) return retval;
+                                    	            COMMA30=(Token)match(input,COMMA,FOLLOW_COMMA_in_functionHeader433); if (state.failed) return retval;
                                     	            if ( state.backtracking==0 ) {
-                                    	            COMMA26_tree = 
-                                    	            (CommonTree)adaptor.create(COMMA26)
+                                    	            COMMA30_tree = 
+                                    	            (CommonTree)adaptor.create(COMMA30)
                                     	            ;
-                                    	            adaptor.addChild(root_0, COMMA26_tree);
+                                    	            adaptor.addChild(root_0, COMMA30_tree);
                                     	            }
 
                                     	            }
@@ -1090,19 +1224,19 @@ public TreeAdaptor getTreeAdaptor() {
                                     	    }
 
 
-                                    	    ID27=(Token)match(input,ID,FOLLOW_ID_in_functionHeader373); if (state.failed) return retval;
+                                    	    ID31=(Token)match(input,ID,FOLLOW_ID_in_functionHeader436); if (state.failed) return retval;
                                     	    if ( state.backtracking==0 ) {
-                                    	    ID27_tree = 
-                                    	    (CommonTree)adaptor.create(ID27)
+                                    	    ID31_tree = 
+                                    	    (CommonTree)adaptor.create(ID31)
                                     	    ;
-                                    	    adaptor.addChild(root_0, ID27_tree);
+                                    	    adaptor.addChild(root_0, ID31_tree);
                                     	    }
 
                                     	    }
                                     	    break;
 
                                     	default :
-                                    	    break loop13;
+                                    	    break loop15;
                                         }
                                     } while (true);
 
@@ -1113,12 +1247,12 @@ public TreeAdaptor getTreeAdaptor() {
                             }
 
 
-                            CLOSEB28=(Token)match(input,CLOSEB,FOLLOW_CLOSEB_in_functionHeader379); if (state.failed) return retval;
+                            CLOSEB32=(Token)match(input,CLOSEB,FOLLOW_CLOSEB_in_functionHeader442); if (state.failed) return retval;
                             if ( state.backtracking==0 ) {
-                            CLOSEB28_tree = 
-                            (CommonTree)adaptor.create(CLOSEB28)
+                            CLOSEB32_tree = 
+                            (CommonTree)adaptor.create(CLOSEB32)
                             ;
-                            adaptor.addChild(root_0, CLOSEB28_tree);
+                            adaptor.addChild(root_0, CLOSEB32_tree);
                             }
 
                             }
@@ -1127,14 +1261,14 @@ public TreeAdaptor getTreeAdaptor() {
                             }
                             break;
                         case 2 :
-                            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:90:41: ID
+                            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:110:41: ID
                             {
-                            ID29=(Token)match(input,ID,FOLLOW_ID_in_functionHeader384); if (state.failed) return retval;
+                            ID33=(Token)match(input,ID,FOLLOW_ID_in_functionHeader447); if (state.failed) return retval;
                             if ( state.backtracking==0 ) {
-                            ID29_tree = 
-                            (CommonTree)adaptor.create(ID29)
+                            ID33_tree = 
+                            (CommonTree)adaptor.create(ID33)
                             ;
-                            adaptor.addChild(root_0, ID29_tree);
+                            adaptor.addChild(root_0, ID33_tree);
                             }
 
                             }
@@ -1143,12 +1277,12 @@ public TreeAdaptor getTreeAdaptor() {
                     }
 
 
-                    EQUALS30=(Token)match(input,EQUALS,FOLLOW_EQUALS_in_functionHeader388); if (state.failed) return retval;
+                    EQUALS34=(Token)match(input,EQUALS,FOLLOW_EQUALS_in_functionHeader451); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
-                    EQUALS30_tree = 
-                    (CommonTree)adaptor.create(EQUALS30)
+                    EQUALS34_tree = 
+                    (CommonTree)adaptor.create(EQUALS34)
                     ;
-                    adaptor.addChild(root_0, EQUALS30_tree);
+                    adaptor.addChild(root_0, EQUALS34_tree);
                     }
 
                     }
@@ -1160,102 +1294,102 @@ public TreeAdaptor getTreeAdaptor() {
             }
 
 
-            ID31=(Token)match(input,ID,FOLLOW_ID_in_functionHeader399); if (state.failed) return retval;
+            ID35=(Token)match(input,ID,FOLLOW_ID_in_functionHeader462); if (state.failed) return retval;
             if ( state.backtracking==0 ) {
-            ID31_tree = 
-            (CommonTree)adaptor.create(ID31)
+            ID35_tree = 
+            (CommonTree)adaptor.create(ID35)
             ;
-            adaptor.addChild(root_0, ID31_tree);
+            adaptor.addChild(root_0, ID35_tree);
             }
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:93:3: ( OPENP ( ID ( COMMA ID )* )? CLOSEP )?
-            int alt19=2;
-            int LA19_0 = input.LA(1);
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:113:3: ( OPENP ( ID ( COMMA ID )* )? CLOSEP )?
+            int alt21=2;
+            int LA21_0 = input.LA(1);
 
-            if ( (LA19_0==OPENP) ) {
-                int LA19_1 = input.LA(2);
+            if ( (LA21_0==OPENP) ) {
+                int LA21_1 = input.LA(2);
 
-                if ( (LA19_1==ID) ) {
-                    int LA19_3 = input.LA(3);
+                if ( (LA21_1==ID) ) {
+                    int LA21_3 = input.LA(3);
 
-                    if ( (LA19_3==COMMA) ) {
-                        alt19=1;
+                    if ( (LA21_3==COMMA) ) {
+                        alt21=1;
                     }
-                    else if ( (LA19_3==CLOSEP) ) {
-                        alt19=1;
+                    else if ( (LA21_3==CLOSEP) ) {
+                        alt21=1;
                     }
                 }
-                else if ( (LA19_1==CLOSEP) ) {
-                    alt19=1;
+                else if ( (LA21_1==CLOSEP) ) {
+                    alt21=1;
                 }
             }
-            switch (alt19) {
+            switch (alt21) {
                 case 1 :
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:93:4: OPENP ( ID ( COMMA ID )* )? CLOSEP
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:113:4: OPENP ( ID ( COMMA ID )* )? CLOSEP
                     {
-                    OPENP32=(Token)match(input,OPENP,FOLLOW_OPENP_in_functionHeader405); if (state.failed) return retval;
+                    OPENP36=(Token)match(input,OPENP,FOLLOW_OPENP_in_functionHeader468); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
-                    OPENP32_tree = 
-                    (CommonTree)adaptor.create(OPENP32)
+                    OPENP36_tree = 
+                    (CommonTree)adaptor.create(OPENP36)
                     ;
-                    adaptor.addChild(root_0, OPENP32_tree);
+                    adaptor.addChild(root_0, OPENP36_tree);
                     }
 
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:93:10: ( ID ( COMMA ID )* )?
-                    int alt18=2;
-                    int LA18_0 = input.LA(1);
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:113:10: ( ID ( COMMA ID )* )?
+                    int alt20=2;
+                    int LA20_0 = input.LA(1);
 
-                    if ( (LA18_0==ID) ) {
-                        alt18=1;
+                    if ( (LA20_0==ID) ) {
+                        alt20=1;
                     }
-                    switch (alt18) {
+                    switch (alt20) {
                         case 1 :
-                            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:93:11: ID ( COMMA ID )*
+                            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:113:11: ID ( COMMA ID )*
                             {
-                            ID33=(Token)match(input,ID,FOLLOW_ID_in_functionHeader408); if (state.failed) return retval;
+                            ID37=(Token)match(input,ID,FOLLOW_ID_in_functionHeader471); if (state.failed) return retval;
                             if ( state.backtracking==0 ) {
-                            ID33_tree = 
-                            (CommonTree)adaptor.create(ID33)
+                            ID37_tree = 
+                            (CommonTree)adaptor.create(ID37)
                             ;
-                            adaptor.addChild(root_0, ID33_tree);
+                            adaptor.addChild(root_0, ID37_tree);
                             }
 
-                            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:93:14: ( COMMA ID )*
-                            loop17:
+                            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:113:14: ( COMMA ID )*
+                            loop19:
                             do {
-                                int alt17=2;
-                                int LA17_0 = input.LA(1);
+                                int alt19=2;
+                                int LA19_0 = input.LA(1);
 
-                                if ( (LA17_0==COMMA) ) {
-                                    alt17=1;
+                                if ( (LA19_0==COMMA) ) {
+                                    alt19=1;
                                 }
 
 
-                                switch (alt17) {
+                                switch (alt19) {
                             	case 1 :
-                            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:93:15: COMMA ID
+                            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:113:15: COMMA ID
                             	    {
-                            	    COMMA34=(Token)match(input,COMMA,FOLLOW_COMMA_in_functionHeader411); if (state.failed) return retval;
+                            	    COMMA38=(Token)match(input,COMMA,FOLLOW_COMMA_in_functionHeader474); if (state.failed) return retval;
                             	    if ( state.backtracking==0 ) {
-                            	    COMMA34_tree = 
-                            	    (CommonTree)adaptor.create(COMMA34)
+                            	    COMMA38_tree = 
+                            	    (CommonTree)adaptor.create(COMMA38)
                             	    ;
-                            	    adaptor.addChild(root_0, COMMA34_tree);
+                            	    adaptor.addChild(root_0, COMMA38_tree);
                             	    }
 
-                            	    ID35=(Token)match(input,ID,FOLLOW_ID_in_functionHeader413); if (state.failed) return retval;
+                            	    ID39=(Token)match(input,ID,FOLLOW_ID_in_functionHeader476); if (state.failed) return retval;
                             	    if ( state.backtracking==0 ) {
-                            	    ID35_tree = 
-                            	    (CommonTree)adaptor.create(ID35)
+                            	    ID39_tree = 
+                            	    (CommonTree)adaptor.create(ID39)
                             	    ;
-                            	    adaptor.addChild(root_0, ID35_tree);
+                            	    adaptor.addChild(root_0, ID39_tree);
                             	    }
 
                             	    }
                             	    break;
 
                             	default :
-                            	    break loop17;
+                            	    break loop19;
                                 }
                             } while (true);
 
@@ -1266,12 +1400,12 @@ public TreeAdaptor getTreeAdaptor() {
                     }
 
 
-                    CLOSEP36=(Token)match(input,CLOSEP,FOLLOW_CLOSEP_in_functionHeader419); if (state.failed) return retval;
+                    CLOSEP40=(Token)match(input,CLOSEP,FOLLOW_CLOSEP_in_functionHeader482); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
-                    CLOSEP36_tree = 
-                    (CommonTree)adaptor.create(CLOSEP36)
+                    CLOSEP40_tree = 
+                    (CommonTree)adaptor.create(CLOSEP40)
                     ;
-                    adaptor.addChild(root_0, CLOSEP36_tree);
+                    adaptor.addChild(root_0, CLOSEP40_tree);
                     }
 
                     }
@@ -1300,7 +1434,7 @@ public TreeAdaptor getTreeAdaptor() {
 
         finally {
         	// do for sure before leaving
-            if ( state.backtracking>0 ) { memoize(input, 6, functionHeader_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 7, functionHeader_StartIndex); }
 
         }
         return retval;
@@ -1315,7 +1449,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "term"
-    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:99:1: term : ( EMPTY_VEC | EMPTY_CELL | OPENP ! expr CLOSEP !| STRING_LITERAL | END | vector | cellArray | COLON | TRUE | FALSE | INTEGER ( DOT ^ INTEGER )? | DOT ^ INTEGER | functionCallOrStructure );
+    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:119:1: term : ( EMPTY_VEC | EMPTY_CELL | OPENP ! expr CLOSEP !| STRING_LITERAL | END | vector | cellArray | COLON | TRUE | FALSE | INTEGER ( DOT ^ INTEGER )? | DOT ^ INTEGER | functionCallOrStructure );
     public final ExprParser.term_return term() throws RecognitionException {
         ExprParser.term_return retval = new ExprParser.term_return();
         retval.start = input.LT(1);
@@ -1324,329 +1458,329 @@ public TreeAdaptor getTreeAdaptor() {
 
         CommonTree root_0 = null;
 
-        Token EMPTY_VEC37=null;
-        Token EMPTY_CELL38=null;
-        Token OPENP39=null;
-        Token CLOSEP41=null;
-        Token STRING_LITERAL42=null;
-        Token END43=null;
-        Token COLON46=null;
-        Token TRUE47=null;
-        Token FALSE48=null;
-        Token INTEGER49=null;
-        Token DOT50=null;
-        Token INTEGER51=null;
-        Token DOT52=null;
+        Token EMPTY_VEC41=null;
+        Token EMPTY_CELL42=null;
+        Token OPENP43=null;
+        Token CLOSEP45=null;
+        Token STRING_LITERAL46=null;
+        Token END47=null;
+        Token COLON50=null;
+        Token TRUE51=null;
+        Token FALSE52=null;
         Token INTEGER53=null;
-        ExprParser.expr_return expr40 =null;
+        Token DOT54=null;
+        Token INTEGER55=null;
+        Token DOT56=null;
+        Token INTEGER57=null;
+        ExprParser.expr_return expr44 =null;
 
-        ExprParser.vector_return vector44 =null;
+        ExprParser.vector_return vector48 =null;
 
-        ExprParser.cellArray_return cellArray45 =null;
+        ExprParser.cellArray_return cellArray49 =null;
 
-        ExprParser.functionCallOrStructure_return functionCallOrStructure54 =null;
+        ExprParser.functionCallOrStructure_return functionCallOrStructure58 =null;
 
 
-        CommonTree EMPTY_VEC37_tree=null;
-        CommonTree EMPTY_CELL38_tree=null;
-        CommonTree OPENP39_tree=null;
-        CommonTree CLOSEP41_tree=null;
-        CommonTree STRING_LITERAL42_tree=null;
-        CommonTree END43_tree=null;
-        CommonTree COLON46_tree=null;
-        CommonTree TRUE47_tree=null;
-        CommonTree FALSE48_tree=null;
-        CommonTree INTEGER49_tree=null;
-        CommonTree DOT50_tree=null;
-        CommonTree INTEGER51_tree=null;
-        CommonTree DOT52_tree=null;
+        CommonTree EMPTY_VEC41_tree=null;
+        CommonTree EMPTY_CELL42_tree=null;
+        CommonTree OPENP43_tree=null;
+        CommonTree CLOSEP45_tree=null;
+        CommonTree STRING_LITERAL46_tree=null;
+        CommonTree END47_tree=null;
+        CommonTree COLON50_tree=null;
+        CommonTree TRUE51_tree=null;
+        CommonTree FALSE52_tree=null;
         CommonTree INTEGER53_tree=null;
+        CommonTree DOT54_tree=null;
+        CommonTree INTEGER55_tree=null;
+        CommonTree DOT56_tree=null;
+        CommonTree INTEGER57_tree=null;
 
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 7) ) { return retval; }
+            if ( state.backtracking>0 && alreadyParsedRule(input, 8) ) { return retval; }
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:99:6: ( EMPTY_VEC | EMPTY_CELL | OPENP ! expr CLOSEP !| STRING_LITERAL | END | vector | cellArray | COLON | TRUE | FALSE | INTEGER ( DOT ^ INTEGER )? | DOT ^ INTEGER | functionCallOrStructure )
-            int alt21=13;
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:119:6: ( EMPTY_VEC | EMPTY_CELL | OPENP ! expr CLOSEP !| STRING_LITERAL | END | vector | cellArray | COLON | TRUE | FALSE | INTEGER ( DOT ^ INTEGER )? | DOT ^ INTEGER | functionCallOrStructure )
+            int alt23=13;
             switch ( input.LA(1) ) {
             case EMPTY_VEC:
                 {
-                alt21=1;
+                alt23=1;
                 }
                 break;
             case EMPTY_CELL:
                 {
-                alt21=2;
+                alt23=2;
                 }
                 break;
             case OPENP:
                 {
-                alt21=3;
+                alt23=3;
                 }
                 break;
             case STRING_LITERAL:
                 {
-                alt21=4;
+                alt23=4;
                 }
                 break;
             case END:
                 {
-                alt21=5;
+                alt23=5;
                 }
                 break;
             case OPENB:
                 {
-                alt21=6;
+                alt23=6;
                 }
                 break;
             case OPENC:
                 {
-                alt21=7;
+                alt23=7;
                 }
                 break;
             case COLON:
                 {
-                alt21=8;
+                alt23=8;
                 }
                 break;
             case TRUE:
                 {
-                alt21=9;
+                alt23=9;
                 }
                 break;
             case FALSE:
                 {
-                alt21=10;
+                alt23=10;
                 }
                 break;
             case INTEGER:
                 {
-                alt21=11;
+                alt23=11;
                 }
                 break;
             case DOT:
                 {
-                alt21=12;
+                alt23=12;
                 }
                 break;
             case ID:
                 {
-                alt21=13;
+                alt23=13;
                 }
                 break;
             default:
                 if (state.backtracking>0) {state.failed=true; return retval;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 21, 0, input);
+                    new NoViableAltException("", 23, 0, input);
 
                 throw nvae;
 
             }
 
-            switch (alt21) {
+            switch (alt23) {
                 case 1 :
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:99:8: EMPTY_VEC
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:119:8: EMPTY_VEC
                     {
                     root_0 = (CommonTree)adaptor.nil();
 
 
-                    EMPTY_VEC37=(Token)match(input,EMPTY_VEC,FOLLOW_EMPTY_VEC_in_term435); if (state.failed) return retval;
+                    EMPTY_VEC41=(Token)match(input,EMPTY_VEC,FOLLOW_EMPTY_VEC_in_term498); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
-                    EMPTY_VEC37_tree = 
-                    (CommonTree)adaptor.create(EMPTY_VEC37)
+                    EMPTY_VEC41_tree = 
+                    (CommonTree)adaptor.create(EMPTY_VEC41)
                     ;
-                    adaptor.addChild(root_0, EMPTY_VEC37_tree);
+                    adaptor.addChild(root_0, EMPTY_VEC41_tree);
                     }
 
                     }
                     break;
                 case 2 :
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:100:4: EMPTY_CELL
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:120:4: EMPTY_CELL
                     {
                     root_0 = (CommonTree)adaptor.nil();
 
 
-                    EMPTY_CELL38=(Token)match(input,EMPTY_CELL,FOLLOW_EMPTY_CELL_in_term441); if (state.failed) return retval;
+                    EMPTY_CELL42=(Token)match(input,EMPTY_CELL,FOLLOW_EMPTY_CELL_in_term504); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
-                    EMPTY_CELL38_tree = 
-                    (CommonTree)adaptor.create(EMPTY_CELL38)
+                    EMPTY_CELL42_tree = 
+                    (CommonTree)adaptor.create(EMPTY_CELL42)
                     ;
-                    adaptor.addChild(root_0, EMPTY_CELL38_tree);
+                    adaptor.addChild(root_0, EMPTY_CELL42_tree);
                     }
 
                     }
                     break;
                 case 3 :
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:101:4: OPENP ! expr CLOSEP !
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:121:4: OPENP ! expr CLOSEP !
                     {
                     root_0 = (CommonTree)adaptor.nil();
 
 
-                    OPENP39=(Token)match(input,OPENP,FOLLOW_OPENP_in_term446); if (state.failed) return retval;
+                    OPENP43=(Token)match(input,OPENP,FOLLOW_OPENP_in_term509); if (state.failed) return retval;
 
-                    pushFollow(FOLLOW_expr_in_term449);
-                    expr40=expr();
+                    pushFollow(FOLLOW_expr_in_term512);
+                    expr44=expr();
 
                     state._fsp--;
                     if (state.failed) return retval;
-                    if ( state.backtracking==0 ) adaptor.addChild(root_0, expr40.getTree());
+                    if ( state.backtracking==0 ) adaptor.addChild(root_0, expr44.getTree());
 
-                    CLOSEP41=(Token)match(input,CLOSEP,FOLLOW_CLOSEP_in_term451); if (state.failed) return retval;
+                    CLOSEP45=(Token)match(input,CLOSEP,FOLLOW_CLOSEP_in_term514); if (state.failed) return retval;
 
                     }
                     break;
                 case 4 :
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:102:4: STRING_LITERAL
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:129:4: STRING_LITERAL
                     {
                     root_0 = (CommonTree)adaptor.nil();
 
 
-                    STRING_LITERAL42=(Token)match(input,STRING_LITERAL,FOLLOW_STRING_LITERAL_in_term457); if (state.failed) return retval;
+                    STRING_LITERAL46=(Token)match(input,STRING_LITERAL,FOLLOW_STRING_LITERAL_in_term534); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
-                    STRING_LITERAL42_tree = 
-                    (CommonTree)adaptor.create(STRING_LITERAL42)
+                    STRING_LITERAL46_tree = 
+                    (CommonTree)adaptor.create(STRING_LITERAL46)
                     ;
-                    adaptor.addChild(root_0, STRING_LITERAL42_tree);
+                    adaptor.addChild(root_0, STRING_LITERAL46_tree);
                     }
 
                     }
                     break;
                 case 5 :
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:103:4: END
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:130:4: END
                     {
                     root_0 = (CommonTree)adaptor.nil();
 
 
-                    END43=(Token)match(input,END,FOLLOW_END_in_term462); if (state.failed) return retval;
+                    END47=(Token)match(input,END,FOLLOW_END_in_term539); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
-                    END43_tree = 
-                    (CommonTree)adaptor.create(END43)
+                    END47_tree = 
+                    (CommonTree)adaptor.create(END47)
                     ;
-                    adaptor.addChild(root_0, END43_tree);
+                    adaptor.addChild(root_0, END47_tree);
                     }
 
                     }
                     break;
                 case 6 :
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:104:4: vector
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:131:4: vector
                     {
                     root_0 = (CommonTree)adaptor.nil();
 
 
-                    pushFollow(FOLLOW_vector_in_term467);
-                    vector44=vector();
+                    pushFollow(FOLLOW_vector_in_term544);
+                    vector48=vector();
 
                     state._fsp--;
                     if (state.failed) return retval;
-                    if ( state.backtracking==0 ) adaptor.addChild(root_0, vector44.getTree());
+                    if ( state.backtracking==0 ) adaptor.addChild(root_0, vector48.getTree());
 
                     }
                     break;
                 case 7 :
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:105:4: cellArray
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:132:4: cellArray
                     {
                     root_0 = (CommonTree)adaptor.nil();
 
 
-                    pushFollow(FOLLOW_cellArray_in_term472);
-                    cellArray45=cellArray();
+                    pushFollow(FOLLOW_cellArray_in_term549);
+                    cellArray49=cellArray();
 
                     state._fsp--;
                     if (state.failed) return retval;
-                    if ( state.backtracking==0 ) adaptor.addChild(root_0, cellArray45.getTree());
+                    if ( state.backtracking==0 ) adaptor.addChild(root_0, cellArray49.getTree());
 
                     }
                     break;
                 case 8 :
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:106:4: COLON
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:133:4: COLON
                     {
                     root_0 = (CommonTree)adaptor.nil();
 
 
-                    COLON46=(Token)match(input,COLON,FOLLOW_COLON_in_term477); if (state.failed) return retval;
+                    COLON50=(Token)match(input,COLON,FOLLOW_COLON_in_term554); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
-                    COLON46_tree = 
-                    (CommonTree)adaptor.create(COLON46)
+                    COLON50_tree = 
+                    (CommonTree)adaptor.create(COLON50)
                     ;
-                    adaptor.addChild(root_0, COLON46_tree);
+                    adaptor.addChild(root_0, COLON50_tree);
                     }
 
                     }
                     break;
                 case 9 :
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:107:4: TRUE
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:134:4: TRUE
                     {
                     root_0 = (CommonTree)adaptor.nil();
 
 
-                    TRUE47=(Token)match(input,TRUE,FOLLOW_TRUE_in_term482); if (state.failed) return retval;
+                    TRUE51=(Token)match(input,TRUE,FOLLOW_TRUE_in_term559); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
-                    TRUE47_tree = 
-                    (CommonTree)adaptor.create(TRUE47)
+                    TRUE51_tree = 
+                    (CommonTree)adaptor.create(TRUE51)
                     ;
-                    adaptor.addChild(root_0, TRUE47_tree);
+                    adaptor.addChild(root_0, TRUE51_tree);
                     }
 
                     }
                     break;
                 case 10 :
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:108:4: FALSE
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:135:4: FALSE
                     {
                     root_0 = (CommonTree)adaptor.nil();
 
 
-                    FALSE48=(Token)match(input,FALSE,FOLLOW_FALSE_in_term487); if (state.failed) return retval;
+                    FALSE52=(Token)match(input,FALSE,FOLLOW_FALSE_in_term564); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
-                    FALSE48_tree = 
-                    (CommonTree)adaptor.create(FALSE48)
+                    FALSE52_tree = 
+                    (CommonTree)adaptor.create(FALSE52)
                     ;
-                    adaptor.addChild(root_0, FALSE48_tree);
+                    adaptor.addChild(root_0, FALSE52_tree);
                     }
 
                     }
                     break;
                 case 11 :
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:109:4: INTEGER ( DOT ^ INTEGER )?
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:137:4: INTEGER ( DOT ^ INTEGER )?
                     {
                     root_0 = (CommonTree)adaptor.nil();
 
 
-                    INTEGER49=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_term492); if (state.failed) return retval;
+                    INTEGER53=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_term571); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
-                    INTEGER49_tree = 
-                    (CommonTree)adaptor.create(INTEGER49)
+                    INTEGER53_tree = 
+                    (CommonTree)adaptor.create(INTEGER53)
                     ;
-                    adaptor.addChild(root_0, INTEGER49_tree);
+                    adaptor.addChild(root_0, INTEGER53_tree);
                     }
 
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:109:12: ( DOT ^ INTEGER )?
-                    int alt20=2;
-                    int LA20_0 = input.LA(1);
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:137:12: ( DOT ^ INTEGER )?
+                    int alt22=2;
+                    int LA22_0 = input.LA(1);
 
-                    if ( (LA20_0==DOT) ) {
-                        int LA20_1 = input.LA(2);
+                    if ( (LA22_0==DOT) ) {
+                        int LA22_1 = input.LA(2);
 
-                        if ( (LA20_1==INTEGER) ) {
-                            alt20=1;
+                        if ( (LA22_1==INTEGER) ) {
+                            alt22=1;
                         }
                     }
-                    switch (alt20) {
+                    switch (alt22) {
                         case 1 :
-                            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:109:13: DOT ^ INTEGER
+                            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:137:13: DOT ^ INTEGER
                             {
-                            DOT50=(Token)match(input,DOT,FOLLOW_DOT_in_term495); if (state.failed) return retval;
+                            DOT54=(Token)match(input,DOT,FOLLOW_DOT_in_term574); if (state.failed) return retval;
                             if ( state.backtracking==0 ) {
-                            DOT50_tree = 
-                            (CommonTree)adaptor.create(DOT50)
+                            DOT54_tree = 
+                            (CommonTree)adaptor.create(DOT54)
                             ;
-                            root_0 = (CommonTree)adaptor.becomeRoot(DOT50_tree, root_0);
+                            root_0 = (CommonTree)adaptor.becomeRoot(DOT54_tree, root_0);
                             }
 
-                            INTEGER51=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_term498); if (state.failed) return retval;
+                            INTEGER55=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_term577); if (state.failed) return retval;
                             if ( state.backtracking==0 ) {
-                            INTEGER51_tree = 
-                            (CommonTree)adaptor.create(INTEGER51)
+                            INTEGER55_tree = 
+                            (CommonTree)adaptor.create(INTEGER55)
                             ;
-                            adaptor.addChild(root_0, INTEGER51_tree);
+                            adaptor.addChild(root_0, INTEGER55_tree);
                             }
 
                             }
@@ -1658,41 +1792,41 @@ public TreeAdaptor getTreeAdaptor() {
                     }
                     break;
                 case 12 :
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:110:4: DOT ^ INTEGER
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:138:4: DOT ^ INTEGER
                     {
                     root_0 = (CommonTree)adaptor.nil();
 
 
-                    DOT52=(Token)match(input,DOT,FOLLOW_DOT_in_term505); if (state.failed) return retval;
+                    DOT56=(Token)match(input,DOT,FOLLOW_DOT_in_term584); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
-                    DOT52_tree = 
-                    (CommonTree)adaptor.create(DOT52)
+                    DOT56_tree = 
+                    (CommonTree)adaptor.create(DOT56)
                     ;
-                    root_0 = (CommonTree)adaptor.becomeRoot(DOT52_tree, root_0);
+                    root_0 = (CommonTree)adaptor.becomeRoot(DOT56_tree, root_0);
                     }
 
-                    INTEGER53=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_term508); if (state.failed) return retval;
+                    INTEGER57=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_term587); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
-                    INTEGER53_tree = 
-                    (CommonTree)adaptor.create(INTEGER53)
+                    INTEGER57_tree = 
+                    (CommonTree)adaptor.create(INTEGER57)
                     ;
-                    adaptor.addChild(root_0, INTEGER53_tree);
+                    adaptor.addChild(root_0, INTEGER57_tree);
                     }
 
                     }
                     break;
                 case 13 :
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:111:4: functionCallOrStructure
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:139:4: functionCallOrStructure
                     {
                     root_0 = (CommonTree)adaptor.nil();
 
 
-                    pushFollow(FOLLOW_functionCallOrStructure_in_term513);
-                    functionCallOrStructure54=functionCallOrStructure();
+                    pushFollow(FOLLOW_functionCallOrStructure_in_term592);
+                    functionCallOrStructure58=functionCallOrStructure();
 
                     state._fsp--;
                     if (state.failed) return retval;
-                    if ( state.backtracking==0 ) adaptor.addChild(root_0, functionCallOrStructure54.getTree());
+                    if ( state.backtracking==0 ) adaptor.addChild(root_0, functionCallOrStructure58.getTree());
 
                     }
                     break;
@@ -1716,7 +1850,7 @@ public TreeAdaptor getTreeAdaptor() {
 
         finally {
         	// do for sure before leaving
-            if ( state.backtracking>0 ) { memoize(input, 7, term_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 8, term_StartIndex); }
 
         }
         return retval;
@@ -1731,7 +1865,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "transponent"
-    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:114:1: transponent : ( term ( ( ( DOT_CARET ^| CARET ^) term )* | ( SINGLE_QUOTE ^| DOT_TRANSPOSE ^)* ) ) ;
+    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:147:1: transponent : ( term ( ( ( DOT_CARET ^| CARET ^) term )* | ( SINGLE_QUOTE ^| DOT_TRANSPOSE ^)* ) ) ;
     public final ExprParser.transponent_return transponent() throws RecognitionException {
         ExprParser.transponent_return retval = new ExprParser.transponent_return();
         retval.start = input.LT(1);
@@ -1740,358 +1874,358 @@ public TreeAdaptor getTreeAdaptor() {
 
         CommonTree root_0 = null;
 
-        Token DOT_CARET56=null;
-        Token CARET57=null;
-        Token SINGLE_QUOTE59=null;
-        Token DOT_TRANSPOSE60=null;
-        ExprParser.term_return term55 =null;
+        Token DOT_CARET60=null;
+        Token CARET61=null;
+        Token SINGLE_QUOTE63=null;
+        Token DOT_TRANSPOSE64=null;
+        ExprParser.term_return term59 =null;
 
-        ExprParser.term_return term58 =null;
+        ExprParser.term_return term62 =null;
 
 
-        CommonTree DOT_CARET56_tree=null;
-        CommonTree CARET57_tree=null;
-        CommonTree SINGLE_QUOTE59_tree=null;
-        CommonTree DOT_TRANSPOSE60_tree=null;
+        CommonTree DOT_CARET60_tree=null;
+        CommonTree CARET61_tree=null;
+        CommonTree SINGLE_QUOTE63_tree=null;
+        CommonTree DOT_TRANSPOSE64_tree=null;
 
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 8) ) { return retval; }
+            if ( state.backtracking>0 && alreadyParsedRule(input, 9) ) { return retval; }
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:115:3: ( ( term ( ( ( DOT_CARET ^| CARET ^) term )* | ( SINGLE_QUOTE ^| DOT_TRANSPOSE ^)* ) ) )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:115:5: ( term ( ( ( DOT_CARET ^| CARET ^) term )* | ( SINGLE_QUOTE ^| DOT_TRANSPOSE ^)* ) )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:153:3: ( ( term ( ( ( DOT_CARET ^| CARET ^) term )* | ( SINGLE_QUOTE ^| DOT_TRANSPOSE ^)* ) ) )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:153:5: ( term ( ( ( DOT_CARET ^| CARET ^) term )* | ( SINGLE_QUOTE ^| DOT_TRANSPOSE ^)* ) )
             {
             root_0 = (CommonTree)adaptor.nil();
 
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:115:5: ( term ( ( ( DOT_CARET ^| CARET ^) term )* | ( SINGLE_QUOTE ^| DOT_TRANSPOSE ^)* ) )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:115:6: term ( ( ( DOT_CARET ^| CARET ^) term )* | ( SINGLE_QUOTE ^| DOT_TRANSPOSE ^)* )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:153:5: ( term ( ( ( DOT_CARET ^| CARET ^) term )* | ( SINGLE_QUOTE ^| DOT_TRANSPOSE ^)* ) )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:153:6: term ( ( ( DOT_CARET ^| CARET ^) term )* | ( SINGLE_QUOTE ^| DOT_TRANSPOSE ^)* )
             {
-            pushFollow(FOLLOW_term_in_transponent527);
-            term55=term();
+            pushFollow(FOLLOW_term_in_transponent618);
+            term59=term();
 
             state._fsp--;
             if (state.failed) return retval;
-            if ( state.backtracking==0 ) adaptor.addChild(root_0, term55.getTree());
+            if ( state.backtracking==0 ) adaptor.addChild(root_0, term59.getTree());
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:115:11: ( ( ( DOT_CARET ^| CARET ^) term )* | ( SINGLE_QUOTE ^| DOT_TRANSPOSE ^)* )
-            int alt25=2;
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:153:11: ( ( ( DOT_CARET ^| CARET ^) term )* | ( SINGLE_QUOTE ^| DOT_TRANSPOSE ^)* )
+            int alt27=2;
             switch ( input.LA(1) ) {
             case CARET:
             case DOT_CARET:
                 {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case DOT_STAR:
                 {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case DOT_SLASH:
                 {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case DOT_BACKSLASH:
                 {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case STAR:
                 {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case SLASH:
                 {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case BACKSLASH:
                 {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case PLUS:
                 {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case MINUS:
                 {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case LESS_THAN:
                 {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case GREATER_THAN:
                 {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case LESS_EQUAL:
                 {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case GREATER_EQUAL:
                 {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case ISEQUAL:
                 {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case NOT_EQUAL:
                 {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case ELE_AND:
                 {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case ELE_OR:
                 {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case SC_AND:
                 {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case SC_OR:
                 {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case COMMA:
                 {
-                alt25=1;
-                }
-                break;
-            case CLOSEC:
-                {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case CLOSEP:
                 {
-                alt25=1;
+                alt27=1;
+                }
+                break;
+            case CLOSEC:
+                {
+                alt27=1;
                 }
                 break;
             case NOT:
                 {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case EMPTY_VEC:
                 {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case EMPTY_CELL:
                 {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case OPENP:
                 {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case STRING_LITERAL:
                 {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case END:
                 {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case OPENB:
                 {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case OPENC:
                 {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case COLON:
                 {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case TRUE:
                 {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case FALSE:
                 {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case INTEGER:
                 {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case DOT:
                 {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case ID:
                 {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case SEMI:
                 {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case CLOSEB:
                 {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case EOF:
                 {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case IF:
                 {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case SWITCH:
                 {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case FOR:
                 {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case WHILE:
                 {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case BLOCK_END:
                 {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case ELSEIF:
                 {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case ELSE:
                 {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case OTHERWISE:
                 {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case CASE:
                 {
-                alt25=1;
+                alt27=1;
                 }
                 break;
             case DOT_TRANSPOSE:
             case SINGLE_QUOTE:
                 {
-                alt25=2;
+                alt27=2;
                 }
                 break;
             default:
                 if (state.backtracking>0) {state.failed=true; return retval;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 25, 0, input);
+                    new NoViableAltException("", 27, 0, input);
 
                 throw nvae;
 
             }
 
-            switch (alt25) {
+            switch (alt27) {
                 case 1 :
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:116:3: ( ( DOT_CARET ^| CARET ^) term )*
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:154:3: ( ( DOT_CARET ^| CARET ^) term )*
                     {
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:116:3: ( ( DOT_CARET ^| CARET ^) term )*
-                    loop23:
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:154:3: ( ( DOT_CARET ^| CARET ^) term )*
+                    loop25:
                     do {
-                        int alt23=2;
-                        int LA23_0 = input.LA(1);
+                        int alt25=2;
+                        int LA25_0 = input.LA(1);
 
-                        if ( (LA23_0==CARET||LA23_0==DOT_CARET) ) {
-                            alt23=1;
+                        if ( (LA25_0==CARET||LA25_0==DOT_CARET) ) {
+                            alt25=1;
                         }
 
 
-                        switch (alt23) {
+                        switch (alt25) {
                     	case 1 :
-                    	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:116:5: ( DOT_CARET ^| CARET ^) term
+                    	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:154:5: ( DOT_CARET ^| CARET ^) term
                     	    {
-                    	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:116:5: ( DOT_CARET ^| CARET ^)
-                    	    int alt22=2;
-                    	    int LA22_0 = input.LA(1);
+                    	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:154:5: ( DOT_CARET ^| CARET ^)
+                    	    int alt24=2;
+                    	    int LA24_0 = input.LA(1);
 
-                    	    if ( (LA22_0==DOT_CARET) ) {
-                    	        alt22=1;
+                    	    if ( (LA24_0==DOT_CARET) ) {
+                    	        alt24=1;
                     	    }
-                    	    else if ( (LA22_0==CARET) ) {
-                    	        alt22=2;
+                    	    else if ( (LA24_0==CARET) ) {
+                    	        alt24=2;
                     	    }
                     	    else {
                     	        if (state.backtracking>0) {state.failed=true; return retval;}
                     	        NoViableAltException nvae =
-                    	            new NoViableAltException("", 22, 0, input);
+                    	            new NoViableAltException("", 24, 0, input);
 
                     	        throw nvae;
 
                     	    }
-                    	    switch (alt22) {
+                    	    switch (alt24) {
                     	        case 1 :
-                    	            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:116:6: DOT_CARET ^
+                    	            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:154:6: DOT_CARET ^
                     	            {
-                    	            DOT_CARET56=(Token)match(input,DOT_CARET,FOLLOW_DOT_CARET_in_transponent536); if (state.failed) return retval;
+                    	            DOT_CARET60=(Token)match(input,DOT_CARET,FOLLOW_DOT_CARET_in_transponent627); if (state.failed) return retval;
                     	            if ( state.backtracking==0 ) {
-                    	            DOT_CARET56_tree = 
-                    	            (CommonTree)adaptor.create(DOT_CARET56)
+                    	            DOT_CARET60_tree = 
+                    	            (CommonTree)adaptor.create(DOT_CARET60)
                     	            ;
-                    	            root_0 = (CommonTree)adaptor.becomeRoot(DOT_CARET56_tree, root_0);
+                    	            root_0 = (CommonTree)adaptor.becomeRoot(DOT_CARET60_tree, root_0);
                     	            }
 
                     	            }
                     	            break;
                     	        case 2 :
-                    	            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:116:19: CARET ^
+                    	            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:154:19: CARET ^
                     	            {
-                    	            CARET57=(Token)match(input,CARET,FOLLOW_CARET_in_transponent541); if (state.failed) return retval;
+                    	            CARET61=(Token)match(input,CARET,FOLLOW_CARET_in_transponent632); if (state.failed) return retval;
                     	            if ( state.backtracking==0 ) {
-                    	            CARET57_tree = 
-                    	            (CommonTree)adaptor.create(CARET57)
+                    	            CARET61_tree = 
+                    	            (CommonTree)adaptor.create(CARET61)
                     	            ;
-                    	            root_0 = (CommonTree)adaptor.becomeRoot(CARET57_tree, root_0);
+                    	            root_0 = (CommonTree)adaptor.becomeRoot(CARET61_tree, root_0);
                     	            }
 
                     	            }
@@ -2100,18 +2234,18 @@ public TreeAdaptor getTreeAdaptor() {
                     	    }
 
 
-                    	    pushFollow(FOLLOW_term_in_transponent545);
-                    	    term58=term();
+                    	    pushFollow(FOLLOW_term_in_transponent636);
+                    	    term62=term();
 
                     	    state._fsp--;
                     	    if (state.failed) return retval;
-                    	    if ( state.backtracking==0 ) adaptor.addChild(root_0, term58.getTree());
+                    	    if ( state.backtracking==0 ) adaptor.addChild(root_0, term62.getTree());
 
                     	    }
                     	    break;
 
                     	default :
-                    	    break loop23;
+                    	    break loop25;
                         }
                     } while (true);
 
@@ -2119,52 +2253,52 @@ public TreeAdaptor getTreeAdaptor() {
                     }
                     break;
                 case 2 :
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:117:5: ( SINGLE_QUOTE ^| DOT_TRANSPOSE ^)*
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:155:5: ( SINGLE_QUOTE ^| DOT_TRANSPOSE ^)*
                     {
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:117:5: ( SINGLE_QUOTE ^| DOT_TRANSPOSE ^)*
-                    loop24:
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:155:5: ( SINGLE_QUOTE ^| DOT_TRANSPOSE ^)*
+                    loop26:
                     do {
-                        int alt24=3;
-                        int LA24_0 = input.LA(1);
+                        int alt26=3;
+                        int LA26_0 = input.LA(1);
 
-                        if ( (LA24_0==SINGLE_QUOTE) ) {
-                            alt24=1;
+                        if ( (LA26_0==SINGLE_QUOTE) ) {
+                            alt26=1;
                         }
-                        else if ( (LA24_0==DOT_TRANSPOSE) ) {
-                            alt24=2;
+                        else if ( (LA26_0==DOT_TRANSPOSE) ) {
+                            alt26=2;
                         }
 
 
-                        switch (alt24) {
+                        switch (alt26) {
                     	case 1 :
-                    	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:117:6: SINGLE_QUOTE ^
+                    	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:155:6: SINGLE_QUOTE ^
                     	    {
-                    	    SINGLE_QUOTE59=(Token)match(input,SINGLE_QUOTE,FOLLOW_SINGLE_QUOTE_in_transponent554); if (state.failed) return retval;
+                    	    SINGLE_QUOTE63=(Token)match(input,SINGLE_QUOTE,FOLLOW_SINGLE_QUOTE_in_transponent645); if (state.failed) return retval;
                     	    if ( state.backtracking==0 ) {
-                    	    SINGLE_QUOTE59_tree = 
-                    	    (CommonTree)adaptor.create(SINGLE_QUOTE59)
+                    	    SINGLE_QUOTE63_tree = 
+                    	    (CommonTree)adaptor.create(SINGLE_QUOTE63)
                     	    ;
-                    	    root_0 = (CommonTree)adaptor.becomeRoot(SINGLE_QUOTE59_tree, root_0);
+                    	    root_0 = (CommonTree)adaptor.becomeRoot(SINGLE_QUOTE63_tree, root_0);
                     	    }
 
                     	    }
                     	    break;
                     	case 2 :
-                    	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:117:22: DOT_TRANSPOSE ^
+                    	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:155:22: DOT_TRANSPOSE ^
                     	    {
-                    	    DOT_TRANSPOSE60=(Token)match(input,DOT_TRANSPOSE,FOLLOW_DOT_TRANSPOSE_in_transponent559); if (state.failed) return retval;
+                    	    DOT_TRANSPOSE64=(Token)match(input,DOT_TRANSPOSE,FOLLOW_DOT_TRANSPOSE_in_transponent650); if (state.failed) return retval;
                     	    if ( state.backtracking==0 ) {
-                    	    DOT_TRANSPOSE60_tree = 
-                    	    (CommonTree)adaptor.create(DOT_TRANSPOSE60)
+                    	    DOT_TRANSPOSE64_tree = 
+                    	    (CommonTree)adaptor.create(DOT_TRANSPOSE64)
                     	    ;
-                    	    root_0 = (CommonTree)adaptor.becomeRoot(DOT_TRANSPOSE60_tree, root_0);
+                    	    root_0 = (CommonTree)adaptor.becomeRoot(DOT_TRANSPOSE64_tree, root_0);
                     	    }
 
                     	    }
                     	    break;
 
                     	default :
-                    	    break loop24;
+                    	    break loop26;
                         }
                     } while (true);
 
@@ -2198,7 +2332,7 @@ public TreeAdaptor getTreeAdaptor() {
 
         finally {
         	// do for sure before leaving
-            if ( state.backtracking>0 ) { memoize(input, 8, transponent_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 9, transponent_StartIndex); }
 
         }
         return retval;
@@ -2213,7 +2347,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "unary"
-    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:121:1: unary : ( PLUS !| MINUS ^| NOT ^)* transponent ;
+    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:159:1: unary : ( PLUS !| MINUS ^| NOT ^)* transponent ;
     public final ExprParser.unary_return unary() throws RecognitionException {
         ExprParser.unary_return retval = new ExprParser.unary_return();
         retval.start = input.LT(1);
@@ -2222,95 +2356,95 @@ public TreeAdaptor getTreeAdaptor() {
 
         CommonTree root_0 = null;
 
-        Token PLUS61=null;
-        Token MINUS62=null;
-        Token NOT63=null;
-        ExprParser.transponent_return transponent64 =null;
+        Token PLUS65=null;
+        Token MINUS66=null;
+        Token NOT67=null;
+        ExprParser.transponent_return transponent68 =null;
 
 
-        CommonTree PLUS61_tree=null;
-        CommonTree MINUS62_tree=null;
-        CommonTree NOT63_tree=null;
+        CommonTree PLUS65_tree=null;
+        CommonTree MINUS66_tree=null;
+        CommonTree NOT67_tree=null;
 
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 9) ) { return retval; }
+            if ( state.backtracking>0 && alreadyParsedRule(input, 10) ) { return retval; }
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:121:7: ( ( PLUS !| MINUS ^| NOT ^)* transponent )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:121:9: ( PLUS !| MINUS ^| NOT ^)* transponent
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:159:7: ( ( PLUS !| MINUS ^| NOT ^)* transponent )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:159:9: ( PLUS !| MINUS ^| NOT ^)* transponent
             {
             root_0 = (CommonTree)adaptor.nil();
 
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:121:9: ( PLUS !| MINUS ^| NOT ^)*
-            loop26:
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:159:9: ( PLUS !| MINUS ^| NOT ^)*
+            loop28:
             do {
-                int alt26=4;
+                int alt28=4;
                 switch ( input.LA(1) ) {
                 case PLUS:
                     {
-                    alt26=1;
+                    alt28=1;
                     }
                     break;
                 case MINUS:
                     {
-                    alt26=2;
+                    alt28=2;
                     }
                     break;
                 case NOT:
                     {
-                    alt26=3;
+                    alt28=3;
                     }
                     break;
 
                 }
 
-                switch (alt26) {
+                switch (alt28) {
             	case 1 :
-            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:121:10: PLUS !
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:159:10: PLUS !
             	    {
-            	    PLUS61=(Token)match(input,PLUS,FOLLOW_PLUS_in_unary580); if (state.failed) return retval;
+            	    PLUS65=(Token)match(input,PLUS,FOLLOW_PLUS_in_unary673); if (state.failed) return retval;
 
             	    }
             	    break;
             	case 2 :
-            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:121:18: MINUS ^
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:159:18: MINUS ^
             	    {
-            	    MINUS62=(Token)match(input,MINUS,FOLLOW_MINUS_in_unary585); if (state.failed) return retval;
+            	    MINUS66=(Token)match(input,MINUS,FOLLOW_MINUS_in_unary678); if (state.failed) return retval;
             	    if ( state.backtracking==0 ) {
-            	    MINUS62_tree = 
-            	    (CommonTree)adaptor.create(MINUS62)
+            	    MINUS66_tree = 
+            	    (CommonTree)adaptor.create(MINUS66)
             	    ;
-            	    root_0 = (CommonTree)adaptor.becomeRoot(MINUS62_tree, root_0);
+            	    root_0 = (CommonTree)adaptor.becomeRoot(MINUS66_tree, root_0);
             	    }
 
             	    }
             	    break;
             	case 3 :
-            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:121:27: NOT ^
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:159:27: NOT ^
             	    {
-            	    NOT63=(Token)match(input,NOT,FOLLOW_NOT_in_unary590); if (state.failed) return retval;
+            	    NOT67=(Token)match(input,NOT,FOLLOW_NOT_in_unary683); if (state.failed) return retval;
             	    if ( state.backtracking==0 ) {
-            	    NOT63_tree = 
-            	    (CommonTree)adaptor.create(NOT63)
+            	    NOT67_tree = 
+            	    (CommonTree)adaptor.create(NOT67)
             	    ;
-            	    root_0 = (CommonTree)adaptor.becomeRoot(NOT63_tree, root_0);
+            	    root_0 = (CommonTree)adaptor.becomeRoot(NOT67_tree, root_0);
             	    }
 
             	    }
             	    break;
 
             	default :
-            	    break loop26;
+            	    break loop28;
                 }
             } while (true);
 
 
-            pushFollow(FOLLOW_transponent_in_unary595);
-            transponent64=transponent();
+            pushFollow(FOLLOW_transponent_in_unary688);
+            transponent68=transponent();
 
             state._fsp--;
             if (state.failed) return retval;
-            if ( state.backtracking==0 ) adaptor.addChild(root_0, transponent64.getTree());
+            if ( state.backtracking==0 ) adaptor.addChild(root_0, transponent68.getTree());
 
             }
 
@@ -2332,7 +2466,7 @@ public TreeAdaptor getTreeAdaptor() {
 
         finally {
         	// do for sure before leaving
-            if ( state.backtracking>0 ) { memoize(input, 9, unary_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 10, unary_StartIndex); }
 
         }
         return retval;
@@ -2347,7 +2481,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "mult"
-    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:123:1: mult : unary ( ( DOT_STAR ^| DOT_SLASH ^| DOT_BACKSLASH ^| STAR ^| SLASH ^| BACKSLASH ^) unary )* ;
+    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:161:1: mult : unary ( ( DOT_STAR ^| DOT_SLASH ^| DOT_BACKSLASH ^| STAR ^| SLASH ^| BACKSLASH ^) unary )* ;
     public final ExprParser.mult_return mult() throws RecognitionException {
         ExprParser.mult_return retval = new ExprParser.mult_return();
         retval.start = input.LT(1);
@@ -2356,295 +2490,89 @@ public TreeAdaptor getTreeAdaptor() {
 
         CommonTree root_0 = null;
 
-        Token DOT_STAR66=null;
-        Token DOT_SLASH67=null;
-        Token DOT_BACKSLASH68=null;
-        Token STAR69=null;
-        Token SLASH70=null;
-        Token BACKSLASH71=null;
-        ExprParser.unary_return unary65 =null;
+        Token DOT_STAR70=null;
+        Token DOT_SLASH71=null;
+        Token DOT_BACKSLASH72=null;
+        Token STAR73=null;
+        Token SLASH74=null;
+        Token BACKSLASH75=null;
+        ExprParser.unary_return unary69 =null;
 
-        ExprParser.unary_return unary72 =null;
-
-
-        CommonTree DOT_STAR66_tree=null;
-        CommonTree DOT_SLASH67_tree=null;
-        CommonTree DOT_BACKSLASH68_tree=null;
-        CommonTree STAR69_tree=null;
-        CommonTree SLASH70_tree=null;
-        CommonTree BACKSLASH71_tree=null;
-
-        try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 10) ) { return retval; }
-
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:123:6: ( unary ( ( DOT_STAR ^| DOT_SLASH ^| DOT_BACKSLASH ^| STAR ^| SLASH ^| BACKSLASH ^) unary )* )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:123:8: unary ( ( DOT_STAR ^| DOT_SLASH ^| DOT_BACKSLASH ^| STAR ^| SLASH ^| BACKSLASH ^) unary )*
-            {
-            root_0 = (CommonTree)adaptor.nil();
+        ExprParser.unary_return unary76 =null;
 
 
-            pushFollow(FOLLOW_unary_in_mult603);
-            unary65=unary();
-
-            state._fsp--;
-            if (state.failed) return retval;
-            if ( state.backtracking==0 ) adaptor.addChild(root_0, unary65.getTree());
-
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:123:14: ( ( DOT_STAR ^| DOT_SLASH ^| DOT_BACKSLASH ^| STAR ^| SLASH ^| BACKSLASH ^) unary )*
-            loop28:
-            do {
-                int alt28=2;
-                int LA28_0 = input.LA(1);
-
-                if ( (LA28_0==BACKSLASH||LA28_0==DOT_BACKSLASH||(LA28_0 >= DOT_SLASH && LA28_0 <= DOT_STAR)||LA28_0==SLASH||LA28_0==STAR) ) {
-                    alt28=1;
-                }
-
-
-                switch (alt28) {
-            	case 1 :
-            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:123:16: ( DOT_STAR ^| DOT_SLASH ^| DOT_BACKSLASH ^| STAR ^| SLASH ^| BACKSLASH ^) unary
-            	    {
-            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:123:16: ( DOT_STAR ^| DOT_SLASH ^| DOT_BACKSLASH ^| STAR ^| SLASH ^| BACKSLASH ^)
-            	    int alt27=6;
-            	    switch ( input.LA(1) ) {
-            	    case DOT_STAR:
-            	        {
-            	        alt27=1;
-            	        }
-            	        break;
-            	    case DOT_SLASH:
-            	        {
-            	        alt27=2;
-            	        }
-            	        break;
-            	    case DOT_BACKSLASH:
-            	        {
-            	        alt27=3;
-            	        }
-            	        break;
-            	    case STAR:
-            	        {
-            	        alt27=4;
-            	        }
-            	        break;
-            	    case SLASH:
-            	        {
-            	        alt27=5;
-            	        }
-            	        break;
-            	    case BACKSLASH:
-            	        {
-            	        alt27=6;
-            	        }
-            	        break;
-            	    default:
-            	        if (state.backtracking>0) {state.failed=true; return retval;}
-            	        NoViableAltException nvae =
-            	            new NoViableAltException("", 27, 0, input);
-
-            	        throw nvae;
-
-            	    }
-
-            	    switch (alt27) {
-            	        case 1 :
-            	            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:123:17: DOT_STAR ^
-            	            {
-            	            DOT_STAR66=(Token)match(input,DOT_STAR,FOLLOW_DOT_STAR_in_mult608); if (state.failed) return retval;
-            	            if ( state.backtracking==0 ) {
-            	            DOT_STAR66_tree = 
-            	            (CommonTree)adaptor.create(DOT_STAR66)
-            	            ;
-            	            root_0 = (CommonTree)adaptor.becomeRoot(DOT_STAR66_tree, root_0);
-            	            }
-
-            	            }
-            	            break;
-            	        case 2 :
-            	            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:123:29: DOT_SLASH ^
-            	            {
-            	            DOT_SLASH67=(Token)match(input,DOT_SLASH,FOLLOW_DOT_SLASH_in_mult613); if (state.failed) return retval;
-            	            if ( state.backtracking==0 ) {
-            	            DOT_SLASH67_tree = 
-            	            (CommonTree)adaptor.create(DOT_SLASH67)
-            	            ;
-            	            root_0 = (CommonTree)adaptor.becomeRoot(DOT_SLASH67_tree, root_0);
-            	            }
-
-            	            }
-            	            break;
-            	        case 3 :
-            	            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:123:42: DOT_BACKSLASH ^
-            	            {
-            	            DOT_BACKSLASH68=(Token)match(input,DOT_BACKSLASH,FOLLOW_DOT_BACKSLASH_in_mult618); if (state.failed) return retval;
-            	            if ( state.backtracking==0 ) {
-            	            DOT_BACKSLASH68_tree = 
-            	            (CommonTree)adaptor.create(DOT_BACKSLASH68)
-            	            ;
-            	            root_0 = (CommonTree)adaptor.becomeRoot(DOT_BACKSLASH68_tree, root_0);
-            	            }
-
-            	            }
-            	            break;
-            	        case 4 :
-            	            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:123:59: STAR ^
-            	            {
-            	            STAR69=(Token)match(input,STAR,FOLLOW_STAR_in_mult623); if (state.failed) return retval;
-            	            if ( state.backtracking==0 ) {
-            	            STAR69_tree = 
-            	            (CommonTree)adaptor.create(STAR69)
-            	            ;
-            	            root_0 = (CommonTree)adaptor.becomeRoot(STAR69_tree, root_0);
-            	            }
-
-            	            }
-            	            break;
-            	        case 5 :
-            	            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:123:67: SLASH ^
-            	            {
-            	            SLASH70=(Token)match(input,SLASH,FOLLOW_SLASH_in_mult628); if (state.failed) return retval;
-            	            if ( state.backtracking==0 ) {
-            	            SLASH70_tree = 
-            	            (CommonTree)adaptor.create(SLASH70)
-            	            ;
-            	            root_0 = (CommonTree)adaptor.becomeRoot(SLASH70_tree, root_0);
-            	            }
-
-            	            }
-            	            break;
-            	        case 6 :
-            	            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:123:76: BACKSLASH ^
-            	            {
-            	            BACKSLASH71=(Token)match(input,BACKSLASH,FOLLOW_BACKSLASH_in_mult633); if (state.failed) return retval;
-            	            if ( state.backtracking==0 ) {
-            	            BACKSLASH71_tree = 
-            	            (CommonTree)adaptor.create(BACKSLASH71)
-            	            ;
-            	            root_0 = (CommonTree)adaptor.becomeRoot(BACKSLASH71_tree, root_0);
-            	            }
-
-            	            }
-            	            break;
-
-            	    }
-
-
-            	    pushFollow(FOLLOW_unary_in_mult637);
-            	    unary72=unary();
-
-            	    state._fsp--;
-            	    if (state.failed) return retval;
-            	    if ( state.backtracking==0 ) adaptor.addChild(root_0, unary72.getTree());
-
-            	    }
-            	    break;
-
-            	default :
-            	    break loop28;
-                }
-            } while (true);
-
-
-            }
-
-            retval.stop = input.LT(-1);
-
-
-            if ( state.backtracking==0 ) {
-
-            retval.tree = (CommonTree)adaptor.rulePostProcessing(root_0);
-            adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
-            }
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-    	retval.tree = (CommonTree)adaptor.errorNode(input, retval.start, input.LT(-1), re);
-
-        }
-
-        finally {
-        	// do for sure before leaving
-            if ( state.backtracking>0 ) { memoize(input, 10, mult_StartIndex); }
-
-        }
-        return retval;
-    }
-    // $ANTLR end "mult"
-
-
-    public static class add_return extends ParserRuleReturnScope {
-        CommonTree tree;
-        public Object getTree() { return tree; }
-    };
-
-
-    // $ANTLR start "add"
-    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:125:1: add : mult ( ( PLUS ^| MINUS ^) mult )* ;
-    public final ExprParser.add_return add() throws RecognitionException {
-        ExprParser.add_return retval = new ExprParser.add_return();
-        retval.start = input.LT(1);
-
-        int add_StartIndex = input.index();
-
-        CommonTree root_0 = null;
-
-        Token PLUS74=null;
-        Token MINUS75=null;
-        ExprParser.mult_return mult73 =null;
-
-        ExprParser.mult_return mult76 =null;
-
-
-        CommonTree PLUS74_tree=null;
-        CommonTree MINUS75_tree=null;
+        CommonTree DOT_STAR70_tree=null;
+        CommonTree DOT_SLASH71_tree=null;
+        CommonTree DOT_BACKSLASH72_tree=null;
+        CommonTree STAR73_tree=null;
+        CommonTree SLASH74_tree=null;
+        CommonTree BACKSLASH75_tree=null;
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 11) ) { return retval; }
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:125:5: ( mult ( ( PLUS ^| MINUS ^) mult )* )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:125:7: mult ( ( PLUS ^| MINUS ^) mult )*
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:161:6: ( unary ( ( DOT_STAR ^| DOT_SLASH ^| DOT_BACKSLASH ^| STAR ^| SLASH ^| BACKSLASH ^) unary )* )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:161:8: unary ( ( DOT_STAR ^| DOT_SLASH ^| DOT_BACKSLASH ^| STAR ^| SLASH ^| BACKSLASH ^) unary )*
             {
             root_0 = (CommonTree)adaptor.nil();
 
 
-            pushFollow(FOLLOW_mult_in_add649);
-            mult73=mult();
+            pushFollow(FOLLOW_unary_in_mult696);
+            unary69=unary();
 
             state._fsp--;
             if (state.failed) return retval;
-            if ( state.backtracking==0 ) adaptor.addChild(root_0, mult73.getTree());
+            if ( state.backtracking==0 ) adaptor.addChild(root_0, unary69.getTree());
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:125:12: ( ( PLUS ^| MINUS ^) mult )*
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:161:14: ( ( DOT_STAR ^| DOT_SLASH ^| DOT_BACKSLASH ^| STAR ^| SLASH ^| BACKSLASH ^) unary )*
             loop30:
             do {
                 int alt30=2;
                 int LA30_0 = input.LA(1);
 
-                if ( (LA30_0==PLUS) ) {
-                    alt30=1;
-                }
-                else if ( (LA30_0==MINUS) ) {
+                if ( (LA30_0==BACKSLASH||LA30_0==DOT_BACKSLASH||(LA30_0 >= DOT_SLASH && LA30_0 <= DOT_STAR)||LA30_0==SLASH||LA30_0==STAR) ) {
                     alt30=1;
                 }
 
 
                 switch (alt30) {
             	case 1 :
-            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:125:14: ( PLUS ^| MINUS ^) mult
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:161:16: ( DOT_STAR ^| DOT_SLASH ^| DOT_BACKSLASH ^| STAR ^| SLASH ^| BACKSLASH ^) unary
             	    {
-            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:125:14: ( PLUS ^| MINUS ^)
-            	    int alt29=2;
-            	    int LA29_0 = input.LA(1);
-
-            	    if ( (LA29_0==PLUS) ) {
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:161:16: ( DOT_STAR ^| DOT_SLASH ^| DOT_BACKSLASH ^| STAR ^| SLASH ^| BACKSLASH ^)
+            	    int alt29=6;
+            	    switch ( input.LA(1) ) {
+            	    case DOT_STAR:
+            	        {
             	        alt29=1;
-            	    }
-            	    else if ( (LA29_0==MINUS) ) {
+            	        }
+            	        break;
+            	    case DOT_SLASH:
+            	        {
             	        alt29=2;
-            	    }
-            	    else {
+            	        }
+            	        break;
+            	    case DOT_BACKSLASH:
+            	        {
+            	        alt29=3;
+            	        }
+            	        break;
+            	    case STAR:
+            	        {
+            	        alt29=4;
+            	        }
+            	        break;
+            	    case SLASH:
+            	        {
+            	        alt29=5;
+            	        }
+            	        break;
+            	    case BACKSLASH:
+            	        {
+            	        alt29=6;
+            	        }
+            	        break;
+            	    default:
             	        if (state.backtracking>0) {state.failed=true; return retval;}
             	        NoViableAltException nvae =
             	            new NoViableAltException("", 29, 0, input);
@@ -2652,29 +2580,82 @@ public TreeAdaptor getTreeAdaptor() {
             	        throw nvae;
 
             	    }
+
             	    switch (alt29) {
             	        case 1 :
-            	            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:125:15: PLUS ^
+            	            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:161:17: DOT_STAR ^
             	            {
-            	            PLUS74=(Token)match(input,PLUS,FOLLOW_PLUS_in_add654); if (state.failed) return retval;
+            	            DOT_STAR70=(Token)match(input,DOT_STAR,FOLLOW_DOT_STAR_in_mult701); if (state.failed) return retval;
             	            if ( state.backtracking==0 ) {
-            	            PLUS74_tree = 
-            	            (CommonTree)adaptor.create(PLUS74)
+            	            DOT_STAR70_tree = 
+            	            (CommonTree)adaptor.create(DOT_STAR70)
             	            ;
-            	            root_0 = (CommonTree)adaptor.becomeRoot(PLUS74_tree, root_0);
+            	            root_0 = (CommonTree)adaptor.becomeRoot(DOT_STAR70_tree, root_0);
             	            }
 
             	            }
             	            break;
             	        case 2 :
-            	            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:125:23: MINUS ^
+            	            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:161:29: DOT_SLASH ^
             	            {
-            	            MINUS75=(Token)match(input,MINUS,FOLLOW_MINUS_in_add659); if (state.failed) return retval;
+            	            DOT_SLASH71=(Token)match(input,DOT_SLASH,FOLLOW_DOT_SLASH_in_mult706); if (state.failed) return retval;
             	            if ( state.backtracking==0 ) {
-            	            MINUS75_tree = 
-            	            (CommonTree)adaptor.create(MINUS75)
+            	            DOT_SLASH71_tree = 
+            	            (CommonTree)adaptor.create(DOT_SLASH71)
             	            ;
-            	            root_0 = (CommonTree)adaptor.becomeRoot(MINUS75_tree, root_0);
+            	            root_0 = (CommonTree)adaptor.becomeRoot(DOT_SLASH71_tree, root_0);
+            	            }
+
+            	            }
+            	            break;
+            	        case 3 :
+            	            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:161:42: DOT_BACKSLASH ^
+            	            {
+            	            DOT_BACKSLASH72=(Token)match(input,DOT_BACKSLASH,FOLLOW_DOT_BACKSLASH_in_mult711); if (state.failed) return retval;
+            	            if ( state.backtracking==0 ) {
+            	            DOT_BACKSLASH72_tree = 
+            	            (CommonTree)adaptor.create(DOT_BACKSLASH72)
+            	            ;
+            	            root_0 = (CommonTree)adaptor.becomeRoot(DOT_BACKSLASH72_tree, root_0);
+            	            }
+
+            	            }
+            	            break;
+            	        case 4 :
+            	            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:161:59: STAR ^
+            	            {
+            	            STAR73=(Token)match(input,STAR,FOLLOW_STAR_in_mult716); if (state.failed) return retval;
+            	            if ( state.backtracking==0 ) {
+            	            STAR73_tree = 
+            	            (CommonTree)adaptor.create(STAR73)
+            	            ;
+            	            root_0 = (CommonTree)adaptor.becomeRoot(STAR73_tree, root_0);
+            	            }
+
+            	            }
+            	            break;
+            	        case 5 :
+            	            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:161:67: SLASH ^
+            	            {
+            	            SLASH74=(Token)match(input,SLASH,FOLLOW_SLASH_in_mult721); if (state.failed) return retval;
+            	            if ( state.backtracking==0 ) {
+            	            SLASH74_tree = 
+            	            (CommonTree)adaptor.create(SLASH74)
+            	            ;
+            	            root_0 = (CommonTree)adaptor.becomeRoot(SLASH74_tree, root_0);
+            	            }
+
+            	            }
+            	            break;
+            	        case 6 :
+            	            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:161:76: BACKSLASH ^
+            	            {
+            	            BACKSLASH75=(Token)match(input,BACKSLASH,FOLLOW_BACKSLASH_in_mult726); if (state.failed) return retval;
+            	            if ( state.backtracking==0 ) {
+            	            BACKSLASH75_tree = 
+            	            (CommonTree)adaptor.create(BACKSLASH75)
+            	            ;
+            	            root_0 = (CommonTree)adaptor.becomeRoot(BACKSLASH75_tree, root_0);
             	            }
 
             	            }
@@ -2683,12 +2664,12 @@ public TreeAdaptor getTreeAdaptor() {
             	    }
 
 
-            	    pushFollow(FOLLOW_mult_in_add663);
-            	    mult76=mult();
+            	    pushFollow(FOLLOW_unary_in_mult730);
+            	    unary76=unary();
 
             	    state._fsp--;
             	    if (state.failed) return retval;
-            	    if ( state.backtracking==0 ) adaptor.addChild(root_0, mult76.getTree());
+            	    if ( state.backtracking==0 ) adaptor.addChild(root_0, unary76.getTree());
 
             	    }
             	    break;
@@ -2719,7 +2700,160 @@ public TreeAdaptor getTreeAdaptor() {
 
         finally {
         	// do for sure before leaving
-            if ( state.backtracking>0 ) { memoize(input, 11, add_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 11, mult_StartIndex); }
+
+        }
+        return retval;
+    }
+    // $ANTLR end "mult"
+
+
+    public static class add_return extends ParserRuleReturnScope {
+        CommonTree tree;
+        public Object getTree() { return tree; }
+    };
+
+
+    // $ANTLR start "add"
+    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:163:1: add : mult ( ( PLUS ^| MINUS ^) mult )* ;
+    public final ExprParser.add_return add() throws RecognitionException {
+        ExprParser.add_return retval = new ExprParser.add_return();
+        retval.start = input.LT(1);
+
+        int add_StartIndex = input.index();
+
+        CommonTree root_0 = null;
+
+        Token PLUS78=null;
+        Token MINUS79=null;
+        ExprParser.mult_return mult77 =null;
+
+        ExprParser.mult_return mult80 =null;
+
+
+        CommonTree PLUS78_tree=null;
+        CommonTree MINUS79_tree=null;
+
+        try {
+            if ( state.backtracking>0 && alreadyParsedRule(input, 12) ) { return retval; }
+
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:163:5: ( mult ( ( PLUS ^| MINUS ^) mult )* )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:163:7: mult ( ( PLUS ^| MINUS ^) mult )*
+            {
+            root_0 = (CommonTree)adaptor.nil();
+
+
+            pushFollow(FOLLOW_mult_in_add742);
+            mult77=mult();
+
+            state._fsp--;
+            if (state.failed) return retval;
+            if ( state.backtracking==0 ) adaptor.addChild(root_0, mult77.getTree());
+
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:163:12: ( ( PLUS ^| MINUS ^) mult )*
+            loop32:
+            do {
+                int alt32=2;
+                int LA32_0 = input.LA(1);
+
+                if ( (LA32_0==PLUS) ) {
+                    alt32=1;
+                }
+                else if ( (LA32_0==MINUS) ) {
+                    alt32=1;
+                }
+
+
+                switch (alt32) {
+            	case 1 :
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:163:14: ( PLUS ^| MINUS ^) mult
+            	    {
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:163:14: ( PLUS ^| MINUS ^)
+            	    int alt31=2;
+            	    int LA31_0 = input.LA(1);
+
+            	    if ( (LA31_0==PLUS) ) {
+            	        alt31=1;
+            	    }
+            	    else if ( (LA31_0==MINUS) ) {
+            	        alt31=2;
+            	    }
+            	    else {
+            	        if (state.backtracking>0) {state.failed=true; return retval;}
+            	        NoViableAltException nvae =
+            	            new NoViableAltException("", 31, 0, input);
+
+            	        throw nvae;
+
+            	    }
+            	    switch (alt31) {
+            	        case 1 :
+            	            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:163:15: PLUS ^
+            	            {
+            	            PLUS78=(Token)match(input,PLUS,FOLLOW_PLUS_in_add747); if (state.failed) return retval;
+            	            if ( state.backtracking==0 ) {
+            	            PLUS78_tree = 
+            	            (CommonTree)adaptor.create(PLUS78)
+            	            ;
+            	            root_0 = (CommonTree)adaptor.becomeRoot(PLUS78_tree, root_0);
+            	            }
+
+            	            }
+            	            break;
+            	        case 2 :
+            	            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:163:23: MINUS ^
+            	            {
+            	            MINUS79=(Token)match(input,MINUS,FOLLOW_MINUS_in_add752); if (state.failed) return retval;
+            	            if ( state.backtracking==0 ) {
+            	            MINUS79_tree = 
+            	            (CommonTree)adaptor.create(MINUS79)
+            	            ;
+            	            root_0 = (CommonTree)adaptor.becomeRoot(MINUS79_tree, root_0);
+            	            }
+
+            	            }
+            	            break;
+
+            	    }
+
+
+            	    pushFollow(FOLLOW_mult_in_add756);
+            	    mult80=mult();
+
+            	    state._fsp--;
+            	    if (state.failed) return retval;
+            	    if ( state.backtracking==0 ) adaptor.addChild(root_0, mult80.getTree());
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop32;
+                }
+            } while (true);
+
+
+            }
+
+            retval.stop = input.LT(-1);
+
+
+            if ( state.backtracking==0 ) {
+
+            retval.tree = (CommonTree)adaptor.rulePostProcessing(root_0);
+            adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
+            }
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+    	retval.tree = (CommonTree)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+
+        }
+
+        finally {
+        	// do for sure before leaving
+            if ( state.backtracking>0 ) { memoize(input, 12, add_StartIndex); }
 
         }
         return retval;
@@ -2734,7 +2868,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "colonEnd"
-    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:127:1: colonEnd : ( COLON add )+ -> ^( COLON_ARGS ( add )+ ) ;
+    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:165:1: colonEnd : ( COLON add )+ -> ^( COLON_ARGS ( add )+ ) ;
     public final ExprParser.colonEnd_return colonEnd() throws RecognitionException {
         ExprParser.colonEnd_return retval = new ExprParser.colonEnd_return();
         retval.start = input.LT(1);
@@ -2743,57 +2877,57 @@ public TreeAdaptor getTreeAdaptor() {
 
         CommonTree root_0 = null;
 
-        Token COLON77=null;
-        ExprParser.add_return add78 =null;
+        Token COLON81=null;
+        ExprParser.add_return add82 =null;
 
 
-        CommonTree COLON77_tree=null;
+        CommonTree COLON81_tree=null;
         RewriteRuleTokenStream stream_COLON=new RewriteRuleTokenStream(adaptor,"token COLON");
         RewriteRuleSubtreeStream stream_add=new RewriteRuleSubtreeStream(adaptor,"rule add");
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 12) ) { return retval; }
+            if ( state.backtracking>0 && alreadyParsedRule(input, 13) ) { return retval; }
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:127:9: ( ( COLON add )+ -> ^( COLON_ARGS ( add )+ ) )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:127:11: ( COLON add )+
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:165:9: ( ( COLON add )+ -> ^( COLON_ARGS ( add )+ ) )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:165:11: ( COLON add )+
             {
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:127:11: ( COLON add )+
-            int cnt31=0;
-            loop31:
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:165:11: ( COLON add )+
+            int cnt33=0;
+            loop33:
             do {
-                int alt31=2;
-                int LA31_0 = input.LA(1);
+                int alt33=2;
+                int LA33_0 = input.LA(1);
 
-                if ( (LA31_0==COLON) ) {
-                    alt31=1;
+                if ( (LA33_0==COLON) ) {
+                    alt33=1;
                 }
 
 
-                switch (alt31) {
+                switch (alt33) {
             	case 1 :
-            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:127:12: COLON add
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:165:12: COLON add
             	    {
-            	    COLON77=(Token)match(input,COLON,FOLLOW_COLON_in_colonEnd674); if (state.failed) return retval; 
-            	    if ( state.backtracking==0 ) stream_COLON.add(COLON77);
+            	    COLON81=(Token)match(input,COLON,FOLLOW_COLON_in_colonEnd767); if (state.failed) return retval; 
+            	    if ( state.backtracking==0 ) stream_COLON.add(COLON81);
 
 
-            	    pushFollow(FOLLOW_add_in_colonEnd676);
-            	    add78=add();
+            	    pushFollow(FOLLOW_add_in_colonEnd769);
+            	    add82=add();
 
             	    state._fsp--;
             	    if (state.failed) return retval;
-            	    if ( state.backtracking==0 ) stream_add.add(add78.getTree());
+            	    if ( state.backtracking==0 ) stream_add.add(add82.getTree());
 
             	    }
             	    break;
 
             	default :
-            	    if ( cnt31 >= 1 ) break loop31;
+            	    if ( cnt33 >= 1 ) break loop33;
             	    if (state.backtracking>0) {state.failed=true; return retval;}
                         EarlyExitException eee =
-                            new EarlyExitException(31, input);
+                            new EarlyExitException(33, input);
                         throw eee;
                 }
-                cnt31++;
+                cnt33++;
             } while (true);
 
 
@@ -2810,9 +2944,9 @@ public TreeAdaptor getTreeAdaptor() {
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
             root_0 = (CommonTree)adaptor.nil();
-            // 127:24: -> ^( COLON_ARGS ( add )+ )
+            // 165:24: -> ^( COLON_ARGS ( add )+ )
             {
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:127:27: ^( COLON_ARGS ( add )+ )
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:165:27: ^( COLON_ARGS ( add )+ )
                 {
                 CommonTree root_1 = (CommonTree)adaptor.nil();
                 root_1 = (CommonTree)adaptor.becomeRoot(
@@ -2857,7 +2991,7 @@ public TreeAdaptor getTreeAdaptor() {
 
         finally {
         	// do for sure before leaving
-            if ( state.backtracking>0 ) { memoize(input, 12, colonEnd_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 13, colonEnd_StartIndex); }
 
         }
         return retval;
@@ -2872,7 +3006,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "colon"
-    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:129:1: colon : add ( colonEnd ^)? ;
+    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:167:1: colon : add ( colonEnd ^)? ;
     public final ExprParser.colon_return colon() throws RecognitionException {
         ExprParser.colon_return retval = new ExprParser.colon_return();
         retval.start = input.LT(1);
@@ -2881,45 +3015,45 @@ public TreeAdaptor getTreeAdaptor() {
 
         CommonTree root_0 = null;
 
-        ExprParser.add_return add79 =null;
+        ExprParser.add_return add83 =null;
 
-        ExprParser.colonEnd_return colonEnd80 =null;
+        ExprParser.colonEnd_return colonEnd84 =null;
 
 
 
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 13) ) { return retval; }
+            if ( state.backtracking>0 && alreadyParsedRule(input, 14) ) { return retval; }
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:129:7: ( add ( colonEnd ^)? )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:129:9: add ( colonEnd ^)?
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:167:7: ( add ( colonEnd ^)? )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:167:9: add ( colonEnd ^)?
             {
             root_0 = (CommonTree)adaptor.nil();
 
 
-            pushFollow(FOLLOW_add_in_colon695);
-            add79=add();
+            pushFollow(FOLLOW_add_in_colon788);
+            add83=add();
 
             state._fsp--;
             if (state.failed) return retval;
-            if ( state.backtracking==0 ) adaptor.addChild(root_0, add79.getTree());
+            if ( state.backtracking==0 ) adaptor.addChild(root_0, add83.getTree());
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:129:13: ( colonEnd ^)?
-            int alt32=2;
-            int LA32_0 = input.LA(1);
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:167:13: ( colonEnd ^)?
+            int alt34=2;
+            int LA34_0 = input.LA(1);
 
-            if ( (LA32_0==COLON) ) {
-                alt32=1;
+            if ( (LA34_0==COLON) ) {
+                alt34=1;
             }
-            switch (alt32) {
+            switch (alt34) {
                 case 1 :
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:129:14: colonEnd ^
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:167:14: colonEnd ^
                     {
-                    pushFollow(FOLLOW_colonEnd_in_colon698);
-                    colonEnd80=colonEnd();
+                    pushFollow(FOLLOW_colonEnd_in_colon791);
+                    colonEnd84=colonEnd();
 
                     state._fsp--;
                     if (state.failed) return retval;
-                    if ( state.backtracking==0 ) root_0 = (CommonTree)adaptor.becomeRoot(colonEnd80.getTree(), root_0);
+                    if ( state.backtracking==0 ) root_0 = (CommonTree)adaptor.becomeRoot(colonEnd84.getTree(), root_0);
 
                     }
                     break;
@@ -2947,7 +3081,7 @@ public TreeAdaptor getTreeAdaptor() {
 
         finally {
         	// do for sure before leaving
-            if ( state.backtracking>0 ) { memoize(input, 13, colon_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 14, colon_StartIndex); }
 
         }
         return retval;
@@ -2962,7 +3096,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "logical"
-    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:131:1: logical : colon ( ( LESS_THAN ^| GREATER_THAN ^| LESS_EQUAL ^| GREATER_EQUAL ^| ISEQUAL ^| NOT_EQUAL ^) colon )* ;
+    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:178:1: logical : colon ( ( LESS_THAN ^| GREATER_THAN ^| LESS_EQUAL ^| GREATER_EQUAL ^| ISEQUAL ^| NOT_EQUAL ^) colon )* ;
     public final ExprParser.logical_return logical() throws RecognitionException {
         ExprParser.logical_return retval = new ExprParser.logical_return();
         retval.start = input.LT(1);
@@ -2971,400 +3105,186 @@ public TreeAdaptor getTreeAdaptor() {
 
         CommonTree root_0 = null;
 
-        Token LESS_THAN82=null;
-        Token GREATER_THAN83=null;
-        Token LESS_EQUAL84=null;
-        Token GREATER_EQUAL85=null;
-        Token ISEQUAL86=null;
-        Token NOT_EQUAL87=null;
-        ExprParser.colon_return colon81 =null;
+        Token LESS_THAN86=null;
+        Token GREATER_THAN87=null;
+        Token LESS_EQUAL88=null;
+        Token GREATER_EQUAL89=null;
+        Token ISEQUAL90=null;
+        Token NOT_EQUAL91=null;
+        ExprParser.colon_return colon85 =null;
 
-        ExprParser.colon_return colon88 =null;
-
-
-        CommonTree LESS_THAN82_tree=null;
-        CommonTree GREATER_THAN83_tree=null;
-        CommonTree LESS_EQUAL84_tree=null;
-        CommonTree GREATER_EQUAL85_tree=null;
-        CommonTree ISEQUAL86_tree=null;
-        CommonTree NOT_EQUAL87_tree=null;
-
-        try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 14) ) { return retval; }
-
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:131:9: ( colon ( ( LESS_THAN ^| GREATER_THAN ^| LESS_EQUAL ^| GREATER_EQUAL ^| ISEQUAL ^| NOT_EQUAL ^) colon )* )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:131:11: colon ( ( LESS_THAN ^| GREATER_THAN ^| LESS_EQUAL ^| GREATER_EQUAL ^| ISEQUAL ^| NOT_EQUAL ^) colon )*
-            {
-            root_0 = (CommonTree)adaptor.nil();
+        ExprParser.colon_return colon92 =null;
 
 
-            pushFollow(FOLLOW_colon_in_logical709);
-            colon81=colon();
-
-            state._fsp--;
-            if (state.failed) return retval;
-            if ( state.backtracking==0 ) adaptor.addChild(root_0, colon81.getTree());
-
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:131:17: ( ( LESS_THAN ^| GREATER_THAN ^| LESS_EQUAL ^| GREATER_EQUAL ^| ISEQUAL ^| NOT_EQUAL ^) colon )*
-            loop34:
-            do {
-                int alt34=2;
-                int LA34_0 = input.LA(1);
-
-                if ( (LA34_0==GREATER_EQUAL||LA34_0==GREATER_THAN||(LA34_0 >= ISEQUAL && LA34_0 <= LESS_THAN)||LA34_0==NOT_EQUAL) ) {
-                    alt34=1;
-                }
-
-
-                switch (alt34) {
-            	case 1 :
-            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:131:19: ( LESS_THAN ^| GREATER_THAN ^| LESS_EQUAL ^| GREATER_EQUAL ^| ISEQUAL ^| NOT_EQUAL ^) colon
-            	    {
-            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:131:19: ( LESS_THAN ^| GREATER_THAN ^| LESS_EQUAL ^| GREATER_EQUAL ^| ISEQUAL ^| NOT_EQUAL ^)
-            	    int alt33=6;
-            	    switch ( input.LA(1) ) {
-            	    case LESS_THAN:
-            	        {
-            	        alt33=1;
-            	        }
-            	        break;
-            	    case GREATER_THAN:
-            	        {
-            	        alt33=2;
-            	        }
-            	        break;
-            	    case LESS_EQUAL:
-            	        {
-            	        alt33=3;
-            	        }
-            	        break;
-            	    case GREATER_EQUAL:
-            	        {
-            	        alt33=4;
-            	        }
-            	        break;
-            	    case ISEQUAL:
-            	        {
-            	        alt33=5;
-            	        }
-            	        break;
-            	    case NOT_EQUAL:
-            	        {
-            	        alt33=6;
-            	        }
-            	        break;
-            	    default:
-            	        if (state.backtracking>0) {state.failed=true; return retval;}
-            	        NoViableAltException nvae =
-            	            new NoViableAltException("", 33, 0, input);
-
-            	        throw nvae;
-
-            	    }
-
-            	    switch (alt33) {
-            	        case 1 :
-            	            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:131:20: LESS_THAN ^
-            	            {
-            	            LESS_THAN82=(Token)match(input,LESS_THAN,FOLLOW_LESS_THAN_in_logical714); if (state.failed) return retval;
-            	            if ( state.backtracking==0 ) {
-            	            LESS_THAN82_tree = 
-            	            (CommonTree)adaptor.create(LESS_THAN82)
-            	            ;
-            	            root_0 = (CommonTree)adaptor.becomeRoot(LESS_THAN82_tree, root_0);
-            	            }
-
-            	            }
-            	            break;
-            	        case 2 :
-            	            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:131:33: GREATER_THAN ^
-            	            {
-            	            GREATER_THAN83=(Token)match(input,GREATER_THAN,FOLLOW_GREATER_THAN_in_logical719); if (state.failed) return retval;
-            	            if ( state.backtracking==0 ) {
-            	            GREATER_THAN83_tree = 
-            	            (CommonTree)adaptor.create(GREATER_THAN83)
-            	            ;
-            	            root_0 = (CommonTree)adaptor.becomeRoot(GREATER_THAN83_tree, root_0);
-            	            }
-
-            	            }
-            	            break;
-            	        case 3 :
-            	            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:131:49: LESS_EQUAL ^
-            	            {
-            	            LESS_EQUAL84=(Token)match(input,LESS_EQUAL,FOLLOW_LESS_EQUAL_in_logical724); if (state.failed) return retval;
-            	            if ( state.backtracking==0 ) {
-            	            LESS_EQUAL84_tree = 
-            	            (CommonTree)adaptor.create(LESS_EQUAL84)
-            	            ;
-            	            root_0 = (CommonTree)adaptor.becomeRoot(LESS_EQUAL84_tree, root_0);
-            	            }
-
-            	            }
-            	            break;
-            	        case 4 :
-            	            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:131:63: GREATER_EQUAL ^
-            	            {
-            	            GREATER_EQUAL85=(Token)match(input,GREATER_EQUAL,FOLLOW_GREATER_EQUAL_in_logical729); if (state.failed) return retval;
-            	            if ( state.backtracking==0 ) {
-            	            GREATER_EQUAL85_tree = 
-            	            (CommonTree)adaptor.create(GREATER_EQUAL85)
-            	            ;
-            	            root_0 = (CommonTree)adaptor.becomeRoot(GREATER_EQUAL85_tree, root_0);
-            	            }
-
-            	            }
-            	            break;
-            	        case 5 :
-            	            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:131:80: ISEQUAL ^
-            	            {
-            	            ISEQUAL86=(Token)match(input,ISEQUAL,FOLLOW_ISEQUAL_in_logical734); if (state.failed) return retval;
-            	            if ( state.backtracking==0 ) {
-            	            ISEQUAL86_tree = 
-            	            (CommonTree)adaptor.create(ISEQUAL86)
-            	            ;
-            	            root_0 = (CommonTree)adaptor.becomeRoot(ISEQUAL86_tree, root_0);
-            	            }
-
-            	            }
-            	            break;
-            	        case 6 :
-            	            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:131:91: NOT_EQUAL ^
-            	            {
-            	            NOT_EQUAL87=(Token)match(input,NOT_EQUAL,FOLLOW_NOT_EQUAL_in_logical739); if (state.failed) return retval;
-            	            if ( state.backtracking==0 ) {
-            	            NOT_EQUAL87_tree = 
-            	            (CommonTree)adaptor.create(NOT_EQUAL87)
-            	            ;
-            	            root_0 = (CommonTree)adaptor.becomeRoot(NOT_EQUAL87_tree, root_0);
-            	            }
-
-            	            }
-            	            break;
-
-            	    }
-
-
-            	    pushFollow(FOLLOW_colon_in_logical743);
-            	    colon88=colon();
-
-            	    state._fsp--;
-            	    if (state.failed) return retval;
-            	    if ( state.backtracking==0 ) adaptor.addChild(root_0, colon88.getTree());
-
-            	    }
-            	    break;
-
-            	default :
-            	    break loop34;
-                }
-            } while (true);
-
-
-            }
-
-            retval.stop = input.LT(-1);
-
-
-            if ( state.backtracking==0 ) {
-
-            retval.tree = (CommonTree)adaptor.rulePostProcessing(root_0);
-            adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
-            }
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-    	retval.tree = (CommonTree)adaptor.errorNode(input, retval.start, input.LT(-1), re);
-
-        }
-
-        finally {
-        	// do for sure before leaving
-            if ( state.backtracking>0 ) { memoize(input, 14, logical_StartIndex); }
-
-        }
-        return retval;
-    }
-    // $ANTLR end "logical"
-
-
-    public static class eleAnd_return extends ParserRuleReturnScope {
-        CommonTree tree;
-        public Object getTree() { return tree; }
-    };
-
-
-    // $ANTLR start "eleAnd"
-    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:133:1: eleAnd : logical ( ELE_AND ^ logical )* ;
-    public final ExprParser.eleAnd_return eleAnd() throws RecognitionException {
-        ExprParser.eleAnd_return retval = new ExprParser.eleAnd_return();
-        retval.start = input.LT(1);
-
-        int eleAnd_StartIndex = input.index();
-
-        CommonTree root_0 = null;
-
-        Token ELE_AND90=null;
-        ExprParser.logical_return logical89 =null;
-
-        ExprParser.logical_return logical91 =null;
-
-
-        CommonTree ELE_AND90_tree=null;
+        CommonTree LESS_THAN86_tree=null;
+        CommonTree GREATER_THAN87_tree=null;
+        CommonTree LESS_EQUAL88_tree=null;
+        CommonTree GREATER_EQUAL89_tree=null;
+        CommonTree ISEQUAL90_tree=null;
+        CommonTree NOT_EQUAL91_tree=null;
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 15) ) { return retval; }
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:133:8: ( logical ( ELE_AND ^ logical )* )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:133:10: logical ( ELE_AND ^ logical )*
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:178:9: ( colon ( ( LESS_THAN ^| GREATER_THAN ^| LESS_EQUAL ^| GREATER_EQUAL ^| ISEQUAL ^| NOT_EQUAL ^) colon )* )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:178:11: colon ( ( LESS_THAN ^| GREATER_THAN ^| LESS_EQUAL ^| GREATER_EQUAL ^| ISEQUAL ^| NOT_EQUAL ^) colon )*
             {
             root_0 = (CommonTree)adaptor.nil();
 
 
-            pushFollow(FOLLOW_logical_in_eleAnd755);
-            logical89=logical();
+            pushFollow(FOLLOW_colon_in_logical819);
+            colon85=colon();
 
             state._fsp--;
             if (state.failed) return retval;
-            if ( state.backtracking==0 ) adaptor.addChild(root_0, logical89.getTree());
+            if ( state.backtracking==0 ) adaptor.addChild(root_0, colon85.getTree());
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:133:18: ( ELE_AND ^ logical )*
-            loop35:
-            do {
-                int alt35=2;
-                int LA35_0 = input.LA(1);
-
-                if ( (LA35_0==ELE_AND) ) {
-                    alt35=1;
-                }
-
-
-                switch (alt35) {
-            	case 1 :
-            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:133:19: ELE_AND ^ logical
-            	    {
-            	    ELE_AND90=(Token)match(input,ELE_AND,FOLLOW_ELE_AND_in_eleAnd758); if (state.failed) return retval;
-            	    if ( state.backtracking==0 ) {
-            	    ELE_AND90_tree = 
-            	    (CommonTree)adaptor.create(ELE_AND90)
-            	    ;
-            	    root_0 = (CommonTree)adaptor.becomeRoot(ELE_AND90_tree, root_0);
-            	    }
-
-            	    pushFollow(FOLLOW_logical_in_eleAnd761);
-            	    logical91=logical();
-
-            	    state._fsp--;
-            	    if (state.failed) return retval;
-            	    if ( state.backtracking==0 ) adaptor.addChild(root_0, logical91.getTree());
-
-            	    }
-            	    break;
-
-            	default :
-            	    break loop35;
-                }
-            } while (true);
-
-
-            }
-
-            retval.stop = input.LT(-1);
-
-
-            if ( state.backtracking==0 ) {
-
-            retval.tree = (CommonTree)adaptor.rulePostProcessing(root_0);
-            adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
-            }
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-    	retval.tree = (CommonTree)adaptor.errorNode(input, retval.start, input.LT(-1), re);
-
-        }
-
-        finally {
-        	// do for sure before leaving
-            if ( state.backtracking>0 ) { memoize(input, 15, eleAnd_StartIndex); }
-
-        }
-        return retval;
-    }
-    // $ANTLR end "eleAnd"
-
-
-    public static class eleOr_return extends ParserRuleReturnScope {
-        CommonTree tree;
-        public Object getTree() { return tree; }
-    };
-
-
-    // $ANTLR start "eleOr"
-    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:135:1: eleOr : eleAnd ( ELE_OR ^ eleAnd )* ;
-    public final ExprParser.eleOr_return eleOr() throws RecognitionException {
-        ExprParser.eleOr_return retval = new ExprParser.eleOr_return();
-        retval.start = input.LT(1);
-
-        int eleOr_StartIndex = input.index();
-
-        CommonTree root_0 = null;
-
-        Token ELE_OR93=null;
-        ExprParser.eleAnd_return eleAnd92 =null;
-
-        ExprParser.eleAnd_return eleAnd94 =null;
-
-
-        CommonTree ELE_OR93_tree=null;
-
-        try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 16) ) { return retval; }
-
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:135:7: ( eleAnd ( ELE_OR ^ eleAnd )* )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:135:9: eleAnd ( ELE_OR ^ eleAnd )*
-            {
-            root_0 = (CommonTree)adaptor.nil();
-
-
-            pushFollow(FOLLOW_eleAnd_in_eleOr772);
-            eleAnd92=eleAnd();
-
-            state._fsp--;
-            if (state.failed) return retval;
-            if ( state.backtracking==0 ) adaptor.addChild(root_0, eleAnd92.getTree());
-
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:135:16: ( ELE_OR ^ eleAnd )*
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:178:17: ( ( LESS_THAN ^| GREATER_THAN ^| LESS_EQUAL ^| GREATER_EQUAL ^| ISEQUAL ^| NOT_EQUAL ^) colon )*
             loop36:
             do {
                 int alt36=2;
                 int LA36_0 = input.LA(1);
 
-                if ( (LA36_0==ELE_OR) ) {
+                if ( (LA36_0==GREATER_EQUAL||LA36_0==GREATER_THAN||(LA36_0 >= ISEQUAL && LA36_0 <= LESS_THAN)||LA36_0==NOT_EQUAL) ) {
                     alt36=1;
                 }
 
 
                 switch (alt36) {
             	case 1 :
-            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:135:17: ELE_OR ^ eleAnd
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:178:19: ( LESS_THAN ^| GREATER_THAN ^| LESS_EQUAL ^| GREATER_EQUAL ^| ISEQUAL ^| NOT_EQUAL ^) colon
             	    {
-            	    ELE_OR93=(Token)match(input,ELE_OR,FOLLOW_ELE_OR_in_eleOr775); if (state.failed) return retval;
-            	    if ( state.backtracking==0 ) {
-            	    ELE_OR93_tree = 
-            	    (CommonTree)adaptor.create(ELE_OR93)
-            	    ;
-            	    root_0 = (CommonTree)adaptor.becomeRoot(ELE_OR93_tree, root_0);
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:178:19: ( LESS_THAN ^| GREATER_THAN ^| LESS_EQUAL ^| GREATER_EQUAL ^| ISEQUAL ^| NOT_EQUAL ^)
+            	    int alt35=6;
+            	    switch ( input.LA(1) ) {
+            	    case LESS_THAN:
+            	        {
+            	        alt35=1;
+            	        }
+            	        break;
+            	    case GREATER_THAN:
+            	        {
+            	        alt35=2;
+            	        }
+            	        break;
+            	    case LESS_EQUAL:
+            	        {
+            	        alt35=3;
+            	        }
+            	        break;
+            	    case GREATER_EQUAL:
+            	        {
+            	        alt35=4;
+            	        }
+            	        break;
+            	    case ISEQUAL:
+            	        {
+            	        alt35=5;
+            	        }
+            	        break;
+            	    case NOT_EQUAL:
+            	        {
+            	        alt35=6;
+            	        }
+            	        break;
+            	    default:
+            	        if (state.backtracking>0) {state.failed=true; return retval;}
+            	        NoViableAltException nvae =
+            	            new NoViableAltException("", 35, 0, input);
+
+            	        throw nvae;
+
             	    }
 
-            	    pushFollow(FOLLOW_eleAnd_in_eleOr778);
-            	    eleAnd94=eleAnd();
+            	    switch (alt35) {
+            	        case 1 :
+            	            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:178:20: LESS_THAN ^
+            	            {
+            	            LESS_THAN86=(Token)match(input,LESS_THAN,FOLLOW_LESS_THAN_in_logical824); if (state.failed) return retval;
+            	            if ( state.backtracking==0 ) {
+            	            LESS_THAN86_tree = 
+            	            (CommonTree)adaptor.create(LESS_THAN86)
+            	            ;
+            	            root_0 = (CommonTree)adaptor.becomeRoot(LESS_THAN86_tree, root_0);
+            	            }
+
+            	            }
+            	            break;
+            	        case 2 :
+            	            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:178:33: GREATER_THAN ^
+            	            {
+            	            GREATER_THAN87=(Token)match(input,GREATER_THAN,FOLLOW_GREATER_THAN_in_logical829); if (state.failed) return retval;
+            	            if ( state.backtracking==0 ) {
+            	            GREATER_THAN87_tree = 
+            	            (CommonTree)adaptor.create(GREATER_THAN87)
+            	            ;
+            	            root_0 = (CommonTree)adaptor.becomeRoot(GREATER_THAN87_tree, root_0);
+            	            }
+
+            	            }
+            	            break;
+            	        case 3 :
+            	            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:178:49: LESS_EQUAL ^
+            	            {
+            	            LESS_EQUAL88=(Token)match(input,LESS_EQUAL,FOLLOW_LESS_EQUAL_in_logical834); if (state.failed) return retval;
+            	            if ( state.backtracking==0 ) {
+            	            LESS_EQUAL88_tree = 
+            	            (CommonTree)adaptor.create(LESS_EQUAL88)
+            	            ;
+            	            root_0 = (CommonTree)adaptor.becomeRoot(LESS_EQUAL88_tree, root_0);
+            	            }
+
+            	            }
+            	            break;
+            	        case 4 :
+            	            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:178:63: GREATER_EQUAL ^
+            	            {
+            	            GREATER_EQUAL89=(Token)match(input,GREATER_EQUAL,FOLLOW_GREATER_EQUAL_in_logical839); if (state.failed) return retval;
+            	            if ( state.backtracking==0 ) {
+            	            GREATER_EQUAL89_tree = 
+            	            (CommonTree)adaptor.create(GREATER_EQUAL89)
+            	            ;
+            	            root_0 = (CommonTree)adaptor.becomeRoot(GREATER_EQUAL89_tree, root_0);
+            	            }
+
+            	            }
+            	            break;
+            	        case 5 :
+            	            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:178:80: ISEQUAL ^
+            	            {
+            	            ISEQUAL90=(Token)match(input,ISEQUAL,FOLLOW_ISEQUAL_in_logical844); if (state.failed) return retval;
+            	            if ( state.backtracking==0 ) {
+            	            ISEQUAL90_tree = 
+            	            (CommonTree)adaptor.create(ISEQUAL90)
+            	            ;
+            	            root_0 = (CommonTree)adaptor.becomeRoot(ISEQUAL90_tree, root_0);
+            	            }
+
+            	            }
+            	            break;
+            	        case 6 :
+            	            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:178:91: NOT_EQUAL ^
+            	            {
+            	            NOT_EQUAL91=(Token)match(input,NOT_EQUAL,FOLLOW_NOT_EQUAL_in_logical849); if (state.failed) return retval;
+            	            if ( state.backtracking==0 ) {
+            	            NOT_EQUAL91_tree = 
+            	            (CommonTree)adaptor.create(NOT_EQUAL91)
+            	            ;
+            	            root_0 = (CommonTree)adaptor.becomeRoot(NOT_EQUAL91_tree, root_0);
+            	            }
+
+            	            }
+            	            break;
+
+            	    }
+
+
+            	    pushFollow(FOLLOW_colon_in_logical853);
+            	    colon92=colon();
 
             	    state._fsp--;
             	    if (state.failed) return retval;
-            	    if ( state.backtracking==0 ) adaptor.addChild(root_0, eleAnd94.getTree());
+            	    if ( state.backtracking==0 ) adaptor.addChild(root_0, colon92.getTree());
 
             	    }
             	    break;
@@ -3395,83 +3315,83 @@ public TreeAdaptor getTreeAdaptor() {
 
         finally {
         	// do for sure before leaving
-            if ( state.backtracking>0 ) { memoize(input, 16, eleOr_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 15, logical_StartIndex); }
 
         }
         return retval;
     }
-    // $ANTLR end "eleOr"
+    // $ANTLR end "logical"
 
 
-    public static class scAnd_return extends ParserRuleReturnScope {
+    public static class eleAnd_return extends ParserRuleReturnScope {
         CommonTree tree;
         public Object getTree() { return tree; }
     };
 
 
-    // $ANTLR start "scAnd"
-    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:137:1: scAnd : eleOr ( SC_AND ^ eleOr )* ;
-    public final ExprParser.scAnd_return scAnd() throws RecognitionException {
-        ExprParser.scAnd_return retval = new ExprParser.scAnd_return();
+    // $ANTLR start "eleAnd"
+    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:180:1: eleAnd : logical ( ELE_AND ^ logical )* ;
+    public final ExprParser.eleAnd_return eleAnd() throws RecognitionException {
+        ExprParser.eleAnd_return retval = new ExprParser.eleAnd_return();
         retval.start = input.LT(1);
 
-        int scAnd_StartIndex = input.index();
+        int eleAnd_StartIndex = input.index();
 
         CommonTree root_0 = null;
 
-        Token SC_AND96=null;
-        ExprParser.eleOr_return eleOr95 =null;
+        Token ELE_AND94=null;
+        ExprParser.logical_return logical93 =null;
 
-        ExprParser.eleOr_return eleOr97 =null;
+        ExprParser.logical_return logical95 =null;
 
 
-        CommonTree SC_AND96_tree=null;
+        CommonTree ELE_AND94_tree=null;
 
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 17) ) { return retval; }
+            if ( state.backtracking>0 && alreadyParsedRule(input, 16) ) { return retval; }
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:137:7: ( eleOr ( SC_AND ^ eleOr )* )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:137:9: eleOr ( SC_AND ^ eleOr )*
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:180:8: ( logical ( ELE_AND ^ logical )* )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:180:10: logical ( ELE_AND ^ logical )*
             {
             root_0 = (CommonTree)adaptor.nil();
 
 
-            pushFollow(FOLLOW_eleOr_in_scAnd789);
-            eleOr95=eleOr();
+            pushFollow(FOLLOW_logical_in_eleAnd865);
+            logical93=logical();
 
             state._fsp--;
             if (state.failed) return retval;
-            if ( state.backtracking==0 ) adaptor.addChild(root_0, eleOr95.getTree());
+            if ( state.backtracking==0 ) adaptor.addChild(root_0, logical93.getTree());
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:137:15: ( SC_AND ^ eleOr )*
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:180:18: ( ELE_AND ^ logical )*
             loop37:
             do {
                 int alt37=2;
                 int LA37_0 = input.LA(1);
 
-                if ( (LA37_0==SC_AND) ) {
+                if ( (LA37_0==ELE_AND) ) {
                     alt37=1;
                 }
 
 
                 switch (alt37) {
             	case 1 :
-            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:137:16: SC_AND ^ eleOr
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:180:19: ELE_AND ^ logical
             	    {
-            	    SC_AND96=(Token)match(input,SC_AND,FOLLOW_SC_AND_in_scAnd792); if (state.failed) return retval;
+            	    ELE_AND94=(Token)match(input,ELE_AND,FOLLOW_ELE_AND_in_eleAnd868); if (state.failed) return retval;
             	    if ( state.backtracking==0 ) {
-            	    SC_AND96_tree = 
-            	    (CommonTree)adaptor.create(SC_AND96)
+            	    ELE_AND94_tree = 
+            	    (CommonTree)adaptor.create(ELE_AND94)
             	    ;
-            	    root_0 = (CommonTree)adaptor.becomeRoot(SC_AND96_tree, root_0);
+            	    root_0 = (CommonTree)adaptor.becomeRoot(ELE_AND94_tree, root_0);
             	    }
 
-            	    pushFollow(FOLLOW_eleOr_in_scAnd795);
-            	    eleOr97=eleOr();
+            	    pushFollow(FOLLOW_logical_in_eleAnd871);
+            	    logical95=logical();
 
             	    state._fsp--;
             	    if (state.failed) return retval;
-            	    if ( state.backtracking==0 ) adaptor.addChild(root_0, eleOr97.getTree());
+            	    if ( state.backtracking==0 ) adaptor.addChild(root_0, logical95.getTree());
 
             	    }
             	    break;
@@ -3502,83 +3422,83 @@ public TreeAdaptor getTreeAdaptor() {
 
         finally {
         	// do for sure before leaving
-            if ( state.backtracking>0 ) { memoize(input, 17, scAnd_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 16, eleAnd_StartIndex); }
 
         }
         return retval;
     }
-    // $ANTLR end "scAnd"
+    // $ANTLR end "eleAnd"
 
 
-    public static class scOr_return extends ParserRuleReturnScope {
+    public static class eleOr_return extends ParserRuleReturnScope {
         CommonTree tree;
         public Object getTree() { return tree; }
     };
 
 
-    // $ANTLR start "scOr"
-    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:139:1: scOr : scAnd ( SC_OR ^ scAnd )* ;
-    public final ExprParser.scOr_return scOr() throws RecognitionException {
-        ExprParser.scOr_return retval = new ExprParser.scOr_return();
+    // $ANTLR start "eleOr"
+    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:182:1: eleOr : eleAnd ( ELE_OR ^ eleAnd )* ;
+    public final ExprParser.eleOr_return eleOr() throws RecognitionException {
+        ExprParser.eleOr_return retval = new ExprParser.eleOr_return();
         retval.start = input.LT(1);
 
-        int scOr_StartIndex = input.index();
+        int eleOr_StartIndex = input.index();
 
         CommonTree root_0 = null;
 
-        Token SC_OR99=null;
-        ExprParser.scAnd_return scAnd98 =null;
+        Token ELE_OR97=null;
+        ExprParser.eleAnd_return eleAnd96 =null;
 
-        ExprParser.scAnd_return scAnd100 =null;
+        ExprParser.eleAnd_return eleAnd98 =null;
 
 
-        CommonTree SC_OR99_tree=null;
+        CommonTree ELE_OR97_tree=null;
 
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 18) ) { return retval; }
+            if ( state.backtracking>0 && alreadyParsedRule(input, 17) ) { return retval; }
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:139:6: ( scAnd ( SC_OR ^ scAnd )* )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:139:8: scAnd ( SC_OR ^ scAnd )*
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:182:7: ( eleAnd ( ELE_OR ^ eleAnd )* )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:182:9: eleAnd ( ELE_OR ^ eleAnd )*
             {
             root_0 = (CommonTree)adaptor.nil();
 
 
-            pushFollow(FOLLOW_scAnd_in_scOr806);
-            scAnd98=scAnd();
+            pushFollow(FOLLOW_eleAnd_in_eleOr882);
+            eleAnd96=eleAnd();
 
             state._fsp--;
             if (state.failed) return retval;
-            if ( state.backtracking==0 ) adaptor.addChild(root_0, scAnd98.getTree());
+            if ( state.backtracking==0 ) adaptor.addChild(root_0, eleAnd96.getTree());
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:139:14: ( SC_OR ^ scAnd )*
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:182:16: ( ELE_OR ^ eleAnd )*
             loop38:
             do {
                 int alt38=2;
                 int LA38_0 = input.LA(1);
 
-                if ( (LA38_0==SC_OR) ) {
+                if ( (LA38_0==ELE_OR) ) {
                     alt38=1;
                 }
 
 
                 switch (alt38) {
             	case 1 :
-            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:139:15: SC_OR ^ scAnd
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:182:17: ELE_OR ^ eleAnd
             	    {
-            	    SC_OR99=(Token)match(input,SC_OR,FOLLOW_SC_OR_in_scOr809); if (state.failed) return retval;
+            	    ELE_OR97=(Token)match(input,ELE_OR,FOLLOW_ELE_OR_in_eleOr885); if (state.failed) return retval;
             	    if ( state.backtracking==0 ) {
-            	    SC_OR99_tree = 
-            	    (CommonTree)adaptor.create(SC_OR99)
+            	    ELE_OR97_tree = 
+            	    (CommonTree)adaptor.create(ELE_OR97)
             	    ;
-            	    root_0 = (CommonTree)adaptor.becomeRoot(SC_OR99_tree, root_0);
+            	    root_0 = (CommonTree)adaptor.becomeRoot(ELE_OR97_tree, root_0);
             	    }
 
-            	    pushFollow(FOLLOW_scAnd_in_scOr812);
-            	    scAnd100=scAnd();
+            	    pushFollow(FOLLOW_eleAnd_in_eleOr888);
+            	    eleAnd98=eleAnd();
 
             	    state._fsp--;
             	    if (state.failed) return retval;
-            	    if ( state.backtracking==0 ) adaptor.addChild(root_0, scAnd100.getTree());
+            	    if ( state.backtracking==0 ) adaptor.addChild(root_0, eleAnd98.getTree());
 
             	    }
             	    break;
@@ -3609,7 +3529,221 @@ public TreeAdaptor getTreeAdaptor() {
 
         finally {
         	// do for sure before leaving
-            if ( state.backtracking>0 ) { memoize(input, 18, scOr_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 17, eleOr_StartIndex); }
+
+        }
+        return retval;
+    }
+    // $ANTLR end "eleOr"
+
+
+    public static class scAnd_return extends ParserRuleReturnScope {
+        CommonTree tree;
+        public Object getTree() { return tree; }
+    };
+
+
+    // $ANTLR start "scAnd"
+    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:184:1: scAnd : eleOr ( SC_AND ^ eleOr )* ;
+    public final ExprParser.scAnd_return scAnd() throws RecognitionException {
+        ExprParser.scAnd_return retval = new ExprParser.scAnd_return();
+        retval.start = input.LT(1);
+
+        int scAnd_StartIndex = input.index();
+
+        CommonTree root_0 = null;
+
+        Token SC_AND100=null;
+        ExprParser.eleOr_return eleOr99 =null;
+
+        ExprParser.eleOr_return eleOr101 =null;
+
+
+        CommonTree SC_AND100_tree=null;
+
+        try {
+            if ( state.backtracking>0 && alreadyParsedRule(input, 18) ) { return retval; }
+
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:184:7: ( eleOr ( SC_AND ^ eleOr )* )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:184:9: eleOr ( SC_AND ^ eleOr )*
+            {
+            root_0 = (CommonTree)adaptor.nil();
+
+
+            pushFollow(FOLLOW_eleOr_in_scAnd899);
+            eleOr99=eleOr();
+
+            state._fsp--;
+            if (state.failed) return retval;
+            if ( state.backtracking==0 ) adaptor.addChild(root_0, eleOr99.getTree());
+
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:184:15: ( SC_AND ^ eleOr )*
+            loop39:
+            do {
+                int alt39=2;
+                int LA39_0 = input.LA(1);
+
+                if ( (LA39_0==SC_AND) ) {
+                    alt39=1;
+                }
+
+
+                switch (alt39) {
+            	case 1 :
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:184:16: SC_AND ^ eleOr
+            	    {
+            	    SC_AND100=(Token)match(input,SC_AND,FOLLOW_SC_AND_in_scAnd902); if (state.failed) return retval;
+            	    if ( state.backtracking==0 ) {
+            	    SC_AND100_tree = 
+            	    (CommonTree)adaptor.create(SC_AND100)
+            	    ;
+            	    root_0 = (CommonTree)adaptor.becomeRoot(SC_AND100_tree, root_0);
+            	    }
+
+            	    pushFollow(FOLLOW_eleOr_in_scAnd905);
+            	    eleOr101=eleOr();
+
+            	    state._fsp--;
+            	    if (state.failed) return retval;
+            	    if ( state.backtracking==0 ) adaptor.addChild(root_0, eleOr101.getTree());
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop39;
+                }
+            } while (true);
+
+
+            }
+
+            retval.stop = input.LT(-1);
+
+
+            if ( state.backtracking==0 ) {
+
+            retval.tree = (CommonTree)adaptor.rulePostProcessing(root_0);
+            adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
+            }
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+    	retval.tree = (CommonTree)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+
+        }
+
+        finally {
+        	// do for sure before leaving
+            if ( state.backtracking>0 ) { memoize(input, 18, scAnd_StartIndex); }
+
+        }
+        return retval;
+    }
+    // $ANTLR end "scAnd"
+
+
+    public static class scOr_return extends ParserRuleReturnScope {
+        CommonTree tree;
+        public Object getTree() { return tree; }
+    };
+
+
+    // $ANTLR start "scOr"
+    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:186:1: scOr : scAnd ( SC_OR ^ scAnd )* ;
+    public final ExprParser.scOr_return scOr() throws RecognitionException {
+        ExprParser.scOr_return retval = new ExprParser.scOr_return();
+        retval.start = input.LT(1);
+
+        int scOr_StartIndex = input.index();
+
+        CommonTree root_0 = null;
+
+        Token SC_OR103=null;
+        ExprParser.scAnd_return scAnd102 =null;
+
+        ExprParser.scAnd_return scAnd104 =null;
+
+
+        CommonTree SC_OR103_tree=null;
+
+        try {
+            if ( state.backtracking>0 && alreadyParsedRule(input, 19) ) { return retval; }
+
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:186:6: ( scAnd ( SC_OR ^ scAnd )* )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:186:8: scAnd ( SC_OR ^ scAnd )*
+            {
+            root_0 = (CommonTree)adaptor.nil();
+
+
+            pushFollow(FOLLOW_scAnd_in_scOr916);
+            scAnd102=scAnd();
+
+            state._fsp--;
+            if (state.failed) return retval;
+            if ( state.backtracking==0 ) adaptor.addChild(root_0, scAnd102.getTree());
+
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:186:14: ( SC_OR ^ scAnd )*
+            loop40:
+            do {
+                int alt40=2;
+                int LA40_0 = input.LA(1);
+
+                if ( (LA40_0==SC_OR) ) {
+                    alt40=1;
+                }
+
+
+                switch (alt40) {
+            	case 1 :
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:186:15: SC_OR ^ scAnd
+            	    {
+            	    SC_OR103=(Token)match(input,SC_OR,FOLLOW_SC_OR_in_scOr919); if (state.failed) return retval;
+            	    if ( state.backtracking==0 ) {
+            	    SC_OR103_tree = 
+            	    (CommonTree)adaptor.create(SC_OR103)
+            	    ;
+            	    root_0 = (CommonTree)adaptor.becomeRoot(SC_OR103_tree, root_0);
+            	    }
+
+            	    pushFollow(FOLLOW_scAnd_in_scOr922);
+            	    scAnd104=scAnd();
+
+            	    state._fsp--;
+            	    if (state.failed) return retval;
+            	    if ( state.backtracking==0 ) adaptor.addChild(root_0, scAnd104.getTree());
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop40;
+                }
+            } while (true);
+
+
+            }
+
+            retval.stop = input.LT(-1);
+
+
+            if ( state.backtracking==0 ) {
+
+            retval.tree = (CommonTree)adaptor.rulePostProcessing(root_0);
+            adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
+            }
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+    	retval.tree = (CommonTree)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+
+        }
+
+        finally {
+        	// do for sure before leaving
+            if ( state.backtracking>0 ) { memoize(input, 19, scOr_StartIndex); }
 
         }
         return retval;
@@ -3624,7 +3758,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "hCatVec"
-    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:142:1: hCatVec : expr ( ( COMMA )? expr )* -> ^( HCAT_VEC ( expr )+ ) ;
+    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:200:1: hCatVec : expr ( ( COMMA )? expr )* -> ^( HCAT_VEC ( expr )+ ) ;
     public final ExprParser.hCatVec_return hCatVec() throws RecognitionException {
         ExprParser.hCatVec_return retval = new ExprParser.hCatVec_return();
         retval.start = input.LT(1);
@@ -3633,56 +3767,56 @@ public TreeAdaptor getTreeAdaptor() {
 
         CommonTree root_0 = null;
 
-        Token COMMA102=null;
-        ExprParser.expr_return expr101 =null;
+        Token COMMA106=null;
+        ExprParser.expr_return expr105 =null;
 
-        ExprParser.expr_return expr103 =null;
+        ExprParser.expr_return expr107 =null;
 
 
-        CommonTree COMMA102_tree=null;
+        CommonTree COMMA106_tree=null;
         RewriteRuleTokenStream stream_COMMA=new RewriteRuleTokenStream(adaptor,"token COMMA");
         RewriteRuleSubtreeStream stream_expr=new RewriteRuleSubtreeStream(adaptor,"rule expr");
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 19) ) { return retval; }
+            if ( state.backtracking>0 && alreadyParsedRule(input, 20) ) { return retval; }
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:142:9: ( expr ( ( COMMA )? expr )* -> ^( HCAT_VEC ( expr )+ ) )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:142:11: expr ( ( COMMA )? expr )*
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:200:9: ( expr ( ( COMMA )? expr )* -> ^( HCAT_VEC ( expr )+ ) )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:200:11: expr ( ( COMMA )? expr )*
             {
-            pushFollow(FOLLOW_expr_in_hCatVec824);
-            expr101=expr();
+            pushFollow(FOLLOW_expr_in_hCatVec945);
+            expr105=expr();
 
             state._fsp--;
             if (state.failed) return retval;
-            if ( state.backtracking==0 ) stream_expr.add(expr101.getTree());
+            if ( state.backtracking==0 ) stream_expr.add(expr105.getTree());
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:142:16: ( ( COMMA )? expr )*
-            loop40:
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:200:16: ( ( COMMA )? expr )*
+            loop42:
             do {
-                int alt40=2;
-                int LA40_0 = input.LA(1);
+                int alt42=2;
+                int LA42_0 = input.LA(1);
 
-                if ( (LA40_0==COLON||LA40_0==COMMA||LA40_0==DOT||(LA40_0 >= EMPTY_CELL && LA40_0 <= END)||LA40_0==FALSE||LA40_0==ID||LA40_0==INTEGER||LA40_0==MINUS||LA40_0==NOT||(LA40_0 >= OPENB && LA40_0 <= OPENP)||LA40_0==PLUS||LA40_0==STRING_LITERAL||LA40_0==TRUE) ) {
-                    alt40=1;
+                if ( (LA42_0==COLON||LA42_0==COMMA||LA42_0==DOT||(LA42_0 >= EMPTY_CELL && LA42_0 <= END)||LA42_0==FALSE||LA42_0==ID||LA42_0==INTEGER||LA42_0==MINUS||LA42_0==NOT||(LA42_0 >= OPENB && LA42_0 <= OPENP)||LA42_0==PLUS||LA42_0==STRING_LITERAL||LA42_0==TRUE) ) {
+                    alt42=1;
                 }
 
 
-                switch (alt40) {
+                switch (alt42) {
             	case 1 :
-            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:142:17: ( COMMA )? expr
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:200:17: ( COMMA )? expr
             	    {
-            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:142:17: ( COMMA )?
-            	    int alt39=2;
-            	    int LA39_0 = input.LA(1);
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:200:17: ( COMMA )?
+            	    int alt41=2;
+            	    int LA41_0 = input.LA(1);
 
-            	    if ( (LA39_0==COMMA) ) {
-            	        alt39=1;
+            	    if ( (LA41_0==COMMA) ) {
+            	        alt41=1;
             	    }
-            	    switch (alt39) {
+            	    switch (alt41) {
             	        case 1 :
-            	            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:142:18: COMMA
+            	            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:200:18: COMMA
             	            {
-            	            COMMA102=(Token)match(input,COMMA,FOLLOW_COMMA_in_hCatVec828); if (state.failed) return retval; 
-            	            if ( state.backtracking==0 ) stream_COMMA.add(COMMA102);
+            	            COMMA106=(Token)match(input,COMMA,FOLLOW_COMMA_in_hCatVec949); if (state.failed) return retval; 
+            	            if ( state.backtracking==0 ) stream_COMMA.add(COMMA106);
 
 
             	            }
@@ -3691,18 +3825,18 @@ public TreeAdaptor getTreeAdaptor() {
             	    }
 
 
-            	    pushFollow(FOLLOW_expr_in_hCatVec832);
-            	    expr103=expr();
+            	    pushFollow(FOLLOW_expr_in_hCatVec953);
+            	    expr107=expr();
 
             	    state._fsp--;
             	    if (state.failed) return retval;
-            	    if ( state.backtracking==0 ) stream_expr.add(expr103.getTree());
+            	    if ( state.backtracking==0 ) stream_expr.add(expr107.getTree());
 
             	    }
             	    break;
 
             	default :
-            	    break loop40;
+            	    break loop42;
                 }
             } while (true);
 
@@ -3720,9 +3854,9 @@ public TreeAdaptor getTreeAdaptor() {
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
             root_0 = (CommonTree)adaptor.nil();
-            // 142:33: -> ^( HCAT_VEC ( expr )+ )
+            // 200:33: -> ^( HCAT_VEC ( expr )+ )
             {
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:142:36: ^( HCAT_VEC ( expr )+ )
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:200:36: ^( HCAT_VEC ( expr )+ )
                 {
                 CommonTree root_1 = (CommonTree)adaptor.nil();
                 root_1 = (CommonTree)adaptor.becomeRoot(
@@ -3767,7 +3901,7 @@ public TreeAdaptor getTreeAdaptor() {
 
         finally {
         	// do for sure before leaving
-            if ( state.backtracking>0 ) { memoize(input, 19, hCatVec_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 20, hCatVec_StartIndex); }
 
         }
         return retval;
@@ -3782,7 +3916,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "vCatVec"
-    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:144:1: vCatVec : hCatVec ( ( SEMI ) hCatVec )* -> ^( VCAT_VEC ( hCatVec )+ ) ;
+    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:202:1: vCatVec : hCatVec ( ( SEMI ) hCatVec )* -> ^( VCAT_VEC ( hCatVec )+ ) ;
     public final ExprParser.vCatVec_return vCatVec() throws RecognitionException {
         ExprParser.vCatVec_return retval = new ExprParser.vCatVec_return();
         retval.start = input.LT(1);
@@ -3791,65 +3925,65 @@ public TreeAdaptor getTreeAdaptor() {
 
         CommonTree root_0 = null;
 
-        Token SEMI105=null;
-        ExprParser.hCatVec_return hCatVec104 =null;
+        Token SEMI109=null;
+        ExprParser.hCatVec_return hCatVec108 =null;
 
-        ExprParser.hCatVec_return hCatVec106 =null;
+        ExprParser.hCatVec_return hCatVec110 =null;
 
 
-        CommonTree SEMI105_tree=null;
+        CommonTree SEMI109_tree=null;
         RewriteRuleTokenStream stream_SEMI=new RewriteRuleTokenStream(adaptor,"token SEMI");
         RewriteRuleSubtreeStream stream_hCatVec=new RewriteRuleSubtreeStream(adaptor,"rule hCatVec");
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 20) ) { return retval; }
+            if ( state.backtracking>0 && alreadyParsedRule(input, 21) ) { return retval; }
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:144:9: ( hCatVec ( ( SEMI ) hCatVec )* -> ^( VCAT_VEC ( hCatVec )+ ) )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:144:11: hCatVec ( ( SEMI ) hCatVec )*
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:202:9: ( hCatVec ( ( SEMI ) hCatVec )* -> ^( VCAT_VEC ( hCatVec )+ ) )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:202:11: hCatVec ( ( SEMI ) hCatVec )*
             {
-            pushFollow(FOLLOW_hCatVec_in_vCatVec851);
-            hCatVec104=hCatVec();
+            pushFollow(FOLLOW_hCatVec_in_vCatVec972);
+            hCatVec108=hCatVec();
 
             state._fsp--;
             if (state.failed) return retval;
-            if ( state.backtracking==0 ) stream_hCatVec.add(hCatVec104.getTree());
+            if ( state.backtracking==0 ) stream_hCatVec.add(hCatVec108.getTree());
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:144:19: ( ( SEMI ) hCatVec )*
-            loop41:
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:202:19: ( ( SEMI ) hCatVec )*
+            loop43:
             do {
-                int alt41=2;
-                int LA41_0 = input.LA(1);
+                int alt43=2;
+                int LA43_0 = input.LA(1);
 
-                if ( (LA41_0==SEMI) ) {
-                    alt41=1;
+                if ( (LA43_0==SEMI) ) {
+                    alt43=1;
                 }
 
 
-                switch (alt41) {
+                switch (alt43) {
             	case 1 :
-            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:144:20: ( SEMI ) hCatVec
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:202:20: ( SEMI ) hCatVec
             	    {
-            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:144:20: ( SEMI )
-            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:144:21: SEMI
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:202:20: ( SEMI )
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:202:21: SEMI
             	    {
-            	    SEMI105=(Token)match(input,SEMI,FOLLOW_SEMI_in_vCatVec855); if (state.failed) return retval; 
-            	    if ( state.backtracking==0 ) stream_SEMI.add(SEMI105);
+            	    SEMI109=(Token)match(input,SEMI,FOLLOW_SEMI_in_vCatVec976); if (state.failed) return retval; 
+            	    if ( state.backtracking==0 ) stream_SEMI.add(SEMI109);
 
 
             	    }
 
 
-            	    pushFollow(FOLLOW_hCatVec_in_vCatVec858);
-            	    hCatVec106=hCatVec();
+            	    pushFollow(FOLLOW_hCatVec_in_vCatVec979);
+            	    hCatVec110=hCatVec();
 
             	    state._fsp--;
             	    if (state.failed) return retval;
-            	    if ( state.backtracking==0 ) stream_hCatVec.add(hCatVec106.getTree());
+            	    if ( state.backtracking==0 ) stream_hCatVec.add(hCatVec110.getTree());
 
             	    }
             	    break;
 
             	default :
-            	    break loop41;
+            	    break loop43;
                 }
             } while (true);
 
@@ -3867,9 +4001,9 @@ public TreeAdaptor getTreeAdaptor() {
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
             root_0 = (CommonTree)adaptor.nil();
-            // 144:37: -> ^( VCAT_VEC ( hCatVec )+ )
+            // 202:37: -> ^( VCAT_VEC ( hCatVec )+ )
             {
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:144:40: ^( VCAT_VEC ( hCatVec )+ )
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:202:40: ^( VCAT_VEC ( hCatVec )+ )
                 {
                 CommonTree root_1 = (CommonTree)adaptor.nil();
                 root_1 = (CommonTree)adaptor.becomeRoot(
@@ -3914,7 +4048,7 @@ public TreeAdaptor getTreeAdaptor() {
 
         finally {
         	// do for sure before leaving
-            if ( state.backtracking>0 ) { memoize(input, 20, vCatVec_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 21, vCatVec_StartIndex); }
 
         }
         return retval;
@@ -3929,7 +4063,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "vector"
-    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:146:1: vector : OPENB ! vCatVec CLOSEB !;
+    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:204:1: vector : OPENB ! vCatVec CLOSEB !;
     public final ExprParser.vector_return vector() throws RecognitionException {
         ExprParser.vector_return retval = new ExprParser.vector_return();
         retval.start = input.LT(1);
@@ -3938,33 +4072,33 @@ public TreeAdaptor getTreeAdaptor() {
 
         CommonTree root_0 = null;
 
-        Token OPENB107=null;
-        Token CLOSEB109=null;
-        ExprParser.vCatVec_return vCatVec108 =null;
+        Token OPENB111=null;
+        Token CLOSEB113=null;
+        ExprParser.vCatVec_return vCatVec112 =null;
 
 
-        CommonTree OPENB107_tree=null;
-        CommonTree CLOSEB109_tree=null;
+        CommonTree OPENB111_tree=null;
+        CommonTree CLOSEB113_tree=null;
 
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 21) ) { return retval; }
+            if ( state.backtracking>0 && alreadyParsedRule(input, 22) ) { return retval; }
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:146:8: ( OPENB ! vCatVec CLOSEB !)
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:146:10: OPENB ! vCatVec CLOSEB !
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:204:8: ( OPENB ! vCatVec CLOSEB !)
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:204:10: OPENB ! vCatVec CLOSEB !
             {
             root_0 = (CommonTree)adaptor.nil();
 
 
-            OPENB107=(Token)match(input,OPENB,FOLLOW_OPENB_in_vector877); if (state.failed) return retval;
+            OPENB111=(Token)match(input,OPENB,FOLLOW_OPENB_in_vector998); if (state.failed) return retval;
 
-            pushFollow(FOLLOW_vCatVec_in_vector880);
-            vCatVec108=vCatVec();
+            pushFollow(FOLLOW_vCatVec_in_vector1001);
+            vCatVec112=vCatVec();
 
             state._fsp--;
             if (state.failed) return retval;
-            if ( state.backtracking==0 ) adaptor.addChild(root_0, vCatVec108.getTree());
+            if ( state.backtracking==0 ) adaptor.addChild(root_0, vCatVec112.getTree());
 
-            CLOSEB109=(Token)match(input,CLOSEB,FOLLOW_CLOSEB_in_vector882); if (state.failed) return retval;
+            CLOSEB113=(Token)match(input,CLOSEB,FOLLOW_CLOSEB_in_vector1003); if (state.failed) return retval;
 
             }
 
@@ -3986,7 +4120,7 @@ public TreeAdaptor getTreeAdaptor() {
 
         finally {
         	// do for sure before leaving
-            if ( state.backtracking>0 ) { memoize(input, 21, vector_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 22, vector_StartIndex); }
 
         }
         return retval;
@@ -4001,7 +4135,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "hCatCell"
-    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:148:1: hCatCell : expr ( ( COMMA )? expr )* -> ^( HCAT_CELL ( expr )+ ) ;
+    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:206:1: hCatCell : expr ( ( COMMA )? expr )* -> ^( HCAT_CELL ( expr )+ ) ;
     public final ExprParser.hCatCell_return hCatCell() throws RecognitionException {
         ExprParser.hCatCell_return retval = new ExprParser.hCatCell_return();
         retval.start = input.LT(1);
@@ -4010,56 +4144,56 @@ public TreeAdaptor getTreeAdaptor() {
 
         CommonTree root_0 = null;
 
-        Token COMMA111=null;
-        ExprParser.expr_return expr110 =null;
+        Token COMMA115=null;
+        ExprParser.expr_return expr114 =null;
 
-        ExprParser.expr_return expr112 =null;
+        ExprParser.expr_return expr116 =null;
 
 
-        CommonTree COMMA111_tree=null;
+        CommonTree COMMA115_tree=null;
         RewriteRuleTokenStream stream_COMMA=new RewriteRuleTokenStream(adaptor,"token COMMA");
         RewriteRuleSubtreeStream stream_expr=new RewriteRuleSubtreeStream(adaptor,"rule expr");
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 22) ) { return retval; }
+            if ( state.backtracking>0 && alreadyParsedRule(input, 23) ) { return retval; }
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:148:9: ( expr ( ( COMMA )? expr )* -> ^( HCAT_CELL ( expr )+ ) )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:148:11: expr ( ( COMMA )? expr )*
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:206:9: ( expr ( ( COMMA )? expr )* -> ^( HCAT_CELL ( expr )+ ) )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:206:11: expr ( ( COMMA )? expr )*
             {
-            pushFollow(FOLLOW_expr_in_hCatCell890);
-            expr110=expr();
+            pushFollow(FOLLOW_expr_in_hCatCell1011);
+            expr114=expr();
 
             state._fsp--;
             if (state.failed) return retval;
-            if ( state.backtracking==0 ) stream_expr.add(expr110.getTree());
+            if ( state.backtracking==0 ) stream_expr.add(expr114.getTree());
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:148:16: ( ( COMMA )? expr )*
-            loop43:
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:206:16: ( ( COMMA )? expr )*
+            loop45:
             do {
-                int alt43=2;
-                int LA43_0 = input.LA(1);
+                int alt45=2;
+                int LA45_0 = input.LA(1);
 
-                if ( (LA43_0==COLON||LA43_0==COMMA||LA43_0==DOT||(LA43_0 >= EMPTY_CELL && LA43_0 <= END)||LA43_0==FALSE||LA43_0==ID||LA43_0==INTEGER||LA43_0==MINUS||LA43_0==NOT||(LA43_0 >= OPENB && LA43_0 <= OPENP)||LA43_0==PLUS||LA43_0==STRING_LITERAL||LA43_0==TRUE) ) {
-                    alt43=1;
+                if ( (LA45_0==COLON||LA45_0==COMMA||LA45_0==DOT||(LA45_0 >= EMPTY_CELL && LA45_0 <= END)||LA45_0==FALSE||LA45_0==ID||LA45_0==INTEGER||LA45_0==MINUS||LA45_0==NOT||(LA45_0 >= OPENB && LA45_0 <= OPENP)||LA45_0==PLUS||LA45_0==STRING_LITERAL||LA45_0==TRUE) ) {
+                    alt45=1;
                 }
 
 
-                switch (alt43) {
+                switch (alt45) {
             	case 1 :
-            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:148:17: ( COMMA )? expr
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:206:17: ( COMMA )? expr
             	    {
-            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:148:17: ( COMMA )?
-            	    int alt42=2;
-            	    int LA42_0 = input.LA(1);
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:206:17: ( COMMA )?
+            	    int alt44=2;
+            	    int LA44_0 = input.LA(1);
 
-            	    if ( (LA42_0==COMMA) ) {
-            	        alt42=1;
+            	    if ( (LA44_0==COMMA) ) {
+            	        alt44=1;
             	    }
-            	    switch (alt42) {
+            	    switch (alt44) {
             	        case 1 :
-            	            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:148:18: COMMA
+            	            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:206:18: COMMA
             	            {
-            	            COMMA111=(Token)match(input,COMMA,FOLLOW_COMMA_in_hCatCell894); if (state.failed) return retval; 
-            	            if ( state.backtracking==0 ) stream_COMMA.add(COMMA111);
+            	            COMMA115=(Token)match(input,COMMA,FOLLOW_COMMA_in_hCatCell1015); if (state.failed) return retval; 
+            	            if ( state.backtracking==0 ) stream_COMMA.add(COMMA115);
 
 
             	            }
@@ -4068,18 +4202,18 @@ public TreeAdaptor getTreeAdaptor() {
             	    }
 
 
-            	    pushFollow(FOLLOW_expr_in_hCatCell898);
-            	    expr112=expr();
+            	    pushFollow(FOLLOW_expr_in_hCatCell1019);
+            	    expr116=expr();
 
             	    state._fsp--;
             	    if (state.failed) return retval;
-            	    if ( state.backtracking==0 ) stream_expr.add(expr112.getTree());
+            	    if ( state.backtracking==0 ) stream_expr.add(expr116.getTree());
 
             	    }
             	    break;
 
             	default :
-            	    break loop43;
+            	    break loop45;
                 }
             } while (true);
 
@@ -4097,9 +4231,9 @@ public TreeAdaptor getTreeAdaptor() {
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
             root_0 = (CommonTree)adaptor.nil();
-            // 148:34: -> ^( HCAT_CELL ( expr )+ )
+            // 206:34: -> ^( HCAT_CELL ( expr )+ )
             {
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:148:37: ^( HCAT_CELL ( expr )+ )
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:206:37: ^( HCAT_CELL ( expr )+ )
                 {
                 CommonTree root_1 = (CommonTree)adaptor.nil();
                 root_1 = (CommonTree)adaptor.becomeRoot(
@@ -4144,7 +4278,7 @@ public TreeAdaptor getTreeAdaptor() {
 
         finally {
         	// do for sure before leaving
-            if ( state.backtracking>0 ) { memoize(input, 22, hCatCell_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 23, hCatCell_StartIndex); }
 
         }
         return retval;
@@ -4159,7 +4293,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "vCatCell"
-    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:150:1: vCatCell : hCatCell ( ( SEMI ) ! hCatCell )* -> ^( VCAT_CELL ( hCatCell )+ ) ;
+    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:208:1: vCatCell : hCatCell ( ( SEMI ) ! hCatCell )* -> ^( VCAT_CELL ( hCatCell )+ ) ;
     public final ExprParser.vCatCell_return vCatCell() throws RecognitionException {
         ExprParser.vCatCell_return retval = new ExprParser.vCatCell_return();
         retval.start = input.LT(1);
@@ -4168,65 +4302,65 @@ public TreeAdaptor getTreeAdaptor() {
 
         CommonTree root_0 = null;
 
-        Token SEMI114=null;
-        ExprParser.hCatCell_return hCatCell113 =null;
+        Token SEMI118=null;
+        ExprParser.hCatCell_return hCatCell117 =null;
 
-        ExprParser.hCatCell_return hCatCell115 =null;
+        ExprParser.hCatCell_return hCatCell119 =null;
 
 
-        CommonTree SEMI114_tree=null;
+        CommonTree SEMI118_tree=null;
         RewriteRuleTokenStream stream_SEMI=new RewriteRuleTokenStream(adaptor,"token SEMI");
         RewriteRuleSubtreeStream stream_hCatCell=new RewriteRuleSubtreeStream(adaptor,"rule hCatCell");
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 23) ) { return retval; }
+            if ( state.backtracking>0 && alreadyParsedRule(input, 24) ) { return retval; }
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:150:9: ( hCatCell ( ( SEMI ) ! hCatCell )* -> ^( VCAT_CELL ( hCatCell )+ ) )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:150:11: hCatCell ( ( SEMI ) ! hCatCell )*
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:208:9: ( hCatCell ( ( SEMI ) ! hCatCell )* -> ^( VCAT_CELL ( hCatCell )+ ) )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:208:11: hCatCell ( ( SEMI ) ! hCatCell )*
             {
-            pushFollow(FOLLOW_hCatCell_in_vCatCell917);
-            hCatCell113=hCatCell();
+            pushFollow(FOLLOW_hCatCell_in_vCatCell1038);
+            hCatCell117=hCatCell();
 
             state._fsp--;
             if (state.failed) return retval;
-            if ( state.backtracking==0 ) stream_hCatCell.add(hCatCell113.getTree());
+            if ( state.backtracking==0 ) stream_hCatCell.add(hCatCell117.getTree());
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:150:20: ( ( SEMI ) ! hCatCell )*
-            loop44:
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:208:20: ( ( SEMI ) ! hCatCell )*
+            loop46:
             do {
-                int alt44=2;
-                int LA44_0 = input.LA(1);
+                int alt46=2;
+                int LA46_0 = input.LA(1);
 
-                if ( (LA44_0==SEMI) ) {
-                    alt44=1;
+                if ( (LA46_0==SEMI) ) {
+                    alt46=1;
                 }
 
 
-                switch (alt44) {
+                switch (alt46) {
             	case 1 :
-            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:150:21: ( SEMI ) ! hCatCell
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:208:21: ( SEMI ) ! hCatCell
             	    {
-            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:150:21: ( SEMI )
-            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:150:22: SEMI
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:208:21: ( SEMI )
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:208:22: SEMI
             	    {
-            	    SEMI114=(Token)match(input,SEMI,FOLLOW_SEMI_in_vCatCell921); if (state.failed) return retval; 
-            	    if ( state.backtracking==0 ) stream_SEMI.add(SEMI114);
+            	    SEMI118=(Token)match(input,SEMI,FOLLOW_SEMI_in_vCatCell1042); if (state.failed) return retval; 
+            	    if ( state.backtracking==0 ) stream_SEMI.add(SEMI118);
 
 
             	    }
 
 
-            	    pushFollow(FOLLOW_hCatCell_in_vCatCell925);
-            	    hCatCell115=hCatCell();
+            	    pushFollow(FOLLOW_hCatCell_in_vCatCell1046);
+            	    hCatCell119=hCatCell();
 
             	    state._fsp--;
             	    if (state.failed) return retval;
-            	    if ( state.backtracking==0 ) stream_hCatCell.add(hCatCell115.getTree());
+            	    if ( state.backtracking==0 ) stream_hCatCell.add(hCatCell119.getTree());
 
             	    }
             	    break;
 
             	default :
-            	    break loop44;
+            	    break loop46;
                 }
             } while (true);
 
@@ -4244,9 +4378,9 @@ public TreeAdaptor getTreeAdaptor() {
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
             root_0 = (CommonTree)adaptor.nil();
-            // 150:40: -> ^( VCAT_CELL ( hCatCell )+ )
+            // 208:40: -> ^( VCAT_CELL ( hCatCell )+ )
             {
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:150:43: ^( VCAT_CELL ( hCatCell )+ )
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:208:43: ^( VCAT_CELL ( hCatCell )+ )
                 {
                 CommonTree root_1 = (CommonTree)adaptor.nil();
                 root_1 = (CommonTree)adaptor.becomeRoot(
@@ -4291,7 +4425,7 @@ public TreeAdaptor getTreeAdaptor() {
 
         finally {
         	// do for sure before leaving
-            if ( state.backtracking>0 ) { memoize(input, 23, vCatCell_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 24, vCatCell_StartIndex); }
 
         }
         return retval;
@@ -4306,7 +4440,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "cellArray"
-    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:152:1: cellArray : OPENC ! ( vCatCell )? CLOSEC !;
+    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:210:1: cellArray : OPENC ! ( vCatCell )? CLOSEC !;
     public final ExprParser.cellArray_return cellArray() throws RecognitionException {
         ExprParser.cellArray_return retval = new ExprParser.cellArray_return();
         retval.start = input.LT(1);
@@ -4315,42 +4449,42 @@ public TreeAdaptor getTreeAdaptor() {
 
         CommonTree root_0 = null;
 
-        Token OPENC116=null;
-        Token CLOSEC118=null;
-        ExprParser.vCatCell_return vCatCell117 =null;
+        Token OPENC120=null;
+        Token CLOSEC122=null;
+        ExprParser.vCatCell_return vCatCell121 =null;
 
 
-        CommonTree OPENC116_tree=null;
-        CommonTree CLOSEC118_tree=null;
+        CommonTree OPENC120_tree=null;
+        CommonTree CLOSEC122_tree=null;
 
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 24) ) { return retval; }
+            if ( state.backtracking>0 && alreadyParsedRule(input, 25) ) { return retval; }
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:152:11: ( OPENC ! ( vCatCell )? CLOSEC !)
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:152:13: OPENC ! ( vCatCell )? CLOSEC !
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:210:11: ( OPENC ! ( vCatCell )? CLOSEC !)
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:210:13: OPENC ! ( vCatCell )? CLOSEC !
             {
             root_0 = (CommonTree)adaptor.nil();
 
 
-            OPENC116=(Token)match(input,OPENC,FOLLOW_OPENC_in_cellArray944); if (state.failed) return retval;
+            OPENC120=(Token)match(input,OPENC,FOLLOW_OPENC_in_cellArray1065); if (state.failed) return retval;
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:152:20: ( vCatCell )?
-            int alt45=2;
-            int LA45_0 = input.LA(1);
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:210:20: ( vCatCell )?
+            int alt47=2;
+            int LA47_0 = input.LA(1);
 
-            if ( (LA45_0==COLON||LA45_0==DOT||(LA45_0 >= EMPTY_CELL && LA45_0 <= END)||LA45_0==FALSE||LA45_0==ID||LA45_0==INTEGER||LA45_0==MINUS||LA45_0==NOT||(LA45_0 >= OPENB && LA45_0 <= OPENP)||LA45_0==PLUS||LA45_0==STRING_LITERAL||LA45_0==TRUE) ) {
-                alt45=1;
+            if ( (LA47_0==COLON||LA47_0==DOT||(LA47_0 >= EMPTY_CELL && LA47_0 <= END)||LA47_0==FALSE||LA47_0==ID||LA47_0==INTEGER||LA47_0==MINUS||LA47_0==NOT||(LA47_0 >= OPENB && LA47_0 <= OPENP)||LA47_0==PLUS||LA47_0==STRING_LITERAL||LA47_0==TRUE) ) {
+                alt47=1;
             }
-            switch (alt45) {
+            switch (alt47) {
                 case 1 :
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:152:20: vCatCell
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:210:20: vCatCell
                     {
-                    pushFollow(FOLLOW_vCatCell_in_cellArray947);
-                    vCatCell117=vCatCell();
+                    pushFollow(FOLLOW_vCatCell_in_cellArray1068);
+                    vCatCell121=vCatCell();
 
                     state._fsp--;
                     if (state.failed) return retval;
-                    if ( state.backtracking==0 ) adaptor.addChild(root_0, vCatCell117.getTree());
+                    if ( state.backtracking==0 ) adaptor.addChild(root_0, vCatCell121.getTree());
 
                     }
                     break;
@@ -4358,7 +4492,7 @@ public TreeAdaptor getTreeAdaptor() {
             }
 
 
-            CLOSEC118=(Token)match(input,CLOSEC,FOLLOW_CLOSEC_in_cellArray950); if (state.failed) return retval;
+            CLOSEC122=(Token)match(input,CLOSEC,FOLLOW_CLOSEC_in_cellArray1071); if (state.failed) return retval;
 
             }
 
@@ -4380,7 +4514,7 @@ public TreeAdaptor getTreeAdaptor() {
 
         finally {
         	// do for sure before leaving
-            if ( state.backtracking>0 ) { memoize(input, 24, cellArray_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 25, cellArray_StartIndex); }
 
         }
         return retval;
@@ -4395,7 +4529,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "expr"
-    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:154:1: expr : scOr ;
+    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:212:1: expr : scOr ;
     public final ExprParser.expr_return expr() throws RecognitionException {
         ExprParser.expr_return retval = new ExprParser.expr_return();
         retval.start = input.LT(1);
@@ -4404,25 +4538,25 @@ public TreeAdaptor getTreeAdaptor() {
 
         CommonTree root_0 = null;
 
-        ExprParser.scOr_return scOr119 =null;
+        ExprParser.scOr_return scOr123 =null;
 
 
 
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 25) ) { return retval; }
+            if ( state.backtracking>0 && alreadyParsedRule(input, 26) ) { return retval; }
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:154:6: ( scOr )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:154:8: scOr
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:212:6: ( scOr )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:212:33: scOr
             {
             root_0 = (CommonTree)adaptor.nil();
 
 
-            pushFollow(FOLLOW_scOr_in_expr961);
-            scOr119=scOr();
+            pushFollow(FOLLOW_scOr_in_expr1084);
+            scOr123=scOr();
 
             state._fsp--;
             if (state.failed) return retval;
-            if ( state.backtracking==0 ) adaptor.addChild(root_0, scOr119.getTree());
+            if ( state.backtracking==0 ) adaptor.addChild(root_0, scOr123.getTree());
 
             }
 
@@ -4444,7 +4578,7 @@ public TreeAdaptor getTreeAdaptor() {
 
         finally {
         	// do for sure before leaving
-            if ( state.backtracking>0 ) { memoize(input, 25, expr_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 26, expr_StartIndex); }
 
         }
         return retval;
@@ -4459,7 +4593,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "line"
-    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:156:1: line : ( ( ( term EQUALS )=> ( term EQUALS ^) )? expr ( SEMI ^)? ) ;
+    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:220:1: line : ( ( ( term EQUALS )=> ( term EQUALS ^) )? expr ( SEMI ^)? ) ;
     public final ExprParser.line_return line() throws RecognitionException {
         ExprParser.line_return retval = new ExprParser.line_return();
         retval.start = input.LT(1);
@@ -4468,170 +4602,170 @@ public TreeAdaptor getTreeAdaptor() {
 
         CommonTree root_0 = null;
 
-        Token EQUALS121=null;
-        Token SEMI123=null;
-        ExprParser.term_return term120 =null;
+        Token EQUALS125=null;
+        Token SEMI127=null;
+        ExprParser.term_return term124 =null;
 
-        ExprParser.expr_return expr122 =null;
+        ExprParser.expr_return expr126 =null;
 
 
-        CommonTree EQUALS121_tree=null;
-        CommonTree SEMI123_tree=null;
+        CommonTree EQUALS125_tree=null;
+        CommonTree SEMI127_tree=null;
 
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 26) ) { return retval; }
+            if ( state.backtracking>0 && alreadyParsedRule(input, 27) ) { return retval; }
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:156:6: ( ( ( ( term EQUALS )=> ( term EQUALS ^) )? expr ( SEMI ^)? ) )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:156:8: ( ( ( term EQUALS )=> ( term EQUALS ^) )? expr ( SEMI ^)? )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:220:6: ( ( ( ( term EQUALS )=> ( term EQUALS ^) )? expr ( SEMI ^)? ) )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:220:28: ( ( ( term EQUALS )=> ( term EQUALS ^) )? expr ( SEMI ^)? )
             {
             root_0 = (CommonTree)adaptor.nil();
 
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:156:8: ( ( ( term EQUALS )=> ( term EQUALS ^) )? expr ( SEMI ^)? )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:156:9: ( ( term EQUALS )=> ( term EQUALS ^) )? expr ( SEMI ^)?
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:220:28: ( ( ( term EQUALS )=> ( term EQUALS ^) )? expr ( SEMI ^)? )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:220:29: ( ( term EQUALS )=> ( term EQUALS ^) )? expr ( SEMI ^)?
             {
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:156:9: ( ( term EQUALS )=> ( term EQUALS ^) )?
-            int alt46=2;
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:220:29: ( ( term EQUALS )=> ( term EQUALS ^) )?
+            int alt48=2;
             switch ( input.LA(1) ) {
                 case EMPTY_VEC:
                     {
-                    int LA46_1 = input.LA(2);
+                    int LA48_1 = input.LA(2);
 
-                    if ( (synpred2_Expr()) ) {
-                        alt46=1;
+                    if ( (synpred3_Expr()) ) {
+                        alt48=1;
                     }
                     }
                     break;
                 case EMPTY_CELL:
                     {
-                    int LA46_2 = input.LA(2);
+                    int LA48_2 = input.LA(2);
 
-                    if ( (synpred2_Expr()) ) {
-                        alt46=1;
+                    if ( (synpred3_Expr()) ) {
+                        alt48=1;
                     }
                     }
                     break;
                 case OPENP:
                     {
-                    int LA46_3 = input.LA(2);
+                    int LA48_3 = input.LA(2);
 
-                    if ( (synpred2_Expr()) ) {
-                        alt46=1;
+                    if ( (synpred3_Expr()) ) {
+                        alt48=1;
                     }
                     }
                     break;
                 case STRING_LITERAL:
                     {
-                    int LA46_4 = input.LA(2);
+                    int LA48_4 = input.LA(2);
 
-                    if ( (synpred2_Expr()) ) {
-                        alt46=1;
+                    if ( (synpred3_Expr()) ) {
+                        alt48=1;
                     }
                     }
                     break;
                 case END:
                     {
-                    int LA46_5 = input.LA(2);
+                    int LA48_5 = input.LA(2);
 
-                    if ( (synpred2_Expr()) ) {
-                        alt46=1;
+                    if ( (synpred3_Expr()) ) {
+                        alt48=1;
                     }
                     }
                     break;
                 case OPENB:
                     {
-                    int LA46_6 = input.LA(2);
+                    int LA48_6 = input.LA(2);
 
-                    if ( (synpred2_Expr()) ) {
-                        alt46=1;
+                    if ( (synpred3_Expr()) ) {
+                        alt48=1;
                     }
                     }
                     break;
                 case OPENC:
                     {
-                    int LA46_7 = input.LA(2);
+                    int LA48_7 = input.LA(2);
 
-                    if ( (synpred2_Expr()) ) {
-                        alt46=1;
+                    if ( (synpred3_Expr()) ) {
+                        alt48=1;
                     }
                     }
                     break;
                 case COLON:
                     {
-                    int LA46_8 = input.LA(2);
+                    int LA48_8 = input.LA(2);
 
-                    if ( (synpred2_Expr()) ) {
-                        alt46=1;
+                    if ( (synpred3_Expr()) ) {
+                        alt48=1;
                     }
                     }
                     break;
                 case TRUE:
                     {
-                    int LA46_9 = input.LA(2);
+                    int LA48_9 = input.LA(2);
 
-                    if ( (synpred2_Expr()) ) {
-                        alt46=1;
+                    if ( (synpred3_Expr()) ) {
+                        alt48=1;
                     }
                     }
                     break;
                 case FALSE:
                     {
-                    int LA46_10 = input.LA(2);
+                    int LA48_10 = input.LA(2);
 
-                    if ( (synpred2_Expr()) ) {
-                        alt46=1;
+                    if ( (synpred3_Expr()) ) {
+                        alt48=1;
                     }
                     }
                     break;
                 case INTEGER:
                     {
-                    int LA46_11 = input.LA(2);
+                    int LA48_11 = input.LA(2);
 
-                    if ( (synpred2_Expr()) ) {
-                        alt46=1;
+                    if ( (synpred3_Expr()) ) {
+                        alt48=1;
                     }
                     }
                     break;
                 case DOT:
                     {
-                    int LA46_12 = input.LA(2);
+                    int LA48_12 = input.LA(2);
 
-                    if ( (synpred2_Expr()) ) {
-                        alt46=1;
+                    if ( (synpred3_Expr()) ) {
+                        alt48=1;
                     }
                     }
                     break;
                 case ID:
                     {
-                    int LA46_13 = input.LA(2);
+                    int LA48_13 = input.LA(2);
 
-                    if ( (synpred2_Expr()) ) {
-                        alt46=1;
+                    if ( (synpred3_Expr()) ) {
+                        alt48=1;
                     }
                     }
                     break;
             }
 
-            switch (alt46) {
+            switch (alt48) {
                 case 1 :
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:156:10: ( term EQUALS )=> ( term EQUALS ^)
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:220:30: ( term EQUALS )=> ( term EQUALS ^)
                     {
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:156:27: ( term EQUALS ^)
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:156:28: term EQUALS ^
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:220:47: ( term EQUALS ^)
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:220:48: term EQUALS ^
                     {
-                    pushFollow(FOLLOW_term_in_line981);
-                    term120=term();
+                    pushFollow(FOLLOW_term_in_line1113);
+                    term124=term();
 
                     state._fsp--;
                     if (state.failed) return retval;
-                    if ( state.backtracking==0 ) adaptor.addChild(root_0, term120.getTree());
+                    if ( state.backtracking==0 ) adaptor.addChild(root_0, term124.getTree());
 
-                    EQUALS121=(Token)match(input,EQUALS,FOLLOW_EQUALS_in_line983); if (state.failed) return retval;
+                    EQUALS125=(Token)match(input,EQUALS,FOLLOW_EQUALS_in_line1115); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
-                    EQUALS121_tree = 
-                    (CommonTree)adaptor.create(EQUALS121)
+                    EQUALS125_tree = 
+                    (CommonTree)adaptor.create(EQUALS125)
                     ;
-                    root_0 = (CommonTree)adaptor.becomeRoot(EQUALS121_tree, root_0);
+                    root_0 = (CommonTree)adaptor.becomeRoot(EQUALS125_tree, root_0);
                     }
 
                     }
@@ -4643,30 +4777,30 @@ public TreeAdaptor getTreeAdaptor() {
             }
 
 
-            pushFollow(FOLLOW_expr_in_line990);
-            expr122=expr();
+            pushFollow(FOLLOW_expr_in_line1122);
+            expr126=expr();
 
             state._fsp--;
             if (state.failed) return retval;
-            if ( state.backtracking==0 ) adaptor.addChild(root_0, expr122.getTree());
+            if ( state.backtracking==0 ) adaptor.addChild(root_0, expr126.getTree());
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:157:7: ( SEMI ^)?
-            int alt47=2;
-            int LA47_0 = input.LA(1);
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:221:7: ( SEMI ^)?
+            int alt49=2;
+            int LA49_0 = input.LA(1);
 
-            if ( (LA47_0==SEMI) ) {
-                alt47=1;
+            if ( (LA49_0==SEMI) ) {
+                alt49=1;
             }
-            switch (alt47) {
+            switch (alt49) {
                 case 1 :
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:157:8: SEMI ^
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:221:8: SEMI ^
                     {
-                    SEMI123=(Token)match(input,SEMI,FOLLOW_SEMI_in_line993); if (state.failed) return retval;
+                    SEMI127=(Token)match(input,SEMI,FOLLOW_SEMI_in_line1125); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
-                    SEMI123_tree = 
-                    (CommonTree)adaptor.create(SEMI123)
+                    SEMI127_tree = 
+                    (CommonTree)adaptor.create(SEMI127)
                     ;
-                    root_0 = (CommonTree)adaptor.becomeRoot(SEMI123_tree, root_0);
+                    root_0 = (CommonTree)adaptor.becomeRoot(SEMI127_tree, root_0);
                     }
 
                     }
@@ -4698,7 +4832,7 @@ public TreeAdaptor getTreeAdaptor() {
 
         finally {
         	// do for sure before leaving
-            if ( state.backtracking>0 ) { memoize(input, 26, line_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 27, line_StartIndex); }
 
         }
         return retval;
@@ -4713,7 +4847,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "ifPart"
-    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:159:1: ifPart : IF ^ expr ( block )? ;
+    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:228:1: ifPart : IF ^ expr ( block )? ;
     public final ExprParser.ifPart_return ifPart() throws RecognitionException {
         ExprParser.ifPart_return retval = new ExprParser.ifPart_return();
         retval.start = input.LT(1);
@@ -4722,55 +4856,55 @@ public TreeAdaptor getTreeAdaptor() {
 
         CommonTree root_0 = null;
 
-        Token IF124=null;
-        ExprParser.expr_return expr125 =null;
+        Token IF128=null;
+        ExprParser.expr_return expr129 =null;
 
-        ExprParser.block_return block126 =null;
+        ExprParser.block_return block130 =null;
 
 
-        CommonTree IF124_tree=null;
+        CommonTree IF128_tree=null;
 
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 27) ) { return retval; }
+            if ( state.backtracking>0 && alreadyParsedRule(input, 28) ) { return retval; }
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:159:8: ( IF ^ expr ( block )? )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:159:10: IF ^ expr ( block )?
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:228:8: ( IF ^ expr ( block )? )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:228:10: IF ^ expr ( block )?
             {
             root_0 = (CommonTree)adaptor.nil();
 
 
-            IF124=(Token)match(input,IF,FOLLOW_IF_in_ifPart1008); if (state.failed) return retval;
+            IF128=(Token)match(input,IF,FOLLOW_IF_in_ifPart1144); if (state.failed) return retval;
             if ( state.backtracking==0 ) {
-            IF124_tree = 
-            (CommonTree)adaptor.create(IF124)
+            IF128_tree = 
+            (CommonTree)adaptor.create(IF128)
             ;
-            root_0 = (CommonTree)adaptor.becomeRoot(IF124_tree, root_0);
+            root_0 = (CommonTree)adaptor.becomeRoot(IF128_tree, root_0);
             }
 
-            pushFollow(FOLLOW_expr_in_ifPart1011);
-            expr125=expr();
+            pushFollow(FOLLOW_expr_in_ifPart1147);
+            expr129=expr();
 
             state._fsp--;
             if (state.failed) return retval;
-            if ( state.backtracking==0 ) adaptor.addChild(root_0, expr125.getTree());
+            if ( state.backtracking==0 ) adaptor.addChild(root_0, expr129.getTree());
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:159:19: ( block )?
-            int alt48=2;
-            int LA48_0 = input.LA(1);
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:228:19: ( block )?
+            int alt50=2;
+            int LA50_0 = input.LA(1);
 
-            if ( (LA48_0==COLON||LA48_0==DOT||(LA48_0 >= EMPTY_CELL && LA48_0 <= END)||(LA48_0 >= FALSE && LA48_0 <= FOR)||(LA48_0 >= ID && LA48_0 <= IF)||LA48_0==INTEGER||LA48_0==MINUS||LA48_0==NOT||(LA48_0 >= OPENB && LA48_0 <= OPENP)||LA48_0==PLUS||(LA48_0 >= STRING_LITERAL && LA48_0 <= SWITCH)||LA48_0==TRUE||LA48_0==WHILE) ) {
-                alt48=1;
+            if ( (LA50_0==COLON||LA50_0==DOT||(LA50_0 >= EMPTY_CELL && LA50_0 <= END)||(LA50_0 >= FALSE && LA50_0 <= FOR)||(LA50_0 >= ID && LA50_0 <= IF)||LA50_0==INTEGER||LA50_0==MINUS||LA50_0==NOT||(LA50_0 >= OPENB && LA50_0 <= OPENP)||LA50_0==PLUS||(LA50_0 >= STRING_LITERAL && LA50_0 <= SWITCH)||LA50_0==TRUE||LA50_0==WHILE) ) {
+                alt50=1;
             }
-            switch (alt48) {
+            switch (alt50) {
                 case 1 :
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:159:19: block
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:228:19: block
                     {
-                    pushFollow(FOLLOW_block_in_ifPart1013);
-                    block126=block();
+                    pushFollow(FOLLOW_block_in_ifPart1149);
+                    block130=block();
 
                     state._fsp--;
                     if (state.failed) return retval;
-                    if ( state.backtracking==0 ) adaptor.addChild(root_0, block126.getTree());
+                    if ( state.backtracking==0 ) adaptor.addChild(root_0, block130.getTree());
 
                     }
                     break;
@@ -4798,7 +4932,7 @@ public TreeAdaptor getTreeAdaptor() {
 
         finally {
         	// do for sure before leaving
-            if ( state.backtracking>0 ) { memoize(input, 27, ifPart_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 28, ifPart_StartIndex); }
 
         }
         return retval;
@@ -4813,7 +4947,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "elseifPart"
-    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:160:1: elseifPart : ( ELSEIF ^e2= expr (b2= block )? ) ;
+    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:229:1: elseifPart : ( ELSEIF ^e2= expr (b2= block )? ) ;
     public final ExprParser.elseifPart_return elseifPart() throws RecognitionException {
         ExprParser.elseifPart_return retval = new ExprParser.elseifPart_return();
         retval.start = input.LT(1);
@@ -4822,53 +4956,53 @@ public TreeAdaptor getTreeAdaptor() {
 
         CommonTree root_0 = null;
 
-        Token ELSEIF127=null;
+        Token ELSEIF131=null;
         ExprParser.expr_return e2 =null;
 
         ExprParser.block_return b2 =null;
 
 
-        CommonTree ELSEIF127_tree=null;
+        CommonTree ELSEIF131_tree=null;
 
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 28) ) { return retval; }
+            if ( state.backtracking>0 && alreadyParsedRule(input, 29) ) { return retval; }
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:160:12: ( ( ELSEIF ^e2= expr (b2= block )? ) )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:160:14: ( ELSEIF ^e2= expr (b2= block )? )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:229:12: ( ( ELSEIF ^e2= expr (b2= block )? ) )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:229:14: ( ELSEIF ^e2= expr (b2= block )? )
             {
             root_0 = (CommonTree)adaptor.nil();
 
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:160:14: ( ELSEIF ^e2= expr (b2= block )? )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:160:15: ELSEIF ^e2= expr (b2= block )?
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:229:14: ( ELSEIF ^e2= expr (b2= block )? )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:229:15: ELSEIF ^e2= expr (b2= block )?
             {
-            ELSEIF127=(Token)match(input,ELSEIF,FOLLOW_ELSEIF_in_elseifPart1022); if (state.failed) return retval;
+            ELSEIF131=(Token)match(input,ELSEIF,FOLLOW_ELSEIF_in_elseifPart1158); if (state.failed) return retval;
             if ( state.backtracking==0 ) {
-            ELSEIF127_tree = 
-            (CommonTree)adaptor.create(ELSEIF127)
+            ELSEIF131_tree = 
+            (CommonTree)adaptor.create(ELSEIF131)
             ;
-            root_0 = (CommonTree)adaptor.becomeRoot(ELSEIF127_tree, root_0);
+            root_0 = (CommonTree)adaptor.becomeRoot(ELSEIF131_tree, root_0);
             }
 
-            pushFollow(FOLLOW_expr_in_elseifPart1027);
+            pushFollow(FOLLOW_expr_in_elseifPart1163);
             e2=expr();
 
             state._fsp--;
             if (state.failed) return retval;
             if ( state.backtracking==0 ) adaptor.addChild(root_0, e2.getTree());
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:160:33: (b2= block )?
-            int alt49=2;
-            int LA49_0 = input.LA(1);
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:229:33: (b2= block )?
+            int alt51=2;
+            int LA51_0 = input.LA(1);
 
-            if ( (LA49_0==COLON||LA49_0==DOT||(LA49_0 >= EMPTY_CELL && LA49_0 <= END)||(LA49_0 >= FALSE && LA49_0 <= FOR)||(LA49_0 >= ID && LA49_0 <= IF)||LA49_0==INTEGER||LA49_0==MINUS||LA49_0==NOT||(LA49_0 >= OPENB && LA49_0 <= OPENP)||LA49_0==PLUS||(LA49_0 >= STRING_LITERAL && LA49_0 <= SWITCH)||LA49_0==TRUE||LA49_0==WHILE) ) {
-                alt49=1;
+            if ( (LA51_0==COLON||LA51_0==DOT||(LA51_0 >= EMPTY_CELL && LA51_0 <= END)||(LA51_0 >= FALSE && LA51_0 <= FOR)||(LA51_0 >= ID && LA51_0 <= IF)||LA51_0==INTEGER||LA51_0==MINUS||LA51_0==NOT||(LA51_0 >= OPENB && LA51_0 <= OPENP)||LA51_0==PLUS||(LA51_0 >= STRING_LITERAL && LA51_0 <= SWITCH)||LA51_0==TRUE||LA51_0==WHILE) ) {
+                alt51=1;
             }
-            switch (alt49) {
+            switch (alt51) {
                 case 1 :
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:160:33: b2= block
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:229:33: b2= block
                     {
-                    pushFollow(FOLLOW_block_in_elseifPart1031);
+                    pushFollow(FOLLOW_block_in_elseifPart1167);
                     b2=block();
 
                     state._fsp--;
@@ -4904,7 +5038,7 @@ public TreeAdaptor getTreeAdaptor() {
 
         finally {
         	// do for sure before leaving
-            if ( state.backtracking>0 ) { memoize(input, 28, elseifPart_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 29, elseifPart_StartIndex); }
 
         }
         return retval;
@@ -4919,7 +5053,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "elsePart"
-    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:161:1: elsePart : ( ELSE ^ (b3= block )? ) ;
+    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:230:1: elsePart : ( ELSE ^ (b3= block )? ) ;
     public final ExprParser.elsePart_return elsePart() throws RecognitionException {
         ExprParser.elsePart_return retval = new ExprParser.elsePart_return();
         retval.start = input.LT(1);
@@ -4928,44 +5062,44 @@ public TreeAdaptor getTreeAdaptor() {
 
         CommonTree root_0 = null;
 
-        Token ELSE128=null;
+        Token ELSE132=null;
         ExprParser.block_return b3 =null;
 
 
-        CommonTree ELSE128_tree=null;
+        CommonTree ELSE132_tree=null;
 
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 29) ) { return retval; }
+            if ( state.backtracking>0 && alreadyParsedRule(input, 30) ) { return retval; }
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:161:10: ( ( ELSE ^ (b3= block )? ) )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:161:11: ( ELSE ^ (b3= block )? )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:230:10: ( ( ELSE ^ (b3= block )? ) )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:230:11: ( ELSE ^ (b3= block )? )
             {
             root_0 = (CommonTree)adaptor.nil();
 
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:161:11: ( ELSE ^ (b3= block )? )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:161:12: ELSE ^ (b3= block )?
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:230:11: ( ELSE ^ (b3= block )? )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:230:12: ELSE ^ (b3= block )?
             {
-            ELSE128=(Token)match(input,ELSE,FOLLOW_ELSE_in_elsePart1040); if (state.failed) return retval;
+            ELSE132=(Token)match(input,ELSE,FOLLOW_ELSE_in_elsePart1176); if (state.failed) return retval;
             if ( state.backtracking==0 ) {
-            ELSE128_tree = 
-            (CommonTree)adaptor.create(ELSE128)
+            ELSE132_tree = 
+            (CommonTree)adaptor.create(ELSE132)
             ;
-            root_0 = (CommonTree)adaptor.becomeRoot(ELSE128_tree, root_0);
+            root_0 = (CommonTree)adaptor.becomeRoot(ELSE132_tree, root_0);
             }
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:161:20: (b3= block )?
-            int alt50=2;
-            int LA50_0 = input.LA(1);
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:230:20: (b3= block )?
+            int alt52=2;
+            int LA52_0 = input.LA(1);
 
-            if ( (LA50_0==COLON||LA50_0==DOT||(LA50_0 >= EMPTY_CELL && LA50_0 <= END)||(LA50_0 >= FALSE && LA50_0 <= FOR)||(LA50_0 >= ID && LA50_0 <= IF)||LA50_0==INTEGER||LA50_0==MINUS||LA50_0==NOT||(LA50_0 >= OPENB && LA50_0 <= OPENP)||LA50_0==PLUS||(LA50_0 >= STRING_LITERAL && LA50_0 <= SWITCH)||LA50_0==TRUE||LA50_0==WHILE) ) {
-                alt50=1;
+            if ( (LA52_0==COLON||LA52_0==DOT||(LA52_0 >= EMPTY_CELL && LA52_0 <= END)||(LA52_0 >= FALSE && LA52_0 <= FOR)||(LA52_0 >= ID && LA52_0 <= IF)||LA52_0==INTEGER||LA52_0==MINUS||LA52_0==NOT||(LA52_0 >= OPENB && LA52_0 <= OPENP)||LA52_0==PLUS||(LA52_0 >= STRING_LITERAL && LA52_0 <= SWITCH)||LA52_0==TRUE||LA52_0==WHILE) ) {
+                alt52=1;
             }
-            switch (alt50) {
+            switch (alt52) {
                 case 1 :
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:161:20: b3= block
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:230:20: b3= block
                     {
-                    pushFollow(FOLLOW_block_in_elsePart1045);
+                    pushFollow(FOLLOW_block_in_elsePart1181);
                     b3=block();
 
                     state._fsp--;
@@ -5001,7 +5135,7 @@ public TreeAdaptor getTreeAdaptor() {
 
         finally {
         	// do for sure before leaving
-            if ( state.backtracking>0 ) { memoize(input, 29, elsePart_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 30, elsePart_StartIndex); }
 
         }
         return retval;
@@ -5016,7 +5150,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "ifBlock"
-    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:162:1: ifBlock : ifPart ( elseifPart )* ( elsePart )? BLOCK_END -> ^( IF_STAT ifPart ( elseifPart )* ( elsePart )? ) ;
+    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:231:1: ifBlock : ifPart ( elseifPart )* ( elsePart )? BLOCK_END -> ^( IF_STAT ifPart ( elseifPart )* ( elsePart )? ) ;
     public final ExprParser.ifBlock_return ifBlock() throws RecognitionException {
         ExprParser.ifBlock_return retval = new ExprParser.ifBlock_return();
         retval.start = input.LT(1);
@@ -5025,80 +5159,80 @@ public TreeAdaptor getTreeAdaptor() {
 
         CommonTree root_0 = null;
 
-        Token BLOCK_END132=null;
-        ExprParser.ifPart_return ifPart129 =null;
+        Token BLOCK_END136=null;
+        ExprParser.ifPart_return ifPart133 =null;
 
-        ExprParser.elseifPart_return elseifPart130 =null;
+        ExprParser.elseifPart_return elseifPart134 =null;
 
-        ExprParser.elsePart_return elsePart131 =null;
+        ExprParser.elsePart_return elsePart135 =null;
 
 
-        CommonTree BLOCK_END132_tree=null;
+        CommonTree BLOCK_END136_tree=null;
         RewriteRuleTokenStream stream_BLOCK_END=new RewriteRuleTokenStream(adaptor,"token BLOCK_END");
         RewriteRuleSubtreeStream stream_ifPart=new RewriteRuleSubtreeStream(adaptor,"rule ifPart");
         RewriteRuleSubtreeStream stream_elseifPart=new RewriteRuleSubtreeStream(adaptor,"rule elseifPart");
         RewriteRuleSubtreeStream stream_elsePart=new RewriteRuleSubtreeStream(adaptor,"rule elsePart");
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 30) ) { return retval; }
+            if ( state.backtracking>0 && alreadyParsedRule(input, 31) ) { return retval; }
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:162:9: ( ifPart ( elseifPart )* ( elsePart )? BLOCK_END -> ^( IF_STAT ifPart ( elseifPart )* ( elsePart )? ) )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:163:2: ifPart ( elseifPart )* ( elsePart )? BLOCK_END
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:231:9: ( ifPart ( elseifPart )* ( elsePart )? BLOCK_END -> ^( IF_STAT ifPart ( elseifPart )* ( elsePart )? ) )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:232:2: ifPart ( elseifPart )* ( elsePart )? BLOCK_END
             {
-            pushFollow(FOLLOW_ifPart_in_ifBlock1056);
-            ifPart129=ifPart();
+            pushFollow(FOLLOW_ifPart_in_ifBlock1192);
+            ifPart133=ifPart();
 
             state._fsp--;
             if (state.failed) return retval;
-            if ( state.backtracking==0 ) stream_ifPart.add(ifPart129.getTree());
+            if ( state.backtracking==0 ) stream_ifPart.add(ifPart133.getTree());
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:164:9: ( elseifPart )*
-            loop51:
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:233:9: ( elseifPart )*
+            loop53:
             do {
-                int alt51=2;
-                int LA51_0 = input.LA(1);
+                int alt53=2;
+                int LA53_0 = input.LA(1);
 
-                if ( (LA51_0==ELSEIF) ) {
-                    alt51=1;
+                if ( (LA53_0==ELSEIF) ) {
+                    alt53=1;
                 }
 
 
-                switch (alt51) {
+                switch (alt53) {
             	case 1 :
-            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:164:9: elseifPart
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:233:9: elseifPart
             	    {
-            	    pushFollow(FOLLOW_elseifPart_in_ifBlock1066);
-            	    elseifPart130=elseifPart();
+            	    pushFollow(FOLLOW_elseifPart_in_ifBlock1202);
+            	    elseifPart134=elseifPart();
 
             	    state._fsp--;
             	    if (state.failed) return retval;
-            	    if ( state.backtracking==0 ) stream_elseifPart.add(elseifPart130.getTree());
+            	    if ( state.backtracking==0 ) stream_elseifPart.add(elseifPart134.getTree());
 
             	    }
             	    break;
 
             	default :
-            	    break loop51;
+            	    break loop53;
                 }
             } while (true);
 
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:165:9: ( elsePart )?
-            int alt52=2;
-            int LA52_0 = input.LA(1);
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:234:9: ( elsePart )?
+            int alt54=2;
+            int LA54_0 = input.LA(1);
 
-            if ( (LA52_0==ELSE) ) {
-                alt52=1;
+            if ( (LA54_0==ELSE) ) {
+                alt54=1;
             }
-            switch (alt52) {
+            switch (alt54) {
                 case 1 :
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:165:9: elsePart
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:234:9: elsePart
                     {
-                    pushFollow(FOLLOW_elsePart_in_ifBlock1077);
-                    elsePart131=elsePart();
+                    pushFollow(FOLLOW_elsePart_in_ifBlock1213);
+                    elsePart135=elsePart();
 
                     state._fsp--;
                     if (state.failed) return retval;
-                    if ( state.backtracking==0 ) stream_elsePart.add(elsePart131.getTree());
+                    if ( state.backtracking==0 ) stream_elsePart.add(elsePart135.getTree());
 
                     }
                     break;
@@ -5106,12 +5240,12 @@ public TreeAdaptor getTreeAdaptor() {
             }
 
 
-            BLOCK_END132=(Token)match(input,BLOCK_END,FOLLOW_BLOCK_END_in_ifBlock1088); if (state.failed) return retval; 
-            if ( state.backtracking==0 ) stream_BLOCK_END.add(BLOCK_END132);
+            BLOCK_END136=(Token)match(input,BLOCK_END,FOLLOW_BLOCK_END_in_ifBlock1224); if (state.failed) return retval; 
+            if ( state.backtracking==0 ) stream_BLOCK_END.add(BLOCK_END136);
 
 
             // AST REWRITE
-            // elements: elseifPart, elsePart, ifPart
+            // elements: elsePart, elseifPart, ifPart
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -5123,9 +5257,9 @@ public TreeAdaptor getTreeAdaptor() {
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
             root_0 = (CommonTree)adaptor.nil();
-            // 167:9: -> ^( IF_STAT ifPart ( elseifPart )* ( elsePart )? )
+            // 236:9: -> ^( IF_STAT ifPart ( elseifPart )* ( elsePart )? )
             {
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:167:12: ^( IF_STAT ifPart ( elseifPart )* ( elsePart )? )
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:236:12: ^( IF_STAT ifPart ( elseifPart )* ( elsePart )? )
                 {
                 CommonTree root_1 = (CommonTree)adaptor.nil();
                 root_1 = (CommonTree)adaptor.becomeRoot(
@@ -5134,14 +5268,14 @@ public TreeAdaptor getTreeAdaptor() {
 
                 adaptor.addChild(root_1, stream_ifPart.nextTree());
 
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:167:29: ( elseifPart )*
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:236:29: ( elseifPart )*
                 while ( stream_elseifPart.hasNext() ) {
                     adaptor.addChild(root_1, stream_elseifPart.nextTree());
 
                 }
                 stream_elseifPart.reset();
 
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:167:41: ( elsePart )?
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:236:41: ( elsePart )?
                 if ( stream_elsePart.hasNext() ) {
                     adaptor.addChild(root_1, stream_elsePart.nextTree());
 
@@ -5177,7 +5311,7 @@ public TreeAdaptor getTreeAdaptor() {
 
         finally {
         	// do for sure before leaving
-            if ( state.backtracking>0 ) { memoize(input, 30, ifBlock_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 31, ifBlock_StartIndex); }
 
         }
         return retval;
@@ -5192,7 +5326,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "switchPart"
-    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:171:1: switchPart : SWITCH ^ expr ;
+    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:241:1: switchPart : SWITCH ^ expr ;
     public final ExprParser.switchPart_return switchPart() throws RecognitionException {
         ExprParser.switchPart_return retval = new ExprParser.switchPart_return();
         retval.start = input.LT(1);
@@ -5201,35 +5335,35 @@ public TreeAdaptor getTreeAdaptor() {
 
         CommonTree root_0 = null;
 
-        Token SWITCH133=null;
-        ExprParser.expr_return expr134 =null;
+        Token SWITCH137=null;
+        ExprParser.expr_return expr138 =null;
 
 
-        CommonTree SWITCH133_tree=null;
+        CommonTree SWITCH137_tree=null;
 
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 31) ) { return retval; }
+            if ( state.backtracking>0 && alreadyParsedRule(input, 32) ) { return retval; }
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:171:12: ( SWITCH ^ expr )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:171:14: SWITCH ^ expr
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:241:12: ( SWITCH ^ expr )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:241:14: SWITCH ^ expr
             {
             root_0 = (CommonTree)adaptor.nil();
 
 
-            SWITCH133=(Token)match(input,SWITCH,FOLLOW_SWITCH_in_switchPart1137); if (state.failed) return retval;
+            SWITCH137=(Token)match(input,SWITCH,FOLLOW_SWITCH_in_switchPart1282); if (state.failed) return retval;
             if ( state.backtracking==0 ) {
-            SWITCH133_tree = 
-            (CommonTree)adaptor.create(SWITCH133)
+            SWITCH137_tree = 
+            (CommonTree)adaptor.create(SWITCH137)
             ;
-            root_0 = (CommonTree)adaptor.becomeRoot(SWITCH133_tree, root_0);
+            root_0 = (CommonTree)adaptor.becomeRoot(SWITCH137_tree, root_0);
             }
 
-            pushFollow(FOLLOW_expr_in_switchPart1140);
-            expr134=expr();
+            pushFollow(FOLLOW_expr_in_switchPart1285);
+            expr138=expr();
 
             state._fsp--;
             if (state.failed) return retval;
-            if ( state.backtracking==0 ) adaptor.addChild(root_0, expr134.getTree());
+            if ( state.backtracking==0 ) adaptor.addChild(root_0, expr138.getTree());
 
             }
 
@@ -5251,7 +5385,7 @@ public TreeAdaptor getTreeAdaptor() {
 
         finally {
         	// do for sure before leaving
-            if ( state.backtracking>0 ) { memoize(input, 31, switchPart_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 32, switchPart_StartIndex); }
 
         }
         return retval;
@@ -5266,7 +5400,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "casePart"
-    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:172:1: casePart : CASE ^ expr ( block )? ;
+    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:242:1: casePart : CASE ^ expr ( block )? ;
     public final ExprParser.casePart_return casePart() throws RecognitionException {
         ExprParser.casePart_return retval = new ExprParser.casePart_return();
         retval.start = input.LT(1);
@@ -5275,55 +5409,55 @@ public TreeAdaptor getTreeAdaptor() {
 
         CommonTree root_0 = null;
 
-        Token CASE135=null;
-        ExprParser.expr_return expr136 =null;
+        Token CASE139=null;
+        ExprParser.expr_return expr140 =null;
 
-        ExprParser.block_return block137 =null;
+        ExprParser.block_return block141 =null;
 
 
-        CommonTree CASE135_tree=null;
+        CommonTree CASE139_tree=null;
 
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 32) ) { return retval; }
+            if ( state.backtracking>0 && alreadyParsedRule(input, 33) ) { return retval; }
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:172:10: ( CASE ^ expr ( block )? )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:172:12: CASE ^ expr ( block )?
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:242:10: ( CASE ^ expr ( block )? )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:242:12: CASE ^ expr ( block )?
             {
             root_0 = (CommonTree)adaptor.nil();
 
 
-            CASE135=(Token)match(input,CASE,FOLLOW_CASE_in_casePart1147); if (state.failed) return retval;
+            CASE139=(Token)match(input,CASE,FOLLOW_CASE_in_casePart1292); if (state.failed) return retval;
             if ( state.backtracking==0 ) {
-            CASE135_tree = 
-            (CommonTree)adaptor.create(CASE135)
+            CASE139_tree = 
+            (CommonTree)adaptor.create(CASE139)
             ;
-            root_0 = (CommonTree)adaptor.becomeRoot(CASE135_tree, root_0);
+            root_0 = (CommonTree)adaptor.becomeRoot(CASE139_tree, root_0);
             }
 
-            pushFollow(FOLLOW_expr_in_casePart1150);
-            expr136=expr();
+            pushFollow(FOLLOW_expr_in_casePart1295);
+            expr140=expr();
 
             state._fsp--;
             if (state.failed) return retval;
-            if ( state.backtracking==0 ) adaptor.addChild(root_0, expr136.getTree());
+            if ( state.backtracking==0 ) adaptor.addChild(root_0, expr140.getTree());
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:172:23: ( block )?
-            int alt53=2;
-            int LA53_0 = input.LA(1);
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:242:23: ( block )?
+            int alt55=2;
+            int LA55_0 = input.LA(1);
 
-            if ( (LA53_0==COLON||LA53_0==DOT||(LA53_0 >= EMPTY_CELL && LA53_0 <= END)||(LA53_0 >= FALSE && LA53_0 <= FOR)||(LA53_0 >= ID && LA53_0 <= IF)||LA53_0==INTEGER||LA53_0==MINUS||LA53_0==NOT||(LA53_0 >= OPENB && LA53_0 <= OPENP)||LA53_0==PLUS||(LA53_0 >= STRING_LITERAL && LA53_0 <= SWITCH)||LA53_0==TRUE||LA53_0==WHILE) ) {
-                alt53=1;
+            if ( (LA55_0==COLON||LA55_0==DOT||(LA55_0 >= EMPTY_CELL && LA55_0 <= END)||(LA55_0 >= FALSE && LA55_0 <= FOR)||(LA55_0 >= ID && LA55_0 <= IF)||LA55_0==INTEGER||LA55_0==MINUS||LA55_0==NOT||(LA55_0 >= OPENB && LA55_0 <= OPENP)||LA55_0==PLUS||(LA55_0 >= STRING_LITERAL && LA55_0 <= SWITCH)||LA55_0==TRUE||LA55_0==WHILE) ) {
+                alt55=1;
             }
-            switch (alt53) {
+            switch (alt55) {
                 case 1 :
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:172:23: block
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:242:23: block
                     {
-                    pushFollow(FOLLOW_block_in_casePart1152);
-                    block137=block();
+                    pushFollow(FOLLOW_block_in_casePart1297);
+                    block141=block();
 
                     state._fsp--;
                     if (state.failed) return retval;
-                    if ( state.backtracking==0 ) adaptor.addChild(root_0, block137.getTree());
+                    if ( state.backtracking==0 ) adaptor.addChild(root_0, block141.getTree());
 
                     }
                     break;
@@ -5351,7 +5485,7 @@ public TreeAdaptor getTreeAdaptor() {
 
         finally {
         	// do for sure before leaving
-            if ( state.backtracking>0 ) { memoize(input, 32, casePart_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 33, casePart_StartIndex); }
 
         }
         return retval;
@@ -5366,7 +5500,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "otherwiseBlock"
-    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:173:1: otherwiseBlock : OTHERWISE ^ ( block )? ;
+    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:243:1: otherwiseBlock : OTHERWISE ^ ( block )? ;
     public final ExprParser.otherwiseBlock_return otherwiseBlock() throws RecognitionException {
         ExprParser.otherwiseBlock_return retval = new ExprParser.otherwiseBlock_return();
         retval.start = input.LT(1);
@@ -5375,46 +5509,46 @@ public TreeAdaptor getTreeAdaptor() {
 
         CommonTree root_0 = null;
 
-        Token OTHERWISE138=null;
-        ExprParser.block_return block139 =null;
+        Token OTHERWISE142=null;
+        ExprParser.block_return block143 =null;
 
 
-        CommonTree OTHERWISE138_tree=null;
+        CommonTree OTHERWISE142_tree=null;
 
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 33) ) { return retval; }
+            if ( state.backtracking>0 && alreadyParsedRule(input, 34) ) { return retval; }
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:173:16: ( OTHERWISE ^ ( block )? )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:173:18: OTHERWISE ^ ( block )?
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:243:16: ( OTHERWISE ^ ( block )? )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:243:18: OTHERWISE ^ ( block )?
             {
             root_0 = (CommonTree)adaptor.nil();
 
 
-            OTHERWISE138=(Token)match(input,OTHERWISE,FOLLOW_OTHERWISE_in_otherwiseBlock1160); if (state.failed) return retval;
+            OTHERWISE142=(Token)match(input,OTHERWISE,FOLLOW_OTHERWISE_in_otherwiseBlock1305); if (state.failed) return retval;
             if ( state.backtracking==0 ) {
-            OTHERWISE138_tree = 
-            (CommonTree)adaptor.create(OTHERWISE138)
+            OTHERWISE142_tree = 
+            (CommonTree)adaptor.create(OTHERWISE142)
             ;
-            root_0 = (CommonTree)adaptor.becomeRoot(OTHERWISE138_tree, root_0);
+            root_0 = (CommonTree)adaptor.becomeRoot(OTHERWISE142_tree, root_0);
             }
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:173:29: ( block )?
-            int alt54=2;
-            int LA54_0 = input.LA(1);
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:243:29: ( block )?
+            int alt56=2;
+            int LA56_0 = input.LA(1);
 
-            if ( (LA54_0==COLON||LA54_0==DOT||(LA54_0 >= EMPTY_CELL && LA54_0 <= END)||(LA54_0 >= FALSE && LA54_0 <= FOR)||(LA54_0 >= ID && LA54_0 <= IF)||LA54_0==INTEGER||LA54_0==MINUS||LA54_0==NOT||(LA54_0 >= OPENB && LA54_0 <= OPENP)||LA54_0==PLUS||(LA54_0 >= STRING_LITERAL && LA54_0 <= SWITCH)||LA54_0==TRUE||LA54_0==WHILE) ) {
-                alt54=1;
+            if ( (LA56_0==COLON||LA56_0==DOT||(LA56_0 >= EMPTY_CELL && LA56_0 <= END)||(LA56_0 >= FALSE && LA56_0 <= FOR)||(LA56_0 >= ID && LA56_0 <= IF)||LA56_0==INTEGER||LA56_0==MINUS||LA56_0==NOT||(LA56_0 >= OPENB && LA56_0 <= OPENP)||LA56_0==PLUS||(LA56_0 >= STRING_LITERAL && LA56_0 <= SWITCH)||LA56_0==TRUE||LA56_0==WHILE) ) {
+                alt56=1;
             }
-            switch (alt54) {
+            switch (alt56) {
                 case 1 :
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:173:29: block
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:243:29: block
                     {
-                    pushFollow(FOLLOW_block_in_otherwiseBlock1163);
-                    block139=block();
+                    pushFollow(FOLLOW_block_in_otherwiseBlock1308);
+                    block143=block();
 
                     state._fsp--;
                     if (state.failed) return retval;
-                    if ( state.backtracking==0 ) adaptor.addChild(root_0, block139.getTree());
+                    if ( state.backtracking==0 ) adaptor.addChild(root_0, block143.getTree());
 
                     }
                     break;
@@ -5442,7 +5576,7 @@ public TreeAdaptor getTreeAdaptor() {
 
         finally {
         	// do for sure before leaving
-            if ( state.backtracking>0 ) { memoize(input, 33, otherwiseBlock_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 34, otherwiseBlock_StartIndex); }
 
         }
         return retval;
@@ -5457,7 +5591,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "switchBlock"
-    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:174:1: switchBlock : switchPart ( casePart )* ( otherwiseBlock )? BLOCK_END -> ^( SWITCH_STAT switchPart ( casePart )* ( otherwiseBlock )? ) ;
+    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:244:1: switchBlock : switchPart ( casePart )* ( otherwiseBlock )? BLOCK_END -> ^( SWITCH_STAT switchPart ( casePart )* ( otherwiseBlock )? ) ;
     public final ExprParser.switchBlock_return switchBlock() throws RecognitionException {
         ExprParser.switchBlock_return retval = new ExprParser.switchBlock_return();
         retval.start = input.LT(1);
@@ -5466,80 +5600,80 @@ public TreeAdaptor getTreeAdaptor() {
 
         CommonTree root_0 = null;
 
-        Token BLOCK_END143=null;
-        ExprParser.switchPart_return switchPart140 =null;
+        Token BLOCK_END147=null;
+        ExprParser.switchPart_return switchPart144 =null;
 
-        ExprParser.casePart_return casePart141 =null;
+        ExprParser.casePart_return casePart145 =null;
 
-        ExprParser.otherwiseBlock_return otherwiseBlock142 =null;
+        ExprParser.otherwiseBlock_return otherwiseBlock146 =null;
 
 
-        CommonTree BLOCK_END143_tree=null;
+        CommonTree BLOCK_END147_tree=null;
         RewriteRuleTokenStream stream_BLOCK_END=new RewriteRuleTokenStream(adaptor,"token BLOCK_END");
         RewriteRuleSubtreeStream stream_switchPart=new RewriteRuleSubtreeStream(adaptor,"rule switchPart");
         RewriteRuleSubtreeStream stream_otherwiseBlock=new RewriteRuleSubtreeStream(adaptor,"rule otherwiseBlock");
         RewriteRuleSubtreeStream stream_casePart=new RewriteRuleSubtreeStream(adaptor,"rule casePart");
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 34) ) { return retval; }
+            if ( state.backtracking>0 && alreadyParsedRule(input, 35) ) { return retval; }
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:174:13: ( switchPart ( casePart )* ( otherwiseBlock )? BLOCK_END -> ^( SWITCH_STAT switchPart ( casePart )* ( otherwiseBlock )? ) )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:175:2: switchPart ( casePart )* ( otherwiseBlock )? BLOCK_END
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:244:13: ( switchPart ( casePart )* ( otherwiseBlock )? BLOCK_END -> ^( SWITCH_STAT switchPart ( casePart )* ( otherwiseBlock )? ) )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:245:2: switchPart ( casePart )* ( otherwiseBlock )? BLOCK_END
             {
-            pushFollow(FOLLOW_switchPart_in_switchBlock1173);
-            switchPart140=switchPart();
+            pushFollow(FOLLOW_switchPart_in_switchBlock1318);
+            switchPart144=switchPart();
 
             state._fsp--;
             if (state.failed) return retval;
-            if ( state.backtracking==0 ) stream_switchPart.add(switchPart140.getTree());
+            if ( state.backtracking==0 ) stream_switchPart.add(switchPart144.getTree());
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:176:2: ( casePart )*
-            loop55:
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:246:2: ( casePart )*
+            loop57:
             do {
-                int alt55=2;
-                int LA55_0 = input.LA(1);
+                int alt57=2;
+                int LA57_0 = input.LA(1);
 
-                if ( (LA55_0==CASE) ) {
-                    alt55=1;
+                if ( (LA57_0==CASE) ) {
+                    alt57=1;
                 }
 
 
-                switch (alt55) {
+                switch (alt57) {
             	case 1 :
-            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:176:2: casePart
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:246:2: casePart
             	    {
-            	    pushFollow(FOLLOW_casePart_in_switchBlock1176);
-            	    casePart141=casePart();
+            	    pushFollow(FOLLOW_casePart_in_switchBlock1321);
+            	    casePart145=casePart();
 
             	    state._fsp--;
             	    if (state.failed) return retval;
-            	    if ( state.backtracking==0 ) stream_casePart.add(casePart141.getTree());
+            	    if ( state.backtracking==0 ) stream_casePart.add(casePart145.getTree());
 
             	    }
             	    break;
 
             	default :
-            	    break loop55;
+            	    break loop57;
                 }
             } while (true);
 
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:177:2: ( otherwiseBlock )?
-            int alt56=2;
-            int LA56_0 = input.LA(1);
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:247:2: ( otherwiseBlock )?
+            int alt58=2;
+            int LA58_0 = input.LA(1);
 
-            if ( (LA56_0==OTHERWISE) ) {
-                alt56=1;
+            if ( (LA58_0==OTHERWISE) ) {
+                alt58=1;
             }
-            switch (alt56) {
+            switch (alt58) {
                 case 1 :
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:177:2: otherwiseBlock
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:247:2: otherwiseBlock
                     {
-                    pushFollow(FOLLOW_otherwiseBlock_in_switchBlock1180);
-                    otherwiseBlock142=otherwiseBlock();
+                    pushFollow(FOLLOW_otherwiseBlock_in_switchBlock1325);
+                    otherwiseBlock146=otherwiseBlock();
 
                     state._fsp--;
                     if (state.failed) return retval;
-                    if ( state.backtracking==0 ) stream_otherwiseBlock.add(otherwiseBlock142.getTree());
+                    if ( state.backtracking==0 ) stream_otherwiseBlock.add(otherwiseBlock146.getTree());
 
                     }
                     break;
@@ -5547,12 +5681,12 @@ public TreeAdaptor getTreeAdaptor() {
             }
 
 
-            BLOCK_END143=(Token)match(input,BLOCK_END,FOLLOW_BLOCK_END_in_switchBlock1184); if (state.failed) return retval; 
-            if ( state.backtracking==0 ) stream_BLOCK_END.add(BLOCK_END143);
+            BLOCK_END147=(Token)match(input,BLOCK_END,FOLLOW_BLOCK_END_in_switchBlock1329); if (state.failed) return retval; 
+            if ( state.backtracking==0 ) stream_BLOCK_END.add(BLOCK_END147);
 
 
             // AST REWRITE
-            // elements: otherwiseBlock, casePart, switchPart
+            // elements: casePart, switchPart, otherwiseBlock
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -5564,9 +5698,9 @@ public TreeAdaptor getTreeAdaptor() {
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
             root_0 = (CommonTree)adaptor.nil();
-            // 179:2: -> ^( SWITCH_STAT switchPart ( casePart )* ( otherwiseBlock )? )
+            // 249:2: -> ^( SWITCH_STAT switchPart ( casePart )* ( otherwiseBlock )? )
             {
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:179:5: ^( SWITCH_STAT switchPart ( casePart )* ( otherwiseBlock )? )
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:249:5: ^( SWITCH_STAT switchPart ( casePart )* ( otherwiseBlock )? )
                 {
                 CommonTree root_1 = (CommonTree)adaptor.nil();
                 root_1 = (CommonTree)adaptor.becomeRoot(
@@ -5575,14 +5709,14 @@ public TreeAdaptor getTreeAdaptor() {
 
                 adaptor.addChild(root_1, stream_switchPart.nextTree());
 
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:179:30: ( casePart )*
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:249:30: ( casePart )*
                 while ( stream_casePart.hasNext() ) {
                     adaptor.addChild(root_1, stream_casePart.nextTree());
 
                 }
                 stream_casePart.reset();
 
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:179:40: ( otherwiseBlock )?
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:249:40: ( otherwiseBlock )?
                 if ( stream_otherwiseBlock.hasNext() ) {
                     adaptor.addChild(root_1, stream_otherwiseBlock.nextTree());
 
@@ -5618,7 +5752,7 @@ public TreeAdaptor getTreeAdaptor() {
 
         finally {
         	// do for sure before leaving
-            if ( state.backtracking>0 ) { memoize(input, 34, switchBlock_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 35, switchBlock_StartIndex); }
 
         }
         return retval;
@@ -5633,7 +5767,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "forPart"
-    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:182:1: forPart : FOR ^ ID EQUALS expr ;
+    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:252:1: forPart : FOR ^ ID EQUALS expr ;
     public final ExprParser.forPart_return forPart() throws RecognitionException {
         ExprParser.forPart_return retval = new ExprParser.forPart_return();
         retval.start = input.LT(1);
@@ -5642,55 +5776,55 @@ public TreeAdaptor getTreeAdaptor() {
 
         CommonTree root_0 = null;
 
-        Token FOR144=null;
-        Token ID145=null;
-        Token EQUALS146=null;
-        ExprParser.expr_return expr147 =null;
+        Token FOR148=null;
+        Token ID149=null;
+        Token EQUALS150=null;
+        ExprParser.expr_return expr151 =null;
 
 
-        CommonTree FOR144_tree=null;
-        CommonTree ID145_tree=null;
-        CommonTree EQUALS146_tree=null;
+        CommonTree FOR148_tree=null;
+        CommonTree ID149_tree=null;
+        CommonTree EQUALS150_tree=null;
 
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 35) ) { return retval; }
+            if ( state.backtracking>0 && alreadyParsedRule(input, 36) ) { return retval; }
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:182:9: ( FOR ^ ID EQUALS expr )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:182:11: FOR ^ ID EQUALS expr
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:252:9: ( FOR ^ ID EQUALS expr )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:252:11: FOR ^ ID EQUALS expr
             {
             root_0 = (CommonTree)adaptor.nil();
 
 
-            FOR144=(Token)match(input,FOR,FOLLOW_FOR_in_forPart1209); if (state.failed) return retval;
+            FOR148=(Token)match(input,FOR,FOLLOW_FOR_in_forPart1354); if (state.failed) return retval;
             if ( state.backtracking==0 ) {
-            FOR144_tree = 
-            (CommonTree)adaptor.create(FOR144)
+            FOR148_tree = 
+            (CommonTree)adaptor.create(FOR148)
             ;
-            root_0 = (CommonTree)adaptor.becomeRoot(FOR144_tree, root_0);
+            root_0 = (CommonTree)adaptor.becomeRoot(FOR148_tree, root_0);
             }
 
-            ID145=(Token)match(input,ID,FOLLOW_ID_in_forPart1212); if (state.failed) return retval;
+            ID149=(Token)match(input,ID,FOLLOW_ID_in_forPart1357); if (state.failed) return retval;
             if ( state.backtracking==0 ) {
-            ID145_tree = 
-            (CommonTree)adaptor.create(ID145)
+            ID149_tree = 
+            (CommonTree)adaptor.create(ID149)
             ;
-            adaptor.addChild(root_0, ID145_tree);
+            adaptor.addChild(root_0, ID149_tree);
             }
 
-            EQUALS146=(Token)match(input,EQUALS,FOLLOW_EQUALS_in_forPart1214); if (state.failed) return retval;
+            EQUALS150=(Token)match(input,EQUALS,FOLLOW_EQUALS_in_forPart1359); if (state.failed) return retval;
             if ( state.backtracking==0 ) {
-            EQUALS146_tree = 
-            (CommonTree)adaptor.create(EQUALS146)
+            EQUALS150_tree = 
+            (CommonTree)adaptor.create(EQUALS150)
             ;
-            adaptor.addChild(root_0, EQUALS146_tree);
+            adaptor.addChild(root_0, EQUALS150_tree);
             }
 
-            pushFollow(FOLLOW_expr_in_forPart1216);
-            expr147=expr();
+            pushFollow(FOLLOW_expr_in_forPart1361);
+            expr151=expr();
 
             state._fsp--;
             if (state.failed) return retval;
-            if ( state.backtracking==0 ) adaptor.addChild(root_0, expr147.getTree());
+            if ( state.backtracking==0 ) adaptor.addChild(root_0, expr151.getTree());
 
             }
 
@@ -5712,7 +5846,7 @@ public TreeAdaptor getTreeAdaptor() {
 
         finally {
         	// do for sure before leaving
-            if ( state.backtracking>0 ) { memoize(input, 35, forPart_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 36, forPart_StartIndex); }
 
         }
         return retval;
@@ -5727,7 +5861,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "forBlock"
-    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:183:1: forBlock : forPart ( block )? BLOCK_END -> ^( FOR_LOOP forPart ( block )? ) ;
+    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:253:1: forBlock : forPart ( block )? BLOCK_END -> ^( FOR_LOOP forPart ( block )? ) ;
     public final ExprParser.forBlock_return forBlock() throws RecognitionException {
         ExprParser.forBlock_return retval = new ExprParser.forBlock_return();
         retval.start = input.LT(1);
@@ -5736,46 +5870,46 @@ public TreeAdaptor getTreeAdaptor() {
 
         CommonTree root_0 = null;
 
-        Token BLOCK_END150=null;
-        ExprParser.forPart_return forPart148 =null;
+        Token BLOCK_END154=null;
+        ExprParser.forPart_return forPart152 =null;
 
-        ExprParser.block_return block149 =null;
+        ExprParser.block_return block153 =null;
 
 
-        CommonTree BLOCK_END150_tree=null;
+        CommonTree BLOCK_END154_tree=null;
         RewriteRuleTokenStream stream_BLOCK_END=new RewriteRuleTokenStream(adaptor,"token BLOCK_END");
         RewriteRuleSubtreeStream stream_forPart=new RewriteRuleSubtreeStream(adaptor,"rule forPart");
         RewriteRuleSubtreeStream stream_block=new RewriteRuleSubtreeStream(adaptor,"rule block");
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 36) ) { return retval; }
+            if ( state.backtracking>0 && alreadyParsedRule(input, 37) ) { return retval; }
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:183:10: ( forPart ( block )? BLOCK_END -> ^( FOR_LOOP forPart ( block )? ) )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:184:2: forPart ( block )? BLOCK_END
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:253:10: ( forPart ( block )? BLOCK_END -> ^( FOR_LOOP forPart ( block )? ) )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:254:2: forPart ( block )? BLOCK_END
             {
-            pushFollow(FOLLOW_forPart_in_forBlock1226);
-            forPart148=forPart();
+            pushFollow(FOLLOW_forPart_in_forBlock1371);
+            forPart152=forPart();
 
             state._fsp--;
             if (state.failed) return retval;
-            if ( state.backtracking==0 ) stream_forPart.add(forPart148.getTree());
+            if ( state.backtracking==0 ) stream_forPart.add(forPart152.getTree());
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:185:2: ( block )?
-            int alt57=2;
-            int LA57_0 = input.LA(1);
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:255:2: ( block )?
+            int alt59=2;
+            int LA59_0 = input.LA(1);
 
-            if ( (LA57_0==COLON||LA57_0==DOT||(LA57_0 >= EMPTY_CELL && LA57_0 <= END)||(LA57_0 >= FALSE && LA57_0 <= FOR)||(LA57_0 >= ID && LA57_0 <= IF)||LA57_0==INTEGER||LA57_0==MINUS||LA57_0==NOT||(LA57_0 >= OPENB && LA57_0 <= OPENP)||LA57_0==PLUS||(LA57_0 >= STRING_LITERAL && LA57_0 <= SWITCH)||LA57_0==TRUE||LA57_0==WHILE) ) {
-                alt57=1;
+            if ( (LA59_0==COLON||LA59_0==DOT||(LA59_0 >= EMPTY_CELL && LA59_0 <= END)||(LA59_0 >= FALSE && LA59_0 <= FOR)||(LA59_0 >= ID && LA59_0 <= IF)||LA59_0==INTEGER||LA59_0==MINUS||LA59_0==NOT||(LA59_0 >= OPENB && LA59_0 <= OPENP)||LA59_0==PLUS||(LA59_0 >= STRING_LITERAL && LA59_0 <= SWITCH)||LA59_0==TRUE||LA59_0==WHILE) ) {
+                alt59=1;
             }
-            switch (alt57) {
+            switch (alt59) {
                 case 1 :
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:185:2: block
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:255:2: block
                     {
-                    pushFollow(FOLLOW_block_in_forBlock1229);
-                    block149=block();
+                    pushFollow(FOLLOW_block_in_forBlock1374);
+                    block153=block();
 
                     state._fsp--;
                     if (state.failed) return retval;
-                    if ( state.backtracking==0 ) stream_block.add(block149.getTree());
+                    if ( state.backtracking==0 ) stream_block.add(block153.getTree());
 
                     }
                     break;
@@ -5783,8 +5917,8 @@ public TreeAdaptor getTreeAdaptor() {
             }
 
 
-            BLOCK_END150=(Token)match(input,BLOCK_END,FOLLOW_BLOCK_END_in_forBlock1233); if (state.failed) return retval; 
-            if ( state.backtracking==0 ) stream_BLOCK_END.add(BLOCK_END150);
+            BLOCK_END154=(Token)match(input,BLOCK_END,FOLLOW_BLOCK_END_in_forBlock1378); if (state.failed) return retval; 
+            if ( state.backtracking==0 ) stream_BLOCK_END.add(BLOCK_END154);
 
 
             // AST REWRITE
@@ -5800,9 +5934,9 @@ public TreeAdaptor getTreeAdaptor() {
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
             root_0 = (CommonTree)adaptor.nil();
-            // 187:2: -> ^( FOR_LOOP forPart ( block )? )
+            // 257:2: -> ^( FOR_LOOP forPart ( block )? )
             {
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:187:5: ^( FOR_LOOP forPart ( block )? )
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:257:5: ^( FOR_LOOP forPart ( block )? )
                 {
                 CommonTree root_1 = (CommonTree)adaptor.nil();
                 root_1 = (CommonTree)adaptor.becomeRoot(
@@ -5811,7 +5945,7 @@ public TreeAdaptor getTreeAdaptor() {
 
                 adaptor.addChild(root_1, stream_forPart.nextTree());
 
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:187:24: ( block )?
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:257:24: ( block )?
                 if ( stream_block.hasNext() ) {
                     adaptor.addChild(root_1, stream_block.nextTree());
 
@@ -5847,7 +5981,7 @@ public TreeAdaptor getTreeAdaptor() {
 
         finally {
         	// do for sure before leaving
-            if ( state.backtracking>0 ) { memoize(input, 36, forBlock_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 37, forBlock_StartIndex); }
 
         }
         return retval;
@@ -5862,7 +5996,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "whilePart"
-    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:190:1: whilePart : WHILE ^ expr ;
+    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:260:1: whilePart : WHILE ^ expr ;
     public final ExprParser.whilePart_return whilePart() throws RecognitionException {
         ExprParser.whilePart_return retval = new ExprParser.whilePart_return();
         retval.start = input.LT(1);
@@ -5871,35 +6005,35 @@ public TreeAdaptor getTreeAdaptor() {
 
         CommonTree root_0 = null;
 
-        Token WHILE151=null;
-        ExprParser.expr_return expr152 =null;
+        Token WHILE155=null;
+        ExprParser.expr_return expr156 =null;
 
 
-        CommonTree WHILE151_tree=null;
+        CommonTree WHILE155_tree=null;
 
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 37) ) { return retval; }
+            if ( state.backtracking>0 && alreadyParsedRule(input, 38) ) { return retval; }
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:190:11: ( WHILE ^ expr )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:190:13: WHILE ^ expr
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:260:11: ( WHILE ^ expr )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:260:13: WHILE ^ expr
             {
             root_0 = (CommonTree)adaptor.nil();
 
 
-            WHILE151=(Token)match(input,WHILE,FOLLOW_WHILE_in_whilePart1256); if (state.failed) return retval;
+            WHILE155=(Token)match(input,WHILE,FOLLOW_WHILE_in_whilePart1401); if (state.failed) return retval;
             if ( state.backtracking==0 ) {
-            WHILE151_tree = 
-            (CommonTree)adaptor.create(WHILE151)
+            WHILE155_tree = 
+            (CommonTree)adaptor.create(WHILE155)
             ;
-            root_0 = (CommonTree)adaptor.becomeRoot(WHILE151_tree, root_0);
+            root_0 = (CommonTree)adaptor.becomeRoot(WHILE155_tree, root_0);
             }
 
-            pushFollow(FOLLOW_expr_in_whilePart1259);
-            expr152=expr();
+            pushFollow(FOLLOW_expr_in_whilePart1404);
+            expr156=expr();
 
             state._fsp--;
             if (state.failed) return retval;
-            if ( state.backtracking==0 ) adaptor.addChild(root_0, expr152.getTree());
+            if ( state.backtracking==0 ) adaptor.addChild(root_0, expr156.getTree());
 
             }
 
@@ -5921,7 +6055,7 @@ public TreeAdaptor getTreeAdaptor() {
 
         finally {
         	// do for sure before leaving
-            if ( state.backtracking>0 ) { memoize(input, 37, whilePart_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 38, whilePart_StartIndex); }
 
         }
         return retval;
@@ -5936,7 +6070,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "whileBlock"
-    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:191:1: whileBlock : whilePart ( block )? BLOCK_END -> ^( WHILE_LOOP whilePart ( block )? ) ;
+    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:261:1: whileBlock : whilePart ( block )? BLOCK_END -> ^( WHILE_LOOP whilePart ( block )? ) ;
     public final ExprParser.whileBlock_return whileBlock() throws RecognitionException {
         ExprParser.whileBlock_return retval = new ExprParser.whileBlock_return();
         retval.start = input.LT(1);
@@ -5945,46 +6079,46 @@ public TreeAdaptor getTreeAdaptor() {
 
         CommonTree root_0 = null;
 
-        Token BLOCK_END155=null;
-        ExprParser.whilePart_return whilePart153 =null;
+        Token BLOCK_END159=null;
+        ExprParser.whilePart_return whilePart157 =null;
 
-        ExprParser.block_return block154 =null;
+        ExprParser.block_return block158 =null;
 
 
-        CommonTree BLOCK_END155_tree=null;
+        CommonTree BLOCK_END159_tree=null;
         RewriteRuleTokenStream stream_BLOCK_END=new RewriteRuleTokenStream(adaptor,"token BLOCK_END");
         RewriteRuleSubtreeStream stream_block=new RewriteRuleSubtreeStream(adaptor,"rule block");
         RewriteRuleSubtreeStream stream_whilePart=new RewriteRuleSubtreeStream(adaptor,"rule whilePart");
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 38) ) { return retval; }
+            if ( state.backtracking>0 && alreadyParsedRule(input, 39) ) { return retval; }
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:191:12: ( whilePart ( block )? BLOCK_END -> ^( WHILE_LOOP whilePart ( block )? ) )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:192:2: whilePart ( block )? BLOCK_END
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:261:12: ( whilePart ( block )? BLOCK_END -> ^( WHILE_LOOP whilePart ( block )? ) )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:262:2: whilePart ( block )? BLOCK_END
             {
-            pushFollow(FOLLOW_whilePart_in_whileBlock1268);
-            whilePart153=whilePart();
+            pushFollow(FOLLOW_whilePart_in_whileBlock1413);
+            whilePart157=whilePart();
 
             state._fsp--;
             if (state.failed) return retval;
-            if ( state.backtracking==0 ) stream_whilePart.add(whilePart153.getTree());
+            if ( state.backtracking==0 ) stream_whilePart.add(whilePart157.getTree());
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:193:2: ( block )?
-            int alt58=2;
-            int LA58_0 = input.LA(1);
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:263:2: ( block )?
+            int alt60=2;
+            int LA60_0 = input.LA(1);
 
-            if ( (LA58_0==COLON||LA58_0==DOT||(LA58_0 >= EMPTY_CELL && LA58_0 <= END)||(LA58_0 >= FALSE && LA58_0 <= FOR)||(LA58_0 >= ID && LA58_0 <= IF)||LA58_0==INTEGER||LA58_0==MINUS||LA58_0==NOT||(LA58_0 >= OPENB && LA58_0 <= OPENP)||LA58_0==PLUS||(LA58_0 >= STRING_LITERAL && LA58_0 <= SWITCH)||LA58_0==TRUE||LA58_0==WHILE) ) {
-                alt58=1;
+            if ( (LA60_0==COLON||LA60_0==DOT||(LA60_0 >= EMPTY_CELL && LA60_0 <= END)||(LA60_0 >= FALSE && LA60_0 <= FOR)||(LA60_0 >= ID && LA60_0 <= IF)||LA60_0==INTEGER||LA60_0==MINUS||LA60_0==NOT||(LA60_0 >= OPENB && LA60_0 <= OPENP)||LA60_0==PLUS||(LA60_0 >= STRING_LITERAL && LA60_0 <= SWITCH)||LA60_0==TRUE||LA60_0==WHILE) ) {
+                alt60=1;
             }
-            switch (alt58) {
+            switch (alt60) {
                 case 1 :
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:193:2: block
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:263:2: block
                     {
-                    pushFollow(FOLLOW_block_in_whileBlock1271);
-                    block154=block();
+                    pushFollow(FOLLOW_block_in_whileBlock1416);
+                    block158=block();
 
                     state._fsp--;
                     if (state.failed) return retval;
-                    if ( state.backtracking==0 ) stream_block.add(block154.getTree());
+                    if ( state.backtracking==0 ) stream_block.add(block158.getTree());
 
                     }
                     break;
@@ -5992,8 +6126,8 @@ public TreeAdaptor getTreeAdaptor() {
             }
 
 
-            BLOCK_END155=(Token)match(input,BLOCK_END,FOLLOW_BLOCK_END_in_whileBlock1275); if (state.failed) return retval; 
-            if ( state.backtracking==0 ) stream_BLOCK_END.add(BLOCK_END155);
+            BLOCK_END159=(Token)match(input,BLOCK_END,FOLLOW_BLOCK_END_in_whileBlock1420); if (state.failed) return retval; 
+            if ( state.backtracking==0 ) stream_BLOCK_END.add(BLOCK_END159);
 
 
             // AST REWRITE
@@ -6009,9 +6143,9 @@ public TreeAdaptor getTreeAdaptor() {
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
             root_0 = (CommonTree)adaptor.nil();
-            // 195:2: -> ^( WHILE_LOOP whilePart ( block )? )
+            // 265:2: -> ^( WHILE_LOOP whilePart ( block )? )
             {
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:195:5: ^( WHILE_LOOP whilePart ( block )? )
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:265:5: ^( WHILE_LOOP whilePart ( block )? )
                 {
                 CommonTree root_1 = (CommonTree)adaptor.nil();
                 root_1 = (CommonTree)adaptor.becomeRoot(
@@ -6020,7 +6154,7 @@ public TreeAdaptor getTreeAdaptor() {
 
                 adaptor.addChild(root_1, stream_whilePart.nextTree());
 
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:195:28: ( block )?
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:265:28: ( block )?
                 if ( stream_block.hasNext() ) {
                     adaptor.addChild(root_1, stream_block.nextTree());
 
@@ -6056,7 +6190,7 @@ public TreeAdaptor getTreeAdaptor() {
 
         finally {
         	// do for sure before leaving
-            if ( state.backtracking>0 ) { memoize(input, 38, whileBlock_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 39, whileBlock_StartIndex); }
 
         }
         return retval;
@@ -6071,7 +6205,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "blockPart"
-    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:198:1: blockPart : ( ifBlock | switchBlock | forBlock | whileBlock | line ) ;
+    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:268:1: blockPart : ( ifBlock | switchBlock | forBlock | whileBlock | line ) ;
     public final ExprParser.blockPart_return blockPart() throws RecognitionException {
         ExprParser.blockPart_return retval = new ExprParser.blockPart_return();
         retval.start = input.LT(1);
@@ -6080,48 +6214,48 @@ public TreeAdaptor getTreeAdaptor() {
 
         CommonTree root_0 = null;
 
-        ExprParser.ifBlock_return ifBlock156 =null;
+        ExprParser.ifBlock_return ifBlock160 =null;
 
-        ExprParser.switchBlock_return switchBlock157 =null;
+        ExprParser.switchBlock_return switchBlock161 =null;
 
-        ExprParser.forBlock_return forBlock158 =null;
+        ExprParser.forBlock_return forBlock162 =null;
 
-        ExprParser.whileBlock_return whileBlock159 =null;
+        ExprParser.whileBlock_return whileBlock163 =null;
 
-        ExprParser.line_return line160 =null;
+        ExprParser.line_return line164 =null;
 
 
 
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 39) ) { return retval; }
+            if ( state.backtracking>0 && alreadyParsedRule(input, 40) ) { return retval; }
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:198:11: ( ( ifBlock | switchBlock | forBlock | whileBlock | line ) )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:198:12: ( ifBlock | switchBlock | forBlock | whileBlock | line )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:268:11: ( ( ifBlock | switchBlock | forBlock | whileBlock | line ) )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:268:12: ( ifBlock | switchBlock | forBlock | whileBlock | line )
             {
             root_0 = (CommonTree)adaptor.nil();
 
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:198:12: ( ifBlock | switchBlock | forBlock | whileBlock | line )
-            int alt59=5;
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:268:12: ( ifBlock | switchBlock | forBlock | whileBlock | line )
+            int alt61=5;
             switch ( input.LA(1) ) {
             case IF:
                 {
-                alt59=1;
+                alt61=1;
                 }
                 break;
             case SWITCH:
                 {
-                alt59=2;
+                alt61=2;
                 }
                 break;
             case FOR:
                 {
-                alt59=3;
+                alt61=3;
                 }
                 break;
             case WHILE:
                 {
-                alt59=4;
+                alt61=4;
                 }
                 break;
             case COLON:
@@ -6141,76 +6275,76 @@ public TreeAdaptor getTreeAdaptor() {
             case STRING_LITERAL:
             case TRUE:
                 {
-                alt59=5;
+                alt61=5;
                 }
                 break;
             default:
                 if (state.backtracking>0) {state.failed=true; return retval;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 59, 0, input);
+                    new NoViableAltException("", 61, 0, input);
 
                 throw nvae;
 
             }
 
-            switch (alt59) {
+            switch (alt61) {
                 case 1 :
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:198:13: ifBlock
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:268:13: ifBlock
                     {
-                    pushFollow(FOLLOW_ifBlock_in_blockPart1298);
-                    ifBlock156=ifBlock();
+                    pushFollow(FOLLOW_ifBlock_in_blockPart1443);
+                    ifBlock160=ifBlock();
 
                     state._fsp--;
                     if (state.failed) return retval;
-                    if ( state.backtracking==0 ) adaptor.addChild(root_0, ifBlock156.getTree());
+                    if ( state.backtracking==0 ) adaptor.addChild(root_0, ifBlock160.getTree());
 
                     }
                     break;
                 case 2 :
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:198:23: switchBlock
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:268:23: switchBlock
                     {
-                    pushFollow(FOLLOW_switchBlock_in_blockPart1302);
-                    switchBlock157=switchBlock();
+                    pushFollow(FOLLOW_switchBlock_in_blockPart1447);
+                    switchBlock161=switchBlock();
 
                     state._fsp--;
                     if (state.failed) return retval;
-                    if ( state.backtracking==0 ) adaptor.addChild(root_0, switchBlock157.getTree());
+                    if ( state.backtracking==0 ) adaptor.addChild(root_0, switchBlock161.getTree());
 
                     }
                     break;
                 case 3 :
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:198:37: forBlock
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:268:37: forBlock
                     {
-                    pushFollow(FOLLOW_forBlock_in_blockPart1306);
-                    forBlock158=forBlock();
+                    pushFollow(FOLLOW_forBlock_in_blockPart1451);
+                    forBlock162=forBlock();
 
                     state._fsp--;
                     if (state.failed) return retval;
-                    if ( state.backtracking==0 ) adaptor.addChild(root_0, forBlock158.getTree());
+                    if ( state.backtracking==0 ) adaptor.addChild(root_0, forBlock162.getTree());
 
                     }
                     break;
                 case 4 :
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:198:48: whileBlock
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:268:48: whileBlock
                     {
-                    pushFollow(FOLLOW_whileBlock_in_blockPart1310);
-                    whileBlock159=whileBlock();
+                    pushFollow(FOLLOW_whileBlock_in_blockPart1455);
+                    whileBlock163=whileBlock();
 
                     state._fsp--;
                     if (state.failed) return retval;
-                    if ( state.backtracking==0 ) adaptor.addChild(root_0, whileBlock159.getTree());
+                    if ( state.backtracking==0 ) adaptor.addChild(root_0, whileBlock163.getTree());
 
                     }
                     break;
                 case 5 :
-                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:198:61: line
+                    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:268:61: line
                     {
-                    pushFollow(FOLLOW_line_in_blockPart1314);
-                    line160=line();
+                    pushFollow(FOLLOW_line_in_blockPart1459);
+                    line164=line();
 
                     state._fsp--;
                     if (state.failed) return retval;
-                    if ( state.backtracking==0 ) adaptor.addChild(root_0, line160.getTree());
+                    if ( state.backtracking==0 ) adaptor.addChild(root_0, line164.getTree());
 
                     }
                     break;
@@ -6238,7 +6372,7 @@ public TreeAdaptor getTreeAdaptor() {
 
         finally {
         	// do for sure before leaving
-            if ( state.backtracking>0 ) { memoize(input, 39, blockPart_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 40, blockPart_StartIndex); }
 
         }
         return retval;
@@ -6253,7 +6387,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "block"
-    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:199:1: block : ( blockPart )+ -> ^( BLOCK ( blockPart )+ ) ;
+    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:269:1: block : ( blockPart )+ -> ^( BLOCK ( blockPart )+ ) ;
     public final ExprParser.block_return block() throws RecognitionException {
         ExprParser.block_return retval = new ExprParser.block_return();
         retval.start = input.LT(1);
@@ -6262,147 +6396,147 @@ public TreeAdaptor getTreeAdaptor() {
 
         CommonTree root_0 = null;
 
-        ExprParser.blockPart_return blockPart161 =null;
+        ExprParser.blockPart_return blockPart165 =null;
 
 
         RewriteRuleSubtreeStream stream_blockPart=new RewriteRuleSubtreeStream(adaptor,"rule blockPart");
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 40) ) { return retval; }
+            if ( state.backtracking>0 && alreadyParsedRule(input, 41) ) { return retval; }
 
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:199:7: ( ( blockPart )+ -> ^( BLOCK ( blockPart )+ ) )
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:199:9: ( blockPart )+
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:269:7: ( ( blockPart )+ -> ^( BLOCK ( blockPart )+ ) )
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:269:9: ( blockPart )+
             {
-            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:199:9: ( blockPart )+
-            int cnt60=0;
-            loop60:
+            // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:269:9: ( blockPart )+
+            int cnt62=0;
+            loop62:
             do {
-                int alt60=2;
+                int alt62=2;
                 switch ( input.LA(1) ) {
                 case IF:
                     {
-                    alt60=1;
+                    alt62=1;
                     }
                     break;
                 case SWITCH:
                     {
-                    alt60=1;
+                    alt62=1;
                     }
                     break;
                 case FOR:
                     {
-                    alt60=1;
+                    alt62=1;
                     }
                     break;
                 case WHILE:
                     {
-                    alt60=1;
+                    alt62=1;
                     }
                     break;
                 case EMPTY_VEC:
                     {
-                    alt60=1;
+                    alt62=1;
                     }
                     break;
                 case EMPTY_CELL:
                     {
-                    alt60=1;
+                    alt62=1;
                     }
                     break;
                 case OPENP:
                     {
-                    alt60=1;
+                    alt62=1;
                     }
                     break;
                 case STRING_LITERAL:
                     {
-                    alt60=1;
+                    alt62=1;
                     }
                     break;
                 case END:
                     {
-                    alt60=1;
+                    alt62=1;
                     }
                     break;
                 case OPENB:
                     {
-                    alt60=1;
+                    alt62=1;
                     }
                     break;
                 case OPENC:
                     {
-                    alt60=1;
+                    alt62=1;
                     }
                     break;
                 case COLON:
                     {
-                    alt60=1;
+                    alt62=1;
                     }
                     break;
                 case TRUE:
                     {
-                    alt60=1;
+                    alt62=1;
                     }
                     break;
                 case FALSE:
                     {
-                    alt60=1;
+                    alt62=1;
                     }
                     break;
                 case INTEGER:
                     {
-                    alt60=1;
+                    alt62=1;
                     }
                     break;
                 case DOT:
                     {
-                    alt60=1;
+                    alt62=1;
                     }
                     break;
                 case ID:
                     {
-                    alt60=1;
+                    alt62=1;
                     }
                     break;
                 case PLUS:
                     {
-                    alt60=1;
+                    alt62=1;
                     }
                     break;
                 case MINUS:
                     {
-                    alt60=1;
+                    alt62=1;
                     }
                     break;
                 case NOT:
                     {
-                    alt60=1;
+                    alt62=1;
                     }
                     break;
 
                 }
 
-                switch (alt60) {
+                switch (alt62) {
             	case 1 :
-            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:199:9: blockPart
+            	    // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:269:9: blockPart
             	    {
-            	    pushFollow(FOLLOW_blockPart_in_block1322);
-            	    blockPart161=blockPart();
+            	    pushFollow(FOLLOW_blockPart_in_block1467);
+            	    blockPart165=blockPart();
 
             	    state._fsp--;
             	    if (state.failed) return retval;
-            	    if ( state.backtracking==0 ) stream_blockPart.add(blockPart161.getTree());
+            	    if ( state.backtracking==0 ) stream_blockPart.add(blockPart165.getTree());
 
             	    }
             	    break;
 
             	default :
-            	    if ( cnt60 >= 1 ) break loop60;
+            	    if ( cnt62 >= 1 ) break loop62;
             	    if (state.backtracking>0) {state.failed=true; return retval;}
                         EarlyExitException eee =
-                            new EarlyExitException(60, input);
+                            new EarlyExitException(62, input);
                         throw eee;
                 }
-                cnt60++;
+                cnt62++;
             } while (true);
 
 
@@ -6419,9 +6553,9 @@ public TreeAdaptor getTreeAdaptor() {
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
             root_0 = (CommonTree)adaptor.nil();
-            // 199:20: -> ^( BLOCK ( blockPart )+ )
+            // 269:20: -> ^( BLOCK ( blockPart )+ )
             {
-                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:199:23: ^( BLOCK ( blockPart )+ )
+                // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:269:23: ^( BLOCK ( blockPart )+ )
                 {
                 CommonTree root_1 = (CommonTree)adaptor.nil();
                 root_1 = (CommonTree)adaptor.becomeRoot(
@@ -6466,38 +6600,38 @@ public TreeAdaptor getTreeAdaptor() {
 
         finally {
         	// do for sure before leaving
-            if ( state.backtracking>0 ) { memoize(input, 40, block_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 41, block_StartIndex); }
 
         }
         return retval;
     }
     // $ANTLR end "block"
 
-    // $ANTLR start synpred2_Expr
-    public final void synpred2_Expr_fragment() throws RecognitionException {
-        // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:156:10: ( term EQUALS )
-        // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:156:11: term EQUALS
+    // $ANTLR start synpred3_Expr
+    public final void synpred3_Expr_fragment() throws RecognitionException {
+        // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:220:30: ( term EQUALS )
+        // /Users/zach/Workspaces/Eclipse 3.5 Classic/GoogleMat2/src/parser/Expr.g:220:31: term EQUALS
         {
-        pushFollow(FOLLOW_term_in_synpred2_Expr973);
+        pushFollow(FOLLOW_term_in_synpred3_Expr1105);
         term();
 
         state._fsp--;
         if (state.failed) return ;
 
-        match(input,EQUALS,FOLLOW_EQUALS_in_synpred2_Expr975); if (state.failed) return ;
+        match(input,EQUALS,FOLLOW_EQUALS_in_synpred3_Expr1107); if (state.failed) return ;
 
         }
 
     }
-    // $ANTLR end synpred2_Expr
+    // $ANTLR end synpred3_Expr
 
     // Delegated rules
 
-    public final boolean synpred2_Expr() {
+    public final boolean synpred3_Expr() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred2_Expr_fragment(); // can never throw exception
+            synpred3_Expr_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -6517,165 +6651,169 @@ public TreeAdaptor getTreeAdaptor() {
     public static final BitSet FOLLOW_functionHeader_in_prog223 = new BitSet(new long[]{0x50B0063800820082L,0x0000000002160107L});
     public static final BitSet FOLLOW_block_in_prog226 = new BitSet(new long[]{0x50B0063800820082L,0x0000000002160107L});
     public static final BitSet FOLLOW_BLOCK_END_in_prog230 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_expr_in_functionArgs243 = new BitSet(new long[]{0x0000000000080002L});
-    public static final BitSet FOLLOW_COMMA_in_functionArgs246 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
-    public static final BitSet FOLLOW_expr_in_functionArgs248 = new BitSet(new long[]{0x0000000000080002L});
-    public static final BitSet FOLLOW_ID_in_functionCall282 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000006L});
-    public static final BitSet FOLLOW_OPENC_in_functionCall288 = new BitSet(new long[]{0x5090023800824000L,0x0000000000120107L});
-    public static final BitSet FOLLOW_functionArgs_in_functionCall292 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_CLOSEC_in_functionCall296 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000006L});
-    public static final BitSet FOLLOW_OPENP_in_functionCall303 = new BitSet(new long[]{0x5090023800828000L,0x0000000000120107L});
-    public static final BitSet FOLLOW_functionArgs_in_functionCall305 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_CLOSEP_in_functionCall308 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_functionCall_in_functionCallOrStructure325 = new BitSet(new long[]{0x0000000000800002L});
-    public static final BitSet FOLLOW_DOT_in_functionCallOrStructure328 = new BitSet(new long[]{0x0010000000000000L,0x0000000000000004L});
-    public static final BitSet FOLLOW_OPENP_in_functionCallOrStructure332 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
-    public static final BitSet FOLLOW_expr_in_functionCallOrStructure334 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_CLOSEP_in_functionCallOrStructure336 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_functionCall_in_functionCallOrStructure340 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_FUNCTION_in_functionHeader352 = new BitSet(new long[]{0x0010004000000000L,0x0000000000000001L});
-    public static final BitSet FOLLOW_OPENB_in_functionHeader364 = new BitSet(new long[]{0x0010000000002000L});
-    public static final BitSet FOLLOW_ID_in_functionHeader367 = new BitSet(new long[]{0x0010000000082000L});
-    public static final BitSet FOLLOW_COMMA_in_functionHeader370 = new BitSet(new long[]{0x0010000000000000L});
-    public static final BitSet FOLLOW_ID_in_functionHeader373 = new BitSet(new long[]{0x0010000000082000L});
-    public static final BitSet FOLLOW_CLOSEB_in_functionHeader379 = new BitSet(new long[]{0x0000004000000000L});
-    public static final BitSet FOLLOW_ID_in_functionHeader384 = new BitSet(new long[]{0x0000004000000000L});
-    public static final BitSet FOLLOW_EQUALS_in_functionHeader388 = new BitSet(new long[]{0x0010000000000000L});
-    public static final BitSet FOLLOW_ID_in_functionHeader399 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000004L});
-    public static final BitSet FOLLOW_OPENP_in_functionHeader405 = new BitSet(new long[]{0x0010000000008000L});
-    public static final BitSet FOLLOW_ID_in_functionHeader408 = new BitSet(new long[]{0x0000000000088000L});
-    public static final BitSet FOLLOW_COMMA_in_functionHeader411 = new BitSet(new long[]{0x0010000000000000L});
-    public static final BitSet FOLLOW_ID_in_functionHeader413 = new BitSet(new long[]{0x0000000000088000L});
-    public static final BitSet FOLLOW_CLOSEP_in_functionHeader419 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_EMPTY_VEC_in_term435 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_EMPTY_CELL_in_term441 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_OPENP_in_term446 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
-    public static final BitSet FOLLOW_expr_in_term449 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_CLOSEP_in_term451 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_STRING_LITERAL_in_term457 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_END_in_term462 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_vector_in_term467 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_cellArray_in_term472 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_COLON_in_term477 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_TRUE_in_term482 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_FALSE_in_term487 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_INTEGER_in_term492 = new BitSet(new long[]{0x0000000000800002L});
-    public static final BitSet FOLLOW_DOT_in_term495 = new BitSet(new long[]{0x0080000000000000L});
-    public static final BitSet FOLLOW_INTEGER_in_term498 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_DOT_in_term505 = new BitSet(new long[]{0x0080000000000000L});
-    public static final BitSet FOLLOW_INTEGER_in_term508 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_functionCallOrStructure_in_term513 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_term_in_transponent527 = new BitSet(new long[]{0x0000000012000202L,0x0000000000002000L});
-    public static final BitSet FOLLOW_DOT_CARET_in_transponent536 = new BitSet(new long[]{0x0090023800820000L,0x0000000000120007L});
-    public static final BitSet FOLLOW_CARET_in_transponent541 = new BitSet(new long[]{0x0090023800820000L,0x0000000000120007L});
-    public static final BitSet FOLLOW_term_in_transponent545 = new BitSet(new long[]{0x0000000002000202L});
-    public static final BitSet FOLLOW_SINGLE_QUOTE_in_transponent554 = new BitSet(new long[]{0x0000000010000002L,0x0000000000002000L});
-    public static final BitSet FOLLOW_DOT_TRANSPOSE_in_transponent559 = new BitSet(new long[]{0x0000000010000002L,0x0000000000002000L});
-    public static final BitSet FOLLOW_PLUS_in_unary580 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
-    public static final BitSet FOLLOW_MINUS_in_unary585 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
-    public static final BitSet FOLLOW_NOT_in_unary590 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
-    public static final BitSet FOLLOW_transponent_in_unary595 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_unary_in_mult603 = new BitSet(new long[]{0x000000000D000022L,0x0000000000014000L});
-    public static final BitSet FOLLOW_DOT_STAR_in_mult608 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
-    public static final BitSet FOLLOW_DOT_SLASH_in_mult613 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
-    public static final BitSet FOLLOW_DOT_BACKSLASH_in_mult618 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
-    public static final BitSet FOLLOW_STAR_in_mult623 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
-    public static final BitSet FOLLOW_SLASH_in_mult628 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
-    public static final BitSet FOLLOW_BACKSLASH_in_mult633 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
-    public static final BitSet FOLLOW_unary_in_mult637 = new BitSet(new long[]{0x000000000D000022L,0x0000000000014000L});
-    public static final BitSet FOLLOW_mult_in_add649 = new BitSet(new long[]{0x1000000000000002L,0x0000000000000100L});
-    public static final BitSet FOLLOW_PLUS_in_add654 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
-    public static final BitSet FOLLOW_MINUS_in_add659 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
-    public static final BitSet FOLLOW_mult_in_add663 = new BitSet(new long[]{0x1000000000000002L,0x0000000000000100L});
-    public static final BitSet FOLLOW_COLON_in_colonEnd674 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
-    public static final BitSet FOLLOW_add_in_colonEnd676 = new BitSet(new long[]{0x0000000000020002L});
-    public static final BitSet FOLLOW_add_in_colon695 = new BitSet(new long[]{0x0000000000020002L});
-    public static final BitSet FOLLOW_colonEnd_in_colon698 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_colon_in_logical709 = new BitSet(new long[]{0x8702800000000002L});
-    public static final BitSet FOLLOW_LESS_THAN_in_logical714 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
-    public static final BitSet FOLLOW_GREATER_THAN_in_logical719 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
-    public static final BitSet FOLLOW_LESS_EQUAL_in_logical724 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
-    public static final BitSet FOLLOW_GREATER_EQUAL_in_logical729 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
-    public static final BitSet FOLLOW_ISEQUAL_in_logical734 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
-    public static final BitSet FOLLOW_NOT_EQUAL_in_logical739 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
-    public static final BitSet FOLLOW_colon_in_logical743 = new BitSet(new long[]{0x8702800000000002L});
-    public static final BitSet FOLLOW_logical_in_eleAnd755 = new BitSet(new long[]{0x0000000040000002L});
-    public static final BitSet FOLLOW_ELE_AND_in_eleAnd758 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
-    public static final BitSet FOLLOW_logical_in_eleAnd761 = new BitSet(new long[]{0x0000000040000002L});
-    public static final BitSet FOLLOW_eleAnd_in_eleOr772 = new BitSet(new long[]{0x0000000080000002L});
-    public static final BitSet FOLLOW_ELE_OR_in_eleOr775 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
-    public static final BitSet FOLLOW_eleAnd_in_eleOr778 = new BitSet(new long[]{0x0000000080000002L});
-    public static final BitSet FOLLOW_eleOr_in_scAnd789 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000400L});
-    public static final BitSet FOLLOW_SC_AND_in_scAnd792 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
-    public static final BitSet FOLLOW_eleOr_in_scAnd795 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000400L});
-    public static final BitSet FOLLOW_scAnd_in_scOr806 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000800L});
-    public static final BitSet FOLLOW_SC_OR_in_scOr809 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
-    public static final BitSet FOLLOW_scAnd_in_scOr812 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000800L});
-    public static final BitSet FOLLOW_expr_in_hCatVec824 = new BitSet(new long[]{0x50900238008A0002L,0x0000000000120107L});
-    public static final BitSet FOLLOW_COMMA_in_hCatVec828 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
-    public static final BitSet FOLLOW_expr_in_hCatVec832 = new BitSet(new long[]{0x50900238008A0002L,0x0000000000120107L});
-    public static final BitSet FOLLOW_hCatVec_in_vCatVec851 = new BitSet(new long[]{0x0000000000000002L,0x0000000000001000L});
-    public static final BitSet FOLLOW_SEMI_in_vCatVec855 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
-    public static final BitSet FOLLOW_hCatVec_in_vCatVec858 = new BitSet(new long[]{0x0000000000000002L,0x0000000000001000L});
-    public static final BitSet FOLLOW_OPENB_in_vector877 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
-    public static final BitSet FOLLOW_vCatVec_in_vector880 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_CLOSEB_in_vector882 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_expr_in_hCatCell890 = new BitSet(new long[]{0x50900238008A0002L,0x0000000000120107L});
-    public static final BitSet FOLLOW_COMMA_in_hCatCell894 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
-    public static final BitSet FOLLOW_expr_in_hCatCell898 = new BitSet(new long[]{0x50900238008A0002L,0x0000000000120107L});
-    public static final BitSet FOLLOW_hCatCell_in_vCatCell917 = new BitSet(new long[]{0x0000000000000002L,0x0000000000001000L});
-    public static final BitSet FOLLOW_SEMI_in_vCatCell921 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
-    public static final BitSet FOLLOW_hCatCell_in_vCatCell925 = new BitSet(new long[]{0x0000000000000002L,0x0000000000001000L});
-    public static final BitSet FOLLOW_OPENC_in_cellArray944 = new BitSet(new long[]{0x5090023800824000L,0x0000000000120107L});
-    public static final BitSet FOLLOW_vCatCell_in_cellArray947 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_CLOSEC_in_cellArray950 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_scOr_in_expr961 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_term_in_line981 = new BitSet(new long[]{0x0000004000000000L});
-    public static final BitSet FOLLOW_EQUALS_in_line983 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
-    public static final BitSet FOLLOW_expr_in_line990 = new BitSet(new long[]{0x0000000000000002L,0x0000000000001000L});
-    public static final BitSet FOLLOW_SEMI_in_line993 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IF_in_ifPart1008 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
-    public static final BitSet FOLLOW_expr_in_ifPart1011 = new BitSet(new long[]{0x50B0063800820002L,0x0000000002160107L});
-    public static final BitSet FOLLOW_block_in_ifPart1013 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ELSEIF_in_elseifPart1022 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
-    public static final BitSet FOLLOW_expr_in_elseifPart1027 = new BitSet(new long[]{0x50B0063800820002L,0x0000000002160107L});
-    public static final BitSet FOLLOW_block_in_elseifPart1031 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ELSE_in_elsePart1040 = new BitSet(new long[]{0x50B0063800820002L,0x0000000002160107L});
-    public static final BitSet FOLLOW_block_in_elsePart1045 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ifPart_in_ifBlock1056 = new BitSet(new long[]{0x0000000600000080L});
-    public static final BitSet FOLLOW_elseifPart_in_ifBlock1066 = new BitSet(new long[]{0x0000000600000080L});
-    public static final BitSet FOLLOW_elsePart_in_ifBlock1077 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_BLOCK_END_in_ifBlock1088 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_SWITCH_in_switchPart1137 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
-    public static final BitSet FOLLOW_expr_in_switchPart1140 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_CASE_in_casePart1147 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
-    public static final BitSet FOLLOW_expr_in_casePart1150 = new BitSet(new long[]{0x50B0063800820002L,0x0000000002160107L});
-    public static final BitSet FOLLOW_block_in_casePart1152 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_OTHERWISE_in_otherwiseBlock1160 = new BitSet(new long[]{0x50B0063800820002L,0x0000000002160107L});
-    public static final BitSet FOLLOW_block_in_otherwiseBlock1163 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_switchPart_in_switchBlock1173 = new BitSet(new long[]{0x0000000000000480L,0x0000000000000010L});
-    public static final BitSet FOLLOW_casePart_in_switchBlock1176 = new BitSet(new long[]{0x0000000000000480L,0x0000000000000010L});
-    public static final BitSet FOLLOW_otherwiseBlock_in_switchBlock1180 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_BLOCK_END_in_switchBlock1184 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_FOR_in_forPart1209 = new BitSet(new long[]{0x0010000000000000L});
-    public static final BitSet FOLLOW_ID_in_forPart1212 = new BitSet(new long[]{0x0000004000000000L});
-    public static final BitSet FOLLOW_EQUALS_in_forPart1214 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
-    public static final BitSet FOLLOW_expr_in_forPart1216 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_forPart_in_forBlock1226 = new BitSet(new long[]{0x50B0063800820080L,0x0000000002160107L});
-    public static final BitSet FOLLOW_block_in_forBlock1229 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_BLOCK_END_in_forBlock1233 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_WHILE_in_whilePart1256 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
-    public static final BitSet FOLLOW_expr_in_whilePart1259 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_whilePart_in_whileBlock1268 = new BitSet(new long[]{0x50B0063800820080L,0x0000000002160107L});
-    public static final BitSet FOLLOW_block_in_whileBlock1271 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_BLOCK_END_in_whileBlock1275 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ifBlock_in_blockPart1298 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_switchBlock_in_blockPart1302 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_forBlock_in_blockPart1306 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_whileBlock_in_blockPart1310 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_line_in_blockPart1314 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_blockPart_in_block1322 = new BitSet(new long[]{0x50B0063800820002L,0x0000000002160107L});
-    public static final BitSet FOLLOW_term_in_synpred2_Expr973 = new BitSet(new long[]{0x0000004000000000L});
-    public static final BitSet FOLLOW_EQUALS_in_synpred2_Expr975 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_expr_in_functionArgs254 = new BitSet(new long[]{0x0000000000080002L});
+    public static final BitSet FOLLOW_COMMA_in_functionArgs257 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
+    public static final BitSet FOLLOW_expr_in_functionArgs259 = new BitSet(new long[]{0x0000000000080002L});
+    public static final BitSet FOLLOW_ID_in_functionCall293 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000006L});
+    public static final BitSet FOLLOW_OPENP_in_functionCall302 = new BitSet(new long[]{0x5090023800828000L,0x0000000000120107L});
+    public static final BitSet FOLLOW_functionArgs_in_functionCall306 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_CLOSEP_in_functionCall310 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000006L});
+    public static final BitSet FOLLOW_OPENC_in_functionCall317 = new BitSet(new long[]{0x5090023800824000L,0x0000000000120107L});
+    public static final BitSet FOLLOW_functionArgs_in_functionCall319 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_CLOSEC_in_functionCall322 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ID_in_cellIndex354 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000002L});
+    public static final BitSet FOLLOW_OPENC_in_cellIndex362 = new BitSet(new long[]{0x5090023800824000L,0x0000000000120107L});
+    public static final BitSet FOLLOW_functionArgs_in_cellIndex365 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_CLOSEC_in_cellIndex368 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_functionCall_in_functionCallOrStructure388 = new BitSet(new long[]{0x0000000000800002L});
+    public static final BitSet FOLLOW_DOT_in_functionCallOrStructure391 = new BitSet(new long[]{0x0010000000000000L,0x0000000000000004L});
+    public static final BitSet FOLLOW_OPENP_in_functionCallOrStructure395 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
+    public static final BitSet FOLLOW_expr_in_functionCallOrStructure397 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_CLOSEP_in_functionCallOrStructure399 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_functionCall_in_functionCallOrStructure403 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_FUNCTION_in_functionHeader415 = new BitSet(new long[]{0x0010004000000000L,0x0000000000000001L});
+    public static final BitSet FOLLOW_OPENB_in_functionHeader427 = new BitSet(new long[]{0x0010000000002000L});
+    public static final BitSet FOLLOW_ID_in_functionHeader430 = new BitSet(new long[]{0x0010000000082000L});
+    public static final BitSet FOLLOW_COMMA_in_functionHeader433 = new BitSet(new long[]{0x0010000000000000L});
+    public static final BitSet FOLLOW_ID_in_functionHeader436 = new BitSet(new long[]{0x0010000000082000L});
+    public static final BitSet FOLLOW_CLOSEB_in_functionHeader442 = new BitSet(new long[]{0x0000004000000000L});
+    public static final BitSet FOLLOW_ID_in_functionHeader447 = new BitSet(new long[]{0x0000004000000000L});
+    public static final BitSet FOLLOW_EQUALS_in_functionHeader451 = new BitSet(new long[]{0x0010000000000000L});
+    public static final BitSet FOLLOW_ID_in_functionHeader462 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000004L});
+    public static final BitSet FOLLOW_OPENP_in_functionHeader468 = new BitSet(new long[]{0x0010000000008000L});
+    public static final BitSet FOLLOW_ID_in_functionHeader471 = new BitSet(new long[]{0x0000000000088000L});
+    public static final BitSet FOLLOW_COMMA_in_functionHeader474 = new BitSet(new long[]{0x0010000000000000L});
+    public static final BitSet FOLLOW_ID_in_functionHeader476 = new BitSet(new long[]{0x0000000000088000L});
+    public static final BitSet FOLLOW_CLOSEP_in_functionHeader482 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_EMPTY_VEC_in_term498 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_EMPTY_CELL_in_term504 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_OPENP_in_term509 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
+    public static final BitSet FOLLOW_expr_in_term512 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_CLOSEP_in_term514 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_STRING_LITERAL_in_term534 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_END_in_term539 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_vector_in_term544 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_cellArray_in_term549 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_COLON_in_term554 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_TRUE_in_term559 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_FALSE_in_term564 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_INTEGER_in_term571 = new BitSet(new long[]{0x0000000000800002L});
+    public static final BitSet FOLLOW_DOT_in_term574 = new BitSet(new long[]{0x0080000000000000L});
+    public static final BitSet FOLLOW_INTEGER_in_term577 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_DOT_in_term584 = new BitSet(new long[]{0x0080000000000000L});
+    public static final BitSet FOLLOW_INTEGER_in_term587 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_functionCallOrStructure_in_term592 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_term_in_transponent618 = new BitSet(new long[]{0x0000000012000202L,0x0000000000002000L});
+    public static final BitSet FOLLOW_DOT_CARET_in_transponent627 = new BitSet(new long[]{0x0090023800820000L,0x0000000000120007L});
+    public static final BitSet FOLLOW_CARET_in_transponent632 = new BitSet(new long[]{0x0090023800820000L,0x0000000000120007L});
+    public static final BitSet FOLLOW_term_in_transponent636 = new BitSet(new long[]{0x0000000002000202L});
+    public static final BitSet FOLLOW_SINGLE_QUOTE_in_transponent645 = new BitSet(new long[]{0x0000000010000002L,0x0000000000002000L});
+    public static final BitSet FOLLOW_DOT_TRANSPOSE_in_transponent650 = new BitSet(new long[]{0x0000000010000002L,0x0000000000002000L});
+    public static final BitSet FOLLOW_PLUS_in_unary673 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
+    public static final BitSet FOLLOW_MINUS_in_unary678 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
+    public static final BitSet FOLLOW_NOT_in_unary683 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
+    public static final BitSet FOLLOW_transponent_in_unary688 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_unary_in_mult696 = new BitSet(new long[]{0x000000000D000022L,0x0000000000014000L});
+    public static final BitSet FOLLOW_DOT_STAR_in_mult701 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
+    public static final BitSet FOLLOW_DOT_SLASH_in_mult706 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
+    public static final BitSet FOLLOW_DOT_BACKSLASH_in_mult711 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
+    public static final BitSet FOLLOW_STAR_in_mult716 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
+    public static final BitSet FOLLOW_SLASH_in_mult721 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
+    public static final BitSet FOLLOW_BACKSLASH_in_mult726 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
+    public static final BitSet FOLLOW_unary_in_mult730 = new BitSet(new long[]{0x000000000D000022L,0x0000000000014000L});
+    public static final BitSet FOLLOW_mult_in_add742 = new BitSet(new long[]{0x1000000000000002L,0x0000000000000100L});
+    public static final BitSet FOLLOW_PLUS_in_add747 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
+    public static final BitSet FOLLOW_MINUS_in_add752 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
+    public static final BitSet FOLLOW_mult_in_add756 = new BitSet(new long[]{0x1000000000000002L,0x0000000000000100L});
+    public static final BitSet FOLLOW_COLON_in_colonEnd767 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
+    public static final BitSet FOLLOW_add_in_colonEnd769 = new BitSet(new long[]{0x0000000000020002L});
+    public static final BitSet FOLLOW_add_in_colon788 = new BitSet(new long[]{0x0000000000020002L});
+    public static final BitSet FOLLOW_colonEnd_in_colon791 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_colon_in_logical819 = new BitSet(new long[]{0x8702800000000002L});
+    public static final BitSet FOLLOW_LESS_THAN_in_logical824 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
+    public static final BitSet FOLLOW_GREATER_THAN_in_logical829 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
+    public static final BitSet FOLLOW_LESS_EQUAL_in_logical834 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
+    public static final BitSet FOLLOW_GREATER_EQUAL_in_logical839 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
+    public static final BitSet FOLLOW_ISEQUAL_in_logical844 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
+    public static final BitSet FOLLOW_NOT_EQUAL_in_logical849 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
+    public static final BitSet FOLLOW_colon_in_logical853 = new BitSet(new long[]{0x8702800000000002L});
+    public static final BitSet FOLLOW_logical_in_eleAnd865 = new BitSet(new long[]{0x0000000040000002L});
+    public static final BitSet FOLLOW_ELE_AND_in_eleAnd868 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
+    public static final BitSet FOLLOW_logical_in_eleAnd871 = new BitSet(new long[]{0x0000000040000002L});
+    public static final BitSet FOLLOW_eleAnd_in_eleOr882 = new BitSet(new long[]{0x0000000080000002L});
+    public static final BitSet FOLLOW_ELE_OR_in_eleOr885 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
+    public static final BitSet FOLLOW_eleAnd_in_eleOr888 = new BitSet(new long[]{0x0000000080000002L});
+    public static final BitSet FOLLOW_eleOr_in_scAnd899 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000400L});
+    public static final BitSet FOLLOW_SC_AND_in_scAnd902 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
+    public static final BitSet FOLLOW_eleOr_in_scAnd905 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000400L});
+    public static final BitSet FOLLOW_scAnd_in_scOr916 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000800L});
+    public static final BitSet FOLLOW_SC_OR_in_scOr919 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
+    public static final BitSet FOLLOW_scAnd_in_scOr922 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000800L});
+    public static final BitSet FOLLOW_expr_in_hCatVec945 = new BitSet(new long[]{0x50900238008A0002L,0x0000000000120107L});
+    public static final BitSet FOLLOW_COMMA_in_hCatVec949 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
+    public static final BitSet FOLLOW_expr_in_hCatVec953 = new BitSet(new long[]{0x50900238008A0002L,0x0000000000120107L});
+    public static final BitSet FOLLOW_hCatVec_in_vCatVec972 = new BitSet(new long[]{0x0000000000000002L,0x0000000000001000L});
+    public static final BitSet FOLLOW_SEMI_in_vCatVec976 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
+    public static final BitSet FOLLOW_hCatVec_in_vCatVec979 = new BitSet(new long[]{0x0000000000000002L,0x0000000000001000L});
+    public static final BitSet FOLLOW_OPENB_in_vector998 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
+    public static final BitSet FOLLOW_vCatVec_in_vector1001 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_CLOSEB_in_vector1003 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_expr_in_hCatCell1011 = new BitSet(new long[]{0x50900238008A0002L,0x0000000000120107L});
+    public static final BitSet FOLLOW_COMMA_in_hCatCell1015 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
+    public static final BitSet FOLLOW_expr_in_hCatCell1019 = new BitSet(new long[]{0x50900238008A0002L,0x0000000000120107L});
+    public static final BitSet FOLLOW_hCatCell_in_vCatCell1038 = new BitSet(new long[]{0x0000000000000002L,0x0000000000001000L});
+    public static final BitSet FOLLOW_SEMI_in_vCatCell1042 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
+    public static final BitSet FOLLOW_hCatCell_in_vCatCell1046 = new BitSet(new long[]{0x0000000000000002L,0x0000000000001000L});
+    public static final BitSet FOLLOW_OPENC_in_cellArray1065 = new BitSet(new long[]{0x5090023800824000L,0x0000000000120107L});
+    public static final BitSet FOLLOW_vCatCell_in_cellArray1068 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_CLOSEC_in_cellArray1071 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_scOr_in_expr1084 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_term_in_line1113 = new BitSet(new long[]{0x0000004000000000L});
+    public static final BitSet FOLLOW_EQUALS_in_line1115 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
+    public static final BitSet FOLLOW_expr_in_line1122 = new BitSet(new long[]{0x0000000000000002L,0x0000000000001000L});
+    public static final BitSet FOLLOW_SEMI_in_line1125 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IF_in_ifPart1144 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
+    public static final BitSet FOLLOW_expr_in_ifPart1147 = new BitSet(new long[]{0x50B0063800820002L,0x0000000002160107L});
+    public static final BitSet FOLLOW_block_in_ifPart1149 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ELSEIF_in_elseifPart1158 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
+    public static final BitSet FOLLOW_expr_in_elseifPart1163 = new BitSet(new long[]{0x50B0063800820002L,0x0000000002160107L});
+    public static final BitSet FOLLOW_block_in_elseifPart1167 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ELSE_in_elsePart1176 = new BitSet(new long[]{0x50B0063800820002L,0x0000000002160107L});
+    public static final BitSet FOLLOW_block_in_elsePart1181 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ifPart_in_ifBlock1192 = new BitSet(new long[]{0x0000000600000080L});
+    public static final BitSet FOLLOW_elseifPart_in_ifBlock1202 = new BitSet(new long[]{0x0000000600000080L});
+    public static final BitSet FOLLOW_elsePart_in_ifBlock1213 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_BLOCK_END_in_ifBlock1224 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_SWITCH_in_switchPart1282 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
+    public static final BitSet FOLLOW_expr_in_switchPart1285 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_CASE_in_casePart1292 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
+    public static final BitSet FOLLOW_expr_in_casePart1295 = new BitSet(new long[]{0x50B0063800820002L,0x0000000002160107L});
+    public static final BitSet FOLLOW_block_in_casePart1297 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_OTHERWISE_in_otherwiseBlock1305 = new BitSet(new long[]{0x50B0063800820002L,0x0000000002160107L});
+    public static final BitSet FOLLOW_block_in_otherwiseBlock1308 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_switchPart_in_switchBlock1318 = new BitSet(new long[]{0x0000000000000480L,0x0000000000000010L});
+    public static final BitSet FOLLOW_casePart_in_switchBlock1321 = new BitSet(new long[]{0x0000000000000480L,0x0000000000000010L});
+    public static final BitSet FOLLOW_otherwiseBlock_in_switchBlock1325 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_BLOCK_END_in_switchBlock1329 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_FOR_in_forPart1354 = new BitSet(new long[]{0x0010000000000000L});
+    public static final BitSet FOLLOW_ID_in_forPart1357 = new BitSet(new long[]{0x0000004000000000L});
+    public static final BitSet FOLLOW_EQUALS_in_forPart1359 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
+    public static final BitSet FOLLOW_expr_in_forPart1361 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_forPart_in_forBlock1371 = new BitSet(new long[]{0x50B0063800820080L,0x0000000002160107L});
+    public static final BitSet FOLLOW_block_in_forBlock1374 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_BLOCK_END_in_forBlock1378 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_WHILE_in_whilePart1401 = new BitSet(new long[]{0x5090023800820000L,0x0000000000120107L});
+    public static final BitSet FOLLOW_expr_in_whilePart1404 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_whilePart_in_whileBlock1413 = new BitSet(new long[]{0x50B0063800820080L,0x0000000002160107L});
+    public static final BitSet FOLLOW_block_in_whileBlock1416 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_BLOCK_END_in_whileBlock1420 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ifBlock_in_blockPart1443 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_switchBlock_in_blockPart1447 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_forBlock_in_blockPart1451 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_whileBlock_in_blockPart1455 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_line_in_blockPart1459 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_blockPart_in_block1467 = new BitSet(new long[]{0x50B0063800820002L,0x0000000002160107L});
+    public static final BitSet FOLLOW_term_in_synpred3_Expr1105 = new BitSet(new long[]{0x0000004000000000L});
+    public static final BitSet FOLLOW_EQUALS_in_synpred3_Expr1107 = new BitSet(new long[]{0x0000000000000002L});
 
 }
