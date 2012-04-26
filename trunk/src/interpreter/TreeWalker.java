@@ -394,6 +394,8 @@ public class TreeWalker<K,V>{
 					MatObject rhsRes = eval(rhs);
 					ArrayList<CellArray> lhsCellArgs =new ArrayList<CellArray>();
 					boolean lastOne = false;
+					boolean newVar = false;
+
 					for (int childInd = 0; childInd < lhs.getChildCount() && !lastOne; childInd++){
 						ArrayList<MatObject> lhsArgs = new ArrayList<MatObject>();
 						CellArray lhsInd = null;
@@ -407,8 +409,8 @@ public class TreeWalker<K,V>{
 						}
 						for (int i = 0; i < curTree.getChildCount(); i++){
 							if (convert(lhs.getChild(0).getChild(i).getType()) == TYPE.COLON && Main.wstack.peek().getVariable(lhs.getText())==null){
-								MatObject asdfasdf = rhsRes.copy().zeroed();
 								Main.wstack.peek().add(new Variable(lhs.getText(), rhsRes.copy().zeroed()));
+								newVar = true;
 							}
 
 							lhsArgs.add(eval(curTree.getChild(i)));
@@ -420,6 +422,18 @@ public class TreeWalker<K,V>{
 					if (lhsType == TYPE.ID){
 						calls.remove(calls.size()-1);
 					}
+					if (newVar){
+						//Main.wstack.peek().getVarList()..removeElement(new Variable(lhs.getText(), new Matrix(1)));
+						DefaultListModel varlist = Main.wstack.peek().getVarList();
+						for (int i = 0; i < varlist.size(); i++){
+							if (((Variable)varlist.get(i)).getVarName().equals(lhs.getText())){
+								varlist.remove(i);
+								Main.wstack.peek().setVarList(varlist);
+								break;
+							}
+						}
+					}
+					Workspace curwasdf = Main.wstack.peek();
 					MatObject.index(lhs.getText(), indexCell, rhsRes, printing);
 					if (rhsType == TYPE.ID){
 						calls.remove(calls.size()-1);

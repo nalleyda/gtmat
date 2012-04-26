@@ -741,7 +741,8 @@ public class Interpreter extends Thread {
 	}
 	
 	public static void main(String[] args) throws Exception{
-		System.out.println(preprocessCommas(preprocessTranspose("'a''b'")));
+		System.out.println(preprocessCommas(preprocessTranspose(" txt = ['x' 13" + 
+				"   'y' 13]")));
 	}
 
 	/**
