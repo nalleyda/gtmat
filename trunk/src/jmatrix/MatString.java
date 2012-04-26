@@ -161,7 +161,8 @@ public class MatString extends UnsignedByte {
 			for(int c=0; c<cols(); c++){
 				ar[c]=(byte)data[c*rows()+r];
 			}
-			out = out.concat("\n");
+			if(!out.equals(""))
+				out = out.concat("\n");
 			out = out.concat(new String(ar));
 		}
 		return out;
