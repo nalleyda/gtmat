@@ -572,7 +572,9 @@ public abstract class MatObject {
 	public static MatObject index(String name, CellArray ca, MatObject expr) throws Exception{
 		Workspace curW = Interpreter.getWorkspace();
 		MatObject val = Interpreter.getValue(name)[0];
-		if(val == null) {//didn't exist previously
+		if(val == null)
+			val = new Matrix();
+		/*if(val == null) {//didn't exist previously
 
 			if (expr.n == 1){//assigning a scalar value
 
@@ -594,41 +596,20 @@ public abstract class MatObject {
 
 			}
 			//val = expr.zeroed();//TODO not entirely sure why things work with this line present...
-		}
-		/*
-		if(ca.n == 1) {
-			MatObject ret;
-			int sz[] = new int[] {1, (int)((Matrix)ca.get(1)).getMax()};
-			if(sz[1] < val.n)
-				sz[1] = val.n;
-			Matrix m = (Matrix) ca.get(1);
-			if(val instanceof Matrix)
-				ret = new Matrix(sz);
-			else if(val instanceof MatString)
-				ret = new MatString(sz);
-			else if(val instanceof UnsignedByte)
-				ret = new UnsignedByte(sz);
-			else if(val instanceof CellArray)
-				ret = new CellArray(sz);
-			else if(val instanceof StructArray) 
-				ret = new StructArray(sz);
-			else
-				ret = new Matrix(sz);
-			
-			for(int i = 1; i <= val.n; i++) {
-				ret.set(val.get(new int[]{1, i}), new int[]{1, i});
-			}
-			for(int i = 1; i <= m.n; i++) {
-				ret.set(expr.get(new int[]{1, i}), new int[] {1, (int)m.get(i)});
-			}
-			
-			curW.add(new Variable(name, ret));
-			if (showIt) {
-				Interpreter.displayString(name + " = " + ret + "\n");
-			}
-			TabbedPane.list.setModel(Main.wstack.peek().getVarList());
-			return;
 		}*/
+		Matrix temp, newval;
+		CellArray arr = new CellArray();
+		for(int i = 0; i < ca.n; i++) {
+			temp = (Matrix)ca.get(i+1);
+			int k = 1;
+			if(temp.type == Type.LOGICAL) {
+				newval = new Matrix();
+				for(int j = 0; j < temp.n; j++) {
+					if(temp.get(i) != 0)
+						newval.set(i, k++);
+				}
+			}
+		}
 		
 		int s = val.size.length > ca.n ? val.size.length : ca.n;
 		int newsize[] = new int[s];
