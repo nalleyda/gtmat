@@ -35,8 +35,14 @@ public class MatDivide {
 			}
 			return res;
 		}
+		else if (m.n == 1){
+			throw new Exception("Matrix dimensions must agree.");
+		}
 		else{//neeed to invert
-			throw new Exception("Non-scalar division not yet implemented.");
+			Matrix left = MatInverse.matInverse(v);
+			Matrix ret = MatMult.matMult(m, left);
+			return ret;//MatMult.matMult(m, MatInverse.matInverse(v));
+			//throw new Exception("Non-scalar division not yet implemented.");
 		}
 		//return res;
 	}
