@@ -56,7 +56,7 @@ public class SubPlot extends JPanel {
         initialized = st;
     }
 
-    public void draw(Graphics g, Dimension d) {
+    public void draw(Graphics g, Dimension d) throws Exception {
         axes.screen = d;
         if (!initialized) {
             axes.setLimits(plots);

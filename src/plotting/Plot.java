@@ -60,19 +60,19 @@ public class Plot extends Plots {
         myFig = Figure.getCurrent();
     }
 
-    public Plot(int type, Matrix y) {
+    public Plot(int type, Matrix y) throws Exception {
         this(type, Matrix.colon(1, y.length()), y, "b");
     }
     
-    public Plot(int type, Matrix y, String clr) {
+    public Plot(int type, Matrix y, String clr) throws Exception {
         this(type, Matrix.colon(1, y.length()), y, clr);
     }
 
-    public Plot(int type, Matrix x, Matrix y) {
+    public Plot(int type, Matrix x, Matrix y) throws Exception {
         this(type, x, y, "b");
     }
 
-    public Plot(int type, Matrix xv, Matrix yv, String clrStr) {
+    public Plot(int type, Matrix xv, Matrix yv, String clrStr) throws Exception {
         myFig = Figure.getCurrent();
         x = new Matrix(xv);
         y = new Matrix(yv);
@@ -85,7 +85,7 @@ public class Plot extends Plots {
         }
     }
     
-    public Plot(int type, Matrix xv, Matrix yv, Matrix zv, String clrStr) {
+    public Plot(int type, Matrix xv, Matrix yv, Matrix zv, String clrStr) throws Exception {
         x = new Matrix(xv);
         y = new Matrix(yv);
         z = new Matrix(zv);
@@ -163,15 +163,15 @@ public class Plot extends Plots {
         return res;
     }
     
-    private Matrix transform(int ndx, Axes ax) {
+    private Matrix transform(int ndx, Axes ax) throws Exception {
         return ax.transform(x.get(ndx), y.get(ndx));
     }
 
-    private Matrix transform3(int ndx, Axes ax) {
+    private Matrix transform3(int ndx, Axes ax) throws Exception {
         return ax.transform(x.get(ndx), y.get(ndx), z.get(ndx));
     }
 
-    public void draw(Graphics g, Axes ax) {
+    public void draw(Graphics g, Axes ax) throws Exception {
         switch(type) {
             case PLOT_2:
                 draw2(g, ax);
@@ -186,14 +186,14 @@ public class Plot extends Plots {
     }
 
 
-    private void showText(Graphics g, Axes ax) {
+    private void showText(Graphics g, Axes ax) throws Exception {
         g.setColor(color);
         Matrix at = transform3(1, ax);
         g.drawString(theString, at.geti(1), at.geti(2));
     }
     
     
-    private void draw2(Graphics g, Axes ax) {
+    private void draw2(Graphics g, Axes ax) throws Exception {
         int chBk = 0;
         int chDn = 0;
         if(doSymb) {
@@ -216,7 +216,7 @@ public class Plot extends Plots {
             from = to;
         }
     }
-    private void draw3(Graphics g, Axes ax) {
+    private void draw3(Graphics g, Axes ax) throws Exception {
         int chBk = 0;
         int chDn = 0;
         if(doSymb) {

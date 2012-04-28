@@ -4,6 +4,7 @@
 
 package plotting;
 
+import functions.Set;
 import jmatrix.*;
 import main.*;
 
@@ -29,20 +30,20 @@ public class Plots {
         String ctl = ltype.toString();
     }
 
-    public static void plot(int type, Matrix x, Matrix y, String str) {
+    public static void plot(int type, Matrix x, Matrix y, String str) throws Exception {
         Figure myFig = Figure.getCurrent();
         Figure.setAngles(0, 90);
         myFig.add(new Plot(type, x, y, str));
     }
     
     
-    public static void text(Matrix x, Matrix y, Matrix z, String str) {
+    public static void text(Matrix x, Matrix y, Matrix z, String str) throws Exception {
         Figure myFig = Figure.getCurrent();
         myFig.add(new Plot(Plot.TEXT, x, y, z, str));
     }
     
     
-    public static void plot3(Matrix x, Matrix y, Matrix z, String str) {
+    public static void plot3(Matrix x, Matrix y, Matrix z, String str) throws Exception {
         Figure myFig = Figure.getCurrent();
         Figure.setAngles(45, 30);
         myFig.add(new Plot(Plot.PLOT_3, x, y, z, str));
@@ -92,7 +93,7 @@ public class Plots {
      *  - make the last xx, yy rows and cols equal end-1
      *  - make the zz frame = 0;
      */
-    public static void meshz(Matrix xx, Matrix yy, Matrix zz) {
+    public static void meshz(Matrix xx, Matrix yy, Matrix zz) throws Exception {
         int rows = xx.rows();
         int cols = xx.cols();
         Matrix nxx = Matrix.zeros(rows+2, cols+2);
@@ -100,20 +101,20 @@ public class Plots {
         Matrix nzz = Matrix.zeros(rows+2, cols+2);
         for(int r = 1; r <= rows; r++) {
             for(int c = 1; c <= cols; c++) {
-                Matrix.set(nxx, r+1, c+1, Matrix.get(xx, r, c));
-                Matrix.set(nyy, r+1, c+1, Matrix.get(yy, r, c));
-                Matrix.set(nzz, r+1, c+1, Matrix.get(zz, r, c));
+                Set.set(nxx, r+1, c+1, Matrix.get(xx, r, c));
+                Set.set(nyy, r+1, c+1, Matrix.get(yy, r, c));
+                Set.set(nzz, r+1, c+1, Matrix.get(zz, r, c));
             }
-            Matrix.set(nxx, r+1, 1, Matrix.get(nxx, r+1, 2));
-            Matrix.set(nxx, r+1, cols+2, Matrix.get(nxx, r+1, cols+1));
-            Matrix.set(nyy, r+1, 1, Matrix.get(nyy, r+1, 2));
-            Matrix.set(nyy, r+1, cols+2, Matrix.get(nyy, r+1, cols+1));
+            Set.set(nxx, r+1, 1, Matrix.get(nxx, r+1, 2));
+            Set.set(nxx, r+1, cols+2, Matrix.get(nxx, r+1, cols+1));
+            Set.set(nyy, r+1, 1, Matrix.get(nyy, r+1, 2));
+            Set.set(nyy, r+1, cols+2, Matrix.get(nyy, r+1, cols+1));
         }
         for(int c = 1; c <= (cols+2); c++) {
-            Matrix.set(nxx, 1, c, Matrix.get(nxx, 2, c));
-            Matrix.set(nxx, rows+2, c, Matrix.get(nxx, rows+1, c));
-            Matrix.set(nyy, 1, c, Matrix.get(nyy, 2, c));
-            Matrix.set(nyy, rows+2, c, Matrix.get(nyy, rows+1, c));
+            Set.set(nxx, 1, c, Matrix.get(nxx, 2, c));
+            Set.set(nxx, rows+2, c, Matrix.get(nxx, rows+1, c));
+            Set.set(nyy, 1, c, Matrix.get(nyy, 2, c));
+            Set.set(nyy, rows+2, c, Matrix.get(nyy, rows+1, c));
         }
         mesh(nxx, nyy, nzz);
     }
