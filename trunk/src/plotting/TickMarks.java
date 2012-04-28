@@ -1,11 +1,13 @@
 package plotting;
 
 import java.util.ArrayList;
+
+import functions.Set;
 import jmatrix.*;
 
 public class TickMarks {
 
-    public static Matrix getMarks(double x1, double x2) {
+    public static Matrix getMarks(double x1, double x2) throws Exception {
         if(x1 > x2) {
             double temp = x2;
             x2 = x1;
@@ -22,7 +24,7 @@ public class TickMarks {
             //TODO: Draw tick marks at each position (with dracDigitToShow digits)
 
             //For testing purposes store the values
-            res.set(1, i++, d);
+            res = Set.set(res, 1, i++, d);
         }
         return res;
     }
@@ -56,7 +58,7 @@ public class TickMarks {
         return niceFrac * Math.pow(10d, exp);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Matrix xl = getMarks(-100.0, 10.0);
         Matrix yl = getMarks(-1.0, 140.0);
         Matrix zl = getMarks(5.1, -8.7);

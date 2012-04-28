@@ -272,7 +272,7 @@ public class MeshPlot extends Plot {
         }
     }
 
-    public void draw(Graphics g, Axes ax) {
+    public void draw(Graphics g, Axes ax) throws Exception {
         Matrix screenCoords[] = new Matrix[6];
         Patch p;
         N = patches.size();

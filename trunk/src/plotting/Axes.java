@@ -101,12 +101,12 @@ public class Axes {
         if (m.size[MatObject.ROW] != 1 || m.size[MatObject.COL] != 6) {
             throw new RuntimeException("Axes.Axes must have vector of size 6");
         }
-        Pmin.set(1, m.get(1));
-        Pmax.set(1, m.get(2));
-        Pmin.set(2, m.get(3));
-        Pmax.set(2, m.get(4));
-        Pmin.set(3, m.get(5));
-        Pmax.set(3, m.get(6));
+        Pmin = Set.set(Pmin, 1, m.get(1));
+        Pmax = Set.set(Pmax, 1, m.get(2));
+        Pmin = Set.set(Pmin, 2, m.get(3));
+        Pmax = Set.set(Pmax, 2, m.get(4));
+        Pmin = Set.set(Pmin, 3, m.get(5));
+        Pmax = Set.set(Pmax, 3, m.get(6));
         try {
 			center = (Matrix) Divide.divide(Subtract.subtract(Pmax, Pmin), new Matrix(2));
 		} catch (IllegalArgumentException e) {
@@ -125,7 +125,7 @@ public class Axes {
      * this will change radically when we include rotation
      */
     public void setScale(double minx, double maxx,
-                         double miny, double maxy) {
+                         double miny, double maxy) throws Exception {
         int left_margin = 0;
         int right_margin = TEXT_MARGIN;
         int top_margin = 0;
@@ -140,12 +140,12 @@ public class Axes {
         if(mySubplot.colorbar) right_margin += 50;
         width = (int) (screen.width * colFract) - left_margin - right_margin;
         height = (int) (screen.height * rowFract) - top_margin - bot_margin;
-        scale.set(1, 1, width / (maxx - minx));
-        scale.set(1, 2, -height / (maxy - miny));
-        scale.set(1, 3, 1);
-        offset.set(1, 1, left_margin + origCol * screen.width - scale.get(1, 1) * minx);
-        offset.set(1, 2, screen.height * (1 - origRow) - bot_margin - scale.get(1, 2) * miny);
-        offset.set(1, 3, 0);
+        scale = Set.set(scale, 1, 1, width / (maxx - minx));
+        scale = Set.set(scale, 1, 2, -height / (maxy - miny));
+        scale = Set.set(scale, 1, 3, 1);
+        offset = Set.set(offset, 1, 1, left_margin + origCol * screen.width - scale.get(1, 1) * minx);
+        offset = Set.set(offset, 1, 2, screen.height * (1 - origRow) - bot_margin - scale.get(1, 2) * miny);
+        offset = Set.set(offset, 1, 3, 0);
     }
 
     public void reset() {
@@ -184,17 +184,17 @@ public class Axes {
             throw new RuntimeException("Axes.setLimits no plots");
         }
         Plot pl = plots.get(0);
-        Pmin.set(1, pl.x.get(1));
-        Pmax.set(1, pl.x.get(1));
-        Pmin.set(2, pl.y.get(1));
-        Pmax.set(2, pl.y.get(1));
+        Pmin = Set.set(Pmin, 1, pl.x.get(1));
+        Pmax = Set.set(Pmax, 1, pl.x.get(1));
+        Pmin = Set.set(Pmin, 2, pl.y.get(1));
+        Pmax = Set.set(Pmax, 2, pl.y.get(1));
         if (pl.is_2D()) {
             Pmin.set(3, -1);
             Pmax.set(3, 1);
             is2D = true;
         } else {
-            Pmin.set(3, pl.z.get(1));
-            Pmax.set(3, pl.z.get(1));
+            Pmin = Set.set(Pmin, 3, pl.z.get(1));
+            Pmax = Set.set(Pmax, 3, pl.z.get(1));
         }
         for (int plno = 0; plno < plots.size(); plno++) {
             pl = plots.get(plno);
@@ -225,7 +225,7 @@ public class Axes {
 //        origelr = elr;
     }
 
-    public void makeRotationMatrix() {
+    public void makeRotationMatrix() throws Exception {
 
         /* new rotation approach thanks to a paper by
          * Diana Gruber at the Xtreme Game Developers Conference
@@ -254,15 +254,15 @@ public class Axes {
         double ce = Math.cos(elr);
 
         if (Math.abs(ce) < 0.0001) {
-            rotMat.set(1, 1, ca);
-            rotMat.set(1, 2, -sa);
-            rotMat.set(1, 3, 0);
-            rotMat.set(2, 1, sa);
-            rotMat.set(2, 2, ca);
-            rotMat.set(2, 3, 0);
-            rotMat.set(3, 1, 0);
-            rotMat.set(3, 2, 0);
-            rotMat.set(3, 3, 1);
+            rotMat = Set.set(rotMat, 1, 1, ca);
+            rotMat = Set.set(rotMat, 1, 2, -sa);
+            rotMat = Set.set(rotMat, 1, 3, 0);
+            rotMat = Set.set(rotMat, 2, 1, sa);
+            rotMat = Set.set(rotMat, 2, 2, ca);
+            rotMat = Set.set(rotMat, 2, 3, 0);
+            rotMat = Set.set(rotMat, 3, 1, 0);
+            rotMat = Set.set(rotMat, 3, 2, 0);
+            rotMat = Set.set(rotMat, 3, 3, 1);
         } else {
             double Outx = ce * ca;
             double Outy = ce * sa;
@@ -271,29 +271,29 @@ public class Axes {
             double Upx = -se * ce * ca / mag;
             double Upy = -se * ce * sa / mag;;
             double Upz = ce * ce / mag;
-            rotMat.set(1, 2, -Upy * Outz + Upz * Outy);
-            rotMat.set(1, 1, Upz * Outx - Upx * Outz);
-            rotMat.set(1, 3, Upx * Outy - Upy * Outx);
-            rotMat.set(2, 2, -Upx);
-            rotMat.set(2, 1, Upy);
-            rotMat.set(2, 3, Upz);
-            rotMat.set(3, 2, -Outx);
-            rotMat.set(3, 1, Outy);
-            rotMat.set(3, 3, Outz);
+            rotMat = Set.set(rotMat, 1, 2, -Upy * Outz + Upz * Outy);
+            rotMat = Set.set(rotMat, 1, 1, Upz * Outx - Upx * Outz);
+            rotMat = Set.set(rotMat, 1, 3, Upx * Outy - Upy * Outx);
+            rotMat = Set.set(rotMat, 2, 2, -Upx);
+            rotMat = Set.set(rotMat, 2, 1, Upy);
+            rotMat = Set.set(rotMat, 2, 3, Upz);
+            rotMat = Set.set(rotMat, 3, 2, -Outx);
+            rotMat = Set.set(rotMat, 3, 1, Outy);
+            rotMat = Set.set(rotMat, 3, 3, Outz);
         }
     }
 
-    public Matrix transform(double x, double y) {
+    public Matrix transform(double x, double y) throws Exception {
         return transform(new Matrix(x, y, 0));
     }
 
-    public Matrix transform(double x, double y, double z) {
+    public Matrix transform(double x, double y, double z) throws Exception {
         return transform(new Matrix(x, y, z));
     }
     double out = 0;
     private static boolean showit = false;
 
-    public Matrix transform(Matrix a) {
+    public Matrix transform(Matrix a) throws Exception {
         Matrix it = Subtract.subtract(a, center);
         Matrix rot = MatMult.matMult(rotMat, Transpose.transpose(it));
         rot = Add.add(rot, center);
@@ -477,7 +477,7 @@ public class Axes {
     }
     
     
-    public void draw(Graphics g, boolean reallyDraw, boolean drawTheGrid) {
+    public void draw(Graphics g, boolean reallyDraw, boolean drawTheGrid) throws Exception {
         if (!zoomed && !reallyDraw) {
             scale.set(1, 1);
             scale.set(2, 1);
@@ -814,7 +814,7 @@ public class Axes {
         return "Axes [ " + Pmin + " - " + Pmax + " ]";
     }
 
-    public static void test() {
+    public static void test() throws Exception {
         Axes ax = new Axes(new Matrix("[0 20 0 20 0 20]"), null);
         // test the matrix transformations
         Dimension d = new Dimension(600, 800);

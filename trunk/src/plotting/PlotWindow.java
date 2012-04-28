@@ -49,7 +49,12 @@ public class PlotWindow extends JPanel
         imageG2.fillRect(0, 0, screenSize.width, screenSize.height);
         for (int spn = 0; spn < figure.subplots.size(); spn++) {
             SubPlot sp = figure.subplots.get(spn);
-            sp.draw(imageG2, screenSize);
+            try {
+				sp.draw(imageG2, screenSize);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         }
         for (int spn = 0; spn < figure.subplots.size(); spn++) {
             SubPlot sp = figure.subplots.get(spn);
