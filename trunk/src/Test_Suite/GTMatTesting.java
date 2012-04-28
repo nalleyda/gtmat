@@ -32,11 +32,12 @@ public class GTMatTesting {
 	public static String dirB = "Validation/chapterScripts/";
 	public static int endCh;
 	public static int beginCh;
+	public static double errorTolerance;
 	public static DefaultListModel gtMatVars;
 	public static ArrayList<DefaultListModel> chVars = new ArrayList<DefaultListModel>(chs.length);;
 	public static ArrayList<ArrayList<String>> allListings;
 	
-	public static void initTesting(int startCh, int stopCh){
+	public static void initTesting(int startCh, int stopCh, double errorTol){
 		//run matlab first, then gtmat
 		for (int s = 0; s<stopCh+1;s++){
 			chVars.add(s, new DefaultListModel());
@@ -44,6 +45,7 @@ public class GTMatTesting {
 		System.out.println("chVars is of size: "+chVars.size());
 		endCh = stopCh;
 		beginCh = startCh;
+		errorTolerance = errorTol;
 		//parseScriptNames();
 		//if(allListings!=null)System.out.println(allListings);
 		
@@ -66,16 +68,16 @@ public class GTMatTesting {
 	public static void execMatlab(){
 		boolean havefiles = true;
 		int j = beginCh;
-//			while(havefiles && (j<=endCh)){
-//			
-//				String fn = chs[j]+ ".txt";
-//				File findFile = new File(fn);
-//				System.out.println("File found?: "+findFile.isFile());	
-//				j++;
-//				if (!findFile.isFile()) havefiles=false;
-//			}
-//		if (havefiles) return;
-//		else{
+			while(havefiles && (j<=endCh)){
+			
+				String fn = chs[j]+ ".txt";
+				File findFile = new File(fn);
+				System.out.println("File found?: "+findFile.isFile());	
+				j++;
+				if (!findFile.isFile()) havefiles=false;
+			}
+		if (havefiles) return;
+		else{
 		try{
 			MatlabProxyFactory factory = new MatlabProxyFactory();
 			MatlabProxy proxy = factory.getProxy();
@@ -106,6 +108,7 @@ public class GTMatTesting {
 				proxy.disconnect();
 		}catch(MatlabConnectionException mce){
 			System.out.println("Could not connect to Matlab instance.");
+		}
 		}
 		
 	}
@@ -374,9 +377,31 @@ public class GTMatTesting {
 				//StringTokenizer pst = new StringTokenizer(pstr.substring(i2+1), dlms);
 				String t1 = vst.nextToken();
 				String t2 = pst.nextToken();
+				double d1 = Double.MAX_VALUE;
+				double d2 = Double.MAX_VALUE;
+				try{
+					d1 = Double.parseDouble(t1);
+					d2 = Double.parseDouble(t2);
+				}catch(Exception e){
+					
+				}
+				//System.out.println("gtmat token:"+t1+", matlab token:"+t2);
 				if(t1.contains(t2) || t2.contains(t1)){
 					result = true;
-				}else{
+				}else if((d1!=Double.MAX_VALUE) && (d2!=Double.MAX_VALUE)){
+					double diff = Math.abs(d1-d2);
+					System.out.println("Difference of results: "+diff);
+					System.out.println("errorTolerance = "+errorTolerance);
+					if (diff<=errorTolerance){
+						result = true;
+					}
+					else{
+						result = false;
+						return result;
+					}
+				}
+				else{
+				
 					result = false;
 					return result;
 				}
@@ -585,7 +610,7 @@ public class GTMatTesting {
 	
 	public static void main(String[] args){
 		
-		initTesting(2,2);
+		initTesting(2,2, 0.0001);
 	}
 //	public class VarResult{
 //		private String gtmatRes;
