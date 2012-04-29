@@ -336,6 +336,20 @@ public class FileIO {
         }
         return 0;
     }
+    
+    public static int fcloseAll(){
+    	int size = handles.size();
+    	int closeCnt = 0;
+    	for (int i = 1; i<=size;i++){
+    		try{
+    			int t = fclose(i);
+    			if (t==0) closeCnt++;
+    		} catch(Exception e){
+    			
+    		}
+    	}
+    	return (size-closeCnt);
+    }
 
     public static void test() throws FileNotFoundException {
         Matrix a = new Matrix(4);
