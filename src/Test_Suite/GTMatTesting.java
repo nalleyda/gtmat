@@ -37,7 +37,7 @@ public class GTMatTesting {
 	public static ArrayList<DefaultListModel> chVars = new ArrayList<DefaultListModel>(chs.length);;
 	public static ArrayList<ArrayList<String>> allListings;
 	
-	public static void initTesting(int startCh, int stopCh, double errorTol){
+	public static void initTesting(int startCh, int stopCh, double errorTol, boolean reuseMatlabResults){
 		//run matlab first, then gtmat
 		for (int s = 0; s<stopCh+1;s++){
 			chVars.add(s, new DefaultListModel());
@@ -50,7 +50,7 @@ public class GTMatTesting {
 		//if(allListings!=null)System.out.println(allListings);
 		
 		//execMatlab() working
-		execMatlab();
+		execMatlab(reuseMatlabResults);
 		
 		//Not running listings very well for weird reasons 
 		execGTMat();
@@ -65,7 +65,7 @@ public class GTMatTesting {
 		
 	}
 	
-	public static void execMatlab(){
+	public static void execMatlab(boolean reuseMatlabResults){
 		boolean havefiles = true;
 		int j = beginCh;
 			while(havefiles && (j<=endCh)){
@@ -76,7 +76,9 @@ public class GTMatTesting {
 				j++;
 				if (!findFile.isFile()) havefiles=false;
 			}
-		if (havefiles) return;
+		if (havefiles && reuseMatlabResults){
+			return;
+		}
 		else{
 		try{
 			MatlabProxyFactory factory = new MatlabProxyFactory();
@@ -610,7 +612,7 @@ public class GTMatTesting {
 	
 	public static void main(String[] args){
 		
-		initTesting(2,2, 0.0001);
+		//initTesting(2,2, 0.0001);
 	}
 //	public class VarResult{
 //		private String gtmatRes;
