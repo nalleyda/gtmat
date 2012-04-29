@@ -24,7 +24,13 @@ import matlabcontrol.MatlabProxyFactory;
 import parser.GTParser;
 import workspace.Variable;
 
-
+/**
+ * 
+ * @author sean pohjalainen
+ *This class is responsible for the automated testing of GTMat.
+ * This is done by running both matlab and gtmat through chapter scripts containing listings from CS4911's textbook
+ * and comparing the results of gtmat to those of matlab (whose values are 'correct'). The results of the validation are displayed.
+ */
 public class GTMatTesting {
 	public static String[] chs = {"", "", "ch2", "ch3", "ch4", "ch5", "ch6", "ch7", "ch8", "ch9", "ch10", "ch11", "ch12", "ch13", "ch14", "ch15", "ch16", "ch17"};
 	public static String[] chapters = {"", "", "Ch 02", "Ch 03", "Ch 04", "Ch 05", "Ch 06", "Ch 07", "Ch 08", "Ch 09", "Ch 10", "Ch 11", "Ch 12", "Ch 13", "Ch 14", "Ch 15", "Ch 16", "Ch 17"};
@@ -37,6 +43,14 @@ public class GTMatTesting {
 	public static ArrayList<DefaultListModel> chVars = new ArrayList<DefaultListModel>(chs.length);;
 	public static ArrayList<ArrayList<String>> allListings;
 	
+	/**
+	 * 
+	 * @param startCh, the starting chapter gtmat will be validated from
+	 * @param stopCh, the last chapter gtmat will be validated on
+	 * @param errorTol, the max accepted difference between corresponding gtmat and matlab results 
+	 * @param reuseMatlabResults, if true the test suite will attempt to reuse previous matlab result files, so that starting a new instance of matlab is not required every time testing occurs
+	 * This class initiates the testing with the specified inputs
+	 */
 	public static void initTesting(int startCh, int stopCh, double errorTol, boolean reuseMatlabResults){
 		//run matlab first, then gtmat
 		for (int s = 0; s<stopCh+1;s++){
@@ -49,22 +63,22 @@ public class GTMatTesting {
 		//parseScriptNames();
 		//if(allListings!=null)System.out.println(allListings);
 		
-		//execMatlab() working
+		// run matlab to obtain .txt files containing results of chapter listings
 		execMatlab(reuseMatlabResults);
 		
-		//Not running listings very well for weird reasons 
+		// run gtmat on the same chapter listings
 		execGTMat();
-		//Compare each resulting matlab ch.txt files with the values in the corresponding column/ch of chVars
+		//Compare each resulting matlab ch.txt files with the values obtained from gtmat, producing test results
 		checkResults();
-		//compareResults(startCh);
-		
-		//Can't test any cell array code in gtMat because horizontalConcatenate isn't implemented
-		//Other than that, the only other data type to test more and improve is structs.
-		//Lots of functions and other features in gtmat are not implemented, making running the scripts all the way through quite difficult.
-		
 		
 	}
 	
+	/** run matlab remotely to obtain .txt files containing results of chapter listings
+	 *  Uses matlabcontrol library to remotely control matlab from java. 
+	 *  Matlab will use the methods outputWsVars, dlmcell, and struct2str to convert the different datatypes to a string and write
+	 *  them to a file ch#.txt, where # is the chapter being tested
+	 * @param reuseMatlabResults, if true, it will attempt to reuse old matlat result .txt files to save time
+	 */
 	public static void execMatlab(boolean reuseMatlabResults){
 		boolean havefiles = true;
 		int j = beginCh;
@@ -114,7 +128,9 @@ public class GTMatTesting {
 		}
 		
 	}
-	
+	/** run gtmat on same chapters, producing results (list of vars and their values) which are stored in its workspaces
+	 * 
+	 */
 	public static void execGTMat(){
 		
 		long start;
@@ -168,6 +184,9 @@ public class GTMatTesting {
 		//gtMatVars = Main.wstack.peek().getVarList();
 	}
 	
+	/**Compare each resulting matlab ch.txt files with the values obtained from gtmat, producing test results
+	 * results are stored in the variable allRes and printed out in console
+	 */
 	public static void checkResults(){
 		int count = 0;
 		int fail = 0;
@@ -205,6 +224,15 @@ public class GTMatTesting {
 		}
 	}
 	
+	/*
+	 * @param i, i is the number of the chapter to be validated
+	 * This class:
+	 * 1. parses the matlab results(vars) from each ch#.txt file and puts the variables into a hashmap(results)
+	 * 2. retrieves the gtmat results (variables) from the workspace
+	 * 3. checks the gtmat results against the matlab results, setting the values, name, outcome, etc into VarResult objects,
+	 * which are added to the output map (out)
+	 * 4. Returns the output map with keys = variable name and values = VarResult objects
+	 */
 	public static HashMap<String, VarResult> compareResults(int i) {
 //			String gtmat = "_gtmat";
 //			String matlab = "_matlab";
@@ -367,6 +395,14 @@ public class GTMatTesting {
 		
 	}
 	
+	/**
+	 * 
+	 * @param vstr, data string from gtmat
+	 * @param pstr, data string from matlab
+	 * @return true if the two are 'equal', false if not
+	 * This method compares the results of a variable obtained from gtmat and matlab, ignoring whitespace and other formatting issues
+	 * If the variable is a numeric value, this will return true if the differences of the results are less than or equal to the error tolerance
+	 */
 	public static boolean match(String vstr, String pstr){
 		boolean result = true;
 		String dlms = ",;[]{} ";
@@ -415,7 +451,11 @@ public class GTMatTesting {
 		
 		return result;
 	}
-	
+	/**
+	 * formats the variable's string representation so that it can be compared correctly
+	 * @param mo, data to be formatted
+	 * @return formatted string representation of the variable
+	 */
 	public static String toFormatted(MatObject mo){
 		String newStr = "";
 		if ((mo instanceof Matrix)&&(mo.rows())>1){
