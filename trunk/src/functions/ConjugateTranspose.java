@@ -32,6 +32,7 @@ public class ConjugateTranspose {
 	public static MatObject conjugateTranspose(MatObject o) throws Exception{
 		MatObject mo = null;
 		try{
+			mo = conjugateTranspose((Matrix)o);
 			
 		}catch(Exception e){
 			throw new Exception("Calling dummy method.");

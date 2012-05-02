@@ -105,10 +105,12 @@ public class HorizontalConcatenate {
 	public static Matrix horizontalConcatenate(Matrix... m) throws Exception {
 		Matrix res;
 		int cols = 0;
-		int rows = m[0].size[MatObject.ROW];
+		int rows = -1;//m[0].size[MatObject.ROW];
 		int col = 0;
 		// calculate cols and check rows
 		for (int i = 0; i < m.length; i++) {
+			if (m[i].n == 0 || m[i].size[MatObject.ROW] == 0) continue;
+			if (rows == -1) rows = m[i].size[MatObject.ROW];
 			cols += m[i].size[MatObject.COL];
 			if (m[i].size[MatObject.ROW] != rows) {
 				throw(new CustomException("Array row dimensions must agree"));

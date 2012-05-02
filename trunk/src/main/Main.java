@@ -183,7 +183,7 @@ public class Main {
         });
 
         
-        //GTMatTesting.initTesting(2,2);//*********************************************************************************
+       // GTMatTesting.initTesting(2,3, .001, false);//*********************************************************************************
         
         /*   System.out.println("Interpreter Tests");
         System.out.println(new Matrix(1,2,3,4));
