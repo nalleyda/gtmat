@@ -611,10 +611,13 @@ public abstract class MatObject {
 		if (expr == TreeWalker.emptyVec){
 			return delete(name, ca);
 		}
+		boolean newmat = false;
 		Workspace curW = Interpreter.getWorkspace();
 		MatObject val = Interpreter.getValue(name)[0];
-		if(val == null)
+		if(val == null) {
 			val = new Matrix();
+			newmat = true;
+		}
 		Matrix temp, newval;
 		CellArray arr = new CellArray();
 		for(int i = 0; i < ca.n; i++) {
@@ -637,8 +640,12 @@ public abstract class MatObject {
 		
 		int s = val.size.length > ca.n ? val.size.length : ca.n;
 		int newsize[] = new int[s];
-		if(ca.n == 1) 
+		if(ca.n == 1 && !newmat) 
 			newsize = val.size;
+		else if(ca.n == 1 && newmat) {
+			newsize[0] = 1;
+			newsize[1] = (int)((Matrix)ca.get(1)).getMax();
+		}
 		else
 			for(int i = 0; i < s; i++) 
 				newsize[i] = i >= ca.n || val.size[i] > ((Matrix)ca.get(i+1)).getMax() ? val.size[i] : (int)((Matrix)ca.get(i+1)).getMax();
@@ -663,7 +670,7 @@ public abstract class MatObject {
 		//Need 1 for the next row, row for the next column, row*column for the next layer...
 		offsetvec[0] = 1;
 		for(int i = 1; i < newsize.length; i++) {
-			offsetvec[i] = offsetvec[i-1] * newsize[i-1];
+			offsetvec[i] = offsetvec[i-1] * (newsize[i-1] != 0 ? newsize[i-1] : 1);
 		}
 		
 		int k = 1;
