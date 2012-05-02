@@ -547,7 +547,15 @@ public class Function {
         ht.put("double", new Function("castToMatrix", "jmatrix.MatObject", 1, MatObject.class));
         ht.put("char", new Function("castToMatString", "jmatrix.MatObject", 1, MatObject.class));
         ht.put("ctranspose", new Function("conjugateTranspose", "functions.ConjugateTranspose", 1, MatComplex.class));
-        
+        ht.put("diff", new Function("diff", "jmatrix.Matrix", 1, Matrix.class));
+        ht.put("trapz", new Function("trapz", "jmatrix.Matrix", 2, Matrix.class, Matrix.class));
+        ht.put("exp", new Function("exp1", "jmatrix.Matrix", 1, Matrix.class));
+        ht.put("erf", new Function("erf", "jmatrix.Matrix", 1, Matrix.class));
+        ht.put("poisscdf", new Function("poisscdf", "jmatrix.Matrix", 2, Matrix.class, Matrix.class));
+        ht.put("erfinv", new Function("erfinv", "jmatrix.Matrix", 1, Matrix.class));
+        ht.put("normcdf", new Function("normcdf", "jmatrix.Matrix", 3, Matrix.class, Matrix.class, Matrix.class));
+        ht.put("norminv", new Function("norminv", "jmatrix.Matrix", 3, Matrix.class, Matrix.class, Matrix.class));
+        ht.put("normrnd", new Function("normrnd", "jmatrix.Matrix", 4, Matrix.class, Matrix.class, Matrix.class, Matrix.class));
     }
 
     public static boolean isFunction(String name) {
