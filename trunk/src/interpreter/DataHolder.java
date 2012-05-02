@@ -57,7 +57,7 @@ public class DataHolder implements Runnable {
             Thread.currentThread().interrupt();
         }
         
-        Main.interactions.appendString(">> ", 0);
+       Main.interactions.appendString(">> ", 0);
         
 //        TreeWalker.process(theTree);
 //        Main.interactions.appendString(">> ", 0);

@@ -94,7 +94,7 @@ public class GTParser {
             ExprParser.prog_return r = g.prog();
             CommonTree tr = (CommonTree) r.getTree();
             TreeWalker.process(tr);
-            Main.interactions.appendString(">> ", 0);
+            //Main.interactions.appendString(">> ", 0);
         }
         catch (Exception e){
             e.printStackTrace();
