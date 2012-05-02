@@ -124,7 +124,6 @@ public class InteractionWindow {
 			startAt = 0;
 			doc.remove(0, doc.getLength());
 			startAt = 3;
-			nextLine();
 		} catch(BadLocationException ble){};
 	}
 
@@ -415,6 +414,7 @@ public class InteractionWindow {
 							break;
 						case your_own_command:
 							DebugTools.runCommand(enteredText);
+							
 						}
 						indexInChangeLog = changeLogArray.size();
 					} catch (BadLocationException ble) {
