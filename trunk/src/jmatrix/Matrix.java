@@ -20,9 +20,9 @@ import gtmatException.*;
  * @author dsmith
  */
 public class Matrix extends MatObject {
-	
+
 	public static final double EPSILON = .0000000001;
-	
+
 	public boolean conditionalIsTrue(){
 		//double error = .0000001;
 		for (int i = 0; i < data.length; i++){
@@ -157,7 +157,7 @@ public class Matrix extends MatObject {
 		size[ROW] = rows;
 		size[COL] = cols;
 	}
-	
+
 	public Matrix(int[] dims){
 		n = 1;
 		for (int x : dims) n *= x;
@@ -332,7 +332,7 @@ public class Matrix extends MatObject {
 		}
 	}
 
-	
+
 	public void set(MatObject m, int... tempInd) {
 		int[] index = new int[tempInd.length];
 		for(int i = 0; i < tempInd.length; i++)
@@ -350,9 +350,9 @@ public class Matrix extends MatObject {
 				ov[i] = ov[i-1] * size[i-1];
 				arrind[i] = 1;
 			}
-			
+
 			int div;
-			
+
 			for(int i = ov.length-1; i >= 0; i--) {
 				if (ov[i] == 0) break;
 				arrind[i] += index[0]/ov[i];
@@ -377,8 +377,8 @@ public class Matrix extends MatObject {
 		//If we need to extend the array, say so here
 		if(size.length < newsize.length)
 			extend = true;
-		
-		
+
+
 		//Now we transform the array indices of the old values into the linear indices for the new array
 		int linind = 0;
 		int trueind = 0;
@@ -386,7 +386,7 @@ public class Matrix extends MatObject {
 		//vecind represents the array indices
 		for(int i = 0; i < size.length; i++) 
 			vecind[i] = 1;
-		
+
 		//offsetvec[i] tells you how much you need to multiply by for index i to go from array indices to linear indices
 		int offsetvec[] = new int[newsize.length];
 		//Need 1 for the next row, row for the next column, row*column for the next layer...
@@ -426,7 +426,7 @@ public class Matrix extends MatObject {
 		data[ind] = val;
 	}
 
-	
+
 
 
 	public void set(double val, int... index) {
@@ -434,23 +434,23 @@ public class Matrix extends MatObject {
 
 		if(index.length == 1) {
 			int arrind[] = new int[size.length];
-			
+
 			int []ov = new int[size.length];
 			ov[0] = 1;
 			for(int i = 1; i < size.length; i++) {
 				ov[i] = ov[i-1] * ov[i-1];
 				arrind[i] = 1;
 			}
-			
+
 			int div;
-			
+
 			for(int i = ov.length-1; i >= 0; i--) {
 				arrind[ov.length-i-1] += index[0]/ov[i];
 				index[0] %= ov[i];
 			}
 			index = arrind;
 		}
-		
+
 		//Find the total number of elements, as well as the new size of the array
 		int newn = 1;
 		int newsize[] = new int[index.length];
@@ -465,8 +465,8 @@ public class Matrix extends MatObject {
 		//If we need to extend the array, say so here
 		if(size.length < newsize.length)
 			extend = true;
-		
-		
+
+
 		//Now we transform the array indices of the old values into the linear indices for the new array
 		int linind = 0;
 		int trueind = 0;
@@ -474,7 +474,7 @@ public class Matrix extends MatObject {
 		//vecind represents the array indices
 		for(int i = 0; i < size.length; i++) 
 			vecind[i] = 1;
-		
+
 		//offsetvec[i] tells you how much you need to multiply by for index i to go from array indices to linear indices
 		int offsetvec[] = new int[newsize.length];
 		//Need 1 for the next row, row for the next column, row*column for the next layer...
@@ -769,7 +769,7 @@ public class Matrix extends MatObject {
 		return (int) data[i - 1];
 	}
 
-	
+
 
 
 	/*
@@ -829,9 +829,9 @@ public class Matrix extends MatObject {
 	public static CellArray sort(Matrix m) {
 		return m.sort();
 	}
-	
 
-	
+
+
 
 	/**
 	 * Raise a matrix to a power
@@ -840,11 +840,11 @@ public class Matrix extends MatObject {
 	 * @return A new matrix with every element of m raised to x
 	 */
 	public static Matrix pow(Matrix m, double x) {
-        Matrix res = new Matrix(m);
-        for (int i = 0; i < m.n; i++) {
-            res.data[i] = Math.pow(m.data[i], x);
-        }
-        return res;
+		Matrix res = new Matrix(m);
+		for (int i = 0; i < m.n; i++) {
+			res.data[i] = Math.pow(m.data[i], x);
+		}
+		return res;
 	}
 
 	/**
@@ -853,22 +853,22 @@ public class Matrix extends MatObject {
 	 * @return a matrix such that ret(i) = sin(m(i))
 	 */
 	public static Matrix sin(Matrix m) {
-        Matrix res = new Matrix(m);
-        for (int i = 0; i < m.n; i++) {
-            res.data[i] = Math.sin(m.data[i]);
-        }
-        return res;
+		Matrix res = new Matrix(m);
+		for (int i = 0; i < m.n; i++) {
+			res.data[i] = Math.sin(m.data[i]);
+		}
+		return res;
 	}
 
 
-	
 
 
-	
-	
 
 
-	
+
+
+
+
 
 	/**
 	 * Floor each element in m.
@@ -876,12 +876,12 @@ public class Matrix extends MatObject {
 	 * @return A matrix where ret(i) = floor(m(i))
 	 */
 	public static Matrix floor(Matrix m) {
-        Matrix res = new Matrix(m);
-        res.type = Type.INTEGER;
-        for (int i = 0; i < m.n; i++) {
-            res.data[i] = Math.floor(m.data[i]);
-        }
-        return res;
+		Matrix res = new Matrix(m);
+		res.type = Type.INTEGER;
+		for (int i = 0; i < m.n; i++) {
+			res.data[i] = Math.floor(m.data[i]);
+		}
+		return res;
 	}
 
 	/**
@@ -892,18 +892,18 @@ public class Matrix extends MatObject {
 	 * @throws Exception 
 	 */
 	public static Matrix sindex(Matrix m, Matrix ri, Matrix ci) throws Exception {
-        if ((ri.size[ROW] != 1) || (ci.size[ROW] != 1)) {
-        	throw(new IndexOOBException());
-        }
-        Matrix res = new Matrix(ri.n, ci.n);
-        for (int r = 1; r <= ri.n; r++) {
-            int rndx = (int) ri.get(r);
-            for (int c = 1; c <= ci.n; c++) {
-                int cndx = (int) ci.get(c);
-                res = Set.set(res, r, c, m.get(rndx, cndx));
-            }
-        }
-        return res;
+		if ((ri.size[ROW] != 1) || (ci.size[ROW] != 1)) {
+			throw(new IndexOOBException());
+		}
+		Matrix res = new Matrix(ri.n, ci.n);
+		for (int r = 1; r <= ri.n; r++) {
+			int rndx = (int) ri.get(r);
+			for (int c = 1; c <= ci.n; c++) {
+				int cndx = (int) ci.get(c);
+				res = Set.set(res, r, c, m.get(rndx, cndx));
+			}
+		}
+		return res;
 	}
 
 	/**
@@ -913,24 +913,24 @@ public class Matrix extends MatObject {
 	 * @throws Exception 
 	 */
 	public static Matrix sindex(Matrix m, Matrix ci) throws Exception {
-        if (ci.size[ROW] != 1) {
-        	throw(new IndexOOBException());
-        }
-        Matrix res = new Matrix(1, ci.n);
-        for (int c = 1; c <= ci.n; c++) {
-            int cndx = (int) ci.get(c);
-            res = Set.set(res, 1, c, m.get(1, cndx));
-        }
-        return res;
+		if (ci.size[ROW] != 1) {
+			throw(new IndexOOBException());
+		}
+		Matrix res = new Matrix(1, ci.n);
+		for (int c = 1; c <= ci.n; c++) {
+			int cndx = (int) ci.get(c);
+			res = Set.set(res, 1, c, m.get(1, cndx));
+		}
+		return res;
 	}
 
 	public static double get(Matrix m, int r, int c) {
-        int it = (c - 1) * m.size[ROW] + (r - 1);
-        if(it<1)
-        	throw(new InvalidIndexException());
-        if(it>m.length())
-        	throw(new IndexOOBException());
-        return m.data[it];
+		int it = (c - 1) * m.size[ROW] + (r - 1);
+		if(it<1)
+			throw(new InvalidIndexException());
+		if(it>m.length())
+			throw(new IndexOOBException());
+		return m.data[it];
 	}
 
 	public static double get(Matrix m, int i) {
@@ -1002,7 +1002,7 @@ public class Matrix extends MatObject {
 						temp.set(i + j * ind.size[ROW] + 1, i + j * ind.size[ROW] + 1);
 				}
 			ind = temp;
-			
+
 		}
 		for (int i = 0; i < indices.length; i++) {
 			try {
@@ -1021,6 +1021,148 @@ public class Matrix extends MatObject {
 	}
 
 	
+	
+	
+	/**************************************************************************************************************************
+	 * START OF 3215 PROJECT CODE
+	 * ************************************************************************************************************************/
+	public static Matrix diff(Matrix m) throws Exception{
+		double[] ret = new double[m.n-1];
+		for (int i = 0; i < ret.length; i++){
+			ret[i] = m.data[i+1] - m.data[i];
+		}
+		return new Matrix(ret);
+	}
+
+	public static Matrix trapz(Matrix x, Matrix y) throws Exception{
+		Matrix xdiff_vec = Matrix.diff(x);
+		Matrix ydiff_vec = Matrix.diff(y);
+		ydiff_vec = Mult.mult(ydiff_vec, new Matrix(.5));
+		for (int i = 0; i < ydiff_vec.n; i++){
+			ydiff_vec.data[i] = xdiff_vec.data[i]*(y.data[i+1] - ydiff_vec.data[i]);
+		}
+		return Matrix.sum(ydiff_vec);
+	}
+	
+	
+	public static Matrix exp1(Matrix m){
+		Matrix res = new Matrix(m);
+		for (int i = 0; i < m.n; i++){
+			res.data[i] = Math.exp(m.data[i]);
+		}
+		return res;
+	}
+
+
+	public static Matrix erf(Matrix xmat) throws Exception{
+		Matrix out = new Matrix(xmat);
+		for (int i = 0; i < xmat.n; i++){
+			double x = xmat.data[i];
+			boolean flipped = false;
+			double step = 0;
+			if (x < 0){
+				x = -x;
+				flipped = true;
+			}
+			if (x < 1){
+				step = .0001;
+			}
+			else if (x  < 5){
+				step = .001;
+			}
+			else{
+				step = .01;
+			}
+
+			Matrix xvec = Matrix.colon(0, step, x);
+
+			Matrix ret = Matrix.trapz(xvec, Mult.mult(Matrix.exp1(Negate.negate(Power.power(xvec, new Matrix(2)))), new Matrix(2/Math.sqrt(Math.PI))));
+			if (flipped) ret = Negate.negate(ret);
+			out.data[i] = ret.data[0];
+		}
+		return out;
+	}
+
+	public static Matrix erfinv(Matrix m){
+		Matrix ret = new Matrix(m);
+		for (int i = 0; i < m.n; i++){
+			ret.data[i] = fast_erfinv(m.data[i]);
+		}
+		return ret;
+	}
+
+	private static double fast_erfinv(double x){
+		double ret = 0;
+		if (Math.abs(x) >= 1-.0000000000001){
+			ret = Double.POSITIVE_INFINITY;
+		}
+		else{
+			double a = .147;//8*(Math.PI-3)/(3*Math.PI*(4-Math.PI));
+			ret = Math.sqrt( Math.sqrt(Math.pow(2/(Math.PI*a) + Math.log(1-x*x)/2, 2) - Math.log(1-x*x)/a) - (2/(Math.PI*a) + Math.log(1-x*x)/2));
+		}
+		return x < 0 ? -ret : ret;
+	}
+	
+	private static double normcdf(double x, double mu, double sigma) throws Exception{
+		return .5*(1 + erf(new Matrix((x-mu)/(Math.sqrt(2)*sigma))).data[0]);
+	}
+	
+	public static Matrix normcdf(Matrix x, Matrix mu, Matrix sigma) throws Exception{
+		Matrix ret = new Matrix(x);
+		for (int i = 0; i < x.n; i++){
+			ret.data[i] = normcdf(x.data[i], mu.data[0], sigma.data[0]);
+		}
+		return ret;
+	}
+	
+	/**
+	 * returns an MxN array of pseudo-random numbers distributed ~N(mu, sigma^2)
+	 * @param mu
+	 * @param sigma
+	 * @param m
+	 * @param n
+	 * @return
+	 * @throws Exception 
+	 */
+	public static Matrix normrnd(Matrix mu, Matrix sigma, Matrix m, Matrix n) throws Exception{
+		Matrix ret = Matrix.zeros((int)m.data[0], (int)n.data[0]);//new Matrix((int)m.data[0], (int)n.data[0]);//, new double[(int)(m.data[0]*n.data[0])]);
+		for (int i = 0; i < ret.n; i++){
+			ret.data[i] = norminv(Math.random(), mu.data[0], sigma.data[0]);
+		}
+		return ret;
+	}
+	
+	public static Matrix norminv(Matrix vec, Matrix mu, Matrix sigma){
+		Matrix ret = new Matrix(vec);
+		for (int i = 0 ;i < ret.n; i++){
+			ret.data[i] = norminv(ret.data[i], mu.data[0], sigma.data[0]);
+		}
+		return ret;
+	}
+	
+	private static double norminv(double x, double mu, double sigma){
+		return mu + Math.sqrt(2)*Math.abs(sigma)*fast_erfinv(2*x-1);
+	}
+
+	public static Matrix poisscdf(Matrix x, Matrix lambda) throws Exception{
+		x = Add.add(x, new Matrix(1));
+		int k = (int)(Math.floor(((Matrix)max(x).get(1)).data[0])+.000000001);
+		double[] arr = new double[k+1];
+		arr[0] = 1;//P(X=0)
+		double fact = 1, power = 1;
+		for (int i = 1; i <= k ;i++){
+			fact *= i;
+			power *= lambda.data[0];
+			arr[i] = arr[i-1] + power/fact;
+		}
+		Matrix arrmat = Mult.mult(new Matrix(arr), exp1(Negate.negate(lambda)));
+		return (Matrix)MatObject.get(arrmat, Matrix.floor(x));
+	}
+	
+	/**************************************************************************************************************************
+	 * END OF 3215 PROJECT CODE
+	 * ************************************************************************************************************************/
+
 
 	/**
 	 * The cross product of two vectors
@@ -1029,7 +1171,7 @@ public class Matrix extends MatObject {
 	 * @return a cross b
 	 * @throws Exception 
 	 */
-	
+
 	public static MatObject cross(Matrix a, Matrix b) throws Exception {
 
 		Matrix res = new Matrix(3);
@@ -1045,7 +1187,7 @@ public class Matrix extends MatObject {
 		return res;
 	}
 
-	
+
 
 	/**
 	 * Find the max and index of a matrix
@@ -1054,51 +1196,51 @@ public class Matrix extends MatObject {
 	 * @throws Exception 
 	 */
 	public static CellArray max(Matrix m) throws Exception {
-        CellArray res = new CellArray(1, 2);
-        if (m.size[ROW] == 1) {
-            double best = m.data[0];
-            int where = 1;
-            for (int c = 1; c < m.size[COL]; c++) {
-                if (m.data[c] > best) {
-                    best = m.data[c];
-                    where = c + 1;
-                }
-            }
-            res.set(1, 1, new Matrix(best));
-            res.set(1, 2, new Matrix(where));
-        } else {
-            Matrix bestm = new Matrix(1, m.size[COL]);
-            Matrix wherem = new Matrix(1, m.size[COL]);
-            for (int c = 0; c < m.size[COL]; c++) {
-                CellArray ca =
-                        Transpose.transpose(m.index(colon(1, m.size[ROW]), new Matrix(c + 1))).max();
-                bestm.data[c] = ((Matrix) ca.get(1, 1)).data[0];
-                wherem.data[c] = ((Matrix) ca.get(1, 2)).data[0];
-            }
-            res.set(1, 1, new Matrix(bestm));
-            res.set(1, 2, new Matrix(wherem));
-        }
-        return res;
+		CellArray res = new CellArray(1, 2);
+		if (m.size[ROW] == 1) {
+			double best = m.data[0];
+			int where = 1;
+			for (int c = 1; c < m.size[COL]; c++) {
+				if (m.data[c] > best) {
+					best = m.data[c];
+					where = c + 1;
+				}
+			}
+			res.set(1, 1, new Matrix(best));
+			res.set(1, 2, new Matrix(where));
+		} else {
+			Matrix bestm = new Matrix(1, m.size[COL]);
+			Matrix wherem = new Matrix(1, m.size[COL]);
+			for (int c = 0; c < m.size[COL]; c++) {
+				CellArray ca =
+					Transpose.transpose(m.index(colon(1, m.size[ROW]), new Matrix(c + 1))).max();
+				bestm.data[c] = ((Matrix) ca.get(1, 1)).data[0];
+				wherem.data[c] = ((Matrix) ca.get(1, 2)).data[0];
+			}
+			res.set(1, 1, new Matrix(bestm));
+			res.set(1, 2, new Matrix(wherem));
+		}
+		return res;
 	}
 
 	public static double getMin(Matrix m) {
-        double res = m.data[0];
-        for (int i = 1; i < m.n; i++) {
-            if (m.data[i] < res) {
-                res = m.data[i];
-            }
-        }
-        return res;
+		double res = m.data[0];
+		for (int i = 1; i < m.n; i++) {
+			if (m.data[i] < res) {
+				res = m.data[i];
+			}
+		}
+		return res;
 	}
 
 	public static double getMax(Matrix m) {
-        double res = m.data[0];
-        for (int i = 1; i < m.n; i++) {
-            if (m.data[i] > res) {
-                res = m.data[i];
-            }
-        }
-        return res;
+		double res = m.data[0];
+		for (int i = 1; i < m.n; i++) {
+			if (m.data[i] > res) {
+				res = m.data[i];
+			}
+		}
+		return res;
 	}
 
 	/**
@@ -1120,8 +1262,8 @@ public class Matrix extends MatObject {
 			found = (x.get(i+1) >= x0);
 			if (found) {
 				res = y.get(i)
-						+ (y.get(i+1) - y.get(i)) * (x0 - x.get(i)) 
-						/ (x.get(i+1) - x.get(i));
+				+ (y.get(i+1) - y.get(i)) * (x0 - x.get(i)) 
+				/ (x.get(i+1) - x.get(i));
 			}
 		}
 		return res;
@@ -1148,7 +1290,7 @@ public class Matrix extends MatObject {
 		return res;
 	}
 
-	
+
 
 	/**
 	 * horizontal concatenation (an array of matrices)
@@ -1156,10 +1298,10 @@ public class Matrix extends MatObject {
 	 * @return
 	 * @throws Exception 
 	 */
-	
 
 
-	
+
+
 	public static Matrix zeros(int rows, int cols) throws Exception {
 		Matrix res = new Matrix(rows, cols);
 		for (int i = 1; i <= res.n; i++) {
@@ -1254,17 +1396,17 @@ public class Matrix extends MatObject {
 	 * @return the ceil of m
 	 */
 	public static Matrix ceil(Matrix m) {
-        Matrix res = new Matrix(m);
-        for (int i = 0; i < m.n; i++) {
-            res.data[i] = Math.ceil(m.data[i]);
-        }
-        res.type = Type.INTEGER;
-        return res;
+		Matrix res = new Matrix(m);
+		for (int i = 0; i < m.n; i++) {
+			res.data[i] = Math.ceil(m.data[i]);
+		}
+		res.type = Type.INTEGER;
+		return res;
 	}
 	/**
 	 * For vectors, CUMSUM(X) is a vector containing the cumulative sum of
-     * the elements of X. For matrices, CUMSUM(X) is a matrix the same size
-     * as X containing the cumulative sums over each column.  
+	 * the elements of X. For matrices, CUMSUM(X) is a matrix the same size
+	 * as X containing the cumulative sums over each column.  
 	 * @throws Exception 
 	 */
 	public static Matrix cumsum(Matrix m) throws Exception {
@@ -1285,7 +1427,7 @@ public class Matrix extends MatObject {
 		}
 		return res;
 	}
-	
+
 	public static Matrix cumprod(Matrix m) {
 		Matrix res = new Matrix(m);
 		if(res.size[ROW] == 1) {
@@ -1633,10 +1775,10 @@ public class Matrix extends MatObject {
 				x = xx.get(r, c);
 				y = yy.get(r, c);
 				z = 3 * Math.pow(1 - x, 2)
-						* Math.exp(-Math.pow(x, 2) - Math.pow(y + 1, 2))
-						- 10 * (x / 5 - Math.pow(x, 3) - Math.pow(y, 5))
-						* Math.exp(-Math.pow(x, 2) - Math.pow(y, 2))
-						- 1 / 3 * Math.exp(-Math.pow(x + 1, 2) - Math.pow(y, 2));
+				* Math.exp(-Math.pow(x, 2) - Math.pow(y + 1, 2))
+				- 10 * (x / 5 - Math.pow(x, 3) - Math.pow(y, 5))
+				* Math.exp(-Math.pow(x, 2) - Math.pow(y, 2))
+				- 1 / 3 * Math.exp(-Math.pow(x + 1, 2) - Math.pow(y, 2));
 				zz = Set.set(zz, r, c, z);
 			}
 		}
@@ -1917,7 +2059,7 @@ public class Matrix extends MatObject {
 		return res;
 	}
 
-	
+
 
 	/**
 	 *
@@ -1965,7 +2107,7 @@ public class Matrix extends MatObject {
 		return res;
 	}
 
-	
+
 
 
 	/**
@@ -1982,7 +2124,7 @@ public class Matrix extends MatObject {
 		}
 	}
 
-	
+
 
 	/**
 	 * multiply a scalar in place
@@ -1996,9 +2138,9 @@ public class Matrix extends MatObject {
 	}
 
 
-	
 
-	
+
+
 
 	/**
 	 *
@@ -2030,6 +2172,7 @@ public class Matrix extends MatObject {
 		}
 		return res;
 	}
+
 
 	/**
 	 *
@@ -2170,7 +2313,7 @@ public class Matrix extends MatObject {
 	  * @param ri
 	  * @param ci
 	  * @return
-	 * @throws Exception 
+	  * @throws Exception 
 	  */
 	 public Matrix index(Matrix ri, Matrix ci) throws Exception {
 		 if ((ri.size[ROW] != 1) || (ci.size[ROW] != 1)) {
@@ -2191,7 +2334,7 @@ public class Matrix extends MatObject {
 	  * index a vector
 	  * @param ci
 	  * @return
-	 * @throws Exception 
+	  * @throws Exception 
 	  */
 	 public Matrix index(Matrix ci) throws Exception {
 		 if (ci.size[ROW] != 1) {
@@ -2208,7 +2351,7 @@ public class Matrix extends MatObject {
 	 /**
 	  *
 	  * @return
-	 * @throws Exception 
+	  * @throws Exception 
 	  */
 	 public Matrix del2() throws Exception {
 		 int rows = size[ROW];
@@ -2242,7 +2385,7 @@ public class Matrix extends MatObject {
 	 /**
 	  *  Find the max and location of a Matrix
 	  * @return
-	 * @throws Exception 
+	  * @throws Exception 
 	  */
 	 public CellArray max() throws Exception {
 		 CellArray res = new CellArray(1, 2);
@@ -2294,7 +2437,7 @@ public class Matrix extends MatObject {
 	 /**
 	  *  Find the max and location of a Matrix
 	  * @return
-	 * @throws Exception 
+	  * @throws Exception 
 	  */
 	 public CellArray min() throws Exception {
 		 CellArray res = new CellArray(1, 2);
@@ -2314,7 +2457,7 @@ public class Matrix extends MatObject {
 			 Matrix wherem = new Matrix(1, size[COL]);
 			 for (int c = 1; c <= size[COL]; c++) {
 				 CellArray ca =
-						 Transpose.transpose(index(colon(1, size[ROW]), new Matrix(c + 1))).min();
+					 Transpose.transpose(index(colon(1, size[ROW]), new Matrix(c + 1))).min();
 				 bestm = Set.set(bestm, c, ((Matrix) ca.get(1, 1)).get(1));
 				 wherem = Set.set(wherem, c, ((Matrix) ca.get(1, 2)).get(1));
 			 }
@@ -2328,7 +2471,7 @@ public class Matrix extends MatObject {
 	  *
 	  * @param m
 	  * @return
-	 * @throws Exception 
+	  * @throws Exception 
 	  */
 	 public Matrix diag(Matrix m) throws Exception {
 		 Matrix res = null;
@@ -2356,7 +2499,7 @@ public class Matrix extends MatObject {
 	  * @param m
 	  * @param offset
 	  * @return
-	 * @throws Exception 
+	  * @throws Exception 
 	  */
 	 public Matrix diag(Matrix m, int offset) throws Exception {
 		 Matrix rowIndex;
@@ -2504,7 +2647,7 @@ public class Matrix extends MatObject {
 			 cols = size[COL];
 		 } else {
 			 rows = 1;
-		     cols = size[0];
+			 cols = size[0];
 		 }
 		 String res = "";
 		 double d;
@@ -2651,23 +2794,23 @@ public class Matrix extends MatObject {
 		 }
 	 }
 
-	@Override
-	public MatObject get(int... indices) {
-		if(indices.length == 1)
-			return new Matrix(data[indices[0]-1]);
-		
-		//offsetvec[i] tells you how much you need to multiply by for index i to go from array indices to linear indices
-		int offsetvec[] = new int[size.length];
-		//Need 1 for the next row, row for the next column, row*column for the next layer...
-		offsetvec[0] = 1;
-		for(int i = 1; i < size.length; i++) {
-			offsetvec[i] = offsetvec[i-1] * size[i-1];
-		}
-		int k = 1;
-		for(int i = 0; i < indices.length; i++) {
-			k += (indices[i]-1) * offsetvec[i];
-		}
-		
-		return new Matrix(data[k-1]);
-	}
+	 @Override
+	 public MatObject get(int... indices) {
+		 if(indices.length == 1)
+			 return new Matrix(data[indices[0]-1]);
+
+		 //offsetvec[i] tells you how much you need to multiply by for index i to go from array indices to linear indices
+		 int offsetvec[] = new int[size.length];
+		 //Need 1 for the next row, row for the next column, row*column for the next layer...
+		 offsetvec[0] = 1;
+		 for(int i = 1; i < size.length; i++) {
+			 offsetvec[i] = offsetvec[i-1] * size[i-1];
+		 }
+		 int k = 1;
+		 for(int i = 0; i < indices.length; i++) {
+			 k += (indices[i]-1) * offsetvec[i];
+		 }
+
+		 return new Matrix(data[k-1]);
+	 }
 }
